@@ -24,6 +24,7 @@
   th:first-child,td:first-child{ text-align:left; }
   th{ background:var(--mist); color:var(--navy); font-size:12.5px; }
   .err{ color:#b3261e; background:#fdecea; border-radius:10px; padding:12px 16px; }
+  .since{ font-size:11px; color:var(--grey); font-weight:400; }
   .ft{ margin-top:22px; font-size:12px; color:var(--grey); text-align:center; }
 </style>
 </head>
@@ -32,7 +33,12 @@
   <h1>📊 AI 董事會 — 下載統計</h1>
   <div class="sub">資料即時來自 GitHub Releases・重新整理即更新</div>
   <div id="out">讀取中…</div>
-  <div class="ft">此頁僅顯示匿名的下載次數，無任何個人資料。<br>© 2026 Fervela.ai</div>
+  <div class="ft">
+    此頁僅顯示匿名的下載次數，無任何個人資料。<br>
+    ⚠️ 計數綁在「檔案」上：<b>重新上傳同名檔案會從 0 重新計算</b>（表格已標起算日）。<br>
+    V2.2 以前是直接傳檔給朋友、沒經過這裡，因此不在統計內。<br>
+    © 2026 Fervela.ai
+  </div>
 </div>
 <script>
 (async () => {
@@ -49,7 +55,9 @@
         else if (/win/i.test(a.name)) w += a.download_count;
       }
       mac += m; win += w;
-      rows += `<tr><td>${rel.tag_name}</td><td>${m}</td><td>${w}</td><td><b>${m + w}</b></td></tr>`;
+      // 顯示「起算日」：GitHub 的下載數綁在「資產檔案」上，重新上傳同名資產會歸零重算。
+      const since = (rel.assets && rel.assets[0] ? rel.assets[0].created_at : "").slice(0, 10);
+      rows += `<tr><td>${rel.tag_name}<div class="since">起算 ${since}</div></td><td>${m}</td><td>${w}</td><td><b>${m + w}</b></td></tr>`;
     }
     out.innerHTML = `
       <div class="big"><div class="n">${mac + win}</div><div class="l">總下載次數</div></div>
