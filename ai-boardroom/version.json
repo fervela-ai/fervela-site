@@ -1,5 +1,5 @@
 {
-  "version": "2.8",
-  "notes": "GPT 席不再在 75 秒陣亡；免費引擎推薦順序調整，手機版可拖曳換位",
+  "version": "2.9",
+  "notes": "教學改成把要介紹的地方框起來；申請 API Key 前先講清楚是什麼",
   "url": "https://fervela.ai/ai-boardroom/"
 }
