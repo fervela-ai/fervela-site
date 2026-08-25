@@ -38,6 +38,14 @@
   .feat b{ color:var(--navy); }
   .story{ margin-top:44px; }
   .story h2{ font-size:22px; color:var(--navy); text-align:center; margin-bottom:18px; }
+  .histlead{ text-align:center; color:#6B7280; font-size:14px; line-height:1.8; margin-bottom:18px; }
+  .rels{ max-width:640px; margin:0 auto; display:flex; flex-direction:column; gap:8px; }
+  .rel{ background:#fff; border:1px solid #dde3ec; border-radius:12px; padding:12px 16px; }
+  .rel summary{ cursor:pointer; display:flex; align-items:baseline; gap:10px; font-size:16px; color:var(--navy); }
+  .rel summary span{ font-size:13px; color:#6B7280; font-weight:400; }
+  .rel ul{ margin:10px 0 2px 2px; list-style:none; }
+  .rel li{ position:relative; padding-left:18px; margin-bottom:7px; font-size:14.5px; line-height:1.8; color:#1c2430; }
+  .rel li::before{ content:"▸"; position:absolute; left:0; color:#008B8B; font-weight:700; }
   .beat{ background:#fff; border:1px solid #dde3ec; border-radius:14px; overflow:hidden; margin-bottom:18px; box-shadow:0 2px 10px rgba(13,27,61,.05); }
   .beat .txt{ padding:16px 20px; display:flex; gap:12px; align-items:flex-start; }
   .beat .no{ flex:0 0 30px; height:30px; border-radius:50%; background:var(--navy); color:#fff; font-weight:800; display:flex; align-items:center; justify-content:center; }
@@ -126,6 +134,71 @@
       回來時，桌上已經擺好結論——<b>連分歧和少數意見都幫你留著</b>。
       所以，「AI 董事會」誕生了。
     </p></div><img src="img/story-5.jpg" alt="共識 80% 的結論與保留的分歧" loading="lazy"></div>
+  </div>
+
+  <div class="story" id="history">
+    <h2>版本沿革</h2>
+    <p class="histlead">每一版改了什麼，用「你感覺得到的差別」來寫。
+      最新版預設展開，舊版點開來看。</p>
+    <div class="rels">
+      <details class="rel" open>
+        <summary><b>V2.8</b><span>2026-08-26</span></summary>
+        <ul>
+        <li>GPT 席不再在 75 秒被誤判成卡死——長會議一路跑到底（實測 35K 字逐字稿，GPT 130 秒、Claude 197 秒完成）。</li>
+        <li>免費額度用完、單次太長等錯誤改成人話，並自動改用另一家繼續開會，不再中斷整場。</li>
+        <li>免費引擎新增推薦順序：GPT → OpenRouter → Groq → Gemini，0 元圓桌補上 OpenRouter。</li>
+        <li>手機版：可長按拖曳換位（含換主席）、橫拿不再跑版、打字區與討論區重新排版。</li>
+        </ul>
+      </details>
+      <details class="rel">
+        <summary><b>V2.7</b><span>2026-08-25</span></summary>
+        <ul>
+        <li>長討論不再被中途砍斷——逾時改看「有沒有在產出」，不再一律 180 秒就砍。</li>
+        <li>一席故障不會卡住整場：連續失敗兩次的席位自動請假，會議繼續跑。</li>
+        <li>修正「不設角色」的成員無法改名；申請金鑰的連結改成明顯的綠色按鈕。</li>
+        </ul>
+      </details>
+      <details class="rel">
+        <summary><b>V2.6</b><span>2026-08-25</span></summary>
+        <ul>
+        <li>0 元也能開董事會：新增 Groq 與 OpenRouter，加上 Gemini 共三家免費層，申請不用信用卡。</li>
+        <li>新手引導會針對你選的那一家，寫清楚按哪顆按鈕、金鑰長什麼樣。</li>
+        <li>免費席位標明真實型號與供應商，不讓你以為在跟官方模型講話。</li>
+        </ul>
+      </details>
+      <details class="rel">
+        <summary><b>V2.5</b><span>2026-08-19</span></summary>
+        <ul>
+        <li>預設改為「思考模式」與「不設角色圓桌」——不再一開口就被推去談怎麼賺錢。</li>
+        <li>新增「純討論」模式：不求結論，只把不同角度攤開來，最後給一張討論地圖。</li>
+        <li>取消所有字數限制；角色卡全面改寫成「視角」而不是「議程」，不再蓋過你當下的意圖。</li>
+        </ul>
+      </details>
+      <details class="rel">
+        <summary><b>V2.4</b><span>2026-08-18</span></summary>
+        <ul>
+        <li>三輪決議改版：第二輪改成發散討論優缺點（必須講自己立場的缺點），不再為反對而反對。</li>
+        <li>AI 思考中你仍然可以發言，正在思考的董事會帶著你的補充重想一次。</li>
+        <li>共識輪不再從格式上逼人同意——先講自己的獨立判斷，才輪到同意誰。</li>
+        </ul>
+      </details>
+      <details class="rel">
+        <summary><b>V2.3</b><span>2026-08-17</span></summary>
+        <ul>
+        <li>新增主席評分（1–5 分）與「★ 必收錄」，之後所有討論與報告都會讀到。</li>
+        <li>勾選動作鍵之後，你送出發言就自動執行，不必再按第二次。</li>
+        <li>新增六頁基礎教學。</li>
+        </ul>
+      </details>
+      <details class="rel">
+        <summary><b>V2.0–V2.2</b><span>2026-08-14 起</span></summary>
+        <ul>
+        <li>從 3 家 AI 擴充到 14 家，每家可選訂閱模式或 API Key 模式。</li>
+        <li>新增五種介面語言與三種佈景主題。</li>
+        <li>打包成 Mac App 與 Windows 版，雙擊即開。</li>
+        </ul>
+      </details>
+    </div>
   </div>
 
   <footer>
