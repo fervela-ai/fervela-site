@@ -1,5 +1,5 @@
 {
-  "version": "2.9",
-  "notes": "教學改成把要介紹的地方框起來；申請 API Key 前先講清楚是什麼",
+  "version": "3.0",
+  "notes": "手機版正式上線；主席可以對董事發言的每一段打勾或打叉",
   "url": "https://fervela.ai/ai-boardroom/"
 }
