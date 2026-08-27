@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI 董事會 — 使用須知：風險與限制 | Fervela.ai</title>
+<meta name="description" content="AI 董事會的資料流向、金鑰外洩途徑分析、網頁版與電腦版的風險，以及開發者做不到的事。">
+<meta property="og:title" content="AI 董事會 — 使用須知：風險與限制">
+<meta property="og:description" content="你的資料到哪裡去、金鑰外洩途徑分析、開發者做不到的事。開始使用前請看完。">
+<style>
+  :root{ --navy:#0D1B3D; --teal:#008B8B; --gold:#F5A623; --grey:#6B7280; --mist:#F5F7FA; --red:#c0392b; }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  body{ font-family:"PingFang TC","Microsoft JhengHei",-apple-system,sans-serif;
+        background:var(--mist); color:#1c2430; line-height:1.85; }
+  .wrap{ max-width:760px; margin:0 auto; padding:40px 22px 60px; }
+  h1{ font-size:28px; color:var(--navy); line-height:1.3; }
+  .sub{ color:var(--grey); font-size:14px; margin-top:6px; }
+  .lead{ margin-top:18px; font-size:16px; }
+  .lead b{ color:var(--navy); }
+  section{ background:#fff; border:1px solid #dde3ec; border-radius:14px;
+           padding:22px 24px; margin-top:18px; box-shadow:0 2px 10px rgba(13,27,61,.05); }
+  section h2{ font-size:19px; color:var(--navy); margin-bottom:10px; }
+  section h3{ font-size:15px; color:var(--navy); margin:16px 0 6px; }
+  ul{ list-style:none; }
+  li{ position:relative; padding-left:20px; margin-bottom:9px; font-size:15px; }
+  li::before{ content:"▸"; position:absolute; left:2px; color:var(--teal); font-weight:700; }
+  li.no::before{ content:"✕"; color:var(--red); }
+  li.ok::before{ content:"✓"; color:var(--teal); }
+  .note{ margin-top:12px; padding:11px 14px; background:var(--mist);
+         border-left:4px solid var(--gold); border-radius:6px; font-size:14.5px; }
+  .path{ margin-bottom:14px; }
+  .path .n{ font-weight:700; color:var(--navy); }
+  .path .s{ display:block; font-size:14.5px; color:#1c2430; }
+  .s b{ color:var(--navy); }
+  a{ color:var(--teal); }
+  footer{ margin-top:34px; padding-top:16px; border-top:1px solid #dde3ec;
+          font-size:12.5px; color:var(--grey); text-align:center; }
+  .back{ display:inline-block; margin-top:20px; background:var(--navy); color:#fff;
+         text-decoration:none; border-radius:10px; padding:11px 22px; font-weight:700; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>使用須知：風險與限制</h1>
+  <div class="sub">AI 董事會 · by Fervela.ai</div>
+  <p class="lead">這一頁說明<b>你的資料會去哪裡</b>、<b>有哪些風險</b>，以及<b>開發者做不到什麼</b>。
+  寫得直白，因為這些事你有權利在使用前就知道。<br>
+  軟體內按「使用須知」也可以隨時看到同一份內容。</p>
+  <div class="note">這是「目前已知的風險」，不是「全部的風險」。沒有任何軟體能保證後者。</div>
+
+  <section>
+    <h2>一、你的資料到哪裡去</h2>
+    <h3>留在你自己裝置上的</h3>
+    <ul>
+      <li>會議記錄</li>
+      <li>API 金鑰</li>
+      <li>開發者收不到這些——這套軟體沒有帳號、沒有登入、沒有資料庫</li>
+    </ul>
+    <h3>會離開你裝置的</h3>
+    <ul>
+      <li>你問的問題、附上的資料、董事的回答，<b>會送到你選的那家 AI</b>（OpenRouter、Groq、Google、Anthropic 等）</li>
+      <li>這是必然的——它們要看到內容才能回答</li>
+      <li>這些內容<b>受該家 AI 公司的隱私政策約束，不受本軟體約束</b></li>
+    </ul>
+    <div class="note">⚠️ <b>免費方案的資料使用條款通常與付費不同</b>，部分業者會用來改進模型。要討論機密內容前，請先看那家的說明。</div>
+  </section>
+
+  <section>
+    <h2>二、金鑰外洩途徑分析及防範措施</h2>
+    <p style="font-size:15px;margin-bottom:12px">把所有可能的途徑列出來，每一條標明現況。</p>
+
+    <div class="path"><span class="n">開發者收走你的金鑰</span>
+      <span class="s">現況：這套軟體<b>沒有後端</b>——不只「不會收」，更沒有地方可以收。沒有帳號、沒有登入、沒有資料庫。</span></div>
+    <div class="path"><span class="n">被寫進紀錄檔或錯誤訊息</span>
+      <span class="s">現況：程式碼中沒有任何一處把金鑰寫進紀錄。</span></div>
+    <div class="path"><span class="n">被送到不該去的網址</span>
+      <span class="s">現況：<b>網頁版</b>由瀏覽器強制執行一份白名單，送不到清單外的地方。<b>電腦版</b>送到程式內建的官方端點；但其中<b>五家（Llama、Qwen、GLM、MiniMax、Doubao）允許你自填端點——若你自填，金鑰就會送到你填的那個網址</b>。</span></div>
+    <div class="path"><span class="n">夾帶在你分享出去的檔案裡</span>
+      <span class="s">現況：設定檔不在安裝包內，把軟體傳給朋友不會夾帶你的金鑰。</span></div>
+    <div class="path"><span class="n">被其他網站偷讀（電腦版）</span>
+      <span class="s">現況：本機服務會拒絕來自其他網站的請求。</span></div>
+    <div class="path"><span class="n">你自己公開了它</span>
+      <span class="s">現況：<b>由你防範，而且這是現實中最常見的一種</b>——截圖傳到群組、貼進公開文件或程式碼倉庫。金鑰除了貼進軟體，不要出現在任何其他地方。</span></div>
+    <div class="path"><span class="n">惡意的瀏覽器擴充功能</span>
+      <span class="s">現況：<b>由你防範。</b>慎選瀏覽器擴充功能——擴充讀得到網頁的儲存空間，這對所有網站都成立。</span></div>
+    <div class="path"><span class="n">你的裝置中毒</span>
+      <span class="s">現況：<b>由你防範。</b>裝置被入侵時上面的任何資料都保不住。</span></div>
+    <div class="path"><span class="n">共用裝置沒清乾淨</span>
+      <span class="s">現況：你可以控制——用完到系統設定按「清除金鑰」。</span></div>
+    <div class="path"><span class="n">開發者的發佈帳號被盜</span>
+      <span class="s">現況：<b>無法 100% 消除。</b>所有「線上更新」的軟體都有這個風險。目前措施：開發者已作安全性檢查並已啟用兩步驟驗證。</span></div>
+    <div class="path" style="margin-bottom:0"><span class="n">軟體本身有未知漏洞</span>
+      <span class="s">全世界沒有軟體敢保證沒漏洞。<b>網頁版</b>有一道確保措施：上面那份白名單由瀏覽器強制執行，就算被注入惡意程式碼，金鑰也<b>只能</b>送得到白名單內的網址。<b>電腦安裝版沒有這道防線</b>——它送到程式內建的官方端點，但其中五家允許你自填網址，你填什麼就送到哪裡。</span></div>
+  </section>
+
+  <section>
+    <h2>三、萬一真的外洩，最壞會怎樣</h2>
+    <ul>
+      <li><b>免費三家</b>（OpenRouter／Groq／Gemini）申請時<b>不用綁信用卡</b>。沒有卡，就沒有東西可以被扣款——最壞是有人用掉你當天的免費額度</li>
+      <li><b>付費金鑰</b>請到該家官網後台設<b>支出上限</b>，把最壞情況變成一個你能接受的數字</li>
+      <li><b>任何金鑰都可以隨時撤銷</b>，到官網後台刪掉，一秒失效</li>
+      <li>有 Claude Pro／ChatGPT 訂閱的話，<b>電腦版可以完全不用 API Key</b>——沒有金鑰就沒有金鑰可以外洩</li>
+    </ul>
+    <div class="note">⚠️ <b>Gemini 是例外</b>：它的金鑰綁在 Google Cloud 專案上，<b>選到已啟用帳單的專案，那把金鑰就是付費的</b>。申請時要挑沒有帳單的專案。</div>
+  </section>
+
+  <section>
+    <h2>四、網頁版的風險與限制</h2>
+    <ul>
+      <li><b>惡意的瀏覽器擴充功能</b>讀得到你的金鑰。請只安裝你信任的擴充</li>
+      <li><b>共用裝置造成金鑰外流</b>：金鑰預設會記住。公用電腦或別人的手機用完，請按「清除金鑰」</li>
+      <li><b>資料不見</b>：只存在你的裝置、不會同步。換裝置或清除瀏覽器資料就消失</li>
+    </ul>
+    <div class="note">⚠️ <b>請務必「分享 → 加入主畫面」</b>，否則 iOS 與 Android 都可能在一段時間未使用後清除儲存空間。重要的會議請用「系統設定 → 資料 → 備份全部會議」存成檔案。</div>
+  </section>
+
+  <section>
+    <h2>五、電腦安裝版的風險與限制</h2>
+    <ul>
+      <li class="no"><b>本軟體尚未申請 Apple／Microsoft 的付費簽名。</b>第一次開啟會被系統擋下，需要手動允許——<b>這代表你正在略過一次安全警告，來執行來自個人開發者的程式</b></li>
+      <li class="no"><b>設定檔的保護有限</b>：金鑰權限設為「僅本人可讀」，但這擋的是同一台電腦的<b>其他使用者帳號</b>，不是以你的身分執行的程式</li>
+      <li class="no"><b>付費金鑰的損失是真的錢</b>——這是與網頁版最大的差別。請設支出上限</li>
+    </ul>
+    <div class="note">👉 <b>請只從 <a href="https://fervela.ai/ai-boardroom/">fervela.ai/ai-boardroom/</a> 下載。</b>從其他地方拿到的版本，我們無法保證內容未被修改。</div>
+  </section>
+
+  <section>
+    <h2>六、開發者做不到的事</h2>
+    <ul>
+      <li class="no"><b>無法保證軟體沒有漏洞。</b>已採取的措施是「就算有漏洞，金鑰也只送得到白名單內的網址」</li>
+      <li class="no"><b>無法控制 AI 服務商如何處理你的內容</b></li>
+      <li class="no"><b>無法保護已經中毒的裝置</b></li>
+      <li class="no"><b>無法防止惡意的瀏覽器擴充功能</b></li>
+      <li class="no"><b>無法保證這份清單是完整的</b></li>
+    </ul>
+    <div class="note">本軟體按「現狀」提供，不附任何擔保。AI 產生的內容僅供決策參考，不構成專業意見；涉及投資、法律、醫療等重大決定，請諮詢持照專業人士。詳見<a href="https://fervela.ai/ai-boardroom/">授權條款</a>。</div>
+  </section>
+
+  <div style="text-align:center"><a class="back" href="https://fervela.ai/ai-boardroom/">← 回到 AI 董事會</a></div>
+
+  <footer>© 2026 Fervela.ai　·　本頁是軟體內十頁「使用須知」的摘要；完整版請在軟體中按「使用須知」</footer>
+</div>
+</body>
+</html>

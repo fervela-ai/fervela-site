@@ -22,6 +22,10 @@
   h1{ font-size:30px; color:var(--navy); line-height:1.25; }
   .sub{ color:var(--grey); font-size:14px; letter-spacing:.4px; }
   .lead{ background:#fff; border-left:5px solid var(--teal); border-radius:10px; padding:16px 20px; margin:22px 0; box-shadow:0 2px 10px rgba(13,27,61,.05); }
+  .lead .q{ font-size:17px; color:var(--navy); font-weight:700; line-height:1.7; }
+  .lead .body{ margin-top:10px; font-size:15.5px; }
+  .lead .fine{ margin-top:10px; font-size:13px; color:var(--grey); }
+  .lead .fine b{ color:var(--grey); }
   .lead b{ color:var(--navy); }
   .ver{ display:inline-block; background:var(--navy); color:#fff; border-radius:999px; padding:2px 14px; font-size:13px; font-weight:700; margin:4px 0 14px; }
   .cards{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
@@ -32,13 +36,92 @@
   .card .note{ font-size:13px; color:var(--grey); margin:10px 0 14px; flex:1; }
   .card .note b{ color:var(--navy); }
   .btn{ display:block; text-align:center; background:var(--navy); color:#fff; text-decoration:none; border-radius:10px; padding:12px 0; font-weight:700; font-size:16px; }
+  /* 「不用安裝就能開始」放在最上面、最大顆——新手不必先選平台、不必下載、
+     不必面對系統的安全警告。安裝版降級成「有訂閱才需要」的進階選項。 */
+  .start{ background:#fff; border:2px solid var(--teal); border-radius:16px; padding:24px 24px 22px; margin-top:18px; box-shadow:0 4px 18px rgba(0,139,139,.12); }
+  .start h2{ font-size:21px; color:var(--navy); }
+  .start p{ font-size:15px; color:#1c2430; margin-top:6px; }
+  .start .go{ display:block; text-align:center; background:var(--teal); color:#fff; text-decoration:none;
+              border-radius:12px; padding:15px 0; font-weight:700; font-size:18px; margin-top:14px; }
+  .start .sm{ font-size:13px; color:var(--grey); margin-top:10px; text-align:center; }
+  .adv{ background:#fff; border:1px solid #dde3ec; border-radius:14px; margin-top:18px; padding:18px 22px; }
+  .adv summary{ cursor:pointer; font-size:17px; font-weight:700; color:var(--navy); }
+  .adv .why{ margin-top:12px; padding:12px 15px; background:var(--mist); border-left:4px solid var(--gold); border-radius:6px; font-size:14.5px; }
+  .pro{ background:#fff; border:2px solid var(--navy); border-radius:16px; padding:24px 24px 22px; margin-top:14px; box-shadow:0 4px 18px rgba(13,27,61,.12); }
+  .pro h2{ font-size:21px; color:var(--navy); }
+  .pro .hook{ font-size:16px; margin-top:8px; }
+  .pro .hook b{ color:var(--navy); }
+  .pro .why{ margin-top:12px; padding:12px 15px; background:var(--mist); border-left:4px solid var(--gold); border-radius:6px; font-size:14.5px; }
+  .pro .why b{ color:var(--navy); }
+  .pro details{ margin-top:14px; }
+  .pro summary{ cursor:pointer; font-size:14px; color:var(--grey); }
+  /* 賣點區：每一條都要是「別人不容易做到、而且可以驗證」的，
+     不寫「強大」「智能」這種形容詞——那種話誰都能寫。 */
+  .sell{ margin-top:22px; }
+  .sell h2{ font-size:21px; color:var(--navy); text-align:center; margin-bottom:4px; }
+  .sell .h2sub{ text-align:center; color:var(--grey); font-size:14px; margin-bottom:16px; }
+  .sell .item{ background:#fff; border:1px solid #dde3ec; border-radius:14px;
+               padding:16px 20px; margin-bottom:10px; box-shadow:0 2px 10px rgba(13,27,61,.05); }
+  .sell .item b{ color:var(--navy); font-size:16px; }
+  .sell .item p{ font-size:14.5px; margin-top:4px; color:#1c2430; }
+  .sell .item p b{ font-size:inherit; }
+  /* 範例報告：放在「吵完給你一份報告」那條裡面——說一百次不如讓人點開看一次。
+     ⚠️ 這個檔案必須是**真實會議**的產出，不能是編的。編的一定比真的漂亮，
+     而真實報告裡沒收攏的分歧、待主席補充的空格，才是這個產品真正的樣子。 */
+  .sample{ display:inline-block; margin-top:10px; background:var(--navy); color:#fff;
+           text-decoration:none; border-radius:9px; padding:9px 16px; font-size:14.5px; font-weight:700; }
+  .sample.pending{ background:#e6eaf0; color:var(--grey); pointer-events:none; }
+  /* 過程相簿：像訂房看房間照片那樣，縮圖點開放大、可左右翻。
+     ⚠️ 純 CSS+JS，不載入任何外部函式庫——這個站不引第三方腳本。 */
+  .report{ margin-top:26px; }
+  .report h2{ font-size:21px; color:var(--navy); text-align:center; margin-bottom:4px; }
+  .report .h2sub{ text-align:center; color:var(--grey); font-size:14px; margin-bottom:14px; }
+  .doc{ background:#fff; border:1px solid #dde3ec; border-radius:14px; overflow:hidden;
+        box-shadow:0 2px 10px rgba(13,27,61,.05); }
+  .doc .docbar{ background:var(--navy); color:#fff; padding:10px 16px; font-size:13px;
+        letter-spacing:.08em; display:flex; justify-content:space-between; align-items:center; }
+  .doc .docbar span{ opacity:.75; letter-spacing:0; }
+  .doc .docbody{ padding:18px 20px 20px; }
+  .doc .doctitle{ font-size:17px; font-weight:700; color:var(--navy); line-height:1.5;
+        padding-bottom:12px; border-bottom:2px solid #eef1f6; }
+  .doc h3{ font-size:13px; color:var(--teal); letter-spacing:.1em; margin:18px 0 6px; }
+  .doc p{ font-size:14.5px; line-height:1.85; color:#1c2430; }
+  .doc ol{ margin:0; padding-left:20px; }
+  .doc ol li{ font-size:14.5px; line-height:1.8; color:#1c2430; margin-bottom:7px; }
+  .doc .when{ color:var(--grey); font-size:13px; }
+  .doc .elide{ color:var(--grey); font-size:13.5px; font-style:italic; padding-left:20px; }
+  .doc .risk{ font-size:14.5px; line-height:1.8; color:#1c2430; }
+  .doc .mmwrap{ margin:10px -20px 0; padding:16px 20px 6px; background:#fbfcfe;
+        border-top:1px solid #eef1f6; border-bottom:1px solid #eef1f6; overflow-x:auto; }
+  .doc .mmwrap img{ width:100%; min-width:560px; max-width:900px; display:block; margin:0 auto; }
+  .doc .mmcap{ text-align:center; font-size:12.5px; color:var(--grey); margin-top:8px; }
+  .doc .foot{ margin-top:18px; padding-top:14px; border-top:1px solid #eef1f6;
+        display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:space-between; }
+  .doc .foot .note{ font-size:13px; color:var(--grey); }
+  .shots{ margin-top:22px; }
+  .shots h2{ font-size:21px; color:var(--navy); text-align:center; }
+  .shots .lead2{ text-align:center; color:var(--grey); font-size:14px; margin:6px 0 14px; }
+  .strip{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
+  @media (max-width:640px){ .strip{ grid-template-columns:repeat(2,1fr); } }
+  .strip figure{ margin:0; cursor:zoom-in; background:#fff; border:1px solid #dde3ec;
+                 border-radius:12px; overflow:hidden; box-shadow:0 2px 10px rgba(13,27,61,.05); }
+  .strip img{ width:100%; height:120px; object-fit:cover; object-position:top; display:block; }
+  .strip figcaption{ font-size:12.5px; color:var(--grey); padding:8px 10px; line-height:1.5; }
+  #lb{ position:fixed; inset:0; background:rgba(10,14,24,.92); z-index:60; display:none;
+       align-items:center; justify-content:center; flex-direction:column; padding:16px; }
+  #lb.on{ display:flex; }
+  #lb img{ max-width:100%; max-height:78vh; border-radius:10px; background:#fff; }
+  #lb .cap{ color:#fff; font-size:14px; margin-top:12px; text-align:center; max-width:680px; }
+  #lb .nav{ margin-top:14px; display:flex; gap:10px; align-items:center; }
+  #lb button{ background:rgba(255,255,255,.14); color:#fff; border:0; border-radius:10px;
+              padding:10px 18px; font:inherit; font-size:15px; cursor:pointer; }
+  #lb .idx{ color:#fff; font-size:13px; opacity:.75; }
   .btn:hover{ background:#16295c; }
   .btn.win{ background:var(--teal); } .btn.win:hover{ background:#0aa3a3; }
   .feat{ margin:26px 0 6px; color:var(--grey); font-size:14px; text-align:center; }
   .feat b{ color:var(--navy); }
   .story{ margin-top:44px; }
   .story h2{ font-size:22px; color:var(--navy); text-align:center; margin-bottom:18px; }
-  .histlead{ text-align:center; color:#6B7280; font-size:14px; line-height:1.8; margin-bottom:18px; }
   .rels{ max-width:640px; margin:0 auto; display:flex; flex-direction:column; gap:8px; }
   .rel{ background:#fff; border:1px solid #dde3ec; border-radius:12px; padding:12px 16px; }
   .rel summary{ cursor:pointer; display:flex; align-items:baseline; gap:10px; font-size:16px; color:var(--navy); }
@@ -77,41 +160,185 @@
   </header>
 
   <div class="lead">
-    你是<b>主席</b>，多位 AI 是你的<b>董事</b>——他們會各自表態、互相反駁、正式表決，
-    幫你把重大決策想透。免費使用，會議資料<b>全部留在你自己的電腦</b>。
+    <div class="q">要不要換這份工作？該不該買這間房？這個計畫到底行不行？</div>
+    <div class="body">
+      這種事問 AI，它多半順著你講；問朋友，他們不好意思講重話。<br>
+      <b>AI 董事會讓好幾家 AI 同桌辯論。</b>你是主席，Claude、Gemini、Groq 各自表態、
+      互相反駁、正式表決——<b>它們不准附和你</b>——最後給你一份可以直接執行的決策報告（<a href="sample-report.pdf?v=31" target="_blank" rel="noopener">看一份真的 ↗</a>）。
+    </div>
+    <div class="fine">免費使用。會議記錄與金鑰只存在你自己的裝置（<a href="privacy.html">你問的內容會送到你選的 AI ↗</a>）。</div>
   </div>
 
-  <span class="ver">最新版本 V3.0（2026-08-26）</span>
+  <span class="ver">最新版本 V3.1（2026-08-27）</span>
 
   <div class="lead" style="border-left-color:var(--gold)">
-    <b>🔔 V3.0 來了。</b><b>手機版正式上線</b>——打開網址就能開會，不用安裝：<a href="https://board.fervela.ai/">board.fervela.ai</a>。另外<b>主席可以對董事發言的每一段打勾或打叉</b>，不必再整則打分。
+    <b>🔔 V3.1 來了。</b><br>
+<b>使用須知大改版</b>：把資料流向、金鑰外洩途徑、以及開發者做不到的事都寫清楚了（<a href="privacy.html">也可以先在這裡看</a>）。<br>
+<b>使用方法大更新，使用介紹得更詳細！</b>
   </div>
 
-  <div class="cards">
-    <div class="card">
-      <h2>🍎 macOS</h2>
-      <div class="tag">Intel 與 Apple 晶片通用・免安裝</div>
-      <div class="note">
-        解壓後把 App 拖進「應用程式」即可。第一次開啟若被擋：
-        <b>系統設定 → 隱私權與安全性 → 強制打開</b>（一次即可）。
-      </div>
-      <a class="btn" href="https://github.com/fervela-ai/fervela-site/releases/download/v3.0/AI-Boardroom-Mac-V3.0.zip">⬇ 下載 Mac 版</a>
-    </div>
-    <div class="card">
-      <h2>🪟 Windows</h2>
-      <div class="tag">Windows 10 / 11・Beta</div>
-      <div class="note">
-        下載後<b>先對 zip 按右鍵 → 內容 → 解除封鎖</b>，再解壓縮
-        （很重要，包內說明書第一頁有圖解）。
-      </div>
-      <a class="btn win" href="https://github.com/fervela-ai/fervela-site/releases/download/v3.0/AI-Boardroom-Windows-V3.0.zip">⬇ 下載 Windows 版</a>
+  <!-- ① 先讓人看到「它長什麼樣」，再談怎麼拿 -->
+  <div class="shots">
+    <h2>實際跑一場長什麼樣</h2>
+    <p class="lead2">下面這場會議未經修飾，題目是「三十五歲、傳統製造業中階主管，該不該轉 AI」。點縮圖放大。</p>
+    <div class="strip" id="strip">
+      <figure data-i="0"><img src="shots/1.png?v=31" alt="主席提出議題" loading="lazy">
+        <figcaption>① 主席把題目交代清楚，三席各接不同的 AI，四個模式一排排開</figcaption></figure>
+      <figure data-i="1"><img src="shots/2.png?v=31" alt="董事逐點交鋒與逐段勾叉" loading="lazy">
+        <figcaption>② 董事逐點交鋒——分歧、被說服之處、讓步條件，每段都能勾或叉</figcaption></figure>
+      <figure data-i="2"><img src="shots/3.png?v=31" alt="主席問答關卡" loading="lazy">
+        <figcaption>③ 缺關鍵事實時，會議停下來問主席，用點的就能回答</figcaption></figure>
+      <figure data-i="3"><img src="shots/4.png?v=31" alt="共識評估與未解分歧" loading="lazy">
+        <figcaption>④ 主持人評估共識度，並點出還沒收攏的分歧</figcaption></figure>
     </div>
   </div>
 
-  <div class="feat">
-    <b>14 家 AI 引擎</b>（訂閱、API Key，其中 4 家免費）<br>
-    五種介面語言<br>
-    <b>會議記錄只存本機</b>
+  <!-- ② 吵完會得到什麼——直接把摘要攤在頁面上，不要求人先下載 -->
+  <div class="report">
+    <h2>那場會議，最後產出這個</h2>
+    <div class="h2sub">以下是真實產出的第一頁，一字未改</div>
+
+    <div class="doc">
+      <div class="docbar">FERVELA.AI<span>AI 董事會決策報告 · 2026-08-27</span></div>
+      <div class="docbody">
+        <div class="doctitle">決策報告：35 歲製造業主管的 AI 路徑決議</div>
+
+        <h3>結論</h3>
+        <p><b>不轉行、不離職、不考純技術職</b>：明天就向直屬主管口頭提出「擔任現有 AI 導入案的
+        廠商溝通窗口／驗收協助」，<b>把 AI 接觸挪進工時</b>；私人時間僅用於驗證興趣，不背職涯期待。</p>
+
+        <h3>行動清單</h3>
+        <ol>
+          <li><b>本週內</b>：向主管口頭提案擔任導入案窗口／驗收協助，講清楚你出的是產線 domain 與驗收，
+          不是工程。若當面不便，先發一封三段式信（現況痛點、你能補的位、要多少工時）。</li>
+          <li><b>本週內拍板一題未答題</b>：「親手寫出可跑程式」的最小標準——建議採心理教練版
+          （跑通一個推論 Notebook：讀資料→載模型→輸出結果）。<b>這題你跳過未答，不定就無法開工。</b></li>
+          <li><b>三個月後（2026 年 11 月底）</b>：檢視提案是否落地、Notebook 是否跑通；
+          依你自己說的「不喜歡除錯就回歸主管本業」處置。</li>
+        </ol>
+
+        <h3>關鍵風險</h3>
+        <p class="risk">你已答「組織上無法接近導入案」，<b>提案被拒的機率無人估算，且全場無備案</b>。<br>
+        全場無任何薪資數字：<b>獵頭明言不編，本報告同樣不給</b>——薪資影響需自行查證。</p>
+
+        <h3>未解分歧</h3>
+        <p class="risk">你曾標記「✗ 可正式加入／✗ 只能旁聽觀察」並答「組織上無法接近」，
+        其後又答「願意提案」——<b>兩者不一致</b>，本報告採較新的「願意提案」，但這是我的判讀，需你確認。</p>
+
+        <h3>心智圖</h3>
+        <div class="mmwrap">
+          <img src="shots/mindmap.png?v=31" alt="整場會議的爭點、分歧與收斂路徑" loading="lazy">
+          <div class="mmcap">整場會議畫成一張圖——誰主張什麼、哪裡還沒收攏（虛線）。沒有用任何第三方繪圖套件。</div>
+        </div>
+
+        <div class="foot">
+          <span class="note">完整報告還有被否決的選項與前提假設，共 2 頁。</span>
+          <a class="sample" href="sample-report.pdf?v=31" target="_blank" rel="noopener">📄 看完整報告 PDF ↗</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ③ 零門檻入口：手機和電腦都適用，不用下載、不用選平台 -->
+  <div class="start">
+    <h2>▶ 直接開始開會</h2>
+    <p><b>手機和電腦都可以</b>——打開網址就用，不用下載、不用安裝、不用管版本。
+    接一把免費金鑰（不用信用卡）就能開會。</p>
+    <a class="go" href="https://board.fervela.ai/">board.fervela.ai</a>
+    <div class="sm">📱 手機請按「分享 → 加入主畫面」，否則系統可能清掉你的資料</div>
+  </div>
+
+  <!-- ② 安裝版：把「用你現有的訂閱、不用付 API 費」當標題講，不藏在摺疊區裡 -->
+  <div class="pro">
+    <h2>💻 已經有 Claude Pro 或 ChatGPT Plus？</h2>
+    <p class="hook">裝電腦版，<b>直接用你現有的訂閱開會——不用申請 API Key、不用再花一毛 API 費用。</b></p>
+
+    <div class="why">
+      安裝版會<b>自動偵測你電腦上的 Claude 與 ChatGPT 指令列工具</b>，用你的訂閱額度發言。
+      這兩家目前的答題品質最好，而<b>網頁版接不到它們</b>——瀏覽器不被允許執行你電腦上的程式，
+      這是安全機制，不是我們沒做。<br><br>
+      沒有訂閱的話，上面的網頁版就夠了，不必裝。
+    </div>
+
+    <div class="cards" style="margin-top:16px">
+      <div class="card">
+        <h2>🍎 macOS</h2>
+        <div class="tag">Intel 與 Apple 晶片通用</div>
+        <a class="btn" href="https://github.com/fervela-ai/fervela-site/releases/download/v3.1/AI-Boardroom-Mac-V3.1.zip">⬇ 下載 Mac 版</a>
+      </div>
+      <div class="card">
+        <h2>🪟 Windows</h2>
+        <div class="tag">Windows 10 / 11・Beta</div>
+        <a class="btn win" href="https://github.com/fervela-ai/fervela-site/releases/download/v3.1/AI-Boardroom-Windows-V3.1.zip">⬇ 下載 Windows 版</a>
+      </div>
+    </div>
+
+    <details>
+      <summary>第一次打開被系統擋下？點開看怎麼處理</summary>
+      <div class="why" style="border-left-color:var(--teal)">
+        本軟體尚未申請付費的開發者簽名（年費 US$99），所以系統會擋第一次開啟。<br><br>
+        <b>Mac</b>：解壓後把 App 拖進「應用程式」，雙擊被擋的話到
+        <b>系統設定 → 隱私權與安全性 → 拉到最下面 → 強制打開</b>（只需一次）。<br><br>
+        <b>Windows</b>：下載後<b>先對 zip 按右鍵 → 內容 → 勾「解除封鎖」</b>，再解壓縮
+        （很重要，包內說明書第一頁有圖解）。接著右鍵那個 .bat →「以系統管理員身分執行」。
+      </div>
+    </details>
+  </div>
+
+  <div class="sell">
+    <h2>跟「分別問三家 AI」差在哪？</h2>
+    <div class="h2sub">差別不在數量，在於它們必須面對彼此，也必須面對你</div>
+
+    <div class="item">
+      <b>它們看得到彼此的發言，而且被要求交鋒</b>
+      <p>每位董事都讀同一份會議記錄，必須<b>點名</b>同意或反對誰的哪一個具體論點。
+      只是換句話說重講一遍別人的話，是被明文禁止的。</p>
+    </div>
+
+    <div class="item">
+      <b>不准附和你——這條寫在程式裡，不是拜託 AI 自律</b>
+      <p>「好問題」「您說得對」這類話全面禁用。每位董事都要寫出<b>讓步條件</b>——對方要成立什麼，你才會接受；
+      改變立場只能因為論證更強，而且必須寫出被誰的哪一句說服。你要的是有人幫你抓錯，不是一群點頭的人。</p>
+    </div>
+
+    <div class="item">
+      <b>可以快速同意或反對 AI 的建議</b>
+      <p>每一段旁邊都有一組勾與叉——不是整篇給星星，是「<b>這一段對、那一段不對</b>」。
+      你的表態會進入後面的討論：同意的請他們深化，反對的別再走那條路。
+      但董事若握有更強的理由，仍然會頂你並說明為什麼。</p>
+    </div>
+
+    <div class="item">
+      <b>缺什麼事實，它們當場問你——多半用點的就能回答</b>
+      <p>董事會不會拿著殘缺的資訊硬推到底。每輪結束若還缺關鍵事實，會議會<b>停下來</b>，
+      把問題連同幾個選項送到你面前，你點一下就繼續。這是刻意的設計：
+      <b>一份你沒參與過的結論，通常也是一份你用不上的結論。</b></p>
+    </div>
+
+    <div class="item">
+      <b>吵完給你一份可以直接執行的報告</b>
+      <p>一頁摘要（結論／行動清單／關鍵風險），後面附上這樣決定的理由、
+      被否決的選項，以及<b>沒有被抹平的少數意見</b>。可存成 PDF。</p>
+    </div>
+
+    <div class="item">
+      <b>不只是商業決策</b>
+      <p>購屋租屋、旅遊規劃、職涯抉擇、家庭會議、內容創作……<b>十組會議室，一鍵換上整組對應的董事</b>。
+      這些角色只負責從不同角度質問你，<b>不負責替你決定要做什麼</b>。
+      你說「我還在研究、還不想談怎麼做」，它們就會陪你停在那裡。</p>
+    </div>
+  </div>
+
+
+  <div id="lb" role="dialog" aria-modal="true">
+    <img id="lbImg" alt="">
+    <div class="cap" id="lbCap"></div>
+    <div class="nav">
+      <button id="lbPrev">← 上一張</button>
+      <span class="idx" id="lbIdx"></span>
+      <button id="lbNext">下一張 →</button>
+      <button id="lbClose">關閉</button>
+    </div>
   </div>
 
   <div class="story">
@@ -128,7 +355,7 @@
       你只要做一件事：<b>把題目交代清楚</b>。剩下的，交給他們。
     </p></div><img src="img/story-4.jpg" alt="主席把題目放上桌" loading="lazy"></div>
     <div class="beat"><div class="txt"><div class="no">4</div><p>
-      然後你去忙你的。董事們<b>自己吵、自己收斂</b>，共識達到 80% 才算數。
+      他們每講完一輪，<b>缺什麼關鍵事實就當場問你</b>——多半用點的就能回答。共識達到 80% 才算數。
     </p></div><img src="img/story-3.jpg" alt="討論進度達到共識 80%" loading="lazy"></div>
     <div class="beat"><div class="txt"><div class="no">5</div><p>
       回來時，桌上已經擺好結論——<b>連分歧和少數意見都幫你留著</b>。
@@ -138,9 +365,20 @@
 
   <div class="story" id="history">
     <h2>版本沿革</h2>
-    <p class="histlead">每一版改了什麼，用「你感覺得到的差別」來寫。
-      最新版預設展開，舊版點開來看。</p>
     <div class="rels">
+      <details class="rel" open>
+        <summary><b>V3.1</b><span>2026-08-27</span></summary>
+        <ul>
+        <li><b>開始使用前，先把風險講清楚</b>——新增十頁「使用須知」，一頁一個主題：你的資料到哪裡去、金鑰外洩途徑分析及防範措施、網頁版與電腦版各自的風險、以及<b>開發者做不到的事</b>。軟體內按「使用須知」可隨時重看，<a href="privacy.html">這裡也看得到</a>。</li>
+        <li><b>討論方式整個改掉了</b>——原本一排七顆按鈕（自動輪一圈、純討論、討論到八成共識……），V3.1 收成<b>四個模式</b>：⚡ 精要回答、📋 認真討論、🔬 深入研究，外加一個 🤖 自動討論。前三個是同一場會議的三種深度，<b>按一下就是一輪，覺得不夠就再按一次</b>；最後一個是你不在場時讓它自己跑完。</li>
+        <li><b>缺什麼事實，董事會當場問你</b>——新增「<b>主席問答關卡</b>」。每輪結束若還缺關鍵事實，會議會<b>停下來</b>，把問題連同幾個選項送到你面前，多半用點的就能回答。這是這一版最重要的改動：<b>一份你沒參與過的結論，通常也是一份你用不上的結論。</b></li>
+        <li><b>每一席可以單獨指定深度</b>——不必整桌一起深入。想讓某一位董事用研究等級發言、其他人維持精要，點那一席上的圖示就好（⚡ 精要／📄 一般／🔬 研究）。</li>
+        <li><b>決策報告附上心智圖</b>——整場會議的爭點、分歧與收斂路徑畫成一張圖，<b>跟報告在同一份文件裡</b>，不必另外產出。沒有用任何第三方繪圖套件，跟軟體其他部分一樣不連外。</li>
+        <li><b>使用教學全部重寫</b>——照著新的四個模式重講一次，並補上主席問答關卡怎麼用、每席深度怎麼調。</li>
+        <li><b>會議室重新規劃</b>——留下<b>主席自己給得出關鍵事實</b>的十張桌子，刪掉那些其實上網查比開會快的。</li>
+        <li>另：介面語言會自動偵測，英文使用者打開就是全英文；授權條款改為「請轉傳官網連結」——舊版一旦流出去，就沒辦法把修正送到那些人手上。</li>
+        </ul>
+      </details>
       <details class="rel" open>
         <summary><b>V3.0</b><span>2026-08-26</span></summary>
         <ul>
@@ -149,7 +387,7 @@
         <li>打勾之後畫面不再跳到最下面；一鍵清除某位董事身上的全部標記。</li>
         </ul>
       </details>
-      <details class="rel">
+      <details class="rel" open>
         <summary><b>V2.9</b><span>2026-08-26</span></summary>
         <ul>
         <li>基礎教學改成「把要介紹的地方框起來」——原本那一大片文字會蓋住它正在解釋的東西，現在畫面壓暗、只留亮要看的那一塊。</li>
@@ -157,7 +395,7 @@
         <li>手機版：打字區壓成一排、討論區與發言卡分出顏色、套會議室不再讓三席跑同一個模型。</li>
         </ul>
       </details>
-      <details class="rel">
+      <details class="rel" open>
         <summary><b>V2.8</b><span>2026-08-26</span></summary>
         <ul>
         <li>GPT 席不再在 75 秒被誤判成卡死——長會議一路跑到底（實測 35K 字逐字稿，GPT 130 秒、Claude 197 秒完成）。</li>
@@ -166,7 +404,7 @@
         <li>手機版：可長按拖曳換位（含換主席）、橫拿不再跑版、打字區與討論區重新排版。</li>
         </ul>
       </details>
-      <details class="rel">
+      <details class="rel" open>
         <summary><b>V2.7</b><span>2026-08-25</span></summary>
         <ul>
         <li>長討論不再被中途砍斷——逾時改看「有沒有在產出」，不再一律 180 秒就砍。</li>
@@ -174,7 +412,7 @@
         <li>修正「不設角色」的成員無法改名；申請金鑰的連結改成明顯的綠色按鈕。</li>
         </ul>
       </details>
-      <details class="rel">
+      <details class="rel" open>
         <summary><b>V2.6</b><span>2026-08-25</span></summary>
         <ul>
         <li>0 元也能開董事會：新增 Groq 與 OpenRouter，加上 Gemini 共三家免費層，申請不用信用卡。</li>
@@ -182,32 +420,32 @@
         <li>免費席位標明真實型號與供應商，不讓你以為在跟官方模型講話。</li>
         </ul>
       </details>
-      <details class="rel">
+      <details class="rel" open>
         <summary><b>V2.5</b><span>2026-08-19</span></summary>
         <ul>
         <li>預設改為「思考模式」與「不設角色圓桌」——不再一開口就被推去談怎麼賺錢。</li>
-        <li>新增「純討論」模式：不求結論，只把不同角度攤開來，最後給一張討論地圖。</li>
+        <li>新增「純討論」模式：不求結論，只把不同角度攤開來，最後給一張討論地圖。<span style="color:#6B7280">（V3.1 已併入「🔬 深入研究」）</span></li>
         <li>取消所有字數限制；角色卡全面改寫成「視角」而不是「議程」，不再蓋過你當下的意圖。</li>
         </ul>
       </details>
-      <details class="rel">
+      <details class="rel" open>
         <summary><b>V2.4</b><span>2026-08-18</span></summary>
         <ul>
-        <li>三輪決議改版：第二輪改成發散討論優缺點（必須講自己立場的缺點），不再為反對而反對。</li>
+        <li>三輪決議改版：第二輪改成發散討論優缺點（必須講自己立場的缺點），不再為反對而反對。<span style="color:#6B7280">（V3.1 已由「🤖 自動討論」取代）</span></li>
         <li>AI 思考中你仍然可以發言，正在思考的董事會帶著你的補充重想一次。</li>
         <li>共識輪不再從格式上逼人同意——先講自己的獨立判斷，才輪到同意誰。</li>
         </ul>
       </details>
-      <details class="rel">
+      <details class="rel" open>
         <summary><b>V2.3</b><span>2026-08-17</span></summary>
         <ul>
         <li>新增主席評分（1–5 分）與「★ 必收錄」，之後所有討論與報告都會讀到。</li>
-        <li>勾選動作鍵之後，你送出發言就自動執行，不必再按第二次。</li>
+        <li>勾選動作鍵之後，你送出發言就自動執行，不必再按第二次。<span style="color:#6B7280">（V3.1 已移除，改為一按一輪）</span></li>
         <li>新增六頁基礎教學。</li>
         </ul>
       </details>
-      <details class="rel">
-        <summary><b>V2.0–V2.2</b><span>2026-08-14 起</span></summary>
+      <details class="rel" open>
+        <summary><b>V2.2</b><span>2026-08-15</span></summary>
         <ul>
         <li>從 3 家 AI 擴充到 14 家，每家可選訂閱模式或 API Key 模式。</li>
         <li>新增五種介面語言與三種佈景主題。</li>
@@ -227,5 +465,38 @@
     重大決定請諮詢持照專業人士。
   </footer>
 </div>
+<script>
+// 過程相簿的燈箱：點縮圖放大、左右翻、Esc 關閉。
+// 不用任何外部函式庫——這個站不引第三方腳本（引了就等於把讀者交給別人）。
+(function () {
+  var figs = [].slice.call(document.querySelectorAll("#strip figure"));
+  if (!figs.length) return;
+  var lb = document.getElementById("lb"), img = document.getElementById("lbImg");
+  var cap = document.getElementById("lbCap"), idx = document.getElementById("lbIdx");
+  var cur = 0;
+  function show(i) {
+    cur = (i + figs.length) % figs.length;
+    var f = figs[cur];
+    img.src = f.querySelector("img").getAttribute("src");
+    img.alt = f.querySelector("img").getAttribute("alt") || "";
+    cap.textContent = f.querySelector("figcaption").textContent.trim();
+    idx.textContent = (cur + 1) + " / " + figs.length;
+    lb.classList.add("on");
+  }
+  function close() { lb.classList.remove("on"); }
+  figs.forEach(function (f, i) { f.addEventListener("click", function () { show(i); }); });
+  document.getElementById("lbPrev").addEventListener("click", function (e) { e.stopPropagation(); show(cur - 1); });
+  document.getElementById("lbNext").addEventListener("click", function (e) { e.stopPropagation(); show(cur + 1); });
+  document.getElementById("lbClose").addEventListener("click", close);
+  // 點背景也關；點圖片本身不關（避免想放大時誤觸）
+  lb.addEventListener("click", function (e) { if (e.target === lb) close(); });
+  document.addEventListener("keydown", function (e) {
+    if (!lb.classList.contains("on")) return;
+    if (e.key === "Escape") close();
+    if (e.key === "ArrowLeft") show(cur - 1);
+    if (e.key === "ArrowRight") show(cur + 1);
+  });
+})();
+</script>
 </body>
 </html>
