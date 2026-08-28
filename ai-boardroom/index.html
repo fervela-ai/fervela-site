@@ -24,8 +24,9 @@
   .lead{ background:#fff; border-left:5px solid var(--teal); border-radius:10px; padding:16px 20px; margin:22px 0; box-shadow:0 2px 10px rgba(13,27,61,.05); }
   .lead .q{ font-size:17px; color:var(--navy); font-weight:700; line-height:1.7; }
   .lead .body{ margin-top:10px; font-size:15.5px; }
-  .lead .fine{ margin-top:10px; font-size:13px; color:var(--grey); }
-  .lead .fine b{ color:var(--grey); }
+  /* 「金鑰只存在你自己的裝置」是本產品的核心承諾，不是免責小字——與正文同級 */
+  .lead .fine{ margin-top:12px; font-size:15.5px; color:var(--txt); }
+  .lead .fine b{ color:var(--navy); }
   .lead b{ color:var(--navy); }
   .ver{ display:inline-block; background:var(--navy); color:#fff; border-radius:999px; padding:2px 14px; font-size:13px; font-weight:700; margin:4px 0 14px; }
   .cards{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
@@ -369,11 +370,10 @@
       <details class="rel" open>
         <summary><b>V3.2</b><span>2026-08-28</span></summary>
         <ul>
-        <li><b>共識沒到八成，也能一鍵收尾</b>——主持人每輪總結都會給一個共識度，達八成就自動產出決策報告。沒到八成時，現在總結底下會多一顆「<b>就在這裡收尾，產出報告</b>」：你覺得討論夠了就按，<b>報告只在你按下的那一刻才花資源</b>。不必為了湊到八成而多跑幾輪。</li>
-        <li><b>報告存哪裡、叫什麼名字，改成你決定</b>——舊版產出報告後會<b>自動下載</b>一份 Markdown 到下載資料夾，很多人根本沒發現。現在不會了：報告就顯示在會議記錄裡，訊息上有「📄 存成 PDF」與「💾 存成 Markdown」兩顆鍵，<b>按了才存</b>，而且可以自己挑位置與檔名。</li>
-        <li><b>免費金鑰額度用完時，這一席會自動換一家繼續</b>——免費層每天都有上限。舊版遇到某幾家額度用盡會停在那裡，整場會議開不完、也拿不到報告。現在會自動改用你接的其他引擎把這一席跑完，並<b>在該席標明實際是誰發言的</b>——不會再出現「卡片寫 A、錯誤訊息說 B」這種對不上的情況。</li>
-        <li><b>決策報告會自我檢查格式</b>——報告產出後，程式會確認一頁摘要、結論、行動清單、關鍵風險與心智圖都在，缺了就退回重寫一次。用免費模型跑長會議時特別有感。</li>
-        <li>這一版出貨前跑了 <b>60 場模擬會議</b>（十桌 × 三種深度 × 兩個平台）逐項驗證，上面三件都是那批跑測抓出來的。</li>
+        <li><b>共識沒到八成，也能一鍵收尾</b>——總結底下多一顆「就在這裡收尾，產出報告」。想停在哪一輪由你決定，<b>報告按了才產</b>，不必為了湊到八成多跑幾輪。</li>
+        <li><b>報告不再自動下載</b>——改成訊息上的「📄 存成 PDF」與「💾 存成 Markdown」兩顆鍵，<b>按了才存</b>，位置與檔名你自己挑。舊版會靜默丟一份 Markdown 到下載資料夾，多數人根本沒發現。</li>
+        <li><b>Bug 修正</b>——免費金鑰額度用完時，這一席會自動換一家繼續，不再整場開不完；決策報告產出後會自我檢查格式，缺項自動重寫一次。</li>
+        <li>這一版出貨前跑了 <b>60 場模擬會議</b>（十桌 × 三種深度 × 兩個平台）逐項驗證。</li>
         </ul>
       </details>
       <details class="rel" open>
