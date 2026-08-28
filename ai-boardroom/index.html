@@ -169,12 +169,12 @@
     <div class="fine">免費使用。會議記錄與金鑰只存在你自己的裝置（<a href="privacy.html">你問的內容會送到你選的 AI ↗</a>）。</div>
   </div>
 
-  <span class="ver">最新版本 V3.1（2026-08-27）</span>
+  <span class="ver">最新版本 V3.2（2026-08-28）</span>
 
   <div class="lead" style="border-left-color:var(--gold)">
-    <b>🔔 V3.1 來了。</b><br>
-<b>使用須知大改版</b>：把資料流向、金鑰外洩途徑、以及開發者做不到的事都寫清楚了（<a href="privacy.html">也可以先在這裡看</a>）。<br>
-<b>使用方法大更新，使用介紹得更詳細！</b>
+    <b>🔔 V3.2 來了。</b><br>
+<b>共識沒到八成也能一鍵收尾</b>：想停在哪一輪由你決定，報告按了才產。<br>
+<b>免費金鑰額度用完時，這一席會自動換一家繼續</b>——不會再整場開不完。
   </div>
 
   <!-- ① 先讓人看到「它長什麼樣」，再談怎麼拿 -->
@@ -264,12 +264,12 @@
       <div class="card">
         <h2>🍎 macOS</h2>
         <div class="tag">Intel 與 Apple 晶片通用</div>
-        <a class="btn" href="https://github.com/fervela-ai/fervela-site/releases/download/v3.1/AI-Boardroom-Mac-V3.1.zip">⬇ 下載 Mac 版</a>
+        <a class="btn" href="https://github.com/fervela-ai/fervela-site/releases/download/v3.2/AI-Boardroom-Mac-V3.2.zip">⬇ 下載 Mac 版</a>
       </div>
       <div class="card">
         <h2>🪟 Windows</h2>
         <div class="tag">Windows 10 / 11・Beta</div>
-        <a class="btn win" href="https://github.com/fervela-ai/fervela-site/releases/download/v3.1/AI-Boardroom-Windows-V3.1.zip">⬇ 下載 Windows 版</a>
+        <a class="btn win" href="https://github.com/fervela-ai/fervela-site/releases/download/v3.2/AI-Boardroom-Windows-V3.2.zip">⬇ 下載 Windows 版</a>
       </div>
     </div>
 
@@ -366,6 +366,16 @@
   <div class="story" id="history">
     <h2>版本沿革</h2>
     <div class="rels">
+      <details class="rel" open>
+        <summary><b>V3.2</b><span>2026-08-28</span></summary>
+        <ul>
+        <li><b>共識沒到八成，也能一鍵收尾</b>——主持人每輪總結都會給一個共識度，達八成就自動產出決策報告。沒到八成時，現在總結底下會多一顆「<b>就在這裡收尾，產出報告</b>」：你覺得討論夠了就按，<b>報告只在你按下的那一刻才花資源</b>。不必為了湊到八成而多跑幾輪。</li>
+        <li><b>報告存哪裡、叫什麼名字，改成你決定</b>——舊版產出報告後會<b>自動下載</b>一份 Markdown 到下載資料夾，很多人根本沒發現。現在不會了：報告就顯示在會議記錄裡，訊息上有「📄 存成 PDF」與「💾 存成 Markdown」兩顆鍵，<b>按了才存</b>，而且可以自己挑位置與檔名。</li>
+        <li><b>免費金鑰額度用完時，這一席會自動換一家繼續</b>——免費層每天都有上限。舊版遇到某幾家額度用盡會停在那裡，整場會議開不完、也拿不到報告。現在會自動改用你接的其他引擎把這一席跑完，並<b>在該席標明實際是誰發言的</b>——不會再出現「卡片寫 A、錯誤訊息說 B」這種對不上的情況。</li>
+        <li><b>決策報告會自我檢查格式</b>——報告產出後，程式會確認一頁摘要、結論、行動清單、關鍵風險與心智圖都在，缺了就退回重寫一次。用免費模型跑長會議時特別有感。</li>
+        <li>這一版出貨前跑了 <b>60 場模擬會議</b>（十桌 × 三種深度 × 兩個平台）逐項驗證，上面三件都是那批跑測抓出來的。</li>
+        </ul>
+      </details>
       <details class="rel" open>
         <summary><b>V3.1</b><span>2026-08-27</span></summary>
         <ul>
