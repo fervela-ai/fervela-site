@@ -26,16 +26,16 @@ body{
 .wrap{max-width:860px;margin:0 auto;padding:0 20px}
 
 /* ── 頁首：深海藍。品牌陳述放這裡，往下才是產品 ── */
-.hero{background:var(--navy);color:#fff;padding:52px 0 46px}
+.hero{background:var(--navy);color:#fff;padding:22px 0 38px}
 .hero .wrap{display:flex;flex-direction:column;align-items:flex-start;gap:0}
 .brandrow{display:flex;align-items:center;gap:16px}
 .mark{width:60px;height:60px;flex-shrink:0}
 .mark svg{width:100%;height:100%;display:block;border-radius:14px}
 .bname{font-size:30px;font-weight:700;letter-spacing:.01em;line-height:1.2}
 .tag{color:var(--gold);font-size:12.5px;letter-spacing:.16em;margin-top:4px;text-transform:uppercase}
-.lead{margin-top:22px;font-size:19px;line-height:1.7;max-width:38em}
+.lead{margin-top:14px;font-size:19px;line-height:1.7;max-width:38em}
 .lead b{color:#fff}
-.sub{margin-top:12px;color:#aab6c8;font-size:14.5px;max-width:40em}
+.sub{margin-top:8px;color:#aab6c8;font-size:14.5px;max-width:54em}
 
 /* ── 語言切換 ── */
 .langbar{position:absolute;top:18px;right:20px;display:flex;gap:2px;
@@ -65,7 +65,7 @@ body{
 .card.soon{background:transparent;border-style:dashed;box-shadow:none}
 .card.soon p{color:var(--grey);font-size:14.5px}
 .card.soon p b{color:var(--txt)}
-.acts{margin-top:15px;display:flex;gap:9px;flex-wrap:wrap}
+.acts{margin:0 0 14px;display:flex;gap:9px;flex-wrap:wrap}
 .btn{display:inline-block;background:var(--navy);color:#fff;text-decoration:none;
   padding:9px 17px;border-radius:10px;font-size:14.5px;font-weight:600}
 .btn:hover{filter:brightness(1.15)}
@@ -80,7 +80,7 @@ footer a{color:var(--teal)}
 .fnote{margin-top:8px;font-size:12.5px}
 
 @media (max-width:640px){
-  .hero{padding:44px 0 38px}
+  .hero{padding:20px 0 32px}
   .bname{font-size:25px}
   .lead{font-size:17px}
   .langbar{top:14px;right:16px}
@@ -151,30 +151,30 @@ footer a{color:var(--teal)}
     <div class="card">
       <h2>🏛 <span class="zh">AI 董事會</span><span class="en">AI Boardroom</span>
         <span class="pill live zh">可以用了</span><span class="pill live en">Available</span></h2>
+      <div class="acts">
+        <a class="btn" href="/ai-boardroom/"><span class="zh">看介紹與下載</span><span class="en">Learn more &amp; download</span></a>
+        <a class="btn ghost" href="https://board.fervela.ai/"><span class="zh">直接開一場會</span><span class="en">Open it now</span></a>
+      </div>
       <img class="shot" src="/img/boardroom.jpg" width="1200" height="675" loading="lazy" decoding="async"
            alt="AI 董事會畫面：一位董事的發言，列出他與另一位董事的分歧、以及被對方說服的地方">
       <p class="zh">讓好幾家 AI 坐上同一張桌子辯論你的難題。你是主席，它們必須互相反駁、<b>不准附和你</b>，缺關鍵事實時會停下來問你，最後給一份可以直接執行的決策報告。</p>
       <p class="en">Several AI models argue your problem out at the same table. You chair the meeting; they must engage each other, they are <b>not allowed to just agree with you</b>, and they stop to ask when a key fact is missing. You leave with a decision report you can act on.</p>
       <div class="meta zh">macOS ・ Windows ・ 網頁版 ・ 手機版　｜　免費</div>
       <div class="meta en">macOS · Windows · Web · Mobile　|　Free</div>
-      <div class="acts">
-        <a class="btn" href="/ai-boardroom/"><span class="zh">看介紹與下載</span><span class="en">Learn more &amp; download</span></a>
-        <a class="btn ghost" href="https://board.fervela.ai/"><span class="zh">直接開一場會</span><span class="en">Open it now</span></a>
-      </div>
     </div>
 
     <div class="card">
       <h2>🎖 <span class="zh">四國軍棋</span><span class="en">Four-Nation Army Chess</span>
         <span class="pill live zh">可以玩了</span><span class="pill live en">Playable</span></h2>
+      <div class="acts">
+        <a class="btn" href="https://army.fervela.ai/"><span class="zh">開始下棋</span><span class="en">Play now</span></a>
+      </div>
       <img class="shot" src="/img/army.jpg" width="1200" height="675" loading="lazy" decoding="async"
            alt="四國軍棋的畫面：十字棋盤上四家各一個顏色，自己那一家的棋子是打開的，旁邊列出軍階大小與走法說明">
       <p class="zh">全場的棋子都是蓋著的，<b>誰大誰小要自己撞出來</b>——撞輸了那顆就沒了。有點像象棋，但你連對手手上有什麼都不知道。完全沒玩過剛剛好，規則就寫在棋盤旁邊。</p>
       <p class="en">Every piece on the board is face down. <b>You find out which one outranks which by running into it</b> — and the loser is gone. A bit like chess, except you have no idea what your opponent is holding. Never played before is fine; the rules sit next to the board.</p>
       <div class="meta zh">目前是單機：一個人對三家電腦。多人線上對戰開發中。　｜　免費</div>
       <div class="meta en">Currently local play: one player against three computers. Online multiplayer is in development.　|　Free</div>
-      <div class="acts">
-        <a class="btn" href="https://army.fervela.ai/"><span class="zh">開始下棋</span><span class="en">Play now</span></a>
-      </div>
     </div>
   </div>
     <div class="seemore">
