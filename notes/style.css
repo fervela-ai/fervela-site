@@ -1,0 +1,93 @@
+/* Fervela 品牌色：深海藍 #0D1B3D、探索青 #008B8B、敢帆金 #F5A623、科技灰 #6B7280、雲霧白 #F5F7FA */
+:root{
+  --navy:#0D1B3D; --teal:#008B8B; --gold:#F5A623; --grey:#6B7280; --mist:#F5F7FA;
+  --txt:#1c2430; --line:#dde3ec; --card:#ffffff;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--mist); color:var(--txt);
+  font:16px/1.75 system-ui,-apple-system,"PingFang TC","Noto Sans TC","Segoe UI",sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px}
+
+/* ── 頁首：深海藍。品牌陳述放這裡，往下才是產品 ── */
+.hero{background:var(--navy);color:#fff;padding:52px 0 46px}
+.hero .wrap{display:flex;flex-direction:column;align-items:flex-start;gap:0}
+.brandrow{display:flex;align-items:center;gap:16px}
+.mark{width:60px;height:60px;flex-shrink:0}
+.mark svg{width:100%;height:100%;display:block;border-radius:14px}
+.bname{font-size:30px;font-weight:700;letter-spacing:.01em;line-height:1.2}
+.tag{color:var(--gold);font-size:12.5px;letter-spacing:.16em;margin-top:4px;text-transform:uppercase}
+.lead{margin-top:22px;font-size:19px;line-height:1.7;max-width:38em}
+.lead b{color:#fff}
+.sub{margin-top:12px;color:#aab6c8;font-size:14.5px;max-width:40em}
+
+/* ── 語言切換 ── */
+.langbar{position:absolute;top:18px;right:20px;display:flex;gap:2px;
+  background:rgba(255,255,255,.12);border-radius:9px;padding:3px}
+.langbar button{background:none;border:0;color:#c7d2e0;font-size:13px;
+  padding:4px 11px;border-radius:7px;cursor:pointer;font-family:inherit}
+.langbar button.on{background:#fff;color:var(--navy);font-weight:600}
+.heroouter{position:relative}
+
+/* ── 產品卡 ── */
+.sec{margin:38px 0}
+.sech{font-size:13px;letter-spacing:.13em;color:var(--grey);text-transform:uppercase;margin-bottom:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;
+  padding:22px 24px;margin-bottom:14px;box-shadow:0 2px 10px rgba(13,27,61,.04)}
+.card h2{margin:0;font-size:20px;color:var(--navy);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.pill{font-size:11.5px;letter-spacing:.06em;padding:3px 9px;border-radius:999px;font-weight:600}
+.pill.live{background:#e6f4f4;color:#046b6b}
+.pill.wip{background:#fdf3d7;color:#8a6d1a}
+.card p{margin:9px 0 0;font-size:15px;color:var(--txt)}
+.card .meta{margin-top:8px;font-size:13.5px;color:var(--grey)}
+.card.soon{background:transparent;border-style:dashed;box-shadow:none}
+.card.soon p{color:var(--grey);font-size:14.5px}
+.card.soon p b{color:var(--txt)}
+.acts{margin-top:15px;display:flex;gap:9px;flex-wrap:wrap}
+.btn{display:inline-block;background:var(--navy);color:#fff;text-decoration:none;
+  padding:9px 17px;border-radius:10px;font-size:14.5px;font-weight:600}
+.btn:hover{filter:brightness(1.15)}
+.btn.ghost{background:transparent;color:var(--navy);border:1px solid var(--line)}
+.btn.ghost:hover{background:#eef2f7;filter:none}
+
+
+/* ── 頁尾 ── */
+footer{border-top:1px solid var(--line);margin-top:44px;padding:26px 0 40px;
+  color:var(--grey);font-size:13.5px}
+footer a{color:var(--teal)}
+.fnote{margin-top:8px;font-size:12.5px}
+
+@media (max-width:640px){
+  .hero{padding:44px 0 38px}
+  .bname{font-size:25px}
+  .lead{font-size:17px}
+  .langbar{top:14px;right:16px}
+}
+[data-lang="en"] .zh,[data-lang="zh"] .en{display:none}
+/* ── 筆記內文 ── */
+.post{background:var(--card);border:1px solid var(--line);border-radius:16px;
+  padding:34px 38px;margin:30px 0;box-shadow:0 2px 10px rgba(13,27,61,.04)}
+.post h1{font-size:27px;line-height:1.45;color:var(--navy);margin:0 0 6px}
+.post .date{color:var(--grey);font-size:13.5px;margin-bottom:26px}
+.post h2{font-size:19px;color:var(--navy);margin:34px 0 10px;
+  padding-top:22px;border-top:1px solid #eef1f6}
+.post p{font-size:16.5px;line-height:1.95;margin:0 0 17px}
+.post blockquote{margin:22px 0;padding:14px 20px;background:var(--mist);
+  border-left:3px solid var(--teal);border-radius:0 10px 10px 0;color:#2a3441}
+.post blockquote p{margin:0;font-size:16px;line-height:1.85}
+.post em{color:var(--grey);font-style:normal;font-size:14.5px}
+.post .foot{margin-top:30px;padding-top:20px;border-top:1px solid #eef1f6;
+  color:var(--grey);font-size:14.5px}
+.post a{color:var(--teal)}
+.back{display:inline-block;margin-top:26px;color:var(--grey);
+  text-decoration:none;font-size:14.5px}
+.back:hover{color:var(--navy)}
+.pinfo{margin-top:10px;color:var(--grey);font-size:14px}
+@media (max-width:640px){
+  .post{padding:24px 20px;border-radius:14px}
+  .post h1{font-size:22px}
+  .post p{font-size:16px}
+}

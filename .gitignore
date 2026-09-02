@@ -1,0 +1,9 @@
+# ⚠️ 這是公開 repo。以下絕對不能推上去：
+.claude/            # 內含 worktree 副本與本機設定
+.ship-secrets       # 機密字串清單（本身就含個資）
+.DS_Store
+__pycache__/
+
+# ⚠️ 草稿不進公開 repo。posts.json 的 publish:false 只擋「不產生 HTML」，
+#    擋不住原始 .md 被推上去讓人直接讀（02-lobster.md 就是 publish:false）。
+notes/_drafts/
