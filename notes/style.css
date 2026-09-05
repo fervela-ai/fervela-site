@@ -91,3 +91,34 @@ footer a{color:var(--teal)}
   .post h1{font-size:22px}
   .post p{font-size:16px}
 }
+
+/* ── 文章頁的頁首色帶 ─────────────────────────────
+   原本文章頁一進來就是一張白卡，沒有品牌也沒有導覽，
+   跟首頁的深藍色帶斷開，看起來像另一個站。 */
+.topbar{background:var(--navy)}
+.topbar .wrap{display:flex;align-items:center;gap:18px;padding-top:13px;padding-bottom:13px}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none;margin-right:auto}
+.tmark{width:30px;height:30px;flex:0 0 30px}
+.tmark svg{width:100%;height:100%;display:block;border-radius:8px}
+.tname{color:#fff;font-size:16px;font-weight:700;letter-spacing:.01em}
+.tlink{color:#aab6c8;text-decoration:none;font-size:14px}
+.tlink:hover{color:#fff}
+
+/* 標題下的金色短線——整頁只有這一個亮色，用來斷開標題與內文 */
+.post h1{position:relative;padding-bottom:14px}
+.post h1::after{content:"";position:absolute;left:0;bottom:0;
+  width:52px;height:3px;border-radius:2px;background:var(--gold)}
+.post .date{margin-top:12px}
+
+/* 導言：把 posts.json 的摘要放在正文之前，給眼睛一個緩衝 */
+.lede{font-size:17.5px;line-height:1.85;color:#3a4655;
+  margin:0 0 26px;padding-left:16px;border-left:3px solid var(--line)}
+
+/* 段落之間有節奏：第一個小標不要再頂一條線（上面已經有導言分隔） */
+.post h2:first-of-type{border-top:0;padding-top:6px;margin-top:26px}
+
+@media (max-width:640px){
+  .topbar .wrap{gap:12px}
+  .tname{font-size:15px}
+  .lede{font-size:16.5px;padding-left:13px}
+}

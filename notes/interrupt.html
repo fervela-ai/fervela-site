@@ -11,10 +11,27 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body data-lang="zh">
+<div class="topbar"><div class="wrap">
+    <a class="brand" href="/"><span class="tmark"><svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><rect width="120" height="120" rx="26" fill="#ffffff"/><g color="#008B8B" transform="translate(6 6) scale(0.9)"><g transform="translate(2 14) scale(.88)">
+      <path d="M60 8C34 10 14 30 13 55c-2 28 18 50 48 54 21 3 41-8 48-27-7 11-22 18-39 17-28-1-45-19-44-42 1-23 15-41 34-49Z" fill="currentColor"/>
+      <path d="m66 31-30 54 27-7 3-47Z" fill="currentColor"/>
+      <path d="m71 31 0 50 16-8Z" fill="currentColor" opacity=".9"/>
+      <path d="M69 27v56" stroke="currentColor" stroke-width="1.25"/>
+      <path d="M29 82c12 8 25 11 39 10-12 4-28 2-41-5l2-5Z" fill="currentColor"/>
+      <path d="M78 70c5-5 12-3 13 3 5-5 13-1 12 6 5-1 8 3 7 8-1 7-8 11-16 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M27 84c19 10 43 13 65 6 7-2 12-6 16-12-2 8-8 14-17 18-19 8-45 6-59-3-3-2-5-6-5-9Z" fill="#fff" opacity=".94"/>
+      <path d="M25 87c20 10 45 13 67 5 7-2 12-6 16-11-3 8-9 14-18 18-19 7-44 5-58-4-4-2-6-5-7-8Z" fill="currentColor"/>
+      <path d="M31 88c18 7 39 8 56 2-14 9-38 10-56 2Z" fill="#fff" opacity=".92"/>
+      <path d="M20 85c14 4 27 3 39-2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+      </g>
+      <path d="m84 7 2.6 8.4L95 18l-8.4 2.6L84 29l-2.6-8.4L73 18l8.4-2.6L84 7Z" fill="#F5A623"/></g></svg></span><span class="tname">Miles 邁爾思</span></a>
+    <a class="tlink" href="/notes/">筆記</a>
+  </div></div>
 <div class="wrap">
   <article class="post">
     <h1>AI 董事會全自動幫我找答案，可行嗎？</h1>
     <div class="date">2026-08-29　·　Miles 邁爾思</div>
+    <p class="lede">我想讓幾家 AI 坐上同一張桌子，吵完給我結論，我去做別的事。做出來之後才發現：沒有我參與，那份報告我一件事都用不上。</p>
     <p>個人體感上，Claude 是超強的資訊工程師，務實可靠；ChatGPT 是給滿滿情緒價值的創業家， 想像力豐富；Gemini 回應快速。我想融合大家的長處——同一個問題，想聽聽各家 AI 怎麼說， 於是開了三個視窗。</p>
 <p>複製、貼上、複製、貼上——問題還沒解決，我先變成了傳話機器。</p>
 <p>而且 AI 很好用，但有一個常見的問題：<b>我丟一句問題，得到五十句答案</b>，大大發散， 我連要傳話都不知道該怎麼貼了。</p>
@@ -33,14 +50,14 @@
 <p>我用 AI 寫程式的時候，從來沒有這個問題。</p>
 <p>因為程式會執行。AI 猜錯方向，跑起來就壞了，錯誤訊息會直接打在臉上。 <b>它的假設會被現實檢驗。</b></p>
 <p>做決定沒有這個機制。一份建議你要不要換工作的報告，不會執行，不會報錯， 它只會靜靜地躺在那裡，看起來很有道理。</p>
-<p><b>你要到三個月後才會知道它猜錯了。</b></p>
+<p><b>你不會發現它猜錯了。</b>你只會覺得這份報告好像不太適合你，然後把它放著。</p>
 <p>這是我覺得最反直覺的地方：<b>同樣是 AI 幫你做事，做決定的那個更需要被打斷。</b> 而多數人（包括我）的直覺剛好相反——寫程式很專業，應該多確認；做決定嘛，講一講就好。</p>
 <p>錯了。專業的那個有現實會幫你抓錯，決定的那個沒有。</p>
 <h2>所以我把「打斷」寫進規則裡</h2>
 <p>現在每一輪討論結束，如果還缺關鍵事實，會議會<b>停下來</b>，把問題連同幾個選項送到我面前。 多半用點的就能回答，不用打字。</p>
 <p>我回答完，那個答案會以主席的身分進入會議記錄，<b>接下來所有人都讀得到</b>—— 不是只有問我的那一位。</p>
 <p>要講清楚一件事：<b>「停下來問使用者」這個模式不是我發明的</b>，開發工具裡很常見， 我一開始也沒特別看重它。</p>
-<p>我沒想到的是<b>它在決策場景的份量完全不一樣</b>。在開發工具裡，它是為了少走冤枉路； 在這裡，它是<b>結論能不能用的唯一分界</b>。</p>
+<p>我沒想到的是<b>它在決策場景的份量完全不一樣</b>。在開發工具裡，它是為了少走冤枉路； 在這裡，它是<b>結論能不能用的重要分界</b>。</p>
 <h2>一個小發現</h2>
 <p>改完之後我跑了六十場模擬會議，想看看效果。有一個數字我沒預期到：</p>
 <p><b>跑最久的題目，共識度最低。</b></p>
