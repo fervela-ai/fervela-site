@@ -17,6 +17,8 @@ import io, os, re, html, json
 HERE = os.path.dirname(os.path.abspath(__file__))
 DRAFTS = os.path.join(HERE, "_drafts")
 META = os.path.join(HERE, "posts.json")     # 每篇的日期與摘要，人工維護
+                                            # 帶 "link" 的條目是指到站內其他頁的卡片，
+                                            # 不需要 .md，但要自己寫 "title"
 
 
 def inline(t):
@@ -97,7 +99,7 @@ PAGE = '''<!doctype html>
   </article>
   <a class="back" href="/">← 回首頁</a>
   <footer>
-    <div>問題回報與合作洽詢：<a href="mailto:lynchwu99@gmail.com">lynchwu99@gmail.com</a></div>
+    <div>問題回報與合作洽詢：<a href="mailto:contact@fervela.ai">contact@fervela.ai</a></div>
     <div class="fnote">作品以 <b>Fervela.ai</b> 為名發佈。© 2026 Fervela.ai</div>
   </footer>
 </div>
@@ -138,13 +140,23 @@ INDEX = '''<!doctype html>
   </div>
   <a class="back" href="/">← 回首頁</a>
   <footer>
-    <div>問題回報與合作洽詢：<a href="mailto:lynchwu99@gmail.com">lynchwu99@gmail.com</a></div>
+    <div>問題回報與合作洽詢：<a href="mailto:contact@fervela.ai">contact@fervela.ai</a></div>
     <div class="fnote">作品以 <b>Fervela.ai</b> 為名發佈。© 2026 Fervela.ai</div>
   </footer>
 </div>
 </body>
 </html>
 '''
+
+def card(href, title, date, desc):
+    """索引上的一張卡。文章與外連卡片共用同一個樣子。"""
+    return '''    <div class="card">
+      <h2><a href="{h}" style="color:inherit;text-decoration:none">{t}</a></h2>
+      <div class="pinfo">{d}</div>
+      <p>{x}</p>
+    </div>'''.format(h=html.escape(href), t=html.escape(title),
+                     d=html.escape(date), x=html.escape(desc))
+
 
 def main():
     meta = json.load(io.open(META, encoding="utf-8")) if os.path.exists(META) else {}
@@ -161,11 +173,18 @@ def main():
         io.open(os.path.join(HERE, slug + ".html"), "w", encoding="utf-8").write(
             PAGE.format(title=html.escape(title), desc=html.escape(desc), date=date, body=body))
         print("✓", slug + ".html　—　" + title)
-        items.append((m.get("order", 0), '''    <div class="card">
-      <h2><a href="{s}.html" style="color:inherit;text-decoration:none">{t}</a></h2>
-      <div class="pinfo">{d}</div>
-      <p>{x}</p>
-    </div>'''.format(s=slug, t=html.escape(title), d=date, x=html.escape(desc))))
+        items.append((m.get("order", 0), card(slug + ".html", title, date, desc)))
+
+    # posts.json 裡帶 "link" 的條目不是文章，是指到站內其他頁的卡片
+    # （例如 /courses/ 那種自己一頁、不走這個建置流程的東西）。
+    # 它沒有 .md 也不產生 html，只在索引上出現一張卡，需要自己寫 title。
+    for key, m in meta.items():
+        if not m.get("link") or not m.get("publish", False):
+            continue
+        items.append((m.get("order", 0),
+                      card(m["link"], m.get("title", key), m.get("date", ""), m.get("desc", ""))))
+        print("✓ 外連卡片　—　" + m.get("title", key) + "　→　" + m["link"])
+
     items.sort(reverse=True)
     io.open(os.path.join(HERE, "index.html"), "w", encoding="utf-8").write(
         INDEX.format(items="\n".join(x[1] for x in items)))
