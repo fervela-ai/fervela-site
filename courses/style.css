@@ -127,3 +127,26 @@ footer p{margin:0;max-width:52em;line-height:1.75}
   .entry{border-radius:14px}
   .sec-head h2{font-size:24px}
 }
+
+/* ── 投資地圖專用：拆解一句新聞的區塊 ──
+   每一個片段對應地圖的一層，讀者從「看不懂的那句話」直接被帶到該去的地方。 */
+.decode{background:var(--navy);color:#fff;border-radius:16px;padding:28px 30px;
+  margin:34px 0 0;display:flex;flex-direction:column;gap:20px}
+.decode .q{margin:0;font-size:21px;line-height:1.7;font-weight:700;color:#fff}
+.decode .q b{color:var(--gold);font-weight:700}
+.decode .why{margin:0;color:#c7d2e0;font-size:17px;max-width:44em}
+.decode-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.dec{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);
+  border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:6px}
+.dec .frag{font-weight:700;color:var(--gold);font-size:17px}
+.dec .mean{color:#e6ebf3;font-size:17px;line-height:1.65}
+.dec .layer{color:#8fa3c2;font-size:14px;letter-spacing:.04em}
+
+/* 書單：不是連結，所以不用 <a>，長得跟條目卡一樣但不會有 hover 位移 */
+.book{cursor:default}
+.book:hover{transform:none;box-shadow:none;border-color:var(--g-line,var(--line))}
+
+@media (max-width:640px){
+  .decode{padding:22px 20px;border-radius:14px}
+  .decode .q{font-size:19px}
+}

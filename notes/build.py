@@ -158,9 +158,49 @@ def card(href, title, date, desc):
                      d=html.escape(date), x=html.escape(desc))
 
 
+# ── 首頁的筆記清單 ────────────────────────────────────────────
+# 為什麼要有這一段：首頁的清單原本是手寫的，跟 posts.json 沒有關係，
+# 所以新增條目只會出現在 /notes/，首頁得有人記得手動補——實際漏過一次
+# （2026-09-11 的課程地圖，Lynch 自己發現的）。
+# 現在用標記把那個區塊圈起來，每次建置重寫，兩邊不會再走鐘。
+HOME = os.path.join(os.path.dirname(HERE), "index.html")
+MARK_A = "<!-- notelist:start 由 notes/build.py 產生，不要手改 -->"
+MARK_B = "<!-- notelist:end -->"
+
+
+def home_row(href, title_zh, title_en, date):
+    """首頁那一列：只有標題和日期，沒有摘要。中英雙語。"""
+    return ('      <a class="noteitem" href="{h}">\n'
+            '        <span class="ntitle"><span class="zh">{z}</span>'
+            '<span class="en">{e}</span></span>\n'
+            '        <span class="ndate">{d}</span>\n'
+            '      </a>').format(h=html.escape(href), z=html.escape(title_zh),
+                                 e=html.escape(title_en), d=html.escape(date))
+
+
+def write_home(rows):
+    """把首頁標記之間的內容換掉。找不到標記就大聲失敗，不要安靜略過——
+       安靜略過的話首頁會停在舊版而沒有任何提示（出貨驗證那一族的老問題）。"""
+    if not os.path.exists(HOME):
+        raise SystemExit("❌ 找不到首頁 " + HOME)
+    s = io.open(HOME, encoding="utf-8").read()
+    a, b = s.find(MARK_A), s.find(MARK_B)
+    if a < 0 or b < 0 or b < a:
+        raise SystemExit("❌ 首頁找不到 notelist 標記，請確認 index.html 有這兩行：\n"
+                         "   " + MARK_A + "\n   " + MARK_B)
+    before, after = s[:a + len(MARK_A)], s[b:]
+    out = before + "\n" + "\n".join(rows) + "\n    " + after
+    # 寫回去之前做個粗略的完整性檢查：標記外的內容不該憑空變少。
+    if len(out) < len(s) - sum(len(r) for r in rows) - 4000:
+        raise SystemExit("❌ 產出的首頁比原本短太多，中止")
+    io.open(HOME, "w", encoding="utf-8").write(out)
+    print("✓ 首頁筆記清單（%d 列）" % len(rows))
+
+
 def main():
     meta = json.load(io.open(META, encoding="utf-8")) if os.path.exists(META) else {}
     items = []
+    rows = []          # 首頁那份清單
     for fn in sorted(os.listdir(DRAFTS)):
         if not fn.endswith(".md"):
             continue
@@ -174,6 +214,9 @@ def main():
             PAGE.format(title=html.escape(title), desc=html.escape(desc), date=date, body=body))
         print("✓", slug + ".html　—　" + title)
         items.append((m.get("order", 0), card(slug + ".html", title, date, desc)))
+        rows.append((m.get("order", 0),
+                     home_row("/notes/" + slug + ".html", title,
+                              m.get("title_en") or title, date)))
 
     # posts.json 裡帶 "link" 的條目不是文章，是指到站內其他頁的卡片
     # （例如 /courses/ 那種自己一頁、不走這個建置流程的東西）。
@@ -183,12 +226,18 @@ def main():
             continue
         items.append((m.get("order", 0),
                       card(m["link"], m.get("title", key), m.get("date", ""), m.get("desc", ""))))
+        rows.append((m.get("order", 0),
+                     home_row(m["link"], m.get("title", key),
+                              m.get("title_en") or m.get("title", key), m.get("date", ""))))
         print("✓ 外連卡片　—　" + m.get("title", key) + "　→　" + m["link"])
 
     items.sort(reverse=True)
     io.open(os.path.join(HERE, "index.html"), "w", encoding="utf-8").write(
         INDEX.format(items="\n".join(x[1] for x in items)))
     print("✓ index.html（%d 篇）" % len(items))
+
+    rows.sort(reverse=True)
+    write_home([r[1] for r in rows])
 
 
 if __name__ == "__main__":
