@@ -150,3 +150,18 @@ footer p{margin:0;max-width:52em;line-height:1.75}
   .decode{padding:22px 20px;border-radius:14px}
   .decode .q{font-size:19px}
 }
+
+/* ── 路線卡裡的步驟與「產出」 ──
+   路線卡要回答「下一堂學什麼」，所以列出有順序的具體課；
+   產出是驗收標準：做得出來才算學會，不是看完幾講。 */
+.steps{margin:2px 0 0;padding-left:1.3em;display:flex;flex-direction:column;gap:6px;font-size:17px;line-height:1.65}
+.steps a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid rgba(4,107,107,.25)}
+.steps a:hover{border-bottom-color:var(--teal-ink)}
+.steps .hint{color:#4b5765}
+.output{margin:4px 0 0;background:#fff;border:1px solid var(--line);border-radius:12px;
+  padding:12px 16px;font-size:17px;line-height:1.7;color:var(--txt)}
+.output .lbl{display:inline-block;margin-right:.55em;font-size:14px;font-weight:700;
+  letter-spacing:.06em;color:var(--teal-ink)}
+.sec-head .output{max-width:44em}
+/* 路線卡：需求標記放到名稱下面。放右邊時標記一長，名稱就被擠成兩行，三張卡標題對不齊 */
+.route .entry-top{flex-direction:column;align-items:flex-start;gap:6px}

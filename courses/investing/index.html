@@ -34,14 +34,15 @@
 <div class="wrap">
 
   <header class="masthead">
-    <div class="eyebrow">最後更新 2026.09.11</div>
+    <div class="eyebrow">最後更新 2026.09.12</div>
     <h1>投資自學課程地圖</h1>
     <p class="lede">目標是兩件事：先看懂市場在講什麼，再有能力把自己的判斷寫成程式。從總體經濟到量化工具，按這條路的順序分層，每個站都標了定位和該不該花時間。</p>
   </header>
 
   <div class="decode">
     <p class="q">「明天晚上 8:30，<b>8 月 CPI</b>，市場預期<b>月增 0.4%</b>，這是九月<b>最關鍵的一個數字</b>。」</p>
-    <p class="why">一句很普通的財經新聞。看不懂的話，這張地圖就是從這裡開始的 —— 每個片段都對應下面的某一層。</p>
+    <p class="why">一句示意的財經新聞（句中數字非實際值）。看不懂的話，這張地圖就是從這裡開始的 —— 每個片段都對應下面的某一層。</p>
+    <p class="why">對照真實排程：2026 年 8 月的美國 CPI 於 9 月 11 日美東上午 8:30（台灣晚上 8:30）公布。</p>
     <div class="decode-grid">
       <div class="dec">
         <div class="frag">晚上 8:30</div>
@@ -50,7 +51,7 @@
       </div>
       <div class="dec">
         <div class="frag">8 月 CPI</div>
-        <div class="mean">消費者物價指數，通膨的溫度計。9 月初公布的是 8 月的數字，永遠慢一個月。</div>
+        <div class="mean">消費者物價指數，通膨的溫度計。永遠慢一個月：8 月的數字 9 月才公布，近年多落在當月 10 到 14 日之間，不是月初。</div>
         <div class="layer">→ 第一層：讀懂指標</div>
       </div>
       <div class="dec">
@@ -80,7 +81,7 @@
         <div class="pick-num">02</div>
         <div class="pick-body">
           <div class="pick-name"><a href="https://pages.stern.nyu.edu/~adamodar/">Aswath Damodaran（NYU）</a></div>
-          <div class="pick-why">估值領域的教科書等級人物，把整學期的公司財務與估值課全部免費放上網，影片、投影片、試算表齊全。投資學的正規訓練，這一個人就夠。</div>
+          <div class="pick-why">估值教科書的作者，把整學期的公司財務與估值課免費放上網，影片、投影片、試算表齊全。涵蓋估值與公司財務這一塊；投資組合理論、市場效率要另外找。</div>
         </div>
       </li>
       <li class="pick">
@@ -99,7 +100,25 @@
   <section class="sec">
     <div class="sec-head">
       <h2>怎麼走</h2>
-      <p class="sec-note">主線是第一層 → 第三層 → 第五層：先看懂市場，再學會估值，最後把判斷寫成程式。第二層和第四層是選修，第零層只在卡住的時候回頭補。不要從第五層開始 —— 沒有前面的底子，寫出來的策略只是在回測裡看起來很美。</p>
+      <p class="sec-note">下面分六層，但不是每個人都要走完。先決定你要的是哪一種，層次照著挑就好 —— 投資不等於量化，看懂市場本身就是一個完整的目標。</p>
+    </div>
+
+    <div class="group g-find">
+      <h3>三條路線</h3>
+      <div class="grid">
+        <div class="entry book">
+          <div class="entry-top"><span class="name">看懂市場就好</span></div>
+          <p class="desc">目標是讀得懂新聞、知道自己的錢放在什麼風險上。走<b>第一層 → 第三層</b>，第三層只要讀被動投資那一組。不用碰財報、技術分析或程式。</p>
+        </div>
+        <div class="entry book">
+          <div class="entry-top"><span class="name">自己研究個股</span></div>
+          <p class="desc">目標是判斷一家公司值多少錢。走<b>第一 → 第二 → 第三層</b>，財報是必修不是選修 —— 估值的每一個輸入值都從三張表來。</p>
+        </div>
+        <div class="entry book">
+          <div class="entry-top"><span class="name">寫成程式</span></div>
+          <p class="desc">走<b>第一 → 第三 → 第零層前半 → 第五層</b>。第零層那半不能跳過：分不清運氣和優勢，回測只會一直騙你。第二、第四層等需要基本面或技術面因子時再回來。</p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -108,6 +127,7 @@
     <div class="sec-head">
       <h2>第一層　看懂新聞：總體經濟與指標</h2>
       <p class="sec-note">目標是讀完一則財經新聞不用查字典。這一層不用學到能推導模型，只要建立「這個數字為什麼重要、誰在看它」的直覺。</p>
+      <p class="output"><span class="lbl">產出</span>挑一份最近公布的美國 CPI，不看媒體解讀、只看官方新聞稿，自己說出三件事：實際值比預期高還是低、跟上一期比是升溫還是降溫、它可能怎麼影響下一次聯準會決議。</p>
     </div>
 
     <div class="group g-hub">
@@ -141,7 +161,7 @@
         </a>
         <a class="entry" href="https://fred.stlouisfed.org/">
           <div class="entry-top"><span class="name">FRED（聖路易聯準銀行）</span><span class="pill main">主力</span></div>
-          <p class="desc">全球最完整的免費經濟資料庫，八十萬筆以上時間序列，有 API。以後寫軟體要抓總經資料，就是從這裡。</p>
+          <p class="desc">聖路易聯準銀行維護的免費經濟資料庫，八十萬筆以上時間序列，有 API。以美國與國際總經為主，台灣的數字要回頭找主計總處。</p>
         </a>
         <a class="entry" href="https://tradingeconomics.com/calendar">
           <div class="entry-top"><span class="name">Trading Economics — 經濟日曆</span><span class="pill main">主力</span></div>
@@ -171,7 +191,8 @@
   <section class="sec">
     <div class="sec-head">
       <h2>第二層　看懂公司：財報與公司財務</h2>
-      <p class="sec-note">選修。如果目標是選個股，這層不能跳；如果走指數化投資或量化策略，可以先略過，等第五層需要基本面因子時再回來。</p>
+      <p class="sec-note">走個股研究這條路的話，這層是必修 —— 第三層的估值模型，每一個輸入值（現金流、負債、營運資金、折舊）都從財報來，不懂它就只是在填試算表。走資產配置或量化的話可以先跳過，等需要基本面因子時再回來。</p>
+      <p class="output"><span class="lbl">產出</span>挑一家你熟悉的台灣上市公司，從公開資訊觀測站抓最近一年的三張財報，說得出：它靠什麼賺錢、營業現金流和淨利差多少、差距從哪裡來。</p>
     </div>
 
     <div class="group g-uni">
@@ -197,7 +218,7 @@
       <div class="grid">
         <a class="entry" href="https://mops.twse.com.tw/mops/web/index">
           <div class="entry-top"><span class="name">公開資訊觀測站</span><span class="pill main">主力</span></div>
-          <p class="desc">台灣上市櫃公司所有法定揭露的原始來源：財報、重大訊息、董監持股。介面舊，但這是唯一的第一手。</p>
+          <p class="desc">台灣上市櫃公司法定揭露的官方來源：財報、重大訊息、董監持股。介面舊，但拿到的是第一手，不經過媒體轉述。</p>
         </a>
         <a class="entry" href="https://www.sec.gov/edgar/search/">
           <div class="entry-top"><span class="name">SEC EDGAR</span><span class="pill know">值得知道</span></div>
@@ -211,7 +232,8 @@
   <section class="sec">
     <div class="sec-head">
       <h2>第三層　投資學：東西值多少、市場怎麼定價</h2>
-      <p class="sec-note">主線的核心。這一層回答「一個資產值多少錢」和「市場為什麼不照那個價格交易」。前者是估值，後者是市場效率與行為財務。</p>
+      <p class="sec-note">個股研究與寫程式兩條路都要經過這一層。這一層回答「一個資產值多少錢」和「市場為什麼不照那個價格交易」。前者是估值，後者是市場效率與行為財務。</p>
+      <p class="output"><span class="lbl">產出</span>對同一家公司做一份簡單的現金流折現估值，找出最影響結果的兩個假設，各上下調 20%，列出估出來的價值變了多少。</p>
     </div>
 
     <div class="group g-prof">
@@ -256,6 +278,7 @@
     <div class="sec-head">
       <h2>第四層　技術分析：看懂市場在看什麼</h2>
       <p class="sec-note">選修，而且要先講清楚：技術分析在學術研究裡的證據很薄弱。學它的理由不是它能預測，是市場上很多人在用，所以要看得懂那些線和名詞在講什麼。第五層做量化時，很多因子的原型也來自這裡。</p>
+      <p class="output"><span class="lbl">產出</span>用 Python 自己算出一檔股票的 20 日移動平均和 14 日 RSI，跟看盤軟體上的數字對得起來；對不起來時，找出是資料還是公式的差異。</p>
     </div>
 
     <div class="group g-world">
@@ -271,7 +294,7 @@
         </a>
         <a class="entry" href="https://finmind.github.io/">
           <div class="entry-top"><span class="name">FinMind — 技術面教學</span><span class="pill know">值得知道</span></div>
-          <p class="desc">FinMind 文件裡有一組用 Python 算技術指標的教學。學技術分析最好的方式就是自己算一遍，而不是看別人畫的圖。</p>
+          <p class="desc">FinMind 文件裡有一組用 Python 算技術指標的教學。與其看別人畫好的圖，不如自己算一遍，才知道那條線是怎麼來的。</p>
         </a>
       </div>
     </div>
@@ -281,7 +304,8 @@
   <section class="sec">
     <div class="sec-head">
       <h2>第五層　寫軟體：量化、回測、資料與下單</h2>
-      <p class="sec-note">目標所在。這一層最大的坑不是程式寫不出來，是回測過擬合 —— 在歷史資料上調到很漂亮的策略，上線就失效。所以書單裡那本 López de Prado 排在所有工具之前。</p>
+      <p class="sec-note">這一層最大的坑不是程式寫不出來，是回測過擬合 —— 在歷史資料上調到很漂亮的策略，上線就失效。順序建議是：先在課程裡把「資料洩漏」和「樣本外驗證」弄懂，做一次含手續費與樣本外期間的回測，再去讀書單最後那本。</p>
+      <p class="output"><span class="lbl">產出</span>一份簡單策略的回測，必須包含手續費與證交稅、一段完全沒拿來調參數的樣本外期間，並寫下樣本內和樣本外的報酬差多少、你怎麼解釋。</p>
     </div>
 
     <div class="group g-ai">
@@ -297,7 +321,7 @@
         </a>
         <a class="entry" href="https://www.quantconnect.com/learning">
           <div class="entry-top"><span class="name">QuantConnect Learning</span><span class="pill main">主力</span></div>
-          <p class="desc">量化平台附的免費教材，從資料到回測到實盤的完整流程。配合他們開源的 Lean 引擎，是目前最完整的免費量化入門。</p>
+          <p class="desc">量化平台附的免費教材，從資料到回測到實盤走一遍。配合他們開源的 Lean 引擎，回測與實盤能用同一套程式碼。</p>
         </a>
         <a class="entry" href="https://github.com/quantopian/research_public">
           <div class="entry-top"><span class="name">Quantopian Lecture Series（封存）</span><span class="pill know">值得知道</span></div>
@@ -333,7 +357,7 @@
       <div class="grid">
         <a class="entry" href="https://finmind.github.io/">
           <div class="entry-top"><span class="name">FinMind</span><span class="pill main">主力</span></div>
-          <p class="desc">台股資料的免費 API：盤後價量、三大法人、融資融券、財報。免費額度每小時 600 次，日常更新綽綽有餘。不提供即時報價。</p>
+          <p class="desc">台股資料的免費 API：盤後價量、三大法人、融資融券、財報。不帶 token 每小時 300 次，註冊後在請求帶上 token 提高到 600 次。不提供即時報價。</p>
         </a>
         <a class="entry" href="https://openapi.twse.com.tw/">
           <div class="entry-top"><span class="name">證交所 OpenAPI</span><span class="pill main">主力</span></div>
@@ -341,7 +365,7 @@
         </a>
         <a class="entry" href="https://sinotrade.github.io/">
           <div class="entry-top"><span class="name">永豐金 Shioaji</span><span class="pill main">主力</span></div>
-          <p class="desc">台灣券商裡 Python API 做得最完整的一家：即時報價、下單、帳務都有。要從回測走到實單，目前最多人走這條。</p>
+          <p class="desc">永豐金的 Python API：即時報價、下單、帳務都有，文件與範例齊。要從回測走到實單，台灣目前走這條的人最多。</p>
         </a>
         <a class="entry" href="https://finlab.finance/">
           <div class="entry-top"><span class="name">FinLab</span><span class="pill know">值得知道</span></div>
@@ -354,8 +378,9 @@
   <!-- ============ 第零層 ============ -->
   <section class="sec">
     <div class="sec-head">
-      <h2>第零層　數學底子：卡住才回頭</h2>
-      <p class="sec-note">機率、統計、隨機過程。不要一開始就補 —— 先走主線，遇到看不懂的公式再回來。第五層做到風險模型與回測統計時，一定會回來。</p>
+      <h2>第零層　數學底子：一半要先修，一半卡住再補</h2>
+      <p class="sec-note">分兩批。<b>前半要在第一次回測之前就有</b>：抽樣誤差、相關不等於因果、樣本外驗證、交易成本怎麼吃掉報酬 —— 沒有這幾個概念，你看不出自己的回測在騙你。<b>後半可以等</b>：隨機過程、投資組合最佳化這類數學，做到風險模型時再補。</p>
+      <p class="output"><span class="lbl">產出</span>（前半）用亂數產生 100 個毫無邏輯的交易策略，回測挑出表現最好的一個，再拿它去跑一段沒用過的期間。親眼看一次「運氣看起來像實力」是什麼樣子。</p>
     </div>
 
     <div class="group g-paid">
@@ -405,7 +430,7 @@
         </div>
         <div class="entry book">
           <div class="entry-top"><span class="name">Advances in Financial Machine Learning — Marcos López de Prado</span><span class="pill main">主力</span></div>
-          <p class="desc">寫策略之前必讀。整本書在講一件事：為什麼你的回測在騙你，以及怎麼設計才不會被騙。難，但這是第五層最重要的一本。</p>
+          <p class="desc">不是入門書，門檻高。整本在講一件事：為什麼你的回測在騙你，以及怎麼設計才不會被騙。先做過一次含成本與樣本外期間的回測，讀起來才有感覺。</p>
         </div>
       </div>
     </div>
@@ -414,9 +439,9 @@
   <a class="back" href="/">← 回首頁</a>
 
   <footer>
-    <p><b>標記說明</b> —— <b>主力</b>：主線上會用到。<b>值得知道</b>：知道它存在，需要時再進去。<b>備用</b>：不建議主動花時間，列出來是為了完整。</p>
+    <p><b>標記說明</b> —— <b>主力</b>：選定路線後會用到。<b>值得知道</b>：知道它存在，需要時再進去。<b>備用</b>：不建議主動花時間，列出來是為了完整。</p>
     <p>這是學習資源的整理，不是投資建議。哪些資源值得花時間是這頁的判斷；買什麼、什麼時候買，是讀完之後自己的判斷。</p>
-    <p>這類清單更新於 2026 年 9 月 11 日，發現死連結或該補的站，麻煩告訴我：<a href="mailto:contact@fervela.ai">contact@fervela.ai</a></p>
+    <p>這類清單更新於 2026 年 9 月 12 日，發現死連結或該補的站，麻煩告訴我：<a href="mailto:contact@fervela.ai">contact@fervela.ai</a></p>
     <div class="fnote">作品以 <b>Fervela.ai</b> 為名發佈。© 2026 Fervela.ai</div>
   </footer>
 

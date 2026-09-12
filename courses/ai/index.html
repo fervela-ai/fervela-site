@@ -34,45 +34,95 @@
 <div class="wrap">
 
   <header class="masthead">
-    <div class="eyebrow">最後更新 2026.09.11</div>
+    <div class="eyebrow">最後更新 2026.09.12</div>
     <h1>AI 自學課程地圖</h1>
-    <p class="lede">從 AI 學習出發整理的開放式課程入口，台灣與全球。按實用性排序，不按知名度，每個站都標了定位和取捨判斷。</p>
+    <p class="lede">先選一條路線，照順序上幾門具體的課，用一個做得出來的東西驗收。後面附台灣與全球的完整目錄，要找更多時再往下翻。</p>
   </header>
 
   <div class="shortlist">
-    <h2>只看三個的話</h2>
+    <h2>明天就能開始的三門</h2>
     <ol class="picks">
       <li class="pick">
         <div class="pick-num">01</div>
         <div class="pick-body">
-          <div class="pick-name"><a href="https://csdiy.wiki/">CS 自學指南</a></div>
-          <div class="pick-why">中文，把全球最好的 CS 課程按主題整理成一條有先修關係的路徑，附評價與難度。這是「課程的課程表」，比任何單一 OCW 站有用。</div>
+          <div class="pick-name"><a href="https://www.youtube.com/watch?v=TigfpYPJk1s">李宏毅 — 生成式人工智慧與機器學習導論 2025，第 1 講</a></div>
+          <div class="pick-why">全中文、不用寫程式。一講建立「大型語言模型到底怎麼運作」的直覺，下面三條路線都從這裡開始。整門共 10 講，<a href="https://speech.ee.ntu.edu.tw/~hylee/GenAI-ML/2025-fall.php">投影片與作業在課程網頁</a>。</div>
         </div>
       </li>
       <li class="pick">
         <div class="pick-num">02</div>
         <div class="pick-body">
-          <div class="pick-name"><a href="https://www.tocec.org.tw/">TOCEC 臺灣開放式課程暨教育聯盟</a></div>
-          <div class="pick-why">26 校聯盟、近 700 門課的統一入口。要找台灣某一門課，從這裡搜，不要一間一間學校翻。</div>
+          <div class="pick-name"><a href="https://academy.claude.com/courses/building-with-the-claude-api">Anthropic — Building with the Claude API</a></div>
+          <div class="pick-why">要會 Python。67 堂、官方標示 9 小時，從呼叫 API 一路做到工具使用、檢索、agent，並有一整段在教怎麼建立測試資料與自動評分。免費，完成有徽章。</div>
         </div>
       </li>
       <li class="pick">
         <div class="pick-num">03</div>
         <div class="pick-body">
-          <div class="pick-name"><a href="https://huggingface.co/learn">Hugging Face Learn</a></div>
-          <div class="pick-why">LLM、Agents、MCP 三門課全免費、全實作。「怎麼把模型組裝成能出貨的東西」那一層，這裡補得最直接。</div>
+          <div class="pick-name"><a href="https://karpathy.ai/zero-to-hero.html">Karpathy — Neural Networks: Zero to Hero，第 1 支</a></div>
+          <div class="pick-why">要會 Python 與導數。第 1 支「building micrograd」2 小時 25 分，親手寫出反向傳播；整個系列 8 支，最後寫出 GPT。</div>
         </div>
       </li>
     </ol>
   </div>
 
+  <section class="sec">
+    <div class="sec-head">
+      <h2>怎麼走</h2>
+      <p class="sec-note">先決定你要的是哪一種。三條路線需要的底子不同，驗收方式也不同 —— 看完課不算學會，做得出下面那個「產出」才算。</p>
+    </div>
+
+    <div class="group g-find">
+      <h3>三條路線</h3>
+      <div class="grid">
+        <div class="entry book route">
+          <div class="entry-top"><span class="name">用 AI 改善工作</span><span class="pill know">不用寫程式</span></div>
+          <ol class="steps">
+            <li><a href="https://www.youtube.com/watch?v=TigfpYPJk1s">李宏毅 第 1 講</a> <span class="hint">— 先知道它怎麼運作</span></li>
+            <li><a href="https://academy.claude.com/courses/ai-fluency-framework-foundations">AI Fluency: Framework &amp; Foundations</a> <span class="hint">— 4 小時，怎麼分工、怎麼描述、怎麼檢查答案</span></li>
+            <li><a href="https://academy.claude.com/courses/ai-capabilities-and-limitations">AI Capabilities and Limitations</a> <span class="hint">— 3.5 小時，它在哪裡會錯</span></li>
+          </ol>
+          <p class="output"><span class="lbl">產出</span>挑一件你每週都在做的重複工作，寫成一份能重複使用的指令：要給 AI 哪些資料、怎麼檢查它的答案。連續用三週，把它出錯的地方記下來。</p>
+        </div>
+        <div class="entry book route">
+          <div class="entry-top"><span class="name">開發 AI 應用</span><span class="pill know">要會 Python</span></div>
+          <ol class="steps">
+            <li><a href="https://missing.csail.mit.edu/">MIT The Missing Semester</a> <span class="hint">— shell、git、除錯，寫應用前的工具底子</span></li>
+            <li><a href="https://academy.claude.com/courses/building-with-the-claude-api">Building with the Claude API</a> <span class="hint">— 9 小時，API、工具使用、檢索、評估</span></li>
+            <li><a href="https://huggingface.co/learn/agents-course">Hugging Face AI Agents Course</a> <span class="hint">— 先做 Unit 1，每單元約一週 3–4 小時</span></li>
+            <li><a href="https://platform.claude.com/docs/en/test-and-evaluate/develop-tests">定義成功指標並建立評估</a> <span class="hint">— 官方文件，改一次就跑一次測試</span></li>
+            <li><a href="https://speech.ee.ntu.edu.tw/~hylee/ml/2026-spring.php">李宏毅 ML 2026 Spring 前兩講</a> <span class="hint">— 進階，agent 實際怎麼運作</span></li>
+          </ol>
+          <p class="output"><span class="lbl">產出</span>做一個根據你自己的文件回答問題的小工具：答案附出處，資料裡沒有時會說不知道。另外準備 30 題測試題，每次修改前後都跑一遍，把分數記下來。</p>
+        </div>
+        <div class="entry book route">
+          <div class="entry-top"><span class="name">理解或訓練模型</span><span class="pill know">要會 Python 與微積分</span></div>
+          <ol class="steps">
+            <li><a href="https://www.3blue1brown.com/topics/neural-networks">3Blue1Brown 神經網路系列</a> <span class="hint">— 先有畫面</span></li>
+            <li><a href="https://speech.ee.ntu.edu.tw/~hylee/GenAI-ML/2025-fall.php">李宏毅 2025 第 5–8 講</a> <span class="hint">— 機器學習、深度學習、LLM 怎麼學、後訓練</span></li>
+            <li><a href="https://karpathy.ai/zero-to-hero.html">Karpathy Zero to Hero</a> <span class="hint">— 8 支依序，從 micrograd 到 GPT</span></li>
+            <li><a href="https://github.com/karpathy/nanochat">Karpathy nanochat</a> <span class="hint">— 實際訓練一個小型對話模型</span></li>
+          </ol>
+          <p class="output"><span class="lbl">產出</span>不用現成框架，寫出一個能生成文字的小模型；再改一個設定（例如層數或上下文長度），說明訓練損失曲線為什麼跟著變。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <hr class="rule">
+
+  <section class="sec">
+    <div class="sec-head">
+      <h2>完整目錄</h2>
+      <p class="sec-note">上面路線裡的課都在這裡，另外還有更多。按台灣與全球分，要找特定學校、平台或補某一塊時再翻。</p>
+    </div>
+  </section>
 
   <!-- ============ 台灣 ============ -->
   <section class="sec">
     <div class="sec-head">
       <h2>台灣</h2>
-      <p class="sec-note">聚合平台先看，單校站只在已經知道要找誰的課時才進去。台灣的 OCW 站普遍更新慢，但既有內容不會消失。</p>
+      <p class="sec-note">聚合平台先看，單校站只在已經知道要找誰的課時才進去。台灣的 OCW 站普遍更新慢，新課不一定會上；舊課多半留著，但沒有人保證會一直在。</p>
     </div>
 
     <div class="group g-hub">
@@ -140,7 +190,7 @@
       <div class="grid">
         <a class="entry" href="https://speech.ee.ntu.edu.tw/~hylee/">
           <div class="entry-top"><span class="name">李宏毅（台大電機）</span><span class="pill main">主力</span></div>
-          <p class="desc">生成式 AI 與機器學習系列，每學期一版，投影片、作業、Colab 全開，明確歡迎旁聽。華語圈最強的 ML 課，走自己的網站不走 OCW。</p>
+          <p class="desc">生成式 AI 與機器學習系列，每學期改一版跟著領域更新，投影片、作業、Colab 全開，明確歡迎旁聽。全中文授課，材料齊到可以一個人跟完。走自己的網站，不走 OCW。</p>
         </a>
         <a class="entry" href="http://www.csie.ntu.edu.tw/~htlin/mooc/">
           <div class="entry-top"><span class="name">林軒田（台大資工）</span><span class="pill main">主力</span></div>
@@ -176,7 +226,7 @@
         </a>
         <a class="entry" href="https://cs50.harvard.edu/x/">
           <div class="entry-top"><span class="name">Harvard CS50</span><span class="pill know">值得知道</span></div>
-          <p class="desc">全世界口碑最好的計算機導論，製作規格接近影集。已經會寫程式的人，價值在它把底層概念講得極清楚。</p>
+          <p class="desc">哈佛的計算機導論，製作規格接近影集，修課人數以百萬計。已經會寫程式的人，價值在它把底層概念講得很清楚，不在教你語法。</p>
         </a>
         <a class="entry" href="https://online.stanford.edu/">
           <div class="entry-top"><span class="name">Stanford Online</span><span class="pill know">值得知道</span></div>
@@ -228,7 +278,7 @@
       <div class="grid">
         <a class="entry" href="https://karpathy.ai/zero-to-hero.html">
           <div class="entry-top"><span class="name">Karpathy — Neural Networks: Zero to Hero</span><span class="pill main">主力</span></div>
-          <p class="desc">從反向傳播一路手刻到 GPT，前 Tesla／OpenAI AI 總監親自帶。技術人公認的最佳實作課，免費。</p>
+          <p class="desc">從反向傳播一路手刻到 GPT，前 Tesla／OpenAI AI 總監親自帶。全程不用現成框架，所以每一步都看得見。免費。</p>
         </a>
         <a class="entry" href="https://github.com/karpathy/nanochat">
           <div class="entry-top"><span class="name">Karpathy — nanochat</span><span class="pill main">主力</span></div>
@@ -236,7 +286,7 @@
         </a>
         <a class="entry" href="https://huggingface.co/learn">
           <div class="entry-top"><span class="name">Hugging Face Learn</span><span class="pill main">主力</span></div>
-          <p class="desc">LLM、Agents、MCP 三條線都有完整課程，全部免費、全部動手做。補「模型 → 產品」那一層最直接的地方。</p>
+          <p class="desc">LLM、Agents、MCP 三條線都有完整課程，免費、全部動手做，附可執行的 notebook。補「模型 → 產品」那一層最直接的地方。</p>
         </a>
         <a class="entry" href="https://academy.claude.com/">
           <div class="entry-top"><span class="name">Claude Academy（Anthropic 官方）</span><span class="pill main">主力</span></div>
@@ -248,7 +298,7 @@
         </a>
         <a class="entry" href="https://learn.deeplearning.ai/">
           <div class="entry-top"><span class="name">DeepLearning.AI 短課</span><span class="pill know">值得知道</span></div>
-          <p class="desc">Andrew Ng 團隊與各家廠商合作的一到兩小時短課，主題貼著業界最新工具走。免費，適合零碎時間。</p>
+          <p class="desc">Andrew Ng 團隊與各家廠商合作的一到兩小時短課，主題貼著業界最新工具走。<b>影片免費；測驗、互動實驗與結業證書要付費會員。</b>適合零碎時間。</p>
         </a>
         <a class="entry" href="https://course.fast.ai/">
           <div class="entry-top"><span class="name">fast.ai — Practical Deep Learning</span><span class="pill know">值得知道</span></div>
@@ -280,7 +330,7 @@
 
   <footer>
     <p><b>標記說明</b> —— <b>主力</b>：現在就會用到。<b>值得知道</b>：知道它存在，需要時再進去。<b>備用</b>：不建議主動花時間，列出來是為了完整。</p>
-    <p>這類清單更新於 2026 年 9 月 11 日，發現死連結或該補的站，麻煩告訴我：<a href="mailto:contact@fervela.ai">contact@fervela.ai</a></p>
+    <p>這類清單更新於 2026 年 9 月 12 日，發現死連結或該補的站，麻煩告訴我：<a href="mailto:contact@fervela.ai">contact@fervela.ai</a></p>
     <div class="fnote">作品以 <b>Fervela.ai</b> 為名發佈。© 2026 Fervela.ai</div>
   </footer>
 

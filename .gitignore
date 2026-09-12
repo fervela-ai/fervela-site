@@ -1,6 +1,8 @@
 # ⚠️ 這是公開 repo。以下絕對不能推上去：
-.claude/            # 內含 worktree 副本與本機設定
-.ship-secrets       # 機密字串清單（本身就含個資）
+# 內含 worktree 副本與本機設定
+.claude/
+# 機密字串清單（本身就含個資）
+.ship-secrets
 .DS_Store
 __pycache__/
 
