@@ -1,0 +1,346 @@
+<!doctype html>
+<!-- Fervela.ai — © 2026 Fervela. All rights reserved. -->
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>美股券商怎麼選：複委託、Firstrade、IBKR｜Miles 邁爾思</title>
+<meta name="description" content="想在美股掛移動停損、想自己寫交易程式，台灣的複委託做不做得到？逐家查完 15 家之後，把元大、Firstrade、IBKR 放在同一張表上比：功能、手續費、遺產稅，還有每一個讓人猶豫的點。">
+<meta property="og:title" content="美股券商怎麼選：複委託、Firstrade、IBKR">
+<meta property="og:description" content="想在美股掛移動停損、想自己寫交易程式，台灣的複委託做不做得到？逐家查完 15 家之後，把元大、Firstrade、IBKR 放在同一張表上比。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://fervela.ai/courses/us-brokers/">
+<link rel="stylesheet" href="../style.css">
+<style>
+/* ── 這頁專用：比較表 ──
+   全部帶 bk- 前綴、只在這頁使用；共用 class 只在 .bk-page 底下加樣式。不搬進共用檔；若日後要共用，前綴與 .bk-page 範圍都要保留。
+   規則跟地圖頁一樣：正文不小於 17px，只有標記與註腳收到 14–15px。 */
+.bk-tbl{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:16px;
+  box-shadow:0 2px 10px rgba(13,27,61,.04)}
+.bk-tbl table{border-collapse:collapse;width:100%;font-size:17px;line-height:1.6}
+.bk-tbl th,.bk-tbl td{padding:12px 14px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+.bk-tbl thead th{background:var(--mist);color:var(--navy);font-weight:700;font-size:15px;
+  letter-spacing:.04em;white-space:nowrap}
+.bk-tbl tbody tr:last-child td{border-bottom:0}
+.bk-tbl td.k{font-weight:700;color:var(--navy);white-space:nowrap}
+.bk-tbl td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.bk-tbl td.note{min-width:240px;color:#4b5765}
+.bk-tbl tr.hl td{background:#fdf9ec}
+.bk-tag{display:inline-block;font-size:14px;font-weight:600;letter-spacing:.04em;
+  padding:3px 10px;border-radius:999px;white-space:nowrap;line-height:1.4}
+.bk-tag.yes{background:var(--teal-bg);color:var(--teal-ink)}
+.bk-tag.no{background:#eef1f6;color:var(--grey)}
+.bk-tag.unk{background:var(--gold-bg);color:var(--gold-ink)}
+.bk-tag.part{background:#e3ecfa;color:#2b4c8a}
+.bk-legend{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;font-size:15px;color:var(--grey);margin-top:-6px}
+.bk-win{box-shadow:inset 4px 0 0 var(--teal)}
+
+/* 結論盒：沿用地圖頁的深藍 decode 盒，改成三行結論 */
+.bk-verdict{display:flex;flex-direction:column;gap:14px}
+.bk-verdict .row{display:grid;grid-template-columns:150px 1fr;gap:14px;align-items:baseline}
+.bk-verdict .who{color:var(--gold);font-weight:700;font-size:17px}
+.bk-verdict .what{margin:0;color:#e6ebf3;font-size:17px;line-height:1.7}
+.bk-verdict .what b{color:#fff}
+@media (max-width:640px){.bk-verdict .row{grid-template-columns:1fr;gap:2px}}
+
+/* 追問卡：一問一答，問題是讀者會問的話 */
+.bk-qa .entry{gap:6px}
+.bk-q{font-size:17px;font-weight:700;color:var(--navy);line-height:1.5}
+.bk-a{margin:0;font-size:17px;line-height:1.72}
+
+/* 步驟：真的有先後順序才用數字 */
+.bk-route{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+.bk-route li{display:flex;gap:14px;align-items:flex-start;background:var(--card);
+  border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.bk-route .n{flex:none;width:2em;padding-top:2px;font-family:var(--mono);font-size:15px;color:var(--teal)}
+.bk-route b{display:block;color:var(--navy);margin-bottom:2px}
+.bk-route p{margin:0;font-size:17px;line-height:1.7}
+
+.bk-warn{background:var(--gold-bg);border:1px solid #e8d9ae;border-radius:14px;padding:16px 20px;font-size:17px;line-height:1.75}
+.bk-warn b{color:var(--gold-ink)}
+.bk-page .bk-tbl a,.bk-page .desc a,.bk-a a,.bk-page .sec-note a{color:var(--teal);text-decoration:none;border-bottom:1px solid var(--line)}
+.bk-page .bk-tbl a:hover,.bk-page .desc a:hover,.bk-a a:hover,.bk-page .sec-note a:hover{border-bottom-color:var(--teal)}
+.bk-src-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.bk-src-col h3{margin:0 0 6px;font-size:17px;color:var(--navy)}
+.bk-src-list{margin:0 0 14px;padding-left:1.2em;font-size:16px;line-height:1.75}
+.bk-src-list li{margin:2px 0}
+.bk-src-list a{color:var(--teal);text-decoration:none;border-bottom:1px solid var(--line)}
+.bk-src-list a:hover{border-bottom-color:var(--teal)}
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="wrap">
+    <a class="brand" href="/"><span class="tmark"><svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><rect width="120" height="120" rx="26" fill="#ffffff"/><g color="#008B8B" transform="translate(6 6) scale(0.9)"><g transform="translate(2 14) scale(.88)">
+      <path d="M60 8C34 10 14 30 13 55c-2 28 18 50 48 54 21 3 41-8 48-27-7 11-22 18-39 17-28-1-45-19-44-42 1-23 15-41 34-49Z" fill="currentColor"/>
+      <path d="m66 31-30 54 27-7 3-47Z" fill="currentColor"/>
+      <path d="m71 31 0 50 16-8Z" fill="currentColor" opacity=".9"/>
+      <path d="M69 27v56" stroke="currentColor" stroke-width="1.25"/>
+      <path d="M29 82c12 8 25 11 39 10-12 4-28 2-41-5l2-5Z" fill="currentColor"/>
+      <path d="M78 70c5-5 12-3 13 3 5-5 13-1 12 6 5-1 8 3 7 8-1 7-8 11-16 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M27 84c19 10 43 13 65 6 7-2 12-6 16-12-2 8-8 14-17 18-19 8-45 6-59-3-3-2-5-6-5-9Z" fill="#fff" opacity=".94"/>
+      <path d="M25 87c20 10 45 13 67 5 7-2 12-6 16-11-3 8-9 14-18 18-19 7-44 5-58-4-4-2-6-5-7-8Z" fill="currentColor"/>
+      <path d="M31 88c18 7 39 8 56 2-14 9-38 10-56 2Z" fill="#fff" opacity=".92"/>
+      <path d="M20 85c14 4 27 3 39-2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+      </g>
+      <path d="m84 7 2.6 8.4L95 18l-8.4 2.6L84 29l-2.6-8.4L73 18l8.4-2.6L84 7Z" fill="#F5A623"/></g></svg></span><span class="tname">Miles 邁爾思</span></a>
+    <a class="tlink" href="/notes/">筆記</a>
+  </div></div>
+
+<div class="wrap bk-page">
+
+  <header class="masthead">
+    <div class="eyebrow">最後更新 2026.09.13</div>
+    <h1>美股券商怎麼選：複委託、Firstrade、IBKR</h1>
+    <p class="lede">我的問題很具體：美股在我睡覺的時候交易，我要一張券商伺服器幫我顧的移動停損單；接下來我還想自己寫交易程式。台灣的複委託做得到嗎？逐家查完 15 家之後，把元大、Firstrade、IBKR 放在同一張表上比。</p>
+  </header>
+
+  <div class="decode">
+    <p class="q">先講結論，<b>再看理由</b>。</p>
+    <div class="bk-verdict">
+      <div class="row"><div class="who">台灣複委託</div><p class="what">15 家<b>沒有任何一家</b>有美股移動停損或二擇一（OCO）。有觸價停損的只有兆豐、永豐、中信、凱基、富邦、群益，而且都是把上手券商的單型轉給你。能寫程式下單的只有凱基，API 是 C#。元大美股連停損單都沒有。</p></div>
+      <div class="row"><div class="who">要寫程式</div><p class="what">選 <b>IBKR</b>。唯一有官方 API、模擬帳戶、正式文件的一家；移動停損、括號單、OCA 全部能從 Python 下，關電腦也在它伺服器上跑。手續費比複委託低一個數量級。</p></div>
+      <div class="row"><div class="who">不寫程式</div><p class="what"><b>Firstrade</b> 的 90 天移動停損夠用、$0 佣金、24 小時華語客服。但它沒有官方 API，不能當演算法帳戶。</p></div>
+    </div>
+    <p class="why">非投資建議。券商功能與費率經常變動，本頁為 2026-09-13 依券商官網、官方手冊與公告整理，引用時請看日期。</p>
+  </div>
+
+  <section class="sec">
+    <div class="sec-head">
+      <h2>為什麼台灣複委託大多沒有美股條件單</h2>
+      <p class="sec-note">不是「拿掉了」，是多數從來沒做過；少數有的也很晚——兆豐與富邦 2022、永豐 2024、群益 2025。四個原因，前兩個是券商自己的手冊寫出來的。</p>
+    </div>
+    <div class="group g-uni">
+      <div class="grid">
+        <div class="entry book">
+          <div class="entry-top"><span class="name">單型綁在「上手券商」</span><span class="pill main">官方手冊</span></div>
+          <p class="desc">中信手冊：「所有委託單皆以交易上手系統回覆之結果為依據」；兆豐：「停損觸發依上手券商系統設定，不符規範將遭上手踢回」。國內券商多半只是轉單加前端檢核，上手給什麼單型，國內就只能開什麼。移動停損、OCO 是美國零售券商層級的功能，機構執行通道通常不給。</p>
+        </div>
+        <div class="entry book">
+          <div class="entry-top"><span class="name">自建深夜觸價要花錢</span><span class="pill main">官方文件</span></div>
+          <p class="desc">兆豐文件直接點名「美股交易時段是台灣的夜間」。要自己盯價得付即時行情、夜間營運、觸價爭議處理。元大的做法最說明問題：它的「長效單」是每天美股開盤前把同一張限價單重送一次，不是觸價。</p>
+        </div>
+        <div class="entry book">
+          <div class="entry-top"><span class="name">圈存制擋掉「觸發後市價買」</span><span class="pill know">事實</span></div>
+          <p class="desc">複委託下單先圈存價金，市價買單鎖不住金額。所以永豐、中信、兆豐全部「市價只限賣出」，買方觸價只能用限價追，體驗打折，券商推的誘因也小。</p>
+        </div>
+        <div class="entry book">
+          <div class="entry-top"><span class="name">生意排序：先打手續費</span><span class="pill know">推論</span></div>
+          <p class="desc">複委託客群以定期定額、長期持有為主（2025 年 1–7 月複委託成交 5.4 兆、美股占 77%），各家競爭全在「免低收」「定期定額一元」。要主動交易的人早就去海外券商了，條件單排在功能清單的最後。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head">
+      <h2>台灣 15 家複委託，逐家查</h2>
+      <p class="sec-note">美股複委託的條件單能力與電子下單費率。「無」是官方文件明寫只接受限價或當日單；「？」是官網跟使用者回報矛盾、或查無官方說明，不猜。</p>
+    </div>
+    <div class="bk-legend"><span class="bk-tag yes">有</span><span class="bk-tag no">無</span><span class="bk-tag unk">？</span><span class="bk-tag part">部分</span><span>費率為牌告或 2026 活動價</span></div>
+    <div class="bk-tbl">
+      <table>
+        <thead><tr><th>券商</th><th>停損</th><th>移動停損</th><th>OCO</th><th>長效單</th><th>下單 API</th><th>手續費</th><th>備註</th></tr></thead>
+        <tbody>
+          <tr><td class="k"><a href="https://www.emega.com.tw/emega/upload/bulletin/%E8%A4%87%E5%A7%94%E8%A8%97-%E3%80%90%E6%A2%9D%E4%BB%B6%E5%96%AE%E3%80%91%E5%A7%94%E8%A8%97%E6%96%B9%E5%BC%8F(%E5%AE%A2%E6%88%B6%E7%89%88).pdf">兆豐</a></td><td><span class="bk-tag yes">有</span></td><td><span class="bk-tag no">無</span></td><td><span class="bk-tag part">母子單</span></td><td>30 日</td><td><span class="bk-tag no">無</span></td><td class="num">$0.1/股 或 買0.25%/賣0.5%</td><td class="note">台灣最完整：停損限價、母子單（母單成交後自動掛停利子單）、AON/IOC、VWAP/TWAP。</td></tr>
+          <tr><td class="k"><a href="https://securities.sinopac.com/seNews/20241021151324613000000000000974.html">永豐金</a></td><td><span class="bk-tag yes">有</span></td><td><span class="bk-tag no">無</span></td><td><span class="bk-tag no">無</span></td><td>3 個月</td><td><span class="bk-tag no">無</span></td><td class="num">0.08% 免低收</td><td class="note">六種智慧單。觸價只能停損不能停利、市價只限賣出。Shioaji API 只有台股。</td></tr>
+          <tr><td class="k"><a href="https://www.ctbcsec.com/2020/n3-subbrokerage/pdf/%E8%A4%87%E5%A7%94%E8%A8%97%E4%BA%A4%E6%98%93%E6%89%8B%E5%86%8A_20260601.pdf">中國信託</a></td><td><span class="bk-tag yes">有</span></td><td><span class="bk-tag no">無</span></td><td><span class="bk-tag no">無</span></td><td>30 日</td><td><span class="bk-tag no">無</span></td><td class="num">0.5% 低收 $35</td><td class="note">觸發限價／市價，觸發價限盤中 ±10%。費率偏貴。</td></tr>
+          <tr><td class="k"><a href="https://www.kgi.com.tw/zh-tw/product-overview/stock-trading/foreign-stock">凱基</a></td><td><span class="bk-tag yes">有</span></td><td><span class="bk-tag no">無</span></td><td><span class="bk-tag no">無</span></td><td>30 日</td><td><span class="bk-tag part">C#</span></td><td class="num">0.1% 活動 無低消</td><td class="note">15 家中唯一有複委託下單 API（2024，C#）。Mac 加 Python 不好用。</td></tr>
+          <tr><td class="k"><a href="https://www.fbs.com.tw/TradingPlatformInt/FCN_OverseasStockMarkets">富邦</a></td><td><span class="bk-tag yes">有</span></td><td><span class="bk-tag no">無</span></td><td><span class="bk-tag no">無</span></td><td>90 日</td><td><span class="bk-tag no">無</span></td><td class="num">0.06% 新戶活動</td><td class="note">觸價單加 90 天長效。舊平台 2026-11-30 停止服務，正遷移到富邦 AI Pro。</td></tr>
+          <tr><td class="k"><a href="https://www.capital.com.tw/events/stock/2025_GlobalInvestment/activity.aspx">群益</a></td><td><span class="bk-tag yes">有</span></td><td><span class="bk-tag no">無</span></td><td><span class="bk-tag no">無</span></td><td>長效觸價</td><td><span class="bk-tag no">無</span></td><td class="num">0.2% 免低收</td><td class="note">2025 年中推出，官網資料少，以媒體報導為主。</td></tr>
+          <tr class="hl"><td class="k"><a href="https://www.yuanta.com.tw/eyuanta/webfile/resourcesFile/b1348f0b-7243-4ae8-9f9d-fd8e87167a0c.pdf">元大</a></td><td><span class="bk-tag no">無</span></td><td><span class="bk-tag no">無</span></td><td><span class="bk-tag no">無</span></td><td>30 日（排程重送）</td><td><span class="bk-tag no">無</span></td><td class="num">0.1%–1%</td><td class="note">美股只有「長效單」，每日開盤前重送限價單，不是觸價。台股智慧單完善，但不含美股。</td></tr>
+          <tr><td class="k"><a href="https://www.cathaysec.com.tw/cathaysecus/us_transaction_info.aspx">國泰</a></td><td><span class="bk-tag unk">？</span></td><td><span class="bk-tag no">無</span></td><td><span class="bk-tag no">無</span></td><td><span class="bk-tag unk">？</span></td><td><span class="bk-tag no">無</span></td><td class="num">0.08% / ETF $3</td><td class="note">官網寫「僅接受限價、當日有效」，論壇有人說 App 有觸價，查無官方說明。</td></tr>
+          <tr><td class="k"><a href="https://eservices.pscnet.com.tw/dm/smart-order/index.html">統一</a></td><td><span class="bk-tag no">無</span></td><td><span class="bk-tag no">無</span></td><td><span class="bk-tag no">無</span></td><td>有</td><td><span class="bk-tag no">無</span></td><td class="num">0.1%–3% 免低收</td><td class="note">智慧單官方頁明寫「僅支援台股」。</td></tr>
+          <tr><td class="k"><a href="https://www.tssco.com.tw/trading-info/">台新</a></td><td><span class="bk-tag unk">？</span></td><td><span class="bk-tag no">無</span></td><td><span class="bk-tag no">無</span></td><td><span class="bk-tag unk">？</span></td><td><span class="bk-tag no">無</span></td><td class="num">0.5% 低收 $35</td><td class="note">App 有「智慧單」捷徑，未說明是否含美股。</td></tr>
+          <tr><td class="k"><a href="https://www.esunsec.com.tw/files/overseas/%E6%B5%B7%E5%A4%96%E8%82%A1%E7%A5%A8%E9%A1%A7%E5%AE%A2%E6%89%8B%E5%86%8A.pdf">玉山</a></td><td><span class="bk-tag no">無</span></td><td><span class="bk-tag no">無</span></td><td><span class="bk-tag no">無</span></td><td><span class="bk-tag no">無</span></td><td><span class="bk-tag no">無</span></td><td class="num">0.4%</td><td class="note">手冊「一律限價」。富果 2024 年底已與玉山拆夥，Fugle API 只有台股。</td></tr>
+          <tr><td class="k"><a href="https://www.entrust.com.tw/upload/entrust/customerServiceDownload/%E8%A4%87%E5%A7%94%E8%A8%97%E6%A5%AD%E5%8B%99%E5%AE%A2%E6%88%B6%E6%89%8B%E5%86%8A202505.pdf">華南永昌</a></td><td><span class="bk-tag no">無</span></td><td><span class="bk-tag no">無</span></td><td><span class="bk-tag no">無</span></td><td><span class="bk-tag no">無</span></td><td><span class="bk-tag no">無</span></td><td class="num">0.5%–1% 低收 $35</td><td class="note">「僅接受當日委託單」。</td></tr>
+          <tr><td class="k"><a href="https://www.masterlink.com.tw/abroad-notice/">元富</a></td><td><span class="bk-tag no">無</span></td><td><span class="bk-tag no">無</span></td><td><span class="bk-tag no">無</span></td><td><span class="bk-tag no">無</span></td><td><span class="bk-tag no">無</span></td><td class="num">0.15% 無低收</td><td class="note">「委託價格一律以限價方式」。</td></tr>
+          <tr><td class="k"><a href="https://events.firstsec.com.tw/%E6%99%BA%E6%85%A7%E5%96%AE%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%B4%B9-29751">第一金</a></td><td><span class="bk-tag no">無</span></td><td><span class="bk-tag no">無</span></td><td><span class="bk-tag no">無</span></td><td><span class="bk-tag no">無</span></td><td><span class="bk-tag no">無</span></td><td class="num">1% 低收 $100</td><td class="note">智慧單只有台股與期權；費率最貴。</td></tr>
+          <tr><td class="k"><a href="https://stock.concords.com.tw/Sub-brokerage02.aspx?mnu=02">康和</a></td><td><span class="bk-tag no">無</span></td><td><span class="bk-tag no">無</span></td><td><span class="bk-tag no">無</span></td><td><span class="bk-tag no">無</span></td><td><span class="bk-tag no">無</span></td><td class="num">查無</td><td class="note">「僅限價、限當日有效」；費用頁失效。</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="sec-note">只想要「睡覺時有停損」、不寫程式，兆豐或永豐的觸價停損是台灣最好的選擇，但仍然沒有移動停損。要寫程式，台灣只剩凱基的 C# API。<b>台灣不適合寫程式的人，直接看美國券商。</b></p>
+    <div class="bk-warn"><b>複委託的美股搬得走嗎？</b> 複委託不是 DTCC 會員，不能走 ACATS；但可以個案申請 DTC 匯撥到美國券商，各家規定不同、要臨櫃問。先問，再決定要不要賣掉重買。台股部位另當別論，台股可以轉戶、不課稅。</div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head">
+      <h2>元大、Firstrade、IBKR 放在同一張表</h2>
+      <p class="sec-note">左邊是我原本用的複委託，右邊兩家是美國本土券商。三家都能買美股，差的是「能掛什麼單」「能不能寫程式」「錢怎麼進出」。</p>
+    </div>
+    <div class="bk-tbl">
+      <table>
+        <thead><tr><th>項目</th><th>元大複委託</th><th><a href="https://www.firstrade.com/zh-TW">Firstrade 第一證券</a></th><th><a href="https://www.interactivebrokers.com/en/pricing/commissions-stocks.php">IBKR 盈透</a></th></tr></thead>
+        <tbody>
+          <tr><td class="k">停損 / 移動停損</td><td>無（只有長效限價單）</td><td>有，伺服器端，90 天到期</td><td class="bk-win">有，伺服器端，<a href="https://www.interactivebrokers.com/en/trading/ordertypes.php?m=goodTilCancelModal">GTC</a>（季末自動取消）</td></tr>
+          <tr><td class="k">括號單 / OCO</td><td>無</td><td>只能網頁手點</td><td class="bk-win"><a href="https://www.interactivebrokers.com/en/trading/ordertypes.php">Bracket、OCA、條件單</a>都能從 API 下</td></tr>
+          <tr><td class="k">官方 API</td><td>無</td><td>無（只有<a href="https://github.com/MaxxRK/firstrade-api">逆向套件</a>，隨時可能失效）</td><td class="bk-win"><a href="https://interactivebrokers.github.io/tws-api/">TWS API</a>、Client Portal Web API；社群 <a href="https://github.com/ib-api-reloaded/ib_async">ib_async</a> 成熟</td></tr>
+          <tr><td class="k">模擬帳戶</td><td>無</td><td>無</td><td class="bk-win">免費 paper account</td></tr>
+          <tr><td class="k">盤前盤後交易</td><td>無，只有正常盤</td><td>限價單可，停損不行</td><td class="bk-win">限價可；Trailing Stop Limit 勾 outsideRth 可</td></tr>
+          <tr><td class="k">交易時間（台灣）</td><td colspan="3">美股正常盤 21:30–04:00（夏令）／22:30–05:00（冬令）。三家都是你睡覺時在交易，差別只在誰幫你顧單。</td></tr>
+          <tr><td class="k">結算幣別</td><td class="bk-win">台幣或美元，券商換匯</td><td>美元，帳戶不收台幣</td><td>美元，不收台幣；帳內換匯 0.002%、最低 $2</td></tr>
+          <tr><td class="k">入金</td><td class="bk-win">台幣帳戶扣款</td><td>電匯美元，新戶單筆 ≥ $2,500 補貼最高 $25</td><td>電匯美元，免費</td></tr>
+          <tr><td class="k">出金</td><td class="bk-win">回台幣帳戶</td><td>$25/筆</td><td>每月首筆免費，之後 $10</td></tr>
+          <tr><td class="k">閒置美元利息</td><td>無</td><td>約 0.15–0.2%</td><td class="bk-win">淨值 &gt; $100k 時約基準利率減 0.5%</td></tr>
+          <tr><td class="k">中文客服</td><td class="bk-win">台灣營業員</td><td class="bk-win">24/7 華語、台灣免付費電話</td><td>繁中介面；香港中心、美東時段</td></tr>
+          <tr><td class="k">稅務文件</td><td class="bk-win">券商彙整，報海外所得方便</td><td>1042-S、1099-B，自己整理</td><td>1042-S、Activity Statement，自己整理</td></tr>
+          <tr><td class="k">美國遺產稅</td><td>實務上較不暴露（券商名義持有）</td><td>暴露</td><td>暴露</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head">
+      <h2>手續費：同一檔股票各買 100 股</h2>
+      <p class="sec-note">三家的計費邏輯不同：元大看金額（0.1%），IBKR 看股數（每股 $0.005、單筆最低 $1），Firstrade 不收。股價用 2026-09-11 收盤，股數一律 100 股，看差距怎麼隨股價變。</p>
+    </div>
+    <div class="bk-tbl">
+      <table>
+        <thead><tr><th>範例（100 股）</th><th>成交金額</th><th>元大 0.1%</th><th>Firstrade</th><th>IBKR</th><th>元大是 IBKR 的幾倍</th></tr></thead>
+        <tbody>
+          <tr><td class="k">AAPL @ $332.27</td><td class="num">$33,227</td><td class="num">$33.23</td><td class="num">$0</td><td class="num">$1.00</td><td class="num">33×</td></tr>
+          <tr><td class="k">AMZN @ $256.78</td><td class="num">$25,678</td><td class="num">$25.68</td><td class="num">$0</td><td class="num">$1.00</td><td class="num">26×</td></tr>
+          <tr><td class="k">NVDA @ $218.29</td><td class="num">$21,829</td><td class="num">$21.83</td><td class="num">$0</td><td class="num">$1.00</td><td class="num">22×</td></tr>
+          <tr><td class="k">SOFI @ $17.32</td><td class="num">$1,732</td><td class="num">$1.73</td><td class="num">$0</td><td class="num">$1.00</td><td class="num">1.7×</td></tr>
+          <tr><td class="k">F @ $13.97</td><td class="num">$1,397</td><td class="num">$1.40</td><td class="num">$0</td><td class="num">$1.00</td><td class="num">1.4×</td></tr>
+          <tr><td class="k">假設一檔 $4 的股票</td><td class="num">$400</td><td class="num">$0.40</td><td class="num">$0</td><td class="num">$1.00</td><td class="num">元大便宜</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="sec-note">規律很清楚：100 股的話，<b>股價超過 $10 就是 IBKR 便宜，越貴的股票差越多</b>；股數多到單筆最低費不再卡住時（200 股以上），分界點降到每股 $5。買美股大型股的人，元大的費用大約是 IBKR 的二、三十倍。</p>
+    <p class="sec-note">另外要算的：<a href="https://www.interactivebrokers.com/en/pricing/market-data-pricing.php">IBKR 即時報價 $10/月</a>，當月佣金滿 $30 免收；賣出時美國監管費三家都有（SEC 約每百萬美元 $28、FINRA 每股 $0.000166，上限 $8.3/筆），100 股 NVDA 賣出大約六毛。一趟來回 100 股 NVDA：元大 $43.7，IBKR 約 $2.6，Firstrade 約 $0.6。</p>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head">
+      <h2>選 IBKR 之前，我卡住的六件事</h2>
+      <p class="sec-note">每一件都是真的代價，但問清楚之後，多數不是障礙。</p>
+    </div>
+    <div class="group g-hub bk-qa">
+      <div class="grid">
+        <div class="entry book">
+          <div class="bk-q">要一台不關機的電腦跑 IB Gateway？</div>
+          <p class="bk-a">是。Mac 一睡眠就斷線。解法是一台常開的機器——Mac mini、Mac Studio 或一台小 VPS 都行；如果本來就打算架一台跑本地模型的工作站，這件事就順便解決了。每週日要用 IB Key 重新驗證一次，<a href="https://github.com/IbcAlpha/IBC">IBC</a> 工具能自動化大部分。</p>
+        </div>
+        <div class="entry book">
+          <div class="bk-q">GTC 單季末會失效，我會忘記重掛？</div>
+          <p class="bk-a">兩層保護：程式在啟動與每天開盤前檢查所有未成交單的到期日，季末前一週自動重掛；再加一則行事曆或推播提醒當備援。這正是「自己寫程式」的好處——不靠記性。</p>
+        </div>
+        <div class="entry book">
+          <div class="bk-q">佣金和數據費不是多花錢嗎？</div>
+          <p class="bk-a">跟 $0 的 Firstrade 比是多花；跟複委託比是省一個數量級（上面那張表）。以買大型股為主的人，一年省下來的手續費遠超過 IBKR 全部雜費。</p>
+        </div>
+        <div class="entry book">
+          <div class="bk-q">API 是事件驅動的 socket，很難？</div>
+          <p class="bk-a">要處理斷線重連、速率限制，<a href="https://github.com/ib-api-reloaded/ib_async">ib_async</a> 包了一層但仍要理解。這是可以學的，而且學會之後它變成資產：你能把過程寫成教學，這一層門檻正是多數人不會跨的地方。</p>
+        </div>
+        <div class="entry book">
+          <div class="bk-q">盤前盤後的停損有取捨，是不是缺點？</div>
+          <p class="bk-a">先講一件事：複委託連盤前盤後<b>都不能交易</b>，所以這對複委託用戶是新增的能力，不是失去什麼。取捨只在 IBKR 內部：Trailing Stop Limit 能蓋到盤外，但跳空穿過限價就不成交；只在正常盤用市價停損一定成交，但盤外沒保護。多數人選後者，把盤外當成資訊不當成執行時段。</p>
+        </div>
+        <div class="entry book">
+          <div class="bk-q">美國遺產稅 40%，是真的嗎？</div>
+          <p class="bk-a">是真的，但不是「全部拿走 40%」。下面一段講清楚它怎麼運作、誰會知道、怎麼因應。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head">
+      <h2>美國遺產稅，講清楚</h2>
+      <p class="sec-note">這是複委託與美國券商之間最少被提起、也最實在的差異。先講機制，再講數字，最後講能做什麼。以下是公開規則的整理，個案請找跨境稅務專業。</p>
+    </div>
+    <div class="group g-prof">
+      <div class="grid">
+        <div class="entry book">
+          <div class="entry-top"><span class="name">誰會知道？券商會。</span></div>
+          <p class="desc">不是美國國稅局來查你，是<b>出口被鎖住</b>。非美國居民過世後，繼承人要把美國券商裡的股票領出來，券商會先要求美國國稅局核發的<a href="https://www.irs.gov/businesses/small-businesses-self-employed/transfer-certificate-filing-requirements-for-the-estates-of-nonresidents-not-citizens-of-the-united-states">「移轉證明」（Form 5173）</a>，而拿到它的前提是先申報遺產稅（<a href="https://www.irs.gov/forms-pubs/about-form-706-na">Form 706-NA</a>）。沒有那張證明，帳戶就凍在那裡。Firstrade、IBKR 都是這樣。</p>
+        </div>
+        <div class="entry book">
+          <div class="entry-top"><span class="name">數字：$60,000 免稅，18% 到 40% 累進</span></div>
+          <p class="desc">適用於「美國境內資產」——美國公司的股票不論放在哪家券商都算。免稅額只有 6 萬美元，超過的部分從 18% 起累進，超過 100 萬美元的部分是 40%。台灣與美國沒有遺產稅協定，沒有減免。一個百萬美元等級的美股帳戶，實際稅率大約三成。</p>
+        </div>
+        <div class="entry book">
+          <div class="entry-top"><span class="name">複委託為什麼「較不暴露」</span></div>
+          <p class="desc">複委託的美股是以台灣券商（或其保管機構）的名義集中持有，美國那端只看到一個機構帳戶，沒有個人的死亡事件會觸發上面那套程序；繼承走的是台灣的流程。這是<b>執行面的差異，不是法律上的豁免</b>——嚴格說稅負仍然存在，只是實務上通常不會被要求。</p>
+        </div>
+        <div class="entry book">
+          <div class="entry-top"><span class="name">台灣這邊可以抵</span></div>
+          <p class="desc">台灣遺產稅對境內居民課全球資產（10–20%），依<a href="https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=G0340072&amp;flno=11">遺產及贈與稅法第 11 條</a>，在國外已納的遺產稅可以扣抵，上限是那筆資產在台灣應納的稅額。所以不是完全重複課稅，但美國稅率高於台灣的部分抵不掉。</p>
+        </div>
+        <div class="entry book">
+          <div class="entry-top"><span class="name">能做什麼：分倉</span></div>
+          <p class="desc">最直接的做法是<b>只把要用程式操作的那一部分放在美國券商</b>，設一個上限，長期核心部位留在複委託。要指數曝險的話，愛爾蘭註冊的 UCITS ETF（如 VUAA、CSPX）不算美國境內資產，不在遺產稅範圍內；個股沒有這種替代。</p>
+        </div>
+        <div class="entry book">
+          <div class="entry-top"><span class="name">最重要的一件事：留一張紙</span></div>
+          <p class="desc">比稅更糟的是<b>沒人知道這個帳戶存在</b>——那筆錢會永遠躺在那裡，最後被州政府收為無人認領財產。帳戶清單、券商名稱、登入方式的所在位置、繼承要走的流程，寫下來放在家人找得到的地方。這件事不花錢，而且跟你選哪家券商無關。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head">
+      <h2>從複委託搬到 IBKR 的順序</h2>
+      <p class="sec-note">真的有先後，所以用數字。整個過程不需要先把股票賣光，也不需要一次搬完。</p>
+    </div>
+    <ol class="bk-route">
+      <li><span class="n">01</span><div><b>先開 IBKR，先用 paper account 寫程式</b><p>不用先動錢，把移動停損策略在模擬帳戶跑通；斷線重連、季末重掛都在這裡練。</p></div></li>
+      <li><span class="n">02</span><div><b>問原券商「複委託美股 DTC 匯撥到 IBKR」</b><p>能匯撥就不用賣掉重買，零手續費、零空窗。要臨櫃問，各家規定不同。</p></div></li>
+      <li><span class="n">03</span><div><b>不能匯撥就慢慢賣、慢慢搬</b><p>成本只有原券商賣出費加 IBKR 買入（每筆約 $1）。帳面沒有獲利的時候搬，海外所得的問題也不存在。</p></div></li>
+      <li><span class="n">04</span><div><b>新資金、新單直接在 IBKR 下，一開始就掛移動停損</b><p>從第一筆起就有夜間保護。</p></div></li>
+      <li><span class="n">05</span><div><b>決定美國券商的上限</b><p>要用程式操作的部位放 IBKR，長期核心留在複委託——這一步是為了上面那段遺產稅。</p></div></li>
+      <li><span class="n">06</span><div><b>台股不動</b><p>台灣各家的台股條件單本來就完善，留在原券商。</p></div></li>
+    </ol>
+  </section>
+
+  <hr class="rule">
+  <section class="sec">
+    <div class="sec-head">
+      <h2>主要來源</h2>
+      <p class="sec-note">以下全部可以點過去查證；台灣券商以官方手冊、公告或功能頁為準，費率頁有活動期限。</p>
+    </div>
+    <div class="bk-src-grid">
+      <div class="bk-src-col"><h3>台灣複委託</h3><ul class="bk-src-list">
+        <li><a href="https://www.yuanta.com.tw/eyuanta/webfile/resourcesFile/b1348f0b-7243-4ae8-9f9d-fd8e87167a0c.pdf">元大《受託買賣外國有價證券業務作業手冊》2026-01（PDF）</a></li>
+        <li><a href="https://securities.sinopac.com/seNews/20241021151324613000000000000974.html">永豐金證券公告：大戶投 6 大美股智慧單 2024-10</a></li>
+        <li><a href="https://www.ctbcsec.com/2020/n3-subbrokerage/pdf/%E8%A4%87%E5%A7%94%E8%A8%97%E4%BA%A4%E6%98%93%E6%89%8B%E5%86%8A_20260601.pdf">中國信託證券《複委託交易手冊》2026-06（PDF）</a></li>
+        <li><a href="https://www.emega.com.tw/emega/upload/bulletin/%E8%A4%87%E5%A7%94%E8%A8%97-%E3%80%90%E6%A2%9D%E4%BB%B6%E5%96%AE%E3%80%91%E5%A7%94%E8%A8%97%E6%96%B9%E5%BC%8F(%E5%AE%A2%E6%88%B6%E7%89%88).pdf">兆豐證券《複委託－條件單委託方式（客戶版）》（PDF）</a></li>
+        <li><a href="https://www.kgi.com.tw/zh-tw/product-overview/stock-trading/foreign-stock">凱基證券海外股票產品頁</a>・<a href="https://www.kgi.com.tw/zh-tw/product-market/news-and-announcement/announcement/announcement-detail?id=2fc401a0c12a41108f59d18e27d0300a">美股行情與複委託下單 API 公告 2024-03</a></li>
+        <li><a href="https://www.fbs.com.tw/TradingPlatformInt/FCN_OverseasStockMarkets">富邦證券海外股市下單說明</a>・<a href="https://etrade.fbs.com.tw/tsfweb/AP_ReMark.html">舊平台停止服務公告</a></li>
+        <li><a href="https://www.capital.com.tw/events/stock/2025_GlobalInvestment/activity.aspx">群益證券美股手續費活動頁</a>（條件單功能依 2025 年媒體報導）</li>
+        <li><a href="https://www.cathaysec.com.tw/cathaysecus/us_transaction_info.aspx">國泰證券美股交易資訊</a></li>
+        <li><a href="https://eservices.pscnet.com.tw/dm/smart-order/index.html">統一證券 e指發智慧下單說明</a></li>
+        <li><a href="https://www.tssco.com.tw/trading-info/">台新證券交易資訊</a></li>
+        <li><a href="https://www.esunsec.com.tw/files/overseas/%E6%B5%B7%E5%A4%96%E8%82%A1%E7%A5%A8%E9%A1%A7%E5%AE%A2%E6%89%8B%E5%86%8A.pdf">玉山證券《海外商品顧客手冊》2026-04（PDF）</a>・<a href="https://support.fugle.tw/open-account/126/">富果與玉山合作終止說明</a></li>
+        <li><a href="https://www.entrust.com.tw/upload/entrust/customerServiceDownload/%E8%A4%87%E5%A7%94%E8%A8%97%E6%A5%AD%E5%8B%99%E5%AE%A2%E6%88%B6%E6%89%8B%E5%86%8A202505.pdf">華南永昌《複委託業務客戶手冊》2025-05（PDF）</a></li>
+        <li><a href="https://www.masterlink.com.tw/abroad-notice/">元富證券海外交易須知</a></li>
+        <li><a href="https://events.firstsec.com.tw/%E6%99%BA%E6%85%A7%E5%96%AE%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%B4%B9-29751">第一金證券智慧單功能介紹</a></li>
+        <li><a href="https://stock.concords.com.tw/Sub-brokerage02.aspx?mnu=02">康和證券複委託交易流程</a></li>
+      </ul></div>
+      <div class="bk-src-col"><h3>美國券商與工具</h3><ul class="bk-src-list">
+        <li><a href="https://www.firstrade.com/zh-TW">Firstrade 第一證券（中文站，費用與說明中心由此進入）</a></li>
+        <li><a href="https://github.com/MaxxRK/firstrade-api">firstrade-api：非官方逆向套件（GitHub）</a></li>
+        <li><a href="https://www.interactivebrokers.com/en/pricing/commissions-stocks.php">IBKR 股票佣金</a>・<a href="https://www.interactivebrokers.com/en/pricing/market-data-pricing.php">行情費</a>・<a href="https://www.interactivebrokers.com/en/trading/ordertypes.php">單型</a></li>
+        <li><a href="https://interactivebrokers.github.io/tws-api/">IBKR TWS API 文件</a>・<a href="https://github.com/ib-api-reloaded/ib_async">ib_async</a>・<a href="https://github.com/IbcAlpha/IBC">IBC（Gateway 自動化）</a></li>
+      </ul>
+      <h3>稅務</h3><ul class="bk-src-list">
+        <li><a href="https://www.irs.gov/businesses/small-businesses-self-employed/estate-tax-for-nonresidents-not-citizens-of-the-united-states">IRS：非美國居民的遺產稅</a>・<a href="https://www.irs.gov/forms-pubs/about-form-706-na">Form 706-NA</a>・<a href="https://www.irs.gov/businesses/small-businesses-self-employed/transfer-certificate-filing-requirements-for-the-estates-of-nonresidents-not-citizens-of-the-united-states">移轉證明（Form 5173）要件</a></li>
+        <li><a href="https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=G0340072&amp;flno=11">遺產及贈與稅法第 11 條（國外遺產稅扣抵）</a></li>
+      </ul></div>
+    </div>
+  </section>
+
+  <a class="back" href="/">← 回首頁</a>
+  <footer>
+    <p>本頁為公開資訊整理，不構成投資、稅務或法律建議；券商功能與費率以當日公告為準。</p>
+    <div>問題回報與合作洽詢：<a href="mailto:contact@fervela.ai">contact@fervela.ai</a></div>
+    <div class="fnote">作品以 <b>Fervela.ai</b> 為名發佈。© 2026 Fervela.ai</div>
+  </footer>
+</div>
+</body>
+</html>

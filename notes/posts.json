@@ -30,5 +30,14 @@
     "date": "2026-09-11",
     "desc": "「8 月 CPI，市場預期月增 0.4%，這是九月最關鍵的數字」—— 看不懂這句話的話，這張地圖從這裡開始。從總體經濟到自己寫回測程式，分五層排的免費資源。",
     "title_en": "A map of where to learn investing for free"
+  },
+  "us-brokers": {
+    "publish": true,
+    "order": 5,
+    "link": "/courses/us-brokers/",
+    "title": "美股券商怎麼選：複委託、Firstrade、IBKR",
+    "date": "2026-09-13",
+    "desc": "想在美股掛移動停損、想自己寫交易程式，台灣的複委託做得到嗎？逐家查完 15 家之後，把元大、Firstrade、IBKR 放在同一張表上比：功能、手續費、遺產稅。",
+    "title_en": "Choosing a U.S. stock broker from Taiwan: sub-brokerage vs. Firstrade vs. IBKR"
   }
 }
