@@ -1,0 +1,519 @@
+<!doctype html>
+<!-- Fervela.ai — © 2026 Fervela. All rights reserved. -->
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>養一隻龍蝦：自架 AI 助理實作指南｜Miles 邁爾思</title>
+<meta name="description" content="用 OpenClaw 在自己的伺服器養一個 24 小時待命、接在 Telegram 上的 AI 助理，模型走現有的 Claude 或 ChatGPT 訂閱。十二個步驟，加上十二個真的咬過人的坑。">
+<meta property="og:title" content="養一隻龍蝦：自架 AI 助理實作指南">
+<meta property="og:description" content="用 OpenClaw 在自己的伺服器養一個 24 小時待命的 AI 助理。十二個步驟，加上十二個真的咬過人的坑。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://fervela.ai/courses/openclaw/">
+<link rel="stylesheet" href="../style.css">
+<style>
+/* ── 這頁專用：安裝步驟、程式碼、坑與提示框 ──
+   courses/style.css 沒有步驟與程式碼樣式，先放在頁內，比照 us-brokers 的做法。
+   規則跟地圖頁一樣：正文不小於 17px，只有標記、步驟編號與程式碼收小。
+   顏色只用品牌色：坑用敢帆金，提示用探索青，不另外引進紅色。 */
+
+.jump{display:flex;flex-wrap:wrap;gap:8px 18px;margin:2px 0 0;font-size:17px}
+.jump a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid rgba(4,107,107,.25)}
+.jump a:hover{border-bottom-color:var(--teal-ink)}
+
+/* 步驟放在白卡裡：長篇正文在白底上比較好讀，跟筆記頁同一個處理 */
+.guide{background:var(--card);border:1px solid var(--line);border-radius:16px;
+  padding:6px 34px;box-shadow:0 2px 10px rgba(13,27,61,.04)}
+.step{display:grid;grid-template-columns:44px 1fr;gap:0 16px;padding:30px 0;
+  border-top:1px solid #eef1f6}
+.step:first-child{border-top:0}
+.step-n{font-family:var(--mono);font-size:14px;color:var(--teal);padding-top:7px;
+  font-variant-numeric:tabular-nums}
+.step-body{min-width:0}
+.step-body > :last-child{margin-bottom:0}
+.step h3{margin:0 0 6px;font-size:22px;line-height:1.4;color:var(--navy)}
+.step .sub{margin:0 0 14px;color:#4b5765}
+.step p{margin:0 0 14px}
+.step ul{margin:0 0 14px;padding-left:1.3em}
+.step li{margin-bottom:6px}
+.step a{color:var(--teal)}
+
+pre{background:#fff;border:1px solid var(--line);border-left:3px solid var(--teal);
+  border-radius:10px;padding:11px 15px;margin:0 0 14px;overflow-x:auto}
+pre code{font-family:var(--mono);font-size:15px;line-height:1.65;color:var(--txt);
+  white-space:pre}
+p code,li code,.desc code,.output code,.trap code,.tip code{font-family:var(--mono);font-size:.86em;
+  background:#eef2f7;border-radius:5px;padding:.06em .36em;word-break:break-word}
+
+.trap,.tip{border-radius:12px;padding:14px 18px;margin:16px 0}
+.trap{background:var(--gold-bg);border:1px solid #ecd9a6}
+.tip{background:var(--teal-bg);border:1px solid #bfe0e0}
+.trap p,.tip p{margin:0 0 10px}
+.trap > :last-child,.tip > :last-child{margin-bottom:0}
+.box-lbl{display:block;margin-bottom:4px;font-size:14px;font-weight:700;letter-spacing:.06em}
+.trap .box-lbl{color:var(--gold-ink)}
+.tip .box-lbl{color:var(--teal-ink)}
+.trap pre,.tip pre{background:rgba(255,255,255,.75)}
+
+/* 坑的卡片：用精選那組的金色底，跟「主力」的青色區隔開 */
+.pits .entry{--g-bg:var(--g-prof-bg);--g-line:var(--g-prof-line)}
+.pits .route .entry-top{gap:6px}
+.pits .desc + .desc{margin-top:-2px}
+
+/* 維護清單 */
+.chk{list-style:none;margin:0;padding:6px 26px;background:var(--card);
+  border:1px solid var(--line);border-radius:16px;box-shadow:0 2px 10px rgba(13,27,61,.04)}
+.chk li{display:grid;grid-template-columns:7.5em 1fr;gap:14px;padding:14px 0;
+  border-top:1px solid #eef1f6}
+.chk li:first-child{border-top:0}
+.chk .when{font-family:var(--mono);font-size:14px;color:var(--teal-ink);padding-top:3px}
+
+.srcs{margin:0;padding-left:1.2em;font-size:15px;line-height:1.8;color:#4b5765}
+.srcs a{color:var(--teal)}
+
+@media (max-width:640px){
+  .guide{padding:2px 20px}
+  .step{grid-template-columns:1fr;gap:4px;padding:24px 0}
+  .step-n{padding-top:0}
+  .step h3{font-size:20px}
+  pre code{font-size:14px}
+  .chk{padding:4px 18px}
+  .chk li{grid-template-columns:1fr;gap:2px}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="wrap">
+    <a class="brand" href="/"><span class="tmark"><svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><rect width="120" height="120" rx="26" fill="#ffffff"/><g color="#008B8B" transform="translate(6 6) scale(0.9)"><g transform="translate(2 14) scale(.88)">
+      <path d="M60 8C34 10 14 30 13 55c-2 28 18 50 48 54 21 3 41-8 48-27-7 11-22 18-39 17-28-1-45-19-44-42 1-23 15-41 34-49Z" fill="currentColor"/>
+      <path d="m66 31-30 54 27-7 3-47Z" fill="currentColor"/>
+      <path d="m71 31 0 50 16-8Z" fill="currentColor" opacity=".9"/>
+      <path d="M69 27v56" stroke="currentColor" stroke-width="1.25"/>
+      <path d="M29 82c12 8 25 11 39 10-12 4-28 2-41-5l2-5Z" fill="currentColor"/>
+      <path d="M78 70c5-5 12-3 13 3 5-5 13-1 12 6 5-1 8 3 7 8-1 7-8 11-16 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M27 84c19 10 43 13 65 6 7-2 12-6 16-12-2 8-8 14-17 18-19 8-45 6-59-3-3-2-5-6-5-9Z" fill="#fff" opacity=".94"/>
+      <path d="M25 87c20 10 45 13 67 5 7-2 12-6 16-11-3 8-9 14-18 18-19 7-44 5-58-4-4-2-6-5-7-8Z" fill="currentColor"/>
+      <path d="M31 88c18 7 39 8 56 2-14 9-38 10-56 2Z" fill="#fff" opacity=".92"/>
+      <path d="M20 85c14 4 27 3 39-2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+      </g>
+      <path d="m84 7 2.6 8.4L95 18l-8.4 2.6L84 29l-2.6-8.4L73 18l8.4-2.6L84 7Z" fill="#F5A623"/></g></svg></span><span class="tname">Miles 邁爾思</span></a>
+    <a class="tlink" href="/notes/">筆記</a>
+  </div></div>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="eyebrow">最後更新 2026.09.13　·　OpenClaw 2026.8.2</div>
+    <h1>養一隻龍蝦：<span style="white-space:nowrap">自架 AI 助理實作指南</span></h1>
+    <p class="lede">一個 24 小時待命、接在 Telegram 上、記得你是誰的 AI 助理，模型走你現有的 Claude 或 ChatGPT 訂閱。指令官方文件都有，這頁寫的是文件不會告訴你、而且真的讓我卡住的地方。</p>
+    <nav class="jump" aria-label="本頁段落">
+      <a href="#setup">安裝十二步</a>
+      <a href="#pits">別人踩過的坑</a>
+      <a href="#upkeep">維護清單</a>
+    </nav>
+  </header>
+
+  <div class="shortlist">
+    <h2>先講清楚三件事</h2>
+    <ol class="picks">
+      <li class="pick">
+        <div class="pick-num">01</div>
+        <div class="pick-body">
+          <div class="pick-name">這頁適合誰</div>
+          <div class="pick-why">想要一個一直開著、會主動找你、可以接進日常通訊軟體的助理，而且願意自己顧一台機器。只想要一個聊天視窗的話，現成的服務更快更穩，不必走這條路。</div>
+        </div>
+      </li>
+      <li class="pick">
+        <div class="pick-num">02</div>
+        <div class="pick-body">
+          <div class="pick-name">要花多少錢</div>
+          <div class="pick-why">有 Claude 或 ChatGPT 訂閱的話，不需要 API key，模型不另外計費。機器可以用甲骨文的永久免費方案，或家裡一台不關機的電腦。要講清楚的是：不是免費，是不用再多付一份。它吃的是你訂閱的用量額度，排程跑得兇，會排擠到你自己白天能用的量。</div>
+        </div>
+      </li>
+      <li class="pick">
+        <div class="pick-num">03</div>
+        <div class="pick-body">
+          <div class="pick-name">要花多少時間</div>
+          <div class="pick-why">裝起來順利的話一個下午。養活才是難的：我的第一隻裝好之後安靜地死了三個半月，重啟了將近六千次，沒有任何東西通知我。下面的順序就是照這個教訓排的。</div>
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  <div class="decode">
+    <p class="q">如果只記得一件事：先寫<b>健康檢查</b>，再加功能。</p>
+    <p class="why">多數人（包括我）是反過來做的：日曆、搜尋、排程全部接上，才發現它會安靜地死掉。一個沒人在看的助理，壞掉的樣子跟「今天沒事」完全一樣。第十步就是在處理這件事，建議排在任何新功能之前。</p>
+  </div>
+
+  <!-- ============ 安裝 ============ -->
+  <section class="sec" id="setup">
+    <div class="sec-head">
+      <h2>安裝十二步</h2>
+      <p class="sec-note">以甲骨文的 Oracle Linux 9 為例。用家裡的電腦或別家 VPS 的話，第一、二步換成你自己的開機方式，後面都一樣。金色框是踩過的坑，青色框是建議。</p>
+    </div>
+
+    <div class="guide">
+
+      <div class="step">
+        <div class="step-n">01</div>
+        <div class="step-body">
+          <h3>準備一台一直開著的機器</h3>
+          <p class="sub">這整件事的地基。規格不必大，但必須不關機。</p>
+          <p>甲骨文永久免費方案的 ARM 機器（<code>VM.Standard.A1.Flex</code>）是最常見的選擇：免費、一直開著、規格夠跑。映像檔選 Oracle Linux 9，建立時會請你下載 SSH 私鑰，務必收好。</p>
+          <p>它不是唯一選擇。家裡有一台不關機的電腦就用那台，不必申請也不會被回收；不想在申請上耗時間，每月幾美元的 VPS 最省事。</p>
+
+          <div class="trap">
+            <span class="box-lbl">坑 · 搶不到機器</span>
+            <p>A1 長期供不應求，建立時很常跳出「Out of host capacity」。這不是你設定錯，是那個可用區真的沒機器了。換一個可用區，或隔幾小時再試。</p>
+          </div>
+
+          <div class="trap">
+            <span class="box-lbl">坑 · 免費額度在 2026 年砍半</span>
+            <p>永久免費的 A1 從 4 OCPU / 24 GB 降到 2 OCPU / 12 GB，2026 年 6 月 15 日生效，官方沒有發公告。超過新額度的免費機器，8 月 18 日之後會被終止。新開的機器只拿得到小規格，跑這套仍然夠用，但不要照舊教學的截圖去期待。</p>
+          </div>
+
+          <div class="tip">
+            <span class="box-lbl">建議 · 開好就升級成 Pay As You Go</span>
+            <p>永久免費的機器閒置太久會被回收，判定是連續七天內 CPU、網路、記憶體（A1 才看這項）的 95 百分位都低於 20%。一個平常在等你講話的助理，剛好符合這個描述。加一張信用卡升級成 PAYG，回收規則就不適用；用量維持在免費額度內不會扣款。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-n">02</div>
+        <div class="step-body">
+          <h3>設定 SSH，而且確認它是永久的</h3>
+          <p class="sub">這一步最容易做出「今天能連、三小時後進不去」的結果。</p>
+          <p>在自己的電腦產一把金鑰，寫一份設定檔，之後打一個短名字就能連。</p>
+<pre><code>ssh-keygen -t ed25519 -f ~/.ssh/oracle_ed25519</code></pre>
+<pre><code>Host oracle
+    HostName 你的公網IP
+    User opc
+    IdentityFile ~/.ssh/oracle_ed25519
+    IdentitiesOnly yes
+    ServerAliveInterval 60</code></pre>
+          <p>把公鑰加進伺服器的 <code>~/.ssh/authorized_keys</code>，之後 <code>ssh oracle</code> 就能進去。</p>
+
+          <div class="trap">
+            <span class="box-lbl">坑 · 金鑰被無聲刪除</span>
+            <p>如果你是透過 OCI Bastion 的 Managed SSH 工作階段進去補金鑰，不要把公鑰「追加」在檔案尾端。Bastion 會在 <code>authorized_keys</code> 裡維護一段自己的區塊，以 <code>#ocid1.bastionsession…</code> 註解標記，工作階段到期時整段清掉，接在後面的金鑰會一起消失。</p>
+            <p>把長期金鑰寫在<b>檔案最前面</b>，寫完立刻刪掉那個 Bastion 工作階段，再直連一次確認金鑰還在。</p>
+          </div>
+
+          <div class="trap">
+            <span class="box-lbl">坑 · 救援通道的來源 IP 對不上</span>
+            <p>Bastion 有自己的來源 IP 白名單，換網路就失效。而且 <code>curl ifconfig.me</code> 可能回 IPv6，白名單填的卻是 IPv4。查 IPv4 要用 <code>curl -4 ifconfig.me</code>。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-n">03</div>
+        <div class="step-body">
+          <h3>準備 Node</h3>
+          <p class="sub">版本差一點點，安裝會在最後一秒失敗。</p>
+          <p>OpenClaw 2026.8 系列要求 Node 22.22.3 以上。版本停在 22.22.0 這種差幾號的狀況很常見，<code>npm install</code> 會在前置檢查中止，錯誤只有一行，很容易被當成網路問題。</p>
+<pre><code>node --version</code></pre>
+          <p>不必追最新的大版本，留在 22 這條 LTS 線上升到夠新就好。伺服器上通常還跑著別的東西，跨大版本的風險高得多。</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-n">04</div>
+        <div class="step-body">
+          <h3>安裝 OpenClaw，裝完先體檢</h3>
+          <p class="sub">這一步反而最順。</p>
+<pre><code>npm install -g openclaw@latest
+openclaw --version
+openclaw doctor --fix</code></pre>
+
+          <div class="trap">
+            <span class="box-lbl">坑 · 一個欄位的格式讓它躺了三個半月</span>
+            <p>從舊版升上來的話，設定檔格式很可能已經漂移。我那台一直重開機失敗，其中一個原因是 <code>channels.telegram.streaming</code> 舊版寫 <code>true</code> 就好，新版要求寫成一個物件。<code>doctor --fix</code> 會自動改好並留一份備份，升級後第一件事就跑它。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-n">05</div>
+        <div class="step-body">
+          <h3>接上訂閱，不接 API</h3>
+          <p class="sub">這件事從「帳單太痛」變成「可以養」的關鍵。</p>
+          <p><b>Claude 這條：</b>在伺服器上產一把長效 token，貼進 OpenClaw。</p>
+<pre><code>claude setup-token
+openclaw models auth paste-token --provider anthropic --expires-in 365d</code></pre>
+          <p>訂閱型的 token 以 <code>sk-ant-oat01-</code> 開頭；API key 是 <code>sk-ant-api03-</code>。看前綴就知道自己有沒有接錯。</p>
+
+          <p><b>ChatGPT 這條：</b>先讓 Codex CLI 登入，無頭伺服器一定要加旗標；再讓 OpenClaw 自己走一次 OAuth。</p>
+<pre><code>codex login --device-auth
+openclaw models auth login --provider openai</code></pre>
+
+          <div class="trap">
+            <span class="box-lbl">坑 · 那個「無法連上這個網站」是流程的一部分</span>
+            <p>一般的 <code>codex login</code> 會把回呼送到<b>你自己電腦</b>的 localhost，那裡沒有東西在聽，一定失敗，所以要用 <code>--device-auth</code>。</p>
+            <p>OpenClaw 那條則會在你授權後跳到一個連不上的 localhost 錯誤頁。<b>不要關掉那個分頁</b>，把網址列整串複製，貼回終端機的提示後面，它會自己取出授權碼。</p>
+          </div>
+
+          <div class="trap">
+            <span class="box-lbl">坑 · 機器上有兩份 Claude Code</span>
+            <p>系統裝一份、使用者目錄裝一份，是很常見的狀態。兩份版本不一致時，OpenClaw 可能抓到舊的那份，新模型就會回你「版本不夠」。用 <code>which -a claude</code> 找出全部，兩份都升。</p>
+          </div>
+
+          <div class="tip">
+            <span class="box-lbl">建議 · 效期差很多，寫進行事曆</span>
+            <p>Claude 那把是一年。ChatGPT 那把只有十天左右，到期後備援就默默失效，不會有人通知你。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-n">06</div>
+        <div class="step-body">
+          <h3>接上 Telegram</h3>
+          <p class="sub">選它是因為你本來就在用，不是因為它多先進。</p>
+          <p>跟 BotFather 申請一支機器人，把 bot token 填進 OpenClaw 的 <code>channels.telegram</code>。<code>dmPolicy</code> 一定設成 <code>allowlist</code>，只放你自己的 user id。這隻機器人握有你的模型額度和伺服器權限，開放給任何人等於把錢包放在路邊。</p>
+
+          <div class="tip">
+            <span class="box-lbl">建議 · 搬家時先停舊的</span>
+            <p>Bot token 屬於 Telegram 那一側，換機器、重灌都能沿用同一支機器人。但同一個 token 同時只能有一個程序在收訊息，舊的沒停就開新的，會拿到 409 衝突，兩邊都收不到。</p>
+          </div>
+
+          <p>之後報告變多、想分頻道收的時候，頻道的設定跟私訊不一樣，見下面的<a href="#pit-channel">頻道那個坑</a>。一開始全部進私訊就好。</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-n">07</div>
+        <div class="step-body">
+          <h3>選模型，並且記得那份白名單</h3>
+          <p class="sub">認證正確不代表模型能用。</p>
+<pre><code>openclaw models set anthropic/claude-opus-5
+openclaw models fallbacks add openai/&lt;你要的備援模型&gt;</code></pre>
+
+          <div class="trap">
+            <span class="box-lbl">坑 · 白名單擋掉你剛設好的模型</span>
+            <p>設定檔裡的 <code>agents.defaults.modelPolicy.allow</code> 是白名單，只有 allow 沒有 deny。模型沒列在裡面，認證再正常也會被拒，錯誤訊息還會誤導你去查認證。新模型出來也不會自動出現，要手動加。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-n">08</div>
+        <div class="step-body">
+          <h3>讓它開機自己活過來</h3>
+          <p class="sub">做完這步，它才是常駐服務，而不是你手動開的程式。</p>
+          <p>OpenClaw 建立的是<b>使用者層</b>的 systemd 服務。另外要開 linger，不然你一登出、或機器重開沒人登入，服務就不會跑。</p>
+<pre><code>systemctl --user enable --now openclaw-gateway.service
+loginctl enable-linger $USER
+systemctl --user status openclaw-gateway.service</code></pre>
+
+          <div class="trap">
+            <span class="box-lbl">坑 · 加 sudo 會找不到它</span>
+            <p>使用者層服務用 <code>sudo systemctl</code> 會回「Unit not loaded」，讓你以為服務不存在。一律用 <code>systemctl --user</code>。</p>
+          </div>
+
+          <div class="trap">
+            <span class="box-lbl">坑 · 服務裝作自己活著</span>
+            <p>2.0 之後，外掛需要「權限同意」。有任何一個沒同意，gateway 就拒絕開監聽埠，但 systemd 顯示 active、程序在跑、沒有崩潰日誌、標準輸出一片空白。從外面看一切正常。</p>
+            <p>真正的錯誤只寫在 <code>/tmp/openclaw/openclaw-日期.log</code>。把那個外掛帶旗標重裝一次：</p>
+<pre><code>openclaw plugins install &lt;外掛名&gt; --accept-capabilities</code></pre>
+            <p>往後查問題，先看那個日誌，再看 systemd。systemd 只知道程序有沒有在跑，不知道程序覺得自己準備好了沒。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-n">09</div>
+        <div class="step-body">
+          <h3>把密鑰收好</h3>
+          <p class="sub">自架的代價，就是安全歸你負責。</p>
+          <p>安裝流程產生的 systemd 設定檔可能把 token 直接寫在 <code>Environment=</code> 行裡，而那個檔案的權限是全機可讀。把密鑰搬到獨立檔案，設定檔改用 <code>EnvironmentFile=</code> 指過去：</p>
+<pre><code>chmod 600 ~/.config/openclaw/gateway.env</code></pre>
+          <p><code>.bashrc</code> 裡的 <code>export XXX_API_KEY=</code> 也用同樣方式處理。</p>
+
+          <div class="trap">
+            <span class="box-lbl">坑 · 截圖是最常見的外洩管道</span>
+            <p>安裝過程有好幾個畫面會完整顯示 token。傳給朋友、貼進聊天室、丟給 AI 幫忙看，都等於外洩。我自己同一天就洩漏了兩把。截圖前先遮掉，或乾脆用文字描述進度。</p>
+            <p>洩漏了就去撤銷：Claude Code 的授權在 claude.ai 的設定頁，只能逐列刪除。分辨哪一把是哪一把看 Scopes 欄位，<code>setup-token</code> 產生的只有 <code>user:inference</code> 一項。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-n">10</div>
+        <div class="step-body">
+          <h3>讓它壞掉時你會知道</h3>
+          <p class="sub">建議排在任何新功能之前。</p>
+          <p>寫一支每小時跑一次的健康檢查，放進 crontab。它要檢查三件事：服務在不在、監聽埠有沒有開、Telegram 有沒有在收訊息。發現壞了先試著重啟，並且只在<b>狀態改變</b>時通知你，不然你很快就會把它靜音。</p>
+          <p>通知要直接呼叫 Telegram 的 Bot API，不要透過助理本身。助理掛掉的時候，正是你最需要收到通知的時候。</p>
+
+          <div class="tip">
+            <span class="box-lbl">建議 · 用 cron 的環境測，不要用你的環境</span>
+            <p>你 ssh 進去的環境跟 cron 的環境很不一樣。寫完一定要這樣跑一次：</p>
+<pre><code>env -i /bin/bash /path/to/health_check.sh</code></pre>
+            <p>再故意弄壞一次（停掉服務），確認它真的會叫。一個永遠不會失敗的檢查，比沒有檢查更危險。</p>
+          </div>
+
+          <p>之後加了定時報告，再加一支「看門狗」：每支報告跑完留一個狀態章，看門狗每天反過來查今天該有的章在不在。原因見<a href="#pit-notrun">「確認送達擋不住根本沒跑」</a>。</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-n">11</div>
+        <div class="step-body">
+          <h3>告訴它你是誰</h3>
+          <p class="sub">裝好只是能講話，要好用還缺這一步。投報率最高的二十分鐘。</p>
+          <p>OpenClaw 的工作目錄裡有 <code>SOUL.md</code>、<code>USER.md</code>、<code>MEMORY.md</code>，那是它的性格與長期記憶，預設內容很空泛。把你的身分、正在做的事、工作習慣、還有你討厭它做的事寫進去。</p>
+          <p><code>SOUL.md</code> 每次都會被讀進去，適合放長期有效的規矩；做過什麼、為什麼這樣設計，放在它不會每天讀的文件裡就好。</p>
+          <p>它停擺過的話，那段期間的事它是真的不知道，不是搜尋壞掉。記憶有斷層就在檔案裡註明，不然它會拿舊資訊當現況，而且講得很有自信。</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-n">12</div>
+        <div class="step-body">
+          <h3>如果要讓它碰個資</h3>
+          <p class="sub">幫你填表、查停車費，就得讓它知道車牌和地址。這一步做不到「保證不外洩」，只能讓外洩的機率變低、損害變小、而且很快會知道。</p>
+          <ul>
+            <li><b>分級。</b>車牌、地址這類可以放；保單號碼這類確定要用再放；身分證字號、卡號、銀行帳號、密碼<b>永遠不放</b>，表單那一格留給你自己填。</li>
+            <li><b>放在工作目錄外面。</b>工作目錄裡的檔案每次對話都會被讀進去，個資放在那裡等於天天帶著走。</li>
+            <li><b>只有一個讀取入口。</b>寫一支小工具，一次只給一個欄位、必須說明用途，每次讀取都留紀錄。</li>
+            <li><b>出口管制寫進 SOUL.md。</b>回覆給你可以；丟進搜尋、寫進記憶檔、寫進日誌一律不行。</li>
+            <li><b>每週掃一次。</b>把個資的值拿去比對工作目錄與日誌，找到就通知你。原因見<a href="#pit-memory">記憶檔那個坑</a>。</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ============ 坑 ============ -->
+  <section class="sec pits" id="pits">
+    <div class="sec-head">
+      <h2>別人踩過的坑</h2>
+      <p class="sec-note">上面是裝起來的坑，這裡是養下去的坑。每一個都真的發生過。它們有個共通點：指令跑完、沒有紅字、看起來一切正常，但事情沒有發生，或發生的是別的事。</p>
+    </div>
+
+    <div class="grid">
+
+      <div class="entry book route">
+        <div class="entry-top"><span class="name">升級之後，舊腳本變成凶手</span><span class="pill know">排程</span></div>
+        <p class="desc">舊版時期寫了兩支定時「維護」腳本，會把 session 檔清空。舊版把那當成清理；升上 2.0 之後，新版把清空的檔案判定成「有舊資料待遷移」而拒絕啟動。一支半夜跑、一支每分鐘跑，systemd 就在旁邊重試了將近六千次。</p>
+        <p class="output"><span class="lbl">解法</span>升級前先列出 crontab 裡每一支會碰助理檔案的腳本，逐一確認它在新版還成不成立。只停掉半夜那支不夠，每分鐘那支照樣會把它弄死。</p>
+      </div>
+
+      <div class="entry book route">
+        <div class="entry-top"><span class="name">健康檢查誤報，自己把服務重啟</span><span class="pill know">監控</span></div>
+        <p class="desc">健康檢查用 <code>ss</code> 看監聽埠，但 cron 的 PATH 裡沒有 <code>/usr/sbin</code>。「找不到指令」的錯誤被 <code>2&gt;/dev/null</code> 吞掉，於是它回報「埠沒有在聽」，然後把一個好好的服務重啟了。</p>
+        <p class="output"><span class="lbl">解法</span>檢查工具找不到時要大聲失敗，走跟「檢查不通過」不同的分支。不要把錯誤導到 <code>/dev/null</code>。寫完用 <code>env -i</code> 跑一次。</p>
+      </div>
+
+      <div class="entry book route">
+        <div class="entry-top"><span class="name">cron 的環境不是你的環境</span><span class="pill know">排程</span></div>
+        <p class="desc">伺服器跑 UTC：台北早上七點的排程，crontab 要寫前一天的 23:00。語系是 C：<code>date +%a</code> 回的是「Tue」，標題就變成「週Tue」。PATH 很短：你平常打得到的指令，它不一定找得到。</p>
+        <p class="output"><span class="lbl">解法</span>每一行 crontab 上面用註解寫出台北時間；日期一律用 <code>TZ=Asia/Taipei</code> 算；中文星期自己對照，不靠語系。</p>
+      </div>
+
+      <div class="entry book route" id="pit-notrun">
+        <div class="entry-top"><span class="name">確認送達擋不住根本沒跑</span><span class="pill know">監控</span></div>
+        <p class="desc">定時報告有檢查 Telegram 回傳 <code>ok:true</code>，送不出去會叫。但如果排程根本沒被執行，就什麼都不會送，也什麼都不會叫。一個壞了兩週的排程，就是這樣安靜地每天「沒事」。</p>
+        <p class="output"><span class="lbl">解法</span>每支報告跑完寫一個狀態章（日期＋結果）。另一支看門狗每天反過來查今天該有的章在不在。看門狗自己每週報一次平安，不然安靜的時候分不出是「沒事」還是「連看門狗都死了」。</p>
+      </div>
+
+      <div class="entry book route">
+        <div class="entry-top"><span class="name">試跑模式留下假的「已送達」</span><span class="pill know">監控</span></div>
+        <p class="desc">為了測試，報告腳本有一個「只產出、不送出」的試跑模式。它跳過了送出，卻照樣寫下「已送達」的狀態章。當天晚上看門狗看到那個章，安靜通過——我們為了抓「假成功」寫的東西，被自己的測試模式繞過去了。</p>
+        <p class="output"><span class="lbl">解法</span>試跑時整個換一個任務名稱，狀態章與日誌都寫到另一個檔案，正式的那份碰都不碰。</p>
+      </div>
+
+      <div class="entry book route" id="pit-memory">
+        <div class="entry-top"><span class="name">它知道身分證不能寫，卻不知道地址也算</span><span class="pill know">個資</span></div>
+        <p class="desc">助理把我的地址寫進了每日記憶檔，同一行裡它還特地寫著「身分證字號我沒寫進備註」。第一次掃描就抓到。清掉之後兩天，同一個地址又出現在四個檔案裡，包括它自動整理記憶時產生的檔案。</p>
+        <p class="output"><span class="lbl">解法</span>給它一份明確的清單，不要靠它自己判斷什麼算個資。掃描要定期跑，不是清一次就好。遮蔽時留下的備份檔要刪掉——那份備份裡就是原本的地址。</p>
+      </div>
+
+      <div class="entry book route" id="pit-channel">
+        <div class="entry-top"><span class="name">頻道裡，機器人分不出是誰在說話</span><span class="pill know">權限</span></div>
+        <p class="desc">想用 Telegram 頻道分類收報告，順便在頻道裡下指令。先是頻道編號放錯欄位：<code>groupAllowFrom</code> 只收個人 ID，頻道要寫在 <code>channels.telegram.groups</code>。放對之後還是不回——頻道貼文在設計上沒有作者欄位，授權檢查拿不到發話者，直接判定不通過。</p>
+        <p class="output"><span class="lbl">解法</span>那個頻道的 <code>allowFrom</code> 設成 <code>["*"]</code>，意思是「能在這個頻道貼文的人我都聽」。私人頻道只有管理員能貼，所以實際上只聽你——前提是<b>不要再加別的管理員</b>。需要它先跟你確認的事（例如改日曆），留在私訊講。</p>
+      </div>
+
+      <div class="entry book route">
+        <div class="entry-top"><span class="name">「只給一個指令」的圍籬，破在參數上</span><span class="pill know">權限</span></div>
+        <p class="desc">讀外部網頁的排程最容易被網頁上的假指令影響，所以它沒有 shell，只被允許呼叫一支讀網頁的工具。但那支工具的第二個參數被直接串進一段 JavaScript，塞一段字串進去就會在瀏覽器裡執行。而那個瀏覽器是跟助理共用、帶著 cookie 的。</p>
+        <p class="output"><span class="lbl">解法</span>允許清單只到「哪支指令」，管不到「帶什麼參數」，所以參數要自己驗（這個例子只准純數字）。另外，不要在助理的瀏覽器裡登入任何網站，登入狀態會被每一支用到它的排程繼承。</p>
+      </div>
+
+      <div class="entry book route">
+        <div class="entry-top"><span class="name">顯示被截斷，寫入卻是整欄覆蓋</span><span class="pill know">資料</span></div>
+        <p class="desc">要在日曆活動的備註加一行字。讀取工具為了畫面整齊，只顯示備註的前 80 個字；而修改是把整欄換掉。照看到的內容加一行再寫回去，後面沒顯示出來的議程就整段消失。連「修改前／修改後」的核對畫面，用的都是同一個被截斷的顯示。是助理自己停下來問才沒出事。</p>
+        <p class="output"><span class="lbl">解法</span>寫入前一定讀完整內容。能附加就不要插入，原文完全不動、只在尾巴多一行，出錯的範圍最小。</p>
+      </div>
+
+      <div class="entry book route">
+        <div class="entry-top"><span class="name">長時間指令綁在 SSH 連線上</span><span class="pill know">維運</span></div>
+        <p class="desc">半年沒更新的機器，一次要裝七百多個套件。指令直接在 ssh 裡跑，連線十分鐘逾時被切。更新程序剛好沒有被一起殺掉，純粹是運氣。</p>
+        <p class="output"><span class="lbl">解法</span>會跑很久的東西放背景跑（<code>nohup</code>、<code>tmux</code> 或 <code>systemd-run</code>），不要綁在連線上。核心更新之前，先在雲端主控台做一次開機磁碟備份。</p>
+      </div>
+
+      <div class="entry book route">
+        <div class="entry-top"><span class="name">要分享出去的東西，不能依賴私人資料</span><span class="pill know">個資</span></div>
+        <p class="desc">做了一份研討會清單，打算出一份給朋友的公開版。為了不重複推薦已經報名的活動，腳本會讀日曆去重——結果公開版少了哪幾場，正好就是我報名了哪幾場。沒有任何一個字寫出個資，但整份清單的形狀洩漏了它。</p>
+        <p class="output"><span class="lbl">解法</span>公開的產出要在結構上跟私人資料無關，不是「有關但努力擋住」。去重只做在自己看的那份。（這個例子最後的決定是：公開版不做了，維護成本不值得。）</p>
+      </div>
+
+      <div class="entry book route">
+        <div class="entry-top"><span class="name">一有空就想再養一隻</span><span class="pill know">取捨</span></div>
+        <p class="desc">看別人有很多個 agent，會想再開一隻。但你手上真正的資產不是軟體本身，是繞著它長出來的守則、權限、健康檢查和記憶。多一隻常駐助理，就多一份記憶會走岔、多一個攻擊面、多一套要顧的排程，而且它們搶的是同一份訂閱額度。</p>
+        <p class="output"><span class="lbl">解法</span>「跑完就結束、工具給到剛好夠用」的定時任務，多開幾支幾乎沒有成本。第二隻常駐助理只在三種情況值得：要給別人用、要一個可以搞壞的實驗場、兩個角色的規矩互相衝突。</p>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ============ 維護 ============ -->
+  <section class="sec" id="upkeep">
+    <div class="sec-head">
+      <h2>養成之後的維護清單</h2>
+      <p class="sec-note">會壞的大多是這些。先寫下來，比事後查快。</p>
+    </div>
+    <ul class="chk">
+      <li><span class="when">每小時</span><span>健康檢查（自動）。只在狀態改變時通知，平常是安靜的。</span></li>
+      <li><span class="when">每 10 天</span><span>重跑 ChatGPT 那條的 OAuth 登入，它的效期很短。</span></li>
+      <li><span class="when">每週</span><span>個資殘留掃描（自動）。看門狗的週報平安也在這天，沒收到就去查。</span></li>
+      <li><span class="when">每年</span><span>更新 Claude 的長效 token，到期前不會有預警。</span></li>
+      <li><span class="when">升級後</span><span>先跑 <code>openclaw doctor --fix</code>，確認監聽埠真的開了，再檢查 crontab 裡的舊腳本在新版還成不成立。</span></li>
+      <li><span class="when">出問題時</span><span>先看 <code>/tmp/openclaw/</code> 底下的日誌，再看 systemd。</span></li>
+      <li><span class="when">加模型時</span><span>同步更新 <code>modelPolicy.allow</code> 白名單。</span></li>
+      <li><span class="when">改排程後</span><span>用 <code>env -i</code> 跑一次，再故意弄壞一次，確認它真的會叫。</span></li>
+      <li><span class="when">換網路後</span><span>要用 Bastion 救援的話，先更新它的來源 IP 白名單。</span></li>
+    </ul>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head">
+      <h2>資料來源</h2>
+    </div>
+    <ul class="srcs">
+      <li><a href="https://docs.oracle.com/en-us/iaas/Content/FreeTier/freetier_topic-Always_Free_Resources.htm">Oracle：Always Free Resources（額度與閒置回收規則）</a></li>
+      <li><a href="https://www.infoq.com/news/2026/07/oracle-cloud-free-tier-limits/">InfoQ：Oracle 將免費 A1 額度減半（2026 年 7 月）</a></li>
+    </ul>
+  </section>
+
+  <a class="back" href="/">← 回首頁</a>
+
+  <footer>
+    <p>這頁是實作紀錄，不是官方文件。版本會變、介面會改、坑也會換位置；你照著做卡在別的地方很正常，記得把新的坑寫下來。</p>
+    <p>養第一次花了我兩天兩夜還失敗，第二次順利但太貴所以放著爛掉，第三次才真的養活。前兩次不是白費，上面每一個框都是從那裡來的。</p>
+    <div>問題回報與合作洽詢：<a href="mailto:contact@fervela.ai">contact@fervela.ai</a></div>
+    <div class="fnote">作品以 <b>Fervela.ai</b> 為名發佈。© 2026 Fervela.ai</div>
+  </footer>
+
+</div>
+</body>
+</html>
