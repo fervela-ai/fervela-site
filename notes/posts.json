@@ -7,11 +7,11 @@
     "title_en": "Can an AI boardroom just go find the answer for me?"
   },
   "02-lobster.md": {
-    "publish": false,
+    "publish": true,
     "order": 2,
     "date": "2026-09-03",
     "desc": "去年底第一次自架 AI 助理，兩天兩夜失敗。今年二月做好了，但 API 帳單太貴，五月它掛掉我反而鬆一口氣。第三次終於不用再多付一份錢。",
-    "title_en": "Can an AI boardroom just go find the answer for me?"
+    "title_en": "Is running your own AI assistant worth it now?"
   },
   "courses-map": {
     "publish": true,
