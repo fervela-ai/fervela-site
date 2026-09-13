@@ -170,12 +170,12 @@
     <div class="fine">免費使用。會議記錄與金鑰只存在你自己的裝置（<a href="privacy.html">你問的內容會送到你選的 AI ↗</a>）。</div>
   </div>
 
-  <span class="ver">最新版本 V3.2（2026-08-28）</span>
+  <span class="ver">最新版本 V3.3（2026-09-13）</span>
 
   <div class="lead" style="border-left-color:var(--gold)">
-    <b>🔔 V3.2 來了。</b><br>
-<b>收尾時機由你決定</b>，報告按了才產。<br>
-<b>免費額度用完，自動換一家繼續開會。</b>
+    <b>🔔 V3.3 來了。</b><br>
+<b>多了「👑 頂級」檔位</b>：Claude Fable 5.1、GPT-6 Astra。<br>
+<b>決策報告會排成真的表格</b>，PDF 也是。
   </div>
 
   <!-- ① 先讓人看到「它長什麼樣」，再談怎麼拿 -->
@@ -265,12 +265,12 @@
       <div class="card">
         <h2>🍎 macOS</h2>
         <div class="tag">Intel 與 Apple 晶片通用</div>
-        <a class="btn" href="https://github.com/fervela-ai/fervela-site/releases/download/v3.2/AI-Boardroom-Mac-V3.2.zip">⬇ 下載 Mac 版</a>
+        <a class="btn" href="https://github.com/fervela-ai/fervela-site/releases/download/v3.3/AI-Boardroom-Mac-V3.3.zip">⬇ 下載 Mac 版</a>
       </div>
       <div class="card">
         <h2>🪟 Windows</h2>
         <div class="tag">Windows 10 / 11・Beta</div>
-        <a class="btn win" href="https://github.com/fervela-ai/fervela-site/releases/download/v3.2/AI-Boardroom-Windows-V3.2.zip">⬇ 下載 Windows 版</a>
+        <a class="btn win" href="https://github.com/fervela-ai/fervela-site/releases/download/v3.3/AI-Boardroom-Windows-V3.3.zip">⬇ 下載 Windows 版</a>
       </div>
     </div>
 
@@ -367,6 +367,16 @@
   <div class="story" id="history">
     <h2>版本沿革</h2>
     <div class="rels">
+      <details class="rel" open>
+        <summary><b>V3.3</b><span>2026-09-13</span></summary>
+        <ul>
+        <li><b>多了一層「👑 頂級」檔位</b>——接上 Claude 的 <b>Fable 5.1</b> 與 <b>GPT-6 Astra</b>。現在是頂級／思考／均衡／速度四檔，一鍵切整桌；沒有頂級型號的引擎會自動用自己最強的那一級，每一席都跑得動。</li>
+        <li><b>決策報告會排成真的表格</b>——候選方案、行動清單、比較表這類內容，以前是一串星號和豎線，現在是表格，存成 PDF 也是。</li>
+        <li><b>免費金鑰不會再被推去撞付費型號</b>——用免費金鑰的引擎切檔位時只在免費型號裡挑，選單裡的付費型號直接標明「免費金鑰用不到」。以前 Gemini 免費層一切到思考檔就報錯。</li>
+        <li><b>CLI 太舊時講人話</b>——你選了新型號但電腦上的 claude／codex 還沒更新，這一席會先用預設型號把話講完，錯誤訊息直接給你更新指令，不再叫你「換一個模型」。</li>
+        <li><b>Bug 修正</b>——設定裡的型號被供應商下架時自動退回預設（不再每次都失敗）；用 npm 裝的 codex 在 App 裡找得到了。</li>
+        </ul>
+      </details>
       <details class="rel" open>
         <summary><b>V3.2</b><span>2026-08-28</span></summary>
         <ul>
