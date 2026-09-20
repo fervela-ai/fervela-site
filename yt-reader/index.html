@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--
+  ⚠️ 這一頁在產品公開下載「之前」寫的（2026-09-21）。內容依據的是程式實際跑起來的功能，
+  不是規格。上線前必須逐條對照當時的實作，對不上就改文案，不要讓頁面替程式說它沒做到的事：
+
+    [ ] 有字幕的影片直接用字幕、不做語音辨識（3.12）
+    [ ] 沒字幕才在本機用 Whisper 辨識；確認支援機型（目前只在 Apple 晶片 Mac 上跑過 mlx-whisper）
+    [ ] 一分鐘版／精華版／完整版三層，段落可點回影片時間點
+    [ ] 清稿與摘要走使用者自己登入的 Claude CLI，不需要 API key
+    [ ] 每日晨報：自動選片、標有興趣才轉，命中率門檻是否已通過
+    [ ] 音檔與成品是否全部留在本機；是否有任何連回 Fervela 的連線（更新檢查以外一律沒有）
+    [ ] 英文影片的中英對照與單字表
+    [ ] Windows 支援與否（目前只有 Mac 跑過）
+
+  上線當天要做的事：
+    1. 拿掉下面那行 noindex
+    2. 「下載」區換成真的按鈕，列版本、日期、大小、SHA-256（Release 資產發佈後不覆蓋）
+    3. 首頁產品卡、sitemap.xml 加上這一頁
+    4. 發 Release 之後放上 yt-reader/version.json
+    版號用兩位數 X.Y，不用 semver 第三位（產品線一致）
+
+  不可以寫進這一頁的：推播頻道編號、bot 名稱、私人訂閱清單、本機路徑、個人偏好設定。
+-->
+<meta name="robots" content="noindex">
+<title>閱影 — 把影片變成可以讀的文章 | Fervela.ai</title>
+<meta name="description" content="閱影把 YouTube 影片整理成三層可讀的文章：一分鐘版、精華版、完整版。每一段都點得回影片的原位置。辨識與整理都在你自己的電腦上做。">
+<meta property="og:title" content="閱影 — 把影片變成可以讀的文章">
+<meta property="og:description" content="一小時的影片，讀完只要幾分鐘。一分鐘版、精華版、完整版三層，自己決定讀多深。">
+<meta property="og:url" content="https://fervela.ai/yt-reader/">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://fervela.ai/yt-reader/">
+<style>
+  :root{ --navy:#0D1B3D; --teal:#008B8B; --gold:#F5A623; --grey:#6B7280; --mist:#F5F7FA; --line:#dde3ec; --txt:#1c2430; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ font-family:"PingFang TC","Microsoft JhengHei",-apple-system,sans-serif; background:var(--mist); color:var(--txt); line-height:1.75; }
+  .wrap{ max-width:860px; margin:0 auto; padding:40px 20px 60px; }
+  a{ color:var(--teal); }
+  header{ display:flex; align-items:center; gap:16px; margin-bottom:8px; }
+  .mark{ width:64px; height:64px; flex:0 0 64px; border-radius:15px; overflow:hidden; border:1px solid var(--line); background:#fff; box-shadow:0 2px 10px rgba(13,27,61,.08); display:block; }
+  .mark svg{ width:100%; height:100%; display:block; }
+  h1{ font-size:30px; color:var(--navy); line-height:1.25; }
+  .sub{ color:var(--grey); font-size:14px; letter-spacing:.4px; }
+  .lead{ background:#fff; border-left:5px solid var(--teal); border-radius:10px; padding:16px 20px; margin:22px 0; box-shadow:0 2px 10px rgba(13,27,61,.05); }
+  .lead .q{ font-size:17px; color:var(--navy); font-weight:700; line-height:1.7; }
+  .lead .body{ margin-top:10px; font-size:15.5px; }
+  /* 「錄音不離開你的電腦」是這個產品的核心承諾，不是免責小字——與正文同級 */
+  .lead .fine{ margin-top:12px; font-size:15.5px; }
+  .lead b{ color:var(--navy); }
+  .ver{ display:inline-block; background:var(--gold); color:var(--navy); border-radius:999px; padding:2px 14px; font-size:13px; font-weight:700; margin:4px 0 6px; }
+
+  .sec{ margin-top:30px; }
+  .sec h2{ font-size:21px; color:var(--navy); text-align:center; margin-bottom:4px; }
+  .sec .h2sub{ text-align:center; color:var(--grey); font-size:14px; margin-bottom:16px; }
+
+  /* 三步驟 */
+  .steps{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+  @media (max-width:700px){ .steps{ grid-template-columns:1fr; } }
+  .step{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:16px 18px; box-shadow:0 2px 10px rgba(13,27,61,.05); }
+  .step .no{ width:30px; height:30px; border-radius:50%; background:var(--navy); color:#fff; font-weight:800; display:flex; align-items:center; justify-content:center; margin-bottom:8px; }
+  .step b{ color:var(--navy); font-size:16px; display:block; }
+  .step p{ font-size:14.5px; margin-top:4px; }
+
+  /* 資料流：這一頁最重要的一張表。會議錄音裡有別人的聲音，含糊不得。 */
+  .flow{ background:#fff; border:2px solid var(--navy); border-radius:16px; padding:6px 0; box-shadow:0 4px 18px rgba(13,27,61,.10); overflow:hidden; }
+  .flow .row{ display:grid; grid-template-columns:150px 1fr; gap:14px; padding:14px 22px; border-top:1px solid #eef1f6; align-items:start; }
+  .flow .row:first-child{ border-top:0; }
+  @media (max-width:640px){ .flow .row{ grid-template-columns:1fr; gap:2px; } }
+  .flow .what{ font-weight:700; color:var(--navy); font-size:15.5px; }
+  .flow .where{ font-size:15px; }
+  .flow .pill{ display:inline-block; border-radius:999px; padding:1px 10px; font-size:12.5px; font-weight:700; margin-right:6px; vertical-align:1px; }
+  .flow .local{ background:#e3f3f1; color:#00695c; }
+  .flow .out{ background:#fff3dc; color:#8a5a00; }
+  .flownote{ margin-top:12px; padding:12px 15px; background:#fff; border-left:4px solid var(--gold); border-radius:6px; font-size:14.5px; }
+  .flownote b{ color:var(--navy); }
+
+  /* 賣點：每一條都要是可以驗證的，不寫「強大」「智能」這種形容詞 */
+  .item{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:16px 20px; margin-bottom:10px; box-shadow:0 2px 10px rgba(13,27,61,.05); }
+  .item b{ color:var(--navy); font-size:16px; }
+  .item p{ font-size:14.5px; margin-top:4px; }
+
+  .cards{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  @media (max-width:640px){ .cards{ grid-template-columns:1fr; } }
+  .card{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:20px 22px; box-shadow:0 2px 10px rgba(13,27,61,.05); }
+  .card h3{ font-size:19px; color:var(--navy); margin-bottom:2px; }
+  .card .tag{ font-size:12px; color:var(--grey); margin-bottom:12px; }
+  .btn{ display:block; text-align:center; background:var(--navy); color:#fff; text-decoration:none; border-radius:10px; padding:12px 0; font-weight:700; font-size:16px; }
+  .btn.pending{ background:#e6eaf0; color:var(--grey); pointer-events:none; }
+  .need{ margin-top:14px; font-size:14.5px; text-align:center; color:var(--txt); }
+  .need b{ color:var(--navy); }
+
+  .steps.four{ grid-template-columns:repeat(2,1fr); }
+  @media (max-width:700px){ .steps.four{ grid-template-columns:1fr; } }
+  .limits{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:14px 20px 14px 38px; font-size:14.5px; }
+  .limits li{ margin:4px 0; }
+
+  .sib{ margin-top:34px; text-align:center; font-size:14.5px; color:var(--grey); }
+  footer{ margin-top:30px; padding-top:16px; border-top:1px solid var(--line); font-size:12.5px; color:var(--grey); text-align:center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="mark" href="/" aria-label="回 Fervela.ai 首頁"><svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><rect width="120" height="120" rx="26" fill="#ffffff"/><g color="#008B8B" transform="translate(6 6) scale(0.9)"><g transform="translate(2 14) scale(.88)">
+      <path d="M60 8C34 10 14 30 13 55c-2 28 18 50 48 54 21 3 41-8 48-27-7 11-22 18-39 17-28-1-45-19-44-42 1-23 15-41 34-49Z" fill="currentColor"/>
+      <path d="m66 31-30 54 27-7 3-47Z" fill="currentColor"/>
+      <path d="m71 31 0 50 16-8Z" fill="currentColor" opacity=".9"/>
+      <path d="M69 27v56" stroke="currentColor" stroke-width="1.25"/>
+      <path d="M29 82c12 8 25 11 39 10-12 4-28 2-41-5l2-5Z" fill="currentColor"/>
+      <path d="M78 70c5-5 12-3 13 3 5-5 13-1 12 6 5-1 8 3 7 8-1 7-8 11-16 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M27 84c19 10 43 13 65 6 7-2 12-6 16-12-2 8-8 14-17 18-19 8-45 6-59-3-3-2-5-6-5-9Z" fill="#fff" opacity=".94"/>
+      <path d="M25 87c20 10 45 13 67 5 7-2 12-6 16-11-3 8-9 14-18 18-19 7-44 5-58-4-4-2-6-5-7-8Z" fill="currentColor"/>
+      <path d="M31 88c18 7 39 8 56 2-14 9-38 10-56 2Z" fill="#fff" opacity=".92"/>
+      <path d="M20 85c14 4 27 3 39-2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+      </g>
+      <path d="m84 7 2.6 8.4L95 18l-8.4 2.6L84 29l-2.6-8.4L73 18l8.4-2.6L84 7Z" fill="#F5A623"/></g></svg></a>
+    <div>
+      <h1>🎬 閱影</h1>
+      <div class="sub">by Fervela.ai</div>
+    </div>
+  </header>
+
+  <div class="lead">
+    <div class="q">一小時的影片，讀完只要幾分鐘。</div>
+    <div class="body">
+      貼上一個 YouTube 網址，閱影把它整理成<b>可以用讀的</b>三層文章：
+      一分鐘版看要不要繼續、精華版看重點、完整版逐句都在。
+      每一段旁邊都有時間，點下去回到影片的那個位置。
+    </div>
+    <div class="fine"><b>影片的處理都在你自己的電腦上做。</b>整理內容用的是你自己登入的 AI，不必另外申請 API key（<a href="#flow">資料到哪裡去 ↓</a>）。</div>
+  </div>
+
+  <span class="ver">開發中</span>
+
+  <div class="sec">
+    <h2>名字</h2>
+    <div class="h2sub">閱卷的閱，不是瀏覽的瀏</div>
+    <div class="item">
+      <b>閱影</b>
+      <p>「閱」是逐一看過、審視的閱——閱卷、檢閱、閱讀，都是把東西攤開來一項一項看完。
+      閱影就是<b>把影片當文章讀</b>。這個詞是自己組的，不是古語，取的是「閱」那個慢下來、看得完整的意思。</p>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2>怎麼用</h2>
+    <div class="h2sub">先給你最短的，你說要再往下做</div>
+    <div class="steps four">
+      <div class="step">
+        <div class="no">1</div>
+        <b>貼網址</b>
+        <p>一支影片，或一整個播放清單。有字幕的影片直接用字幕，不必等語音辨識。</p>
+      </div>
+      <div class="step">
+        <div class="no">2</div>
+        <b>先拿到一分鐘版</b>
+        <p>幾十秒內先給你最短的那層，讓你決定這支值不值得花時間。</p>
+      </div>
+      <div class="step">
+        <div class="no">3</div>
+        <b>說「有興趣」才往下</b>
+        <p>覺得值得，才去產生精華版和完整版。不感興趣的影片不會白白吃掉你的時間和額度。</p>
+      </div>
+      <div class="step">
+        <div class="no">4</div>
+        <b>照自己的深淺讀</b>
+        <p>三個版本標了字數和大概要讀幾分鐘。讀到哪一句想聽原音，點時間就回影片。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2>每天早上一份片單</h2>
+    <div class="h2sub">不是推薦演算法，是一份清單</div>
+    <div class="item">
+      <b>它自己去找最近重要的影片</b>
+      <p>從一份講話型頻道的名單裡，找出近幾天觀看速度遠高於該頻道平常水準的影片，再判斷內容重不重要。
+      你也可以把自己訂閱的頻道匯入進去。</p>
+    </div>
+    <div class="item">
+      <b>你只要看片單，不必看影片</b>
+      <p>每支附一句結論。有興趣的按一下，才會去產生完整的閱讀版。</p>
+    </div>
+    <div class="item">
+      <b>原作者的連結和頻道名放在最顯眼的位置</b>
+      <p>閱影的用途是幫你決定要不要看、看完幫你記住，不是取代原影片。</p>
+    </div>
+  </div>
+
+  <div class="sec" id="flow">
+    <h2>你的資料到哪裡去</h2>
+    <div class="h2sub">哪些留在電腦裡、哪些會送出去，分開講</div>
+    <div class="flow">
+      <div class="row">
+        <div class="what">影片與音訊</div>
+        <div class="where"><span class="pill local">留在本機</span>下載與解碼都在你的電腦上。<b>音檔不會傳給任何 AI 服務，也不會傳給 Fervela。</b></div>
+      </div>
+      <div class="row">
+        <div class="what">語音辨識</div>
+        <div class="where"><span class="pill local">留在本機</span>影片本來就有字幕就直接用；沒有字幕才在你的電腦上用 Whisper 轉成文字。</div>
+      </div>
+      <div class="row">
+        <div class="what">逐字稿</div>
+        <div class="where"><span class="pill out">送到你選的 AI</span>清稿與摘要交給你自己登入的 Claude CLI（用的是你的帳戶與方案）。</div>
+      </div>
+      <div class="row">
+        <div class="what">成品</div>
+        <div class="where"><span class="pill local">留在本機</span>三個版本的文章存在你自己的資料夾，Fervela 沒有副本。</div>
+      </div>
+    </div>
+    <div class="flownote">
+      <b>Fervela 不接收你看了什麼。</b>送到 AI 服務的文字怎麼保存、怎麼使用，依你的帳戶方案與該服務的條款而定。
+    </div>
+    <div class="flownote">
+      <b>轉出來的東西是給你自己讀的。</b>影片的著作權屬於原作者；要公開分享請附上原連結與頻道名，完整逐字稿不適合轉貼。
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2>跟「影片摘要工具」差在哪</h2>
+    <div class="h2sub">摘要只有一層，讀起來要嘛不夠要嘛太多</div>
+    <div class="item">
+      <b>三層，而不是一份摘要</b>
+      <p>一分鐘版用來篩選，精華版用來理解，完整版用來查證。同一支影片，三種深度都留著。</p>
+    </div>
+    <div class="item">
+      <b>每一段都回得去</b>
+      <p>段落開頭標時間區間，點下去直接跳到影片那一段。AI 寫錯的時候，你查得到。</p>
+    </div>
+    <div class="item">
+      <b>不需要 API key</b>
+      <p>用你既有的 AI 訂閱，不必另外辦帳號、綁信用卡。</p>
+    </div>
+    <div class="item">
+      <b>英文影片另外給中英對照</b>
+      <p>勾「練英文」會多一份對照稿和單字表，標出原句與時間。</p>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2>下載</h2>
+    <div class="h2sub">還在開發，做好會放在這裡</div>
+    <div class="cards">
+      <div class="card">
+        <h3>🍎 macOS</h3>
+        <div class="tag">支援機型確定後公布</div>
+        <span class="btn pending">準備中</span>
+      </div>
+      <div class="card">
+        <h3>🪟 Windows</h3>
+        <div class="tag">還沒開始，不保證會有</div>
+        <span class="btn pending">未定</span>
+      </div>
+    </div>
+    <div class="need">需要：<b>Claude CLI</b>，以及放得下影片與逐字稿的硬碟空間。</div>
+    <div class="need">想在上線時收到通知，寫信到 <a href="mailto:contact@fervela.ai?subject=%E9%96%B1%E5%BD%B1%E4%B8%8A%E7%B7%9A%E9%80%9A%E7%9F%A5">contact@fervela.ai</a></div>
+  </div>
+
+  <div class="sec">
+    <h2>做不到的事</h2>
+    <div class="h2sub">先講清楚，免得你白裝</div>
+    <ul class="limits">
+      <li>沒有字幕的長影片要先做語音辨識，<b>需要時間</b>，不是貼上去就有。</li>
+      <li>語音辨識會有錯字，人名、公司名和專有名詞最容易錯；安靜的片段偶爾會生出不存在的句子。</li>
+      <li>需要看畫面才懂的內容（圖表、示範操作），文字版救不回來。</li>
+      <li>目前只在 Apple 晶片的 Mac 上跑過。</li>
+      <li>測試版還沒有付費簽章，第一次打開時系統會跳安全警告。</li>
+    </ul>
+  </div>
+
+  <div class="sib">Fervela.ai 的其他作品：<a href="/ai-boardroom/">AI 董事會</a>　·　<a href="/books/">萬卷</a>　·　<a href="https://army.fervela.ai/">四國軍棋</a></div>
+
+  <footer>
+    問題回報與合作洽詢：<a href="mailto:contact@fervela.ai">contact@fervela.ai</a><br>
+    作品以 <b>Fervela.ai</b> 為名發佈。© 2026 Fervela.ai
+  </footer>
+</div>
+</body>
+</html>
