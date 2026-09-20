@@ -39,5 +39,12 @@
     "date": "2026-09-13",
     "desc": "想在美股掛移動停損、想自己寫交易程式，台灣的複委託做得到嗎？逐家查完 15 家之後，把元大、Firstrade、IBKR 放在同一張表上比：功能、手續費、遺產稅。",
     "title_en": "Choosing a U.S. stock broker from Taiwan: sub-brokerage vs. Firstrade vs. IBKR"
+  },
+  "03-wanjuan.md": {
+    "publish": true,
+    "order": 6,
+    "date": "2026-09-20",
+    "desc": "朋友問我萬卷從頭到尾是怎麼做的。一萬多行程式，我一行都沒寫也沒看，那三天我到底做了什麼？先開會、先拿四本真的書去撞，還有一個讓框從十九中六變成十九全中的外行問題。",
+    "title_en": "I can't code. How did I build a reading app in three days?"
   }
 }

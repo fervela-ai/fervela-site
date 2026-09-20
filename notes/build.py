@@ -8,6 +8,8 @@
 
    支援的語法只有這幾種，夠寫文章就好：
      # 標題 / ## 小標 / > 引言 / **粗體** / *斜體* / [文字](網址) / --- 分隔
+     ![圖說](img/資料夾/檔名.jpg)  ← 獨立一行；圖說會顯示在圖片下方
+     ![圖說](img/資料夾/檔名.mp4)  ← 影片；同資料夾要有同名 .jpg 當封面
 
 用法：
     python3 build.py            重建全部文章與索引
@@ -54,6 +56,19 @@ def render(md):
             flush(); title = l[2:].strip(); continue
         if l.startswith("## "):
             flush(); out.append("<h2>" + inline(l[3:].strip()) + "</h2>"); continue
+        m = re.match(r'^!\[([^\]]*)\]\(([^)]+)\)$', l.strip())
+        if m:   # 獨立一行的圖片：alt 同時當圖說
+            flush()
+            alt, src = html.escape(m.group(1)), html.escape(m.group(2))
+            if src.lower().endswith(".mp4"):
+                # 影片：封面圖用同名 .jpg。preload=metadata＝沒按播放就不下載整支影片
+                out.append('<figure><video controls playsinline preload="metadata" poster="%s" src="%s">'
+                           '<a href="%s">下載影片</a></video><figcaption>%s</figcaption></figure>'
+                           % (src[:-4] + ".jpg", src, src, inline(m.group(1))))
+                continue
+            out.append('<figure><a href="%s"><img src="%s" alt="%s" loading="lazy"></a>'
+                       '<figcaption>%s</figcaption></figure>' % (src, src, alt, inline(m.group(1))))
+            continue
         if l.strip() == "---":
             flush(); continue
         buf.append(l.strip())

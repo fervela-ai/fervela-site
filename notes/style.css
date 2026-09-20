@@ -122,3 +122,9 @@ footer a{color:var(--teal)}
   .tname{font-size:15px}
   .lede{font-size:16.5px;padding-left:13px}
 }
+
+/* 文章內的截圖（2026-09-20 加）：寬度跟著內文走，圖說在下方；點圖開原圖 */
+.post figure{margin:26px 0 28px}
+.post figure img,.post figure video{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:10px}
+.post figcaption{margin-top:9px;color:var(--grey);font-size:14px;line-height:1.7;text-align:center}
+.post figure video{background:#0b1430}
