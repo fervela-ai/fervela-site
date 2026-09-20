@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>采風週報 #001｜AI 助理的擴充、稽核與記憶｜Fervela.ai</title>
+<meta name="description" content="采風週報公開試刊：三個 AI 助理功能需求，以及 fast-jev-compaction 的繁體中文導讀。">
+<meta property="og:title" content="采風週報 #001｜AI 助理的擴充、稽核與記憶">
+<meta property="og:description" content="三個完整功能需求，加上一篇 fast-jev-compaction 中文導讀。每則均附來源與證據限制。">
+<meta property="og:url" content="https://fervela.ai/scout/weekly/001/">
+<meta property="og:type" content="article">
+<link rel="canonical" href="https://fervela.ai/scout/weekly/001/">
+<style>
+:root{--ink:#171812;--navy:#0d1b3d;--muted:#62675e;--paper:#f2eee3;--card:#fffdf7;--accent:#c34e2b;--green:#2f6954;--blue:#345f8f;--line:#d8d0bf;--soft:#f8f4ea;--gold:#9a6b24}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.8 system-ui,-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif}a{color:var(--accent);text-underline-offset:3px}header,main,footer{max-width:1000px;margin:auto;padding:28px}.crumbs{padding-top:22px;font-size:14px}.hero{padding:65px 0 48px;border-bottom:1px solid var(--line)}.eyebrow{margin:0 0 10px;color:var(--accent);font-size:13px;font-weight:800;letter-spacing:.12em}.hero h1{max-width:840px;margin:0;color:var(--navy);font:700 clamp(40px,6vw,68px)/1.16 "Songti TC","Noto Serif TC",serif}.hero .lead{max-width:760px;margin:24px 0 0;color:var(--muted);font-size:19px}.meta{display:flex;gap:18px;flex-wrap:wrap;margin-top:22px;color:var(--muted);font-size:14px}.notice{margin:30px 0;padding:18px 22px;background:#fff7e8;border-left:5px solid #f5a623}.notice p{margin:0}.toc{margin:42px 0;padding:22px 26px;background:var(--card);border:1px solid var(--line)}.toc h2{margin:0 0 8px;color:var(--navy);font-size:18px}.toc ol{margin:0;padding-left:21px}.section-title{margin:68px 0 20px;color:var(--navy);font:700 35px/1.25 "Songti TC","Noto Serif TC",serif}.entry{display:grid;grid-template-columns:64px 1fr;gap:20px;margin:24px 0;padding:30px;background:var(--card);border:1px solid var(--line);box-shadow:5px 5px 0 #ddd4c2;scroll-margin-top:20px}.rank{color:var(--accent);font:700 27px/1 ui-monospace,monospace}.entry h3{margin:0 0 18px;color:var(--navy);font:700 29px/1.35 "Songti TC","Noto Serif TC",serif}.summary{font-size:19px;color:var(--ink)}.row{display:grid;grid-template-columns:145px 1fr;gap:18px;padding:13px 0;border-top:1px solid #e6e0d3}.row b{color:var(--navy)}.row p{margin:0;color:var(--muted)}.row.pain{border-left:4px solid var(--accent);padding-left:14px}.row.value{border-left:4px solid var(--green);padding-left:14px}.row.signal{border-left:4px solid var(--blue);padding-left:14px}.evidence{margin:18px 0;padding:16px 18px;background:var(--soft);color:var(--muted);font-size:14px}.evidence p{margin:4px 0}.source{display:inline-block;font-weight:800}.software{border-top:5px solid var(--green)}.software .project{color:var(--muted);margin:-8px 0 20px}.features{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:18px 0}.features section{padding:18px;background:var(--soft);border:1px solid var(--line)}.features h4{margin:0 0 8px;color:var(--green)}.features ul{margin:0;padding-left:20px}.terms{margin:0}.terms dt{margin-top:9px;color:var(--green);font-weight:800}.terms dd{margin:0;color:var(--muted)}.editor{margin:34px 0;padding:22px 25px;background:#fff8ed;border-left:5px solid var(--accent)}.editor h4{margin:0 0 8px;color:var(--navy)}.editor p{margin:0;color:var(--muted)}.rights{margin-top:54px;padding-top:24px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}footer{margin-top:70px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}.footer-links{display:flex;gap:18px;flex-wrap:wrap}@media(max-width:700px){header,main,footer{padding-left:20px;padding-right:20px}.entry{grid-template-columns:1fr;padding:22px}.row{grid-template-columns:1fr;gap:3px}.features{grid-template-columns:1fr}}
+</style>
+</head>
+<body id="top">
+<header>
+  <nav class="crumbs"><a href="/">Fervela.ai</a>　/　<a href="/scout/">采風</a>　/　<a href="/scout/weekly/">週報</a>　/　001</nav>
+  <div class="hero">
+    <p class="eyebrow">采風週報 #001 · 公開試刊</p>
+    <h1>AI 助理正在長大，但擴充、稽核與記憶還沒跟上</h1>
+    <p class="lead">這一期從 2026 年 9 月 20 日的內部采集結果中，人工挑出三個說得清楚、能回到來源核對的功能需求，再加上一個與這些問題密切相關的熱門軟體。它是一份精選，不是完整資料庫。</p>
+    <div class="meta"><span>採集日期：2026-09-20</span><span>編輯／查核日期：2026-09-21</span><span>3 個需求 · 1 篇導讀</span></div>
+  </div>
+</header>
+<main>
+  <aside class="notice"><p><b>先說證據邊界：</b>GitHub 的留言、reactions 與 stars 都是公開注意力訊號，不能直接換算成使用者人數、付費意願或產品成功率。以下評估的用途，是幫你決定下一步該查什麼、該找誰談。</p></aside>
+
+  <nav class="toc" aria-label="本期目錄">
+    <h2>本期目錄</h2>
+    <ol>
+      <li><a href="#need-1">可組合的 AI 編程助理擴充功能</a></li>
+      <li><a href="#need-2">可追溯的排程 AI 執行紀錄</a></li>
+      <li><a href="#need-3">長時間 AI 對話的脈絡整理</a></li>
+      <li><a href="#hot-1">熱門導讀：fast-jev-compaction</a></li>
+    </ol>
+  </nav>
+
+  <h2 class="section-title">一、功能需求與產品機會</h2>
+
+  <article class="entry" id="need-1">
+    <div class="rank">01</div>
+    <div>
+      <p class="eyebrow">需求訊號 · 證據較強</p>
+      <h3>我需要替 AI 編程助理加上可組合的自訂擴充功能</h3>
+      <p class="summary">重度使用者想把團隊規則、安全檢查、專用工具與互動介面接進 AI 助理的工作流程，而不是每次都靠額外腳本和人工巡查。</p>
+      <div class="row pain"><b>痛點在哪裡</b><p>現有 hooks 很難完整表達執行順序、失敗狀態與長時間任務。團隊常要另外拼接排程、日誌和例外處理，才能知道擴充是否真的生效。</p></div>
+      <div class="row value"><b>為什麼值得做</b><p>可靠的擴充介面可以把安全遮罩、流程引導、監測與垂直工具包裝成可分享模組，讓 AI 編程助理從單一產品變成可組合的平台。</p></div>
+      <div class="row"><b>解法方向</b><p>以事件為核心提供具型別的輸入輸出、明確的失敗策略與排序，並支援可暫停、恢復的長任務，以及文件化的終端互動元件。</p></div>
+      <div class="row signal"><b>有人開始做了嗎</b><p>有。來源中的維護者與留言者提到正在開發的 function hooks，也分享多個可運作的外掛或原型。這表示方向已有實作者，但介面仍可能快速變動。</p></div>
+      <div class="evidence"><p><b>目前證據：</b>單一公開 Issue 有 203 則抽查留言、125 位有效參與者及 196 個 reactions；討論包含使用案例、API 邊界與失敗處理。</p><p><b>證據限制：</b>訊號集中在一個早期功能社群，不能據此推論整體市場規模或付費意願。</p><p><b>日期：</b>2026-09-20 採集，2026-09-21 查核。</p><p><b>來源授權：</b>來源頁面文字權利依 GitHub 條款及原作者權利；本頁提供原創摘要與評論，未重製完整留言。</p></div>
+      <a class="source" href="https://github.com/anthropics/claude-code/issues/91870" target="_blank" rel="noreferrer">查看原始討論：Mods - make Claude 10x more extensible →</a>
+    </div>
+  </article>
+
+  <article class="entry" id="need-2">
+    <div class="rank">02</div>
+    <div>
+      <p class="eyebrow">需求訊號 · 值得小規模驗證</p>
+      <h3>我需要為排程 AI 工作留下可追溯的執行紀錄</h3>
+      <p class="summary">排程顯示「已觸發」，不代表工作真的完成。管理者需要一份能回答做了什麼、怎麼驗證、卡在哪裡的紀錄。</p>
+      <div class="row pain"><b>痛點在哪裡</b><p>當任務跨多個階段和代理人，若缺少固定的任務 ID、時間、輸入輸出與驗證結果，接手的人只看得到進度敘述，無法確認真正狀態。</p></div>
+      <div class="row value"><b>為什麼值得做</b><p>可稽核紀錄能把「排程曾執行」與「結果已驗證」分開，讓人快速看出阻塞、待確認事項，以及下一步能否安全繼續。</p></div>
+      <div class="row"><b>解法方向</b><p>每次執行建立不可覆寫的 run ID，追加記錄前序檢查、實際操作、變更、測試、證據、終態與下一步；另產生容易瀏覽的目前狀態索引。</p></div>
+      <div class="row signal"><b>有人開始做了嗎</b><p>來源提出了具體欄位和外部收據構想，但沒有看見完整功能已經完成的直接證據。適合先做本機 append-only 日誌原型，測試它是否真的減少人工追問。</p></div>
+      <div class="evidence"><p><b>目前證據：</b>需求與驗收條件寫得具體，另有一位參與者補充獨立收據與 fail-closed 的觀點。</p><p><b>證據限制：</b>只有一個 Issue、兩位有效參與者；抽查的 238 則內容多數是同一作者的重複執行紀錄，不能當成 238 個需求訊號。</p><p><b>日期：</b>2026-09-20 採集，2026-09-21 查核。</p><p><b>來源授權：</b>來源頁面文字權利依 GitHub 條款及原作者權利；本頁只保留重新整理的問題與判斷。</p></div>
+      <a class="source" href="https://github.com/darrinbaldwindev/AgentOS/issues/75" target="_blank" rel="noreferrer">查看原始討論：Control-loop mission ledger and timestamped execution evidence →</a>
+    </div>
+  </article>
+
+  <article class="entry" id="need-3">
+    <div class="rank">03</div>
+    <div>
+      <p class="eyebrow">需求訊號 · 已有實作</p>
+      <h3>我需要讓長時間運作的 AI 助理自動整理對話脈絡</h3>
+      <p class="summary">工具呼叫和輸出會在長任務中持續堆積。粗暴刪除可以騰出空間，卻可能把關鍵證據、限制或呼叫結果一起丟掉。</p>
+      <div class="row pain"><b>痛點在哪裡</b><p>人工整理長對話不實際；壓縮若破壞工具呼叫和結果的配對，後續模型可能誤判工作已完成，或失去重要的錯誤與確認訊號。</p></div>
+      <div class="row value"><b>為什麼值得做</b><p>可靠的脈絡整理能讓長任務繼續運作，減少重述背景的成本，也讓 AI 的判斷仍能回到可驗證的工具紀錄。</p></div>
+      <div class="row"><b>解法方向</b><p>把脈絡管理做成可插拔引擎，逐一判斷工具紀錄要保留、截短或移除；保護最近內容與明確收據，並讓敏感工具輸入能在送出前遮罩。</p></div>
+      <div class="row signal"><b>有人開始做了嗎</b><p>有。來源描述 Hermes Agent 的 context-engine 外掛與另一個公開實作，並附上測試與整合細節。這提高技術可行性，但尚未證明廣泛需求。</p></div>
+      <div class="evidence"><p><b>目前證據：</b>單一 Issue 中有兩位有效參與者、五則留言，並提到兩個公開實作。</p><p><b>證據限制：</b>沒有 reactions，資料主要來自少數技術實作者；4,766 stars 是 repository 關注度，不是這項需求的使用者人數。</p><p><b>日期：</b>2026-09-20 採集，2026-09-21 查核。</p><p><b>來源授權：</b>來源頁面文字權利依 GitHub 條款及原作者權利；本頁未轉載原始技術說明。</p></div>
+      <a class="source" href="https://github.com/tamaratran/fast-jev-compaction/issues/60" target="_blank" rel="noreferrer">查看原始討論：fast-jev-compaction is now a live context engine of Hermes Agent →</a>
+    </div>
+  </article>
+
+  <h2 class="section-title">二、熱門軟體導讀</h2>
+
+  <article class="entry software" id="hot-1">
+    <div class="rank">01</div>
+    <div>
+      <p class="eyebrow">AI 與代理人 · 近期受到關注</p>
+      <h3>fast-jev-compaction：讓長對話壓縮時，少忘記關鍵工具紀錄</h3>
+      <p class="project"><a href="https://github.com/tamaratran/fast-jev-compaction" target="_blank" rel="noreferrer">tamaratran/fast-jev-compaction</a> · 採集時 4,766 stars · TypeScript · 程式碼標示 MIT</p>
+      <p class="summary">這是一個給 Claude Code 使用的外掛與 TypeScript 函式庫。它不把整段舊對話改寫成摘要，而是判斷每組工具呼叫與結果是否仍有用：重要的保留原文，較不重要的截短或移除。</p>
+      <div class="features">
+        <section><h4>它解決什麼</h4><ul><li>工具輸出太多，逐漸吃掉可用的對話空間。</li><li>一般摘要可能改寫或漏掉檔案路徑、錯誤訊息與限制。</li><li>只刪結果、不管呼叫配對，可能讓後續模型誤讀工作狀態。</li></ul></section>
+        <section><h4>怎麼理解它</h4><ul><li>每個工具呼叫和結果先被配成一組。</li><li>系統判斷整組要完整保留、截短或移除。</li><li>最早設定與最近內容可以鎖定，失敗時回退到原本的壓縮方式。</li></ul></section>
+      </div>
+      <dl class="terms">
+        <dt>上下文壓縮</dt><dd>對話太長時縮短舊紀錄，騰出繼續工作的空間。</dd>
+        <dt>工具呼叫</dt><dd>AI 請系統讀檔、搜尋或執行指令的操作，以及系統回傳的結果。</dd>
+        <dt>Jev</dt><dd>這個專案用來判斷哪些工具紀錄值得留下的外部模型服務。</dd>
+      </dl>
+      <div class="row value"><b>為什麼值得看</b><p>它把「如何讓 AI 記得更多」改成「哪些證據必須留下」。這個思路可延伸到任何長時間代理工作：先保住能驗證行動的紀錄，再處理其餘內容。</p></div>
+      <div class="row pain"><b>目前限制</b><p>保留機率不是安全證明，必要時仍須重跑工具；token 估算、外部服務成本、敏感輸入遮罩和早期 hooks 穩定性都要自行驗證。採集時的安裝條件可能已改變，實際試用前應回到 README 核對。</p></div>
+      <div class="editor"><h4>采風的延伸想法</h4><p>先做一組可重播測試：刻意放入禁止事項、重要路徑和錯誤訊息，比較壓縮前後的任務成功率；再加入可閱讀的決策報告，讓人知道每筆紀錄為何被保留、截短或移除。</p></div>
+      <div class="evidence"><p><b>熱門的意思：</b>採集時 repository 有 4,766 stars 與 265 forks，代表 GitHub 上的公開關注度；不代表品質、實際使用人數或需求規模。</p><p><b>授權資訊：</b>採集時 repository 顯示 MIT 程式碼授權；README、圖片、商標及第三方內容可能有不同權利，使用前仍應核對 repository 內的授權檔。</p><p><b>查核日期：</b>2026-09-21；公開數字採自 2026-09-20 采風資料。</p></div>
+      <a class="source" href="https://github.com/tamaratran/fast-jev-compaction" target="_blank" rel="noreferrer">查看專案與最新說明 →</a>
+    </div>
+  </article>
+
+  <section class="rights">
+    <p><b>出版說明：</b>本期由采風資料人工選題並重新撰寫。除名稱與必要事實外，沒有複製 README、Issue 或留言的長段文字，也沒有使用來源圖片。原始內容、程式、圖片與商標的權利仍屬各自權利人。</p>
+    <p>發現事實錯誤、內容更新或權利問題，請聯絡 <a href="mailto:contact@fervela.ai">contact@fervela.ai</a>。</p>
+  </section>
+</main>
+<footer>
+  <div class="footer-links"><a href="#top">回到本期開頭 ↑</a><a href="/scout/weekly/">返回歷期週報</a><a href="/scout/">采風首頁</a></div>
+  <p>Fervela.ai · © 2026</p>
+</footer>
+</body>
+</html>
