@@ -166,6 +166,9 @@ def card(href, title, date, desc):
 HOME = os.path.join(os.path.dirname(HERE), "index.html")
 MARK_A = "<!-- notelist:start 由 notes/build.py 產生，不要手改 -->"
 MARK_B = "<!-- notelist:end -->"
+# 首頁只放最新幾篇，其餘到 /notes/ 看。不設上限的話筆記每多一篇、產品區就往下掉一格——
+# 2026-09-20 Lynch：「以我的產出，軟體會被蓋掉」。
+HOME_MAX = 5
 
 
 def home_row(href, title_zh, title_en, date):
@@ -237,7 +240,7 @@ def main():
     print("✓ index.html（%d 篇）" % len(items))
 
     rows.sort(reverse=True)
-    write_home([r[1] for r in rows])
+    write_home([r[1] for r in rows][:HOME_MAX])
 
 
 if __name__ == "__main__":
