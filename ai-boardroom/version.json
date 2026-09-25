@@ -1,5 +1,5 @@
 {
-  "version": "3.6",
-  "notes": "用起來更順手：附件什麼檔都能丟（Word／PowerPoint／Excel／ZIP）；套用會議室不再刪人，先分配職位；一席就叫「人物名（職位）」；截圖前一鍵藏起其他會議名稱",
+  "version": "3.7",
+  "notes": "V3.7 安全修正，請更新：Grok 席不再夾帶你電腦上的 Claude 全域設定與 skill 說明；GPT 席不會再被附件誘導讀你電腦上的檔案。詳見隱私頁。",
   "url": "https://fervela.ai/ai-boardroom/"
 }
