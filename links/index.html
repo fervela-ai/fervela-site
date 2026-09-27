@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fervela.ai — 連結</title>
+<meta name="description" content="以智慧造器，為日常解題；擇新知分享，與諸君共思。">
+<meta property="og:title" content="Fervela.ai">
+<meta property="og:description" content="以智慧造器，為日常解題；擇新知分享，與諸君共思。">
+<meta property="og:image" content="https://fervela.ai/assets/og-fervela.png">
+<meta property="og:url" content="https://fervela.ai/links/">
+<meta name="theme-color" content="#0D1B3D">
+<link rel="icon" type="image/png" href="/assets/fervela-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;600&family=Noto+Sans+TC:wght@400;500&family=Noto+Serif+TC:wght@500&display=swap" rel="stylesheet">
+<style>
+/* 只用品牌五色（品牌/標準/README.md）：深海藍、探索青、啟航金、科技灰、雲霧白 */
+:root{--navy:#0D1B3D;--teal:#008B8B;--gold:#F5A623;--gray:#6B7280;--cloud:#F5F7FA}
+*{box-sizing:border-box;margin:0}
+html,body{min-height:100%}
+body{background:var(--navy);color:var(--cloud);font-family:'DM Sans','Noto Sans TC',sans-serif;
+  display:flex;justify-content:center;padding:max(24px,env(safe-area-inset-top)) 16px max(20px,env(safe-area-inset-bottom));
+  -webkit-font-smoothing:antialiased}
+main{width:100%;max-width:420px;display:flex;flex-direction:column;align-items:center}
+.avatar{width:88px;height:88px;border-radius:50%;background:var(--cloud);display:grid;place-items:center;
+  border:2px solid var(--teal)}
+.avatar img{width:56px;height:auto;display:block}
+h1{margin-top:12px;font-size:26px;font-weight:600;letter-spacing:-.5px}
+h1 span{color:var(--teal)}
+.bio{margin-top:6px;font-family:'Noto Serif TC',serif;font-size:15px;line-height:1.9;text-align:center;color:var(--cloud);opacity:.92}
+.star{color:var(--gold);font-size:13px;margin-top:8px;letter-spacing:6px}
+nav{width:100%;margin-top:14px;display:flex;flex-direction:column;gap:10px}
+nav a{display:flex;align-items:center;justify-content:space-between;min-height:48px;padding:0 20px;
+  border:1px solid var(--teal);border-radius:12px;color:var(--cloud);text-decoration:none;font-size:16px;font-weight:500;
+  transition:background .15s}
+nav a:first-child{background:var(--teal)}
+nav a:hover,nav a:focus-visible{background:var(--teal);outline:none}
+nav a:focus-visible{box-shadow:0 0 0 2px var(--gold)}
+nav a small{color:var(--cloud);opacity:.7;font-size:13px;font-weight:400}
+footer{margin-top:18px;font-size:12px;color:var(--gray);letter-spacing:.5px}
+</style>
+</head>
+<body>
+<main>
+  <div class="avatar"><img src="/links/fervela-icon.png" alt="Fervela 帆船標誌" width="56" height="63"></div>
+  <h1>Fervela<span>.ai</span></h1>
+  <p class="bio">以智慧造器，為日常解題；<br>擇新知分享，與諸君共思。</p>
+  <div class="star" aria-hidden="true">✦</div>
+  <nav id="links" aria-label="Fervela.ai 的連結"></nav>
+  <footer>Research. Create. Share.</footer>
+</main>
+<script>
+// 帳號開了就把 on 改成 true；網址還沒確定的先留 false，不放壞連結。
+const LINKS = [
+  { on: true,  label: '官網',          note: 'fervela.ai',          href: 'https://fervela.ai/' },
+  { on: false, label: '臉書粉專',      note: 'Fervela.ai',          href: 'https://www.facebook.com/fervelaai' },
+  { on: false, label: 'Instagram',     note: '',                    href: '' },
+  { on: false, label: 'Threads',       note: '',                    href: '' },
+  { on: false, label: 'LINE 官方帳號', note: '',                    href: '' },
+  { on: false, label: 'Telegram 頻道', note: '',                    href: '' },
+  { on: false, label: 'X',             note: '',                    href: '' },
+  { on: false, label: 'LinkedIn',      note: '',                    href: '' },
+  { on: true,  label: 'Email',         note: 'contact@fervela.ai',  href: 'mailto:contact@fervela.ai' },
+];
+const nav = document.getElementById('links');
+for (const l of LINKS) {
+  if (!l.on || !l.href) continue;
+  const a = document.createElement('a');
+  a.href = l.href;
+  if (l.href.startsWith('http')) { a.target = '_blank'; a.rel = 'noopener'; }
+  a.innerHTML = '<span></span><small></small>';
+  a.firstChild.textContent = l.label;
+  a.lastChild.textContent = l.note;
+  nav.appendChild(a);
+}
+</script>
+</body>
+</html>

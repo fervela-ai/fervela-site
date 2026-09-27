@@ -80,8 +80,9 @@ PAGE = '''<!doctype html>
 <html lang="zh-Hant">
 <head>
 <meta charset="utf-8">
+<link rel="icon" type="image/png" href="/assets/fervela-icon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{title}｜Miles 邁爾思</title>
+<title>{title} — Fervela.ai</title>
 <meta name="description" content="{desc}">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
@@ -102,13 +103,13 @@ PAGE = '''<!doctype html>
       <path d="M31 88c18 7 39 8 56 2-14 9-38 10-56 2Z" fill="#fff" opacity=".92"/>
       <path d="M20 85c14 4 27 3 39-2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
       </g>
-      <path d="m84 7 2.6 8.4L95 18l-8.4 2.6L84 29l-2.6-8.4L73 18l8.4-2.6L84 7Z" fill="#F5A623"/></g></svg></span><span class="tname">Miles 邁爾思</span></a>
+      <path d="m84 7 2.6 8.4L95 18l-8.4 2.6L84 29l-2.6-8.4L73 18l8.4-2.6L84 7Z" fill="#F5A623"/></g></svg></span><span class="tname">Fervela.ai</span></a>
     <a class="tlink" href="/notes/">筆記</a>
   </div></div>
 <div class="wrap">
   <article class="post">
     <h1>{title}</h1>
-    <div class="date">{date}　·　Miles 邁爾思</div>
+    <div class="date">{date}　·　Miles</div>
     <p class="lede">{desc}</p>
     {body}
   </article>
@@ -126,8 +127,9 @@ INDEX = '''<!doctype html>
 <html lang="zh-Hant">
 <head>
 <meta charset="utf-8">
+<link rel="icon" type="image/png" href="/assets/fervela-icon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>筆記｜Miles 邁爾思</title>
+<title>筆記 — Fervela.ai</title>
 <meta name="description" content="實作過程的紀錄——怎麼做、為什麼那樣選、哪裡踩坑，以及事後回頭看哪些判斷是錯的。">
 <link rel="stylesheet" href="style.css">
 </head>
@@ -145,7 +147,7 @@ INDEX = '''<!doctype html>
       <path d="M31 88c18 7 39 8 56 2-14 9-38 10-56 2Z" fill="#fff" opacity=".92"/>
       <path d="M20 85c14 4 27 3 39-2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
       </g>
-      <path d="m84 7 2.6 8.4L95 18l-8.4 2.6L84 29l-2.6-8.4L73 18l8.4-2.6L84 7Z" fill="#F5A623"/></g></svg></span><span class="tname">Miles 邁爾思</span></a>
+      <path d="m84 7 2.6 8.4L95 18l-8.4 2.6L84 29l-2.6-8.4L73 18l8.4-2.6L84 7Z" fill="#F5A623"/></g></svg></span><span class="tname">Fervela.ai</span></a>
     <a class="tlink" href="/notes/">筆記</a>
   </div></div>
 <div class="wrap">

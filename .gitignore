@@ -9,3 +9,7 @@ __pycache__/
 # ⚠️ 草稿不進公開 repo。posts.json 的 publish:false 只擋「不產生 HTML」，
 #    擋不住原始 .md 被推上去讓人直接讀（02-lobster.md 就是 publish:false）。
 notes/_drafts/
+
+# 本機用、不推上線（幕僚長 9/26）
+交接給GPT_*.md
+*.webloc
