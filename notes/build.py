@@ -176,51 +176,47 @@ def card(href, title, date, desc):
 
 
 # ── 首頁的筆記清單 ────────────────────────────────────────────
-# 為什麼要有這一段：首頁的清單原本是手寫的，跟 posts.json 沒有關係，
-# 所以新增條目只會出現在 /notes/，首頁得有人記得手動補——實際漏過一次
-# （2026-09-11 的課程地圖，Lynch 自己發現的）。
-# 現在用標記把那個區塊圈起來，每次建置重寫，兩邊不會再走鐘。
+# 為什麼要有這一段：首頁的清單跟 posts.json 沒有關係，新增條目只會出現在 /notes/，
+# 首頁得有人記得手動補——實際漏過一次（2026-09-11 的課程地圖，Lynch 自己發現的）。
+#
+# 9/20～9/21 這段曾經用 notelist 標記圈住首頁清單、每次建置整段重寫。
+# 9/21 官網改版後首頁是 Lynch 用 Codex 設計的版面（分類標籤、手寫英文標題、只放三篇），
+# 標記也跟著消失，build.py 每次都在這裡失敗。改版的首頁是設計稿，不該被腳本重寫，
+# 所以改成「只檢查、不寫入」：列出最新幾篇裡哪些沒出現在首頁，提醒人去決定要不要補。
+# 這是提醒不是錯誤，所以不讓建置失敗；但找不到首頁或找不到筆記區塊，代表檢查沒跑起來，
+# 那就要大聲失敗——「沒檢查」和「檢查通過」不能長得一樣。
 HOME = os.path.join(os.path.dirname(HERE), "index.html")
-MARK_A = "<!-- notelist:start 由 notes/build.py 產生，不要手改 -->"
-MARK_B = "<!-- notelist:end -->"
-# 首頁只放最新幾篇，其餘到 /notes/ 看。不設上限的話筆記每多一篇、產品區就往下掉一格——
-# 2026-09-20 Lynch：「以我的產出，軟體會被蓋掉」。
-HOME_MAX = 5
+HOME_SECTION = 'id="journal"'
+# 首頁筆記區放幾篇由版面決定（目前 3 篇）；這裡只看最新幾篇有沒有漏。
+HOME_CHECK = 3
 
 
-def home_row(href, title_zh, title_en, date):
-    """首頁那一列：只有標題和日期，沒有摘要。中英雙語。"""
-    return ('      <a class="noteitem" href="{h}">\n'
-            '        <span class="ntitle"><span class="zh">{z}</span>'
-            '<span class="en">{e}</span></span>\n'
-            '        <span class="ndate">{d}</span>\n'
-            '      </a>').format(h=html.escape(href), z=html.escape(title_zh),
-                                 e=html.escape(title_en), d=html.escape(date))
-
-
-def write_home(rows):
-    """把首頁標記之間的內容換掉。找不到標記就大聲失敗，不要安靜略過——
-       安靜略過的話首頁會停在舊版而沒有任何提示（出貨驗證那一族的老問題）。"""
+def check_home(latest):
+    """latest：[(href, 標題)]，由新到舊。回傳沒出現在首頁筆記區的那幾篇。"""
     if not os.path.exists(HOME):
-        raise SystemExit("❌ 找不到首頁 " + HOME)
+        raise SystemExit("❌ 找不到首頁 " + HOME + "，首頁檢查沒有執行")
     s = io.open(HOME, encoding="utf-8").read()
-    a, b = s.find(MARK_A), s.find(MARK_B)
-    if a < 0 or b < 0 or b < a:
-        raise SystemExit("❌ 首頁找不到 notelist 標記，請確認 index.html 有這兩行：\n"
-                         "   " + MARK_A + "\n   " + MARK_B)
-    before, after = s[:a + len(MARK_A)], s[b:]
-    out = before + "\n" + "\n".join(rows) + "\n    " + after
-    # 寫回去之前做個粗略的完整性檢查：標記外的內容不該憑空變少。
-    if len(out) < len(s) - sum(len(r) for r in rows) - 4000:
-        raise SystemExit("❌ 產出的首頁比原本短太多，中止")
-    io.open(HOME, "w", encoding="utf-8").write(out)
-    print("✓ 首頁筆記清單（%d 列）" % len(rows))
+    a = s.find(HOME_SECTION)
+    if a < 0:
+        raise SystemExit("❌ 首頁找不到筆記區塊（" + HOME_SECTION + "），首頁檢查沒有執行")
+    b = s.find("</section>", a)
+    block = s[a:b if b > 0 else len(s)]
+    # 首頁用絕對網址（https://fervela.ai/notes/x.html），posts.json 用站內路徑，比對時去掉網域。
+    hrefs = {re.sub(r"^https?://[^/]+", "", h) for h in re.findall(r'href="([^"]+)"', block)}
+    missing = [(h, t) for h, t in latest if h not in hrefs]
+    if missing:
+        print("⚠️ 首頁筆記區沒有這幾篇（首頁是手排的，要不要補請人決定）：")
+        for h, t in missing:
+            print("   " + t + "　→　" + h)
+    else:
+        print("✓ 首頁筆記區已包含最新 %d 篇" % len(latest))
+    return missing
 
 
 def main():
     meta = json.load(io.open(META, encoding="utf-8")) if os.path.exists(META) else {}
     items = []
-    rows = []          # 首頁那份清單
+    rows = []          # (order, 網址, 標題)，拿來檢查首頁有沒有漏
     for fn in sorted(os.listdir(DRAFTS)):
         if not fn.endswith(".md"):
             continue
@@ -234,9 +230,7 @@ def main():
             PAGE.format(title=html.escape(title), desc=html.escape(desc), date=date, body=body))
         print("✓", slug + ".html　—　" + title)
         items.append((m.get("order", 0), card(slug + ".html", title, date, desc)))
-        rows.append((m.get("order", 0),
-                     home_row("/notes/" + slug + ".html", title,
-                              m.get("title_en") or title, date)))
+        rows.append((m.get("order", 0), "/notes/" + slug + ".html", title))
 
     # posts.json 裡帶 "link" 的條目不是文章，是指到站內其他頁的卡片
     # （例如 /courses/ 那種自己一頁、不走這個建置流程的東西）。
@@ -246,9 +240,7 @@ def main():
             continue
         items.append((m.get("order", 0),
                       card(m["link"], m.get("title", key), m.get("date", ""), m.get("desc", ""))))
-        rows.append((m.get("order", 0),
-                     home_row(m["link"], m.get("title", key),
-                              m.get("title_en") or m.get("title", key), m.get("date", ""))))
+        rows.append((m.get("order", 0), m["link"], m.get("title", key)))
         print("✓ 外連卡片　—　" + m.get("title", key) + "　→　" + m["link"])
 
     items.sort(reverse=True)
@@ -257,7 +249,7 @@ def main():
     print("✓ index.html（%d 篇）" % len(items))
 
     rows.sort(reverse=True)
-    write_home([r[1] for r in rows][:HOME_MAX])
+    check_home([(r[1], r[2]) for r in rows][:HOME_CHECK])
 
 
 if __name__ == "__main__":
