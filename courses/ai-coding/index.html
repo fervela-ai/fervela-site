@@ -1,0 +1,347 @@
+<!doctype html>
+<!-- Fervela.ai — © 2026 Fervela. All rights reserved. -->
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<link rel="icon" type="image/png" href="/assets/fervela-icon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>用 AI 寫軟體自學地圖 — Fervela.ai</title>
+<meta name="description" content="不用先當工程師：學會把要做的東西講清楚、讓 AI 動手、自己驗收。三條路線各附一個做得出來的產出，加上本站自己踩過的四個坑。">
+<meta property="og:title" content="用 AI 寫軟體自學地圖">
+<meta property="og:description" content="不用先當工程師：學會把要做的東西講清楚、讓 AI 動手、自己驗收。三條路線各附一個做得出來的產出，加上本站自己踩過的四個坑。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://fervela.ai/courses/ai-coding/">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="topbar"><div class="wrap">
+    <a class="brand" href="/"><span class="tmark"><svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><rect width="120" height="120" rx="26" fill="#ffffff"/><g color="#008B8B" transform="translate(6 6) scale(0.9)"><g transform="translate(2 14) scale(.88)">
+      <path d="M60 8C34 10 14 30 13 55c-2 28 18 50 48 54 21 3 41-8 48-27-7 11-22 18-39 17-28-1-45-19-44-42 1-23 15-41 34-49Z" fill="currentColor"/>
+      <path d="m66 31-30 54 27-7 3-47Z" fill="currentColor"/>
+      <path d="m71 31 0 50 16-8Z" fill="currentColor" opacity=".9"/>
+      <path d="M69 27v56" stroke="currentColor" stroke-width="1.25"/>
+      <path d="M29 82c12 8 25 11 39 10-12 4-28 2-41-5l2-5Z" fill="currentColor"/>
+      <path d="M78 70c5-5 12-3 13 3 5-5 13-1 12 6 5-1 8 3 7 8-1 7-8 11-16 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M27 84c19 10 43 13 65 6 7-2 12-6 16-12-2 8-8 14-17 18-19 8-45 6-59-3-3-2-5-6-5-9Z" fill="#fff" opacity=".94"/>
+      <path d="M25 87c20 10 45 13 67 5 7-2 12-6 16-11-3 8-9 14-18 18-19 7-44 5-58-4-4-2-6-5-7-8Z" fill="currentColor"/>
+      <path d="M31 88c18 7 39 8 56 2-14 9-38 10-56 2Z" fill="#fff" opacity=".92"/>
+      <path d="M20 85c14 4 27 3 39-2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+      </g>
+      <path d="m84 7 2.6 8.4L95 18l-8.4 2.6L84 29l-2.6-8.4L73 18l8.4-2.6L84 7Z" fill="#F5A623"/></g></svg></span><span class="tname">Fervela.ai</span></a>
+    <a class="tlink" href="/notes/">筆記</a>
+  </div></div>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="eyebrow">最後更新 2026.10.01</div>
+    <h1>用 AI 寫軟體自學地圖</h1>
+    <p class="lede">不用先當工程師。先學會三件事：把要做的東西講清楚、讓 AI 動手、自己驗收。程式底子只補剛好夠用的那一塊——夠你看得懂它改了什麼、改壞了退得回去、上線前知道要檢查什麼。後面附完整目錄，要找更多時再往下翻。</p>
+  </header>
+
+  <div class="shortlist">
+    <h2>明天就能開始的三門</h2>
+    <ol class="picks">
+      <li class="pick">
+        <div class="pick-num">01</div>
+        <div class="pick-body">
+          <div class="pick-name"><a href="https://academy.claude.com/courses/claude-code-101">Anthropic — Claude Code 101</a></div>
+          <div class="pick-why">全免費、12 堂、官方標 1.5 小時，完成有徽章。從「寫程式的 AI 代理跟聊天機器人差在哪」講起，核心是一套每次都能照走的節奏：先讓它讀、再讓它提計畫、你看過才動手、做完存一個版本。要實際操作需要 Claude 的付費方案（Pro 以上）或 API 帳號。</div>
+        </div>
+      </li>
+      <li class="pick">
+        <div class="pick-num">02</div>
+        <div class="pick-body">
+          <div class="pick-name"><a href="https://harper.blog/2025/02/16/my-llm-codegen-workflow-atm/">Harper Reed — My LLM codegen workflow atm</a></div>
+          <div class="pick-why">一篇文章，約 15 分鐘讀完。三步：先跟 AI 一問一答把想法磨成規格，再把規格拆成一步一步的計畫，最後照計畫一次做一步。這張地圖所有路線都建立在這個順序上。範例用的工具名稱可以跳過，看流程就好。</div>
+        </div>
+      </li>
+      <li class="pick">
+        <div class="pick-num">03</div>
+        <div class="pick-body">
+          <div class="pick-name"><a href="https://github.com/skills/introduction-to-github">GitHub Skills — Introduction to GitHub</a></div>
+          <div class="pick-why">不到 1 小時、免費、在瀏覽器裡就能做完。學的是「存版本」：AI 一次改幾十個檔案很正常，改壞的時候，有存版本的人按一下退回去，沒存的人只能重來。先學這個，再放手讓 AI 改。</div>
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  <section class="sec">
+    <div class="sec-head">
+      <h2>怎麼走</h2>
+      <p class="sec-note">先決定你要做的是哪一種。三條路線需要的底子不同，驗收方式也不同 —— 看完課不算學會，做得出下面那個「產出」才算。</p>
+    </div>
+
+    <div class="group g-find">
+      <h3>三條路線</h3>
+      <div class="grid">
+        <div class="entry book route">
+          <div class="entry-top"><span class="name">做給自己用的小工具</span><span class="pill know">不用會寫程式</span></div>
+          <ol class="steps">
+            <li><a href="https://academy.claude.com/courses/claude-101">Claude 101</a> <span class="hint">— 2.5 小時，先把 Claude 本身用熟：怎麼描述需求、專案、Artifacts（部分功能要付費方案才能實際操作）</span></li>
+            <li><a href="https://academy.claude.com/courses/claude-code-101">Claude Code 101</a> <span class="hint">— 1.5 小時，換成會自己動手改檔案的版本</span></li>
+            <li><a href="https://harper.blog/2025/02/16/my-llm-codegen-workflow-atm/">Harper Reed 的三步流程</a> <span class="hint">— 想法 → 規格 → 計畫 → 照做</span></li>
+            <li><a href="https://github.com/skills/introduction-to-github">Introduction to GitHub</a> <span class="hint">— 1 小時，學會存版本</span></li>
+            <li><a href="https://docs.github.com/en/pages/quickstart">GitHub Pages 快速入門</a> <span class="hint">— 把做好的網頁放上網，免費</span></li>
+          </ol>
+          <p class="output"><span class="lbl">產出</span>挑一件你每週都在做的重複工作，做成一個單檔網頁小工具，放上 GitHub Pages。給一個朋友用，把他卡住的地方記下來，改出第二版。</p>
+        </div>
+        <div class="entry book route">
+          <div class="entry-top"><span class="name">做給別人用的產品</span><span class="pill know">願意學一點程式</span></div>
+          <ol class="steps">
+            <li><a href="https://missing.csail.mit.edu/2026/">MIT The Missing Semester 2026</a> <span class="hint">— 挑四講：命令列環境、版本控制與 Git、打包與出貨（Packaging and Shipping Code）、代理式寫程式（Agentic Coding）。2026 年這一版把「跟 AI 代理一起寫程式」正式排成一講，大學課裡很少見</span></li>
+            <li><a href="https://ocw.aca.ntu.edu.tw/courses/mooc0018">台大 — 用 Python 做商管程式設計（孔令傑）前幾講</a> <span class="hint">— 中文、從零開始，目的不是自己寫，是看得懂 AI 寫的東西</span></li>
+            <li><a href="https://academy.claude.com/courses/claude-code-in-action">Claude Code in Action</a> <span class="hint">— 1 小時，讓它長時間自己做、你事後驗收的方法（先修：會用 Git 和命令列）</span></li>
+            <li>GitHub 的<a href="https://docs.github.com/en/code-security/secret-scanning/introduction/about-push-protection">推送防護（push protection）</a>與<a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository">從儲存庫移除敏感資料</a>兩篇官方文件 <span class="hint">— 金鑰不小心推上去時怎麼辦：<b>先換掉金鑰，再清歷史</b></span></li>
+            <li><a href="https://genai.owasp.org/resource/owasp-top-10-for-llm-applications-2025/">OWASP Top 10 for LLM Applications 2025</a> <span class="hint">— 你的產品如果也接了 AI，看第 1 名（提示注入）和第 2 名（敏感資訊外洩）就好</span></li>
+          </ol>
+          <p class="output"><span class="lbl">產出</span>做一個別人下載或打開就能用的小產品，附安裝說明。推上 GitHub 前開啟推送防護，並寫一份自己的「出貨前檢查清單」，至少包含四項：有沒有夾帶金鑰或個資、測試是否全過、檢查腳本本身有沒有在說謊、線上是不是真的更新了。每次出貨照著勾一遍。</p>
+        </div>
+        <div class="entry book route">
+          <div class="entry-top"><span class="name">已經是工程師，改成跟 AI 代理一起工作</span><span class="pill know">會寫程式</span></div>
+          <ol class="steps">
+            <li><a href="https://code.claude.com/docs/en/best-practices">Claude Code 官方最佳實踐</a> <span class="hint">— 官方持續改寫的版本，驗證、計畫模式、CLAUDE.md、平行工作都在這</span></li>
+            <li><a href="https://simonwillison.net/2025/Mar/11/using-llms-for-code/">Simon Willison — Here's how I use LLMs to help me write code</a> <span class="hint">— 長文，核心一句：規格越清楚越快，測試永遠不能省</span></li>
+            <li><a href="https://newsletter.kentbeck.com/p/augmented-coding-beyond-the-vibes">Kent Beck — Augmented Coding: Beyond the Vibes</a> <span class="hint">— TDD 的提出者區分「只看結果的 vibe coding」與「在意程式碼品質的 augmented coding」（部分內容要付費訂閱）</span></li>
+            <li><a href="https://martinfowler.com/articles/exploring-gen-ai.html">Birgitta Böckeler — Exploring Generative AI 系列</a> <span class="hint">— martinfowler.com 上，Thoughtworks 團隊從 2023 年寫到現在的第一手實驗紀錄，挑標題看</span></li>
+            <li><a href="https://missing.csail.mit.edu/2026/">Missing Semester 2026 — Code Quality 一講</a></li>
+          </ol>
+          <p class="output"><span class="lbl">產出</span>挑一個真實的小功能，先寫規格和測試，再交給代理做。記錄三個數字：你中途介入了幾次、測試抓到幾個它自己沒發現的錯、跟你自己寫比多花或省了多少時間。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <section class="sec">
+    <div class="sec-head">
+      <h2>為什麼要花時間在「驗收」和「安全」</h2>
+      <p class="sec-note">AI 寫得快，漏得也快。資安公司 GitGuardian 的《State of Secrets Sprawl 2026》報告：2025 年公開 GitHub 上新增 2,865 萬筆寫死在程式裡的金鑰，一年增加 34%，是他們紀錄以來最大的單年增幅；其中由 Claude Code 協助的存版本，金鑰外洩率 3.2%，全體平均是 1.5%。</p>
+      <p class="sec-note">工具本身不是問題，問題是做得太快、沒有人檢查。路線二的那份出貨前檢查清單就是為了這件事。</p>
+    </div>
+
+    <div class="group g-paid">
+      <h3>本站自己踩過的四個坑</h3>
+      <p class="sec-note">Fervela 的軟體都是這樣跟 AI 一起做出來的。下面四件事都真的發生過，共通點是：<b>它們看起來都像成功</b>——指令跑完、沒有紅字，問題要到別人手上才會出現。</p>
+      <div class="grid">
+        <div class="entry book">
+          <div class="entry-top"><span class="name">1　發佈的檔案夾帶了不該有的東西</span></div>
+          <p class="desc">打包時順手把設定檔、本機路徑、私人信箱一起包了進去。<b>教訓：</b>發佈前用工具掃一遍成品，不是掃原始碼。</p>
+        </div>
+        <div class="entry book">
+          <div class="entry-top"><span class="name">2　檢查腳本說「全部通過」，其實根本沒跑</span></div>
+          <p class="desc">一個指令寫法錯了，掃描沒有執行，結果是空的，於是印出「乾淨」。<b>教訓：</b>「工具沒跑起來」和「檢查通過」必須是兩種不同的結果；一個永遠不會失敗的檢查，比沒有檢查更危險。</p>
+        </div>
+        <div class="entry book">
+          <div class="entry-top"><span class="name">3　覆蓋舊的下載檔，下載次數歸零</span></div>
+          <p class="desc">為了省一個版號，把新檔案蓋在已發佈的版本上，累積的下載數字一起消失，救不回來。<b>教訓：</b>已經發出去的東西不要覆蓋，有問題就發新版。</p>
+        </div>
+        <div class="entry book">
+          <div class="entry-top"><span class="name">4　推上去成功了，網站卻還是舊的</span></div>
+          <p class="desc">推送指令回報成功，但網站的建置在後面失敗，沒有人發現。<b>教訓：</b>上線後打開真正的網址，確認看到的是新內容，才算上線。</p>
+        </div>
+      </div>
+      <p class="sec-note">路線二那份出貨前檢查清單的四項，就是從這四個坑來的。</p>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <section class="sec">
+    <div class="sec-head">
+      <h2>完整目錄</h2>
+      <p class="sec-note">上面路線裡的資源都在這裡，另外還有更多。按用途分：工具官方教材、程式底子、方法、上線與安全。</p>
+    </div>
+
+    <div class="group g-ai">
+      <h3>工具官方教材</h3>
+      <p class="sec-note">大部分是英文；官方文件改得很快，以最新版為準，不要依賴一年前的教學影片。</p>
+      <div class="grid">
+        <a class="entry" href="https://academy.claude.com/courses/claude-code-101">
+          <div class="entry-top"><span class="name">Claude Code 101（Anthropic）</span><span class="pill main">主力</span></div>
+          <p class="desc">12 堂、1.5 小時、免費有徽章。從原理到每天的工作節奏，最後帶到 CLAUDE.md、subagents、skills、MCP、hooks。新手的第一站。</p>
+        </a>
+        <a class="entry" href="https://academy.claude.com/courses/claude-101">
+          <div class="entry-top"><span class="name">Claude 101（Anthropic）</span><span class="pill know">值得知道</span></div>
+          <p class="desc">13 堂、2.5 小時。還沒用過 Claude 的人先上這門，再上 Claude Code 101。</p>
+        </a>
+        <a class="entry" href="https://academy.claude.com/courses/claude-code-in-action">
+          <div class="entry-top"><span class="name">Claude Code in Action（Anthropic）</span><span class="pill main">主力</span></div>
+          <p class="desc">9 堂、1 小時。已經會單次下指令的人，學怎麼讓它長時間自己跑、回來怎麼驗收。先修：Git 與命令列。</p>
+        </a>
+        <a class="entry" href="https://code.claude.com/docs/en/quickstart">
+          <div class="entry-top"><span class="name">Claude Code 官方文件：快速入門</span><span class="pill main">主力</span></div>
+          <p class="desc">8 個步驟從安裝到第一次修 bug。沒碰過終端機的人，頁面裡有連到終端機入門。</p>
+        </a>
+        <a class="entry" href="https://code.claude.com/docs/en/best-practices">
+          <div class="entry-top"><span class="name">Claude Code 官方文件：最佳實踐</span><span class="pill main">主力</span></div>
+          <p class="desc">原本是 2025 年 4 月的部落格文章，現在搬進官方文件、跟著新功能持續改寫。</p>
+        </a>
+        <a class="entry" href="https://www.deeplearning.ai/courses/claude-code-a-highly-agentic-coding-assistant">
+          <div class="entry-top"><span class="name">DeepLearning.AI × Anthropic — Claude Code: A Highly Agentic Coding Assistant</span><span class="pill know">值得知道</span></div>
+          <p class="desc">10 支影片約 2 小時，Anthropic 講師用三個實際專案示範。目前免費，但官方註明只在平台測試期間免費。</p>
+        </a>
+        <a class="entry" href="https://academy.openai.com/public/events/codex-for-beginners-wsz3p1tg0r">
+          <div class="entry-top"><span class="name">OpenAI Academy — Codex for Beginners</span><span class="pill know">值得知道</span></div>
+          <p class="desc">OpenAI 官方的 Codex 入門直播重播，標明不需要技術背景，免費。用 GPT 訂閱的人從這裡開始。</p>
+        </a>
+        <a class="entry" href="https://developers.openai.com/codex/cli">
+          <div class="entry-top"><span class="name">Codex CLI 官方文件</span><span class="pill file">備用</span></div>
+          <p class="desc">命令列版的 Codex，需要 ChatGPT 付費方案或 API 額度。</p>
+        </a>
+        <a class="entry" href="https://cursor.com/learn">
+          <div class="entry-top"><span class="name">Cursor Learn</span><span class="pill know">值得知道</span></div>
+          <p class="desc">Cursor 官方的免費課，分 AI 基礎、用代理寫程式、審查與測試三段，寫得淺白，無證書。</p>
+        </a>
+        <a class="entry" href="https://github.com/skills/getting-started-with-github-copilot">
+          <div class="entry-top"><span class="name">GitHub Skills — Getting started with GitHub Copilot</span><span class="pill file">備用</span></div>
+          <p class="desc">不到 1 小時。Copilot 免費方案額度少，做自己的產品很快會用完，適合試用不適合主力。</p>
+        </a>
+        <a class="entry" href="https://www.youtube.com/watch?v=f10jf_PQU2E">
+          <div class="entry-top"><span class="name">傑少 JAY — Claude Code 完整教學：新手必學的 15 個核心觀念</span><span class="pill know">值得知道</span></div>
+          <p class="desc">中文、1 小時 38 分，2026 年 8 月上傳。想先聽中文把觀念建立起來的人看這支。</p>
+        </a>
+      </div>
+    </div>
+
+    <div class="group g-uni">
+      <h3>程式底子：看得懂、退得回去就夠</h3>
+      <p class="sec-note">目標不是自己寫，是 AI 寫完你看得懂它動了什麼、壞了知道去哪裡找。</p>
+      <div class="grid">
+        <a class="entry" href="https://missing.csail.mit.edu/2026/">
+          <div class="entry-top"><span class="name">MIT The Missing Semester 2026</span><span class="pill main">主力</span></div>
+          <p class="desc">9 講、免費。2026 年版新增「打包與出貨」「代理式寫程式」「程式碼品質」。非工程師挑命令列、Git、出貨、代理四講。2020 舊版仍在，不用看。</p>
+        </a>
+        <a class="entry" href="https://github.com/skills/introduction-to-github">
+          <div class="entry-top"><span class="name">GitHub Skills — Introduction to GitHub</span><span class="pill main">主力</span></div>
+          <p class="desc">1 小時、在瀏覽器裡做完。分支、存版本、合併，做完會有一個自己的 GitHub 頁面。</p>
+        </a>
+        <a class="entry" href="https://ocw.aca.ntu.edu.tw/courses/mooc0018">
+          <div class="entry-top"><span class="name">台大 — 用 Python 做商管程式設計（一）（孔令傑）</span><span class="pill main">主力</span></div>
+          <p class="desc">中文、從零開始、5 講，例題是生產、存貨、投資這類商管問題。台大 OCW 版本免費。</p>
+        </a>
+        <a class="entry" href="https://cs50.harvard.edu/python/">
+          <div class="entry-top"><span class="name">Harvard CS50P（Python）</span><span class="pill know">值得知道</span></div>
+          <p class="desc">10 週、每週約 6 小時。在 cs50.harvard.edu 自學完全免費，作業達標還能拿免費證書；在 edX 付費才是付費證書。沒有官方中文字幕。</p>
+        </a>
+        <a class="entry" href="https://github.com/progit/progit2-zh-tw">
+          <div class="entry-top"><span class="name">Pro Git（繁體中文版）</span><span class="pill know">值得知道</span></div>
+          <p class="desc">免費電子書。只要看「開始」和「Git 基礎」兩章。</p>
+        </a>
+        <a class="entry" href="https://developer.mozilla.org/zh-TW/docs/Learn_web_development">
+          <div class="entry-top"><span class="name">MDN — 學習網頁開發（繁體中文）</span><span class="pill know">值得知道</span></div>
+          <p class="desc">做網頁工具的人，想看懂 AI 寫的 HTML／CSS／JavaScript 時查這裡。</p>
+        </a>
+        <a class="entry" href="https://docs.python.org/zh-tw/3.13/tutorial/index.html">
+          <div class="entry-top"><span class="name">Python 官方教學（繁體中文）</span><span class="pill file">備用</span></div>
+          <p class="desc">志工翻譯。當工具書查，不適合當入門教材。</p>
+        </a>
+        <a class="entry" href="https://www.freecodecamp.org/chinese-traditional/">
+          <div class="entry-top"><span class="name">freeCodeCamp（繁體中文站）</span><span class="pill file">備用</span></div>
+          <p class="desc">全免費，但完整全端課程每模組以百小時計。當字典查，不要整套跟。</p>
+        </a>
+        <a class="entry" href="https://csdiy.wiki/">
+          <div class="entry-top"><span class="name">CS 自學指南</span><span class="pill know">值得知道</span></div>
+          <p class="desc">中文社群維護的全球課程目錄（簡體），要補某一塊時先查這裡。AI 地圖也收了。</p>
+        </a>
+      </div>
+    </div>
+
+    <div class="group g-prof">
+      <h3>方法：怎麼跟 AI 一起做軟體</h3>
+      <div class="grid">
+        <a class="entry" href="https://harper.blog/2025/02/16/my-llm-codegen-workflow-atm/">
+          <div class="entry-top"><span class="name">Harper Reed — My LLM codegen workflow atm</span><span class="pill main">主力</span></div>
+          <p class="desc">2025 年 2 月。想法 → 規格 → 計畫 → 照做，全新專案和既有專案各一套。</p>
+        </a>
+        <a class="entry" href="https://simonwillison.net/2025/Mar/11/using-llms-for-code/">
+          <div class="entry-top"><span class="name">Simon Willison — Here's how I use LLMs to help me write code</span><span class="pill main">主力</span></div>
+          <p class="desc">2025 年 3 月，長文。Django 共同作者把 AI 當成「過度自信的搭檔」來用：給清楚規格、自己跑測試。</p>
+        </a>
+        <a class="entry" href="https://www.youtube.com/watch?v=LCEmiRjPEtQ">
+          <div class="entry-top"><span class="name">Andrej Karpathy — Software Is Changing (Again)</span><span class="pill know">值得知道</span></div>
+          <p class="desc">2025 年 6 月 YC 演講，39 分鐘，約 257 萬次觀看。建立觀念：用自然語言描述需求本身就是一種寫程式。沒有實作步驟。</p>
+        </a>
+        <a class="entry" href="https://newsletter.kentbeck.com/p/augmented-coding-beyond-the-vibes">
+          <div class="entry-top"><span class="name">Kent Beck — Augmented Coding: Beyond the Vibes</span><span class="pill know">值得知道</span></div>
+          <p class="desc">2025 年 6 月。區分只看結果和在意程式碼品質兩種做法。部分內容要付費訂閱。</p>
+        </a>
+        <a class="entry" href="https://martinfowler.com/articles/exploring-gen-ai.html">
+          <div class="entry-top"><span class="name">Birgitta Böckeler — Exploring Generative AI</span><span class="pill know">值得知道</span></div>
+          <p class="desc">martinfowler.com 上的系列，2023 年寫到現在，約 30 篇。偏工程師，挑標題看。</p>
+        </a>
+        <a class="entry" href="https://beyond.addy.ie/">
+          <div class="entry-top"><span class="name">Addy Osmani —《Beyond Vibe Coding》</span><span class="pill file">備用</span></div>
+          <p class="desc">2025 年出版的書，要付費。作者網站有幾篇免費導讀。</p>
+        </a>
+      </div>
+    </div>
+
+    <div class="group g-hub">
+      <h3>上線與安全</h3>
+      <div class="grid">
+        <a class="entry" href="https://docs.github.com/en/pages/quickstart">
+          <div class="entry-top"><span class="name">GitHub Pages 快速入門</span><span class="pill main">主力</span></div>
+          <p class="desc">靜態網頁免費放上網的最短路徑。</p>
+        </a>
+        <a class="entry" href="https://developers.cloudflare.com/pages/platform/limits/">
+          <div class="entry-top"><span class="name">Cloudflare Pages</span><span class="pill know">值得知道</span></div>
+          <p class="desc">另一個免費放網頁的選擇，免費方案每月 500 次建置。GitHub Pages 不夠用時再換。</p>
+        </a>
+        <a class="entry" href="https://vercel.com/docs/plans/hobby">
+          <div class="entry-top"><span class="name">Vercel Hobby 方案</span><span class="pill file">備用</span></div>
+          <p class="desc">免費，但官方明訂只限個人、非商業用途；拿來接案或收費就違規。</p>
+        </a>
+        <a class="entry" href="https://docs.github.com/en/code-security/secret-scanning/introduction/about-push-protection">
+          <div class="entry-top"><span class="name">GitHub — 推送防護（push protection）</span><span class="pill main">主力</span></div>
+          <p class="desc">你要把含金鑰的程式推上去之前就先擋下來。</p>
+        </a>
+        <a class="entry" href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository">
+          <div class="entry-top"><span class="name">GitHub — 從儲存庫移除敏感資料</span><span class="pill main">主力</span></div>
+          <p class="desc">已經推上去了怎麼辦。第一步是換掉外洩的金鑰，清歷史是之後的事。</p>
+        </a>
+        <a class="entry" href="https://genai.owasp.org/resource/owasp-top-10-for-llm-applications-2025/">
+          <div class="entry-top"><span class="name">OWASP Top 10 for LLM Applications 2025</span><span class="pill know">值得知道</span></div>
+          <p class="desc">產品接了 AI 才需要。第 1 名提示注入、第 2 名敏感資訊外洩。</p>
+        </a>
+        <a class="entry" href="https://owasp.org/Top10/2025/">
+          <div class="entry-top"><span class="name">OWASP Top 10:2025</span><span class="pill file">備用</span></div>
+          <p class="desc">網頁應用的十大風險，2026 年 1 月定版。術語多，要深入時再看。</p>
+        </a>
+        <a class="entry" href="https://blog.gitguardian.com/the-state-of-secrets-sprawl-2026/">
+          <div class="entry-top"><span class="name">GitGuardian — State of Secrets Sprawl 2026</span><span class="pill know">值得知道</span></div>
+          <p class="desc">上面那段數字的出處。</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="group g-find">
+      <h3>其他自學地圖</h3>
+      <div class="grid">
+        <a class="entry" href="/courses/ai/">
+          <div class="entry-top"><span class="name">AI 自學課程地圖</span></div>
+          <p class="desc">想懂 AI 本身、或開發接了 AI 的應用，看這張。「開發 AI 應用」那條路線和這裡的路線二都從 Missing Semester 起步。</p>
+        </a>
+        <a class="entry" href="/courses/investing/">
+          <div class="entry-top"><span class="name">投資自學課程地圖</span></div>
+          <p class="desc">想把投資判斷寫成程式的人，那張的第五層講量化、回測與下單。</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <a class="back" href="/courses/">← 回自學地圖</a>
+
+  <footer>
+    <p><b>標記說明</b> —— <b>主力</b>：現在就會用到。<b>值得知道</b>：知道它存在，需要時再進去。<b>備用</b>：不建議主動花時間，列出來是為了完整。</p>
+    <p>這類清單更新於 2026 年 10 月 1 日，發現死連結或該補的資源，麻煩告訴我：<a href="mailto:contact@fervela.ai">contact@fervela.ai</a></p>
+    <div class="fnote">作品以 <b>Fervela.ai</b> 為名發佈。© 2026 Fervela.ai</div>
+  </footer>
+
+</div>
+</body>
+</html>
