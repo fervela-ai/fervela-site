@@ -55,5 +55,12 @@
     "date": "2026-10-01",
     "desc": "不用先當工程師。先學會三件事：把要做的東西講清楚、讓 AI 動手、自己驗收。三條路線各附一個做得出來的產出，加上本站自己踩過的四個坑——它們看起來都像成功。",
     "title_en": "A map for building software with AI"
+  },
+  "05-founding.md": {
+    "publish": true,
+    "order": 8,
+    "date": "2026-10-06",
+    "desc": "2026 年 10 月 6 日，雲帆研創有限公司正式核准設立。刻章才知道一間公司有好幾組章、國慶日政府不上班不能核准、一天限額讓 168,888 變成 88,888，最後到紫南宮求金雞，半夜開完公司信箱才收工。",
+    "title_en": "Founding diary: the week I started a company"
   }
 }
