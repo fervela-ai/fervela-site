@@ -116,7 +116,7 @@ PAGE = '''<!doctype html>
   <a class="back" href="/">← 回首頁</a>
   <footer>
     <div>問題回報與合作洽詢：<a href="mailto:contact@fervela.ai">contact@fervela.ai</a></div>
-    <div class="fnote">作品以 <b>Fervela.ai</b> 為名發佈。© 2026 Fervela.ai</div>
+    <div class="fnote">作品以 <b>Fervela.ai</b> 為名發佈。© 2026 雲帆研創有限公司（Fervela.ai）</div>
   </footer>
 </div>
 </body>
@@ -158,7 +158,7 @@ INDEX = '''<!doctype html>
   <a class="back" href="/">← 回首頁</a>
   <footer>
     <div>問題回報與合作洽詢：<a href="mailto:contact@fervela.ai">contact@fervela.ai</a></div>
-    <div class="fnote">作品以 <b>Fervela.ai</b> 為名發佈。© 2026 Fervela.ai</div>
+    <div class="fnote">作品以 <b>Fervela.ai</b> 為名發佈。© 2026 雲帆研創有限公司（Fervela.ai）</div>
   </footer>
 </div>
 </body>
