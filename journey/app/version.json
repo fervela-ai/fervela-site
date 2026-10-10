@@ -1,0 +1,11 @@
+{
+  "product": "feihong",
+  "channel": "preview",
+  "versionName": "0.8.49",
+  "versionCode": 62,
+  "apk": "https://github.com/fervela-ai/fervela-site/releases/download/feihong-0.8.49-62/Feihong-0.8.49-friend.apk",
+  "sha256": "f4b394a0fc538affca4180769518272547992417da35df15e9d3a251a5de4257",
+  "sizeBytes": 246551293,
+  "notes": "0.8.49：好玩度（臺南不再一直廟、溪頭不再全散步）、手帳首頁、返回一律回上一頁、森林遊樂區挑景點不空白、文字更清楚、沒照片改類型圖示、重排更順。安裝前請先清出約 1GB 手機空間。",
+  "publishedAt": "2026-10-10T12:44:28+08:00"
+}
