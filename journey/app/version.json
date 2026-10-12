@@ -1,11 +1,11 @@
 {
   "product": "feihong",
   "channel": "preview",
-  "versionName": "0.8.49",
-  "versionCode": 62,
-  "apk": "https://github.com/fervela-ai/fervela-site/releases/download/feihong-0.8.49-62/Feihong-0.8.49-friend.apk",
-  "sha256": "f4b394a0fc538affca4180769518272547992417da35df15e9d3a251a5de4257",
-  "sizeBytes": 246551293,
-  "notes": "0.8.49：好玩度（臺南不再一直廟、溪頭不再全散步）、手帳首頁、返回一律回上一頁、森林遊樂區挑景點不空白、文字更清楚、沒照片改類型圖示、重排更順。安裝前請先清出約 1GB 手機空間。",
-  "publishedAt": "2026-10-10T12:44:28+08:00"
+  "versionName": "0.9.4",
+  "versionCode": 67,
+  "apk": "https://github.com/fervela-ai/fervela-site/releases/download/feihong-0.9.4-67/Feihong-0.9.4-friend.apk",
+  "sha256": "474e731266fdc71d3b8bfdb8c51187474e6b74a6cbcc10b83110360bc4988e3b",
+  "sizeBytes": 258954687,
+  "notes": "0.9.4：大改版。挑景點可以標「想去／不要」，想去的優先排、不要的絕不排；點一站先看介紹再調整；選住宿改成地圖為主；沒照片的地方改用插畫；景點可以改到上午／下午／晚上或第幾天；多天行程順路不繞回頭；奧萬大、太平山等森林遊樂區一定排進園區。新增時光膠囊（埋一句話給未來的自己）、旅行明信片、分享圖可直接存到相簿、鄉鎮四階（點亮→踏足→識途→深遊）。另有使用條款與隱私說明、大卡左右滑更順。安裝前請先清出約 1GB 手機空間。",
+  "publishedAt": "2026-10-12T21:42:27+08:00"
 }
