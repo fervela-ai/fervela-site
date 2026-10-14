@@ -1,11 +1,11 @@
 {
   "product": "feihong",
   "channel": "preview",
-  "versionName": "0.9.4",
-  "versionCode": 67,
-  "apk": "https://github.com/fervela-ai/fervela-site/releases/download/feihong-0.9.4-67/Feihong-0.9.4-friend.apk",
-  "sha256": "474e731266fdc71d3b8bfdb8c51187474e6b74a6cbcc10b83110360bc4988e3b",
-  "sizeBytes": 258954687,
-  "notes": "0.9.4：大改版。挑景點可以標「想去／不要」，想去的優先排、不要的絕不排；點一站先看介紹再調整；選住宿改成地圖為主；沒照片的地方改用插畫；景點可以改到上午／下午／晚上或第幾天；多天行程順路不繞回頭；奧萬大、太平山等森林遊樂區一定排進園區。新增時光膠囊（埋一句話給未來的自己）、旅行明信片、分享圖可直接存到相簿、鄉鎮四階（點亮→踏足→識途→深遊）。另有使用條款與隱私說明、大卡左右滑更順。安裝前請先清出約 1GB 手機空間。",
-  "publishedAt": "2026-10-12T21:42:27+08:00"
+  "versionName": "0.9.7",
+  "versionCode": 70,
+  "apk": "https://github.com/fervela-ai/fervela-site/releases/download/feihong-0.9.7-70/Feihong-0.9.7-friend.apk",
+  "sha256": "b9bd01fb88578f796627a2060e9f0fe8abb8db742b44293fc8eb196c317d7459",
+  "sizeBytes": 258989945,
+  "notes": "0.9.7：人生軌跡只突顯特地出遊（上班、出差的地方自動收起，長按可改）；花蓮排得到太魯閣；不再漏排午餐；溫泉不排一大早、看海看景在天黑前；封閉的景點不排（依太魯閣國家公園公告）；燈塔、觀景台等熱門看景點更常排進行程；景點分類更準。安裝前請先清出約 1GB 手機空間。",
+  "publishedAt": "2026-10-14T10:52:42+08:00"
 }
