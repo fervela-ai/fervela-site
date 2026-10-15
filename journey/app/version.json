@@ -1,11 +1,11 @@
 {
   "product": "feihong",
   "channel": "preview",
-  "versionName": "0.9.7",
-  "versionCode": 70,
-  "apk": "https://github.com/fervela-ai/fervela-site/releases/download/feihong-0.9.7-70/Feihong-0.9.7-friend.apk",
-  "sha256": "b9bd01fb88578f796627a2060e9f0fe8abb8db742b44293fc8eb196c317d7459",
-  "sizeBytes": 258989945,
-  "notes": "0.9.7：人生軌跡只突顯特地出遊（上班、出差的地方自動收起，長按可改）；花蓮排得到太魯閣；不再漏排午餐；溫泉不排一大早、看海看景在天黑前；封閉的景點不排（依太魯閣國家公園公告）；燈塔、觀景台等熱門看景點更常排進行程；景點分類更準。安裝前請先清出約 1GB 手機空間。",
-  "publishedAt": "2026-10-14T10:52:42+08:00"
+  "versionName": "0.9.11",
+  "versionCode": 74,
+  "apk": "https://github.com/fervela-ai/fervela-site/releases/download/feihong-0.9.11-74/Feihong-0.9.11-friend.apk",
+  "sha256": "69cd600773cc09f5a65bef1904fd17c4d997cc1bf399d9f331c8b58ef7934e3e",
+  "sizeBytes": 259351417,
+  "notes": "0.9.11：搭大眾運輸會告訴你怎麼去（搭到哪一站、再怎麼轉）；排不滿的時段改成附近走走，不硬塞冷門景點；晚餐一定排進行程；勾選的景點會排在同一區那天；看海看景在日落前結束；可以匯出備份，換手機也帶得走；更新前會檢查安裝檔是不是我們發的；新圖示和新的小飛鴻。安裝前請先清出約 1GB 手機空間。",
+  "publishedAt": "2026-10-16T02:24:54+08:00"
 }
