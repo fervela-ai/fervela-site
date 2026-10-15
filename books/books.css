@@ -1,0 +1,43 @@
+/* 萬卷產品頁（V5 暖白有人味）：與 /assets/v5/v5.css 並用，只供 /books/index.html */
+.breadcrumb{display:flex;gap:8px;font-size:13px;color:var(--ink2);padding:10px 0}
+.breadcrumb a{text-decoration:underline;text-underline-offset:3px}
+.bhero{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:48px;align-items:center;padding:36px 0 24px}
+.bcopy{min-width:0;overflow-wrap:anywhere}
+.eyebrow{display:flex;align-items:center;gap:12px;font-size:13px;letter-spacing:.1em;color:var(--ink);margin:0 0 10px}
+.bicon{width:40px;height:40px;border-radius:10px;flex:none;object-fit:contain}
+.badge{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:var(--ink);background:#e9f1ee;border:1px solid var(--line);border-radius:999px;padding:4px 12px;margin:0 0 12px}
+.badge i{width:8px;height:8px;border-radius:50%;background:#2f9e7a;display:inline-block}
+.bcopy h1{font-size:clamp(52px,6vw,80px);margin:0 0 8px;line-height:1.15}
+.bcopy h2{font-size:clamp(22px,2.4vw,34px);line-height:1.4;margin:0 0 14px}
+.bcopy .lead{font-size:clamp(15px,1.2vw,17px);line-height:1.9;margin:0 0 22px;color:var(--ink)}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.btn.ghost{background:rgba(255,253,249,.85);color:var(--ink);border:1.5px solid var(--ink)}
+.btn.ghost:hover{background:#fff}
+.platform{margin:14px 0 0;font-size:13px;color:var(--ink2)}
+.bvisual{min-width:0;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px;box-shadow:0 10px 32px rgba(14,42,59,.10)}
+.bvisual img{width:100%;height:auto;border-radius:10px;background:#e8dfcc}
+.books-play{padding:0}
+.books-play-intro{text-align:center;padding:64px 0 36px}
+.books-play-intro h2{white-space:pre-line;margin:0 0 20px}
+.books-play-intro p{text-wrap:balance;font-family:var(--serif);font-size:clamp(15px,1.5vw,19px);line-height:2;margin:0 auto;max-width:44em;color:var(--ink)}
+.books-appeal{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.books-appeal article{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 10px 22px;box-shadow:0 2px 10px rgba(14,42,59,.04);min-width:0}
+.books-appeal article img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;object-position:top;border-radius:8px;background:#e8dfcc}
+.atxt{padding:14px 14px 0}
+.books-appeal h3{font-family:var(--serif);font-weight:800;font-size:22px;margin:0 0 8px;color:var(--ink);line-height:1.35}
+.books-appeal p{font-size:15px;line-height:1.8;color:var(--ink2);margin:0;overflow-wrap:anywhere}
+.bcta{margin-top:56px;padding:76px 0}
+.bcta h2{overflow-wrap:anywhere}
+@media(max-width:900px){
+ .bhero{grid-template-columns:minmax(0,1fr);gap:22px;padding:18px 0 8px}
+ .bcopy h1{font-size:clamp(46px,13vw,60px)}
+ .bcopy h2{font-size:24px}.bcopy .lead{font-size:15px}
+ .hero-actions .btn{width:100%;max-width:340px;justify-content:center}
+ .books-play-intro{padding:24px 0 20px}
+ .books-play-intro h2{font-size:clamp(26px,7.5vw,34px)}
+ .books-play-intro p{font-size:15px;line-height:1.9}
+ .books-appeal{grid-template-columns:minmax(0,1fr);gap:14px}
+ .bcta{padding:48px 0;margin-top:40px}
+}
+html,body{max-width:100%}
+.fq{white-space:pre-line;font-family:var(--serif);font-weight:700;font-size:18px;margin:14px 0 6px}.footer .top{display:inline-block;padding:8px 4px;font-size:14px;text-decoration:underline;text-underline-offset:3px}
