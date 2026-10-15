@@ -1,0 +1,56 @@
+/* 實踐筆記：分類標籤、卡片網格（V5 暖白）。分類色：淡藍／淡暖橘／淡青綠 */
+:root{--c-discover:#7fa6dc;--c-practice:#e39a58;--c-map:#5fb7a3;--t-discover:#3f6aa3;--t-practice:#a85f1f;--t-map:#2f7f6e}
+.dot{display:inline-block;width:11px;height:11px;border-radius:50%;flex:none}
+.dot.discover{background:var(--c-discover)}.dot.practice{background:var(--c-practice)}.dot.map{background:var(--c-map)}
+.nt{padding-bottom:20px}
+.nt-head{text-align:center;padding:64px 0 8px}
+.nt-head h1{font-size:clamp(44px,6vw,72px);margin:0 0 14px}
+.nt-head p{margin:0;font-family:var(--serif);font-size:clamp(17px,1.8vw,22px);color:var(--ink2)}
+.nt-tabs{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:34px 0 34px}
+.nt-tab{display:inline-flex;align-items:center;gap:9px;min-height:48px;padding:0 26px;border-radius:999px;border:1px solid var(--line);background:var(--card);font-family:var(--serif);font-weight:700;font-size:17px;color:var(--ink);transition:background .15s,color .15s}
+.nt-tab:hover{background:#f3ecdd}
+.nt-tab.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.nt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.nt-card{display:block;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 2px 10px rgba(14,42,59,.04);transition:box-shadow .2s,transform .2s}
+.nt-card[hidden]{display:none}
+.nt-card:hover{box-shadow:0 8px 24px rgba(14,42,59,.12);transform:translateY(-2px)}
+.nt-card picture{display:block}
+.nt-card img{width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;background:#e8dfcc}
+.nt-body{padding:16px 20px 22px}
+.nt-label{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;font-weight:700}
+.nt-label.discover{color:var(--t-discover)}.nt-label.practice{color:var(--t-practice)}.nt-label.map{color:var(--t-map)}
+.nt-body h2{font-size:20px;line-height:1.45;margin:10px 0 8px;letter-spacing:0}
+.nt-body time{display:block;font-size:13.5px;color:var(--ink2)}
+.nt-body p{margin:10px 0 0;font-size:14.5px;line-height:1.65;color:var(--ink2);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.nt-empty{text-align:center;padding:56px 16px 48px;background:var(--card);border:1px dashed var(--line);border-radius:14px}
+.nt-empty[hidden]{display:none}
+.nt-empty p{margin:0 0 14px;font-family:var(--serif);font-size:20px;font-weight:700}
+.nt-empty a{font-weight:500;border-bottom:1px solid var(--ink);padding:6px 0}
+/* 首頁：三張分類大卡＋最新清單 */
+.cats{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.cat{display:block;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 2px 10px rgba(14,42,59,.04);transition:box-shadow .2s,transform .2s}
+.cat:hover{box-shadow:0 8px 24px rgba(14,42,59,.12);transform:translateY(-2px)}
+.cat picture{display:block}
+.cat img{width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;background:#e8dfcc}
+.cat-b{padding:16px 22px 22px}
+.cat-b h3{display:flex;align-items:center;gap:10px;font-family:var(--serif);font-weight:800;font-size:23px;margin:0 0 6px}
+.cat-b p{margin:0 0 14px;font-size:15px;color:var(--ink2);line-height:1.5}
+.cat-b .go{font-weight:700;font-size:15px}
+.latest-h{font-family:var(--serif);font-weight:800;font-size:22px;margin:38px 0 14px}
+.latest{display:flex;flex-direction:column;gap:10px}
+.lt{display:flex;align-items:center;gap:16px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 20px 10px 10px;transition:box-shadow .2s}
+.lt:hover{box-shadow:0 6px 18px rgba(14,42,59,.1)}
+.lt picture{flex:none;width:112px}
+.lt img{width:112px;height:72px;object-fit:cover;border-radius:8px;background:#e8dfcc}
+.lt span.t{flex:1;font-family:var(--serif);font-weight:700;font-size:18px;line-height:1.45}
+.lt .chev{display:block}
+@media(max-width:900px){
+ .nt-head{padding:36px 0 4px}
+ .nt-tabs{gap:8px;margin:22px 0 22px}.nt-tab{padding:0 16px;font-size:15px;min-height:44px}
+ .nt-grid{grid-template-columns:1fr;gap:14px}
+ .nt-body h2{font-size:19px}
+ .cats{grid-template-columns:1fr;gap:12px}
+ .cat{display:flex;align-items:center}.cat picture{width:38%;flex:none}.cat img{height:100%;aspect-ratio:auto;min-height:112px}
+ .cat-b{padding:12px 14px}.cat-b h3{font-size:19px}.cat-b p{font-size:13.5px;margin-bottom:8px}
+ .lt{padding:8px 14px 8px 8px;gap:12px}.lt picture,.lt img{width:84px}.lt img{height:56px}.lt span.t{font-size:15.5px}
+}

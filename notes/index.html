@@ -2,78 +2,138 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="utf-8">
-<link rel="icon" type="image/png" href="/assets/fervela-icon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>筆記 — Fervela.ai</title>
-<meta name="description" content="實作過程的紀錄——怎麼做、為什麼那樣選、哪裡踩坑，以及事後回頭看哪些判斷是錯的。">
-<link rel="stylesheet" href="style.css">
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"9791694bcfb64758948d79fecdce88b1","spa":false}'></script></head>
-<body data-lang="zh">
-<div class="topbar"><div class="wrap">
-    <a class="brand" href="/"><span class="tmark"><svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><rect width="120" height="120" rx="26" fill="#ffffff"/><g color="#008B8B" transform="translate(6 6) scale(0.9)"><g transform="translate(2 14) scale(.88)">
-      <path d="M60 8C34 10 14 30 13 55c-2 28 18 50 48 54 21 3 41-8 48-27-7 11-22 18-39 17-28-1-45-19-44-42 1-23 15-41 34-49Z" fill="currentColor"/>
-      <path d="m66 31-30 54 27-7 3-47Z" fill="currentColor"/>
-      <path d="m71 31 0 50 16-8Z" fill="currentColor" opacity=".9"/>
-      <path d="M69 27v56" stroke="currentColor" stroke-width="1.25"/>
-      <path d="M29 82c12 8 25 11 39 10-12 4-28 2-41-5l2-5Z" fill="currentColor"/>
-      <path d="M78 70c5-5 12-3 13 3 5-5 13-1 12 6 5-1 8 3 7 8-1 7-8 11-16 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M27 84c19 10 43 13 65 6 7-2 12-6 16-12-2 8-8 14-17 18-19 8-45 6-59-3-3-2-5-6-5-9Z" fill="#fff" opacity=".94"/>
-      <path d="M25 87c20 10 45 13 67 5 7-2 12-6 16-11-3 8-9 14-18 18-19 7-44 5-58-4-4-2-6-5-7-8Z" fill="currentColor"/>
-      <path d="M31 88c18 7 39 8 56 2-14 9-38 10-56 2Z" fill="#fff" opacity=".92"/>
-      <path d="M20 85c14 4 27 3 39-2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
-      </g>
-      <path d="m84 7 2.6 8.4L95 18l-8.4 2.6L84 29l-2.6-8.4L73 18l8.4-2.6L84 7Z" fill="#F5A623"/></g></svg></span><span class="tname">Fervela.ai</span></a>
-    <a class="tlink" href="/notes/">筆記</a>
-  </div></div>
-<div class="wrap">
-  <div class="sec" style="margin-top:30px">
-    <div class="sech">筆記</div>
-    <div class="card">
-      <h2><a href="founding.html" style="color:inherit;text-decoration:none">【雲帆研創成立日記】從刻章、求金雞到半夜開通公司信箱：成立公司的這一週</a></h2>
-      <div class="pinfo">2026-10-06</div>
-      <p>2026 年 10 月 6 日，雲帆研創有限公司正式核准設立。刻章才知道一間公司有好幾組章、國慶日政府不上班不能核准、一天限額讓 168,888 變成 88,888，最後到紫南宮求金雞，半夜開完公司信箱才收工。</p>
-    </div>
-    <div class="card">
-      <h2><a href="/courses/ai-coding/" style="color:inherit;text-decoration:none">用 AI 寫軟體自學地圖</a></h2>
-      <div class="pinfo">2026-10-01</div>
-      <p>不用先當工程師。先學會三件事：把要做的東西講清楚、讓 AI 動手、自己驗收。三條路線各附一個做得出來的產出，加上本站自己踩過的四個坑——它們看起來都像成功。</p>
-    </div>
-    <div class="card">
-      <h2><a href="wanjuan.html" style="color:inherit;text-decoration:none">不會寫程式的我，三天做出一套讀書軟體，是怎麼做的？</a></h2>
-      <div class="pinfo">2026-09-20</div>
-      <p>朋友問我萬卷從頭到尾是怎麼做的。一萬多行程式，我一行都沒寫也沒看，那三天我到底做了什麼？先開會、先拿四本真的書去撞，還有一個讓框從十九中六變成十九全中的外行問題。</p>
-    </div>
-    <div class="card">
-      <h2><a href="/courses/us-brokers/" style="color:inherit;text-decoration:none">美股券商怎麼選：複委託、Firstrade、IBKR</a></h2>
-      <div class="pinfo">2026-09-13</div>
-      <p>想在美股掛移動停損、想自己寫交易程式，台灣的複委託做得到嗎？逐家查完 15 家之後，把元大、Firstrade、IBKR 放在同一張表上比：功能、手續費、遺產稅。</p>
-    </div>
-    <div class="card">
-      <h2><a href="/courses/investing/" style="color:inherit;text-decoration:none">投資自學課程地圖</a></h2>
-      <div class="pinfo">2026-09-11</div>
-      <p>「8 月 CPI，市場預期月增 0.4%，這是九月最關鍵的數字」—— 看不懂這句話的話，這張地圖從這裡開始。從總體經濟到自己寫回測程式，分五層排的免費資源。</p>
-    </div>
-    <div class="card">
-      <h2><a href="/courses/ai/" style="color:inherit;text-decoration:none">AI 自學課程地圖</a></h2>
-      <div class="pinfo">2026-09-11</div>
-      <p>想自學 AI，第一個問題不是「要看哪門課」，是「該去哪裡找課」。台灣與全球的開放式課程入口都在這裡，按實用性排序，每個站都標了定位和該不該花時間。</p>
-    </div>
-    <div class="card">
-      <h2><a href="lobster.html" style="color:inherit;text-decoration:none">自己養一隻 AI 助理，現在划算了嗎？</a></h2>
-      <div class="pinfo">2026-09-03</div>
-      <p>去年底第一次自架 AI 助理，兩天兩夜失敗。今年二月做好了，但 API 帳單太貴，五月它掛掉我反而鬆一口氣。第三次終於不用再多付一份錢。</p>
-    </div>
-    <div class="card">
-      <h2><a href="interrupt.html" style="color:inherit;text-decoration:none">AI 董事會全自動幫我找答案，可行嗎？</a></h2>
-      <div class="pinfo">2026-08-29</div>
-      <p>我想讓幾家 AI 坐上同一張桌子，吵完給我結論，我去做別的事。做出來之後才發現：沒有我參與，那份報告我一件事都用不上。</p>
-    </div>
+<title>實踐筆記 — Fervela.ai</title>
+<meta name="description" content="把做軟體、用 AI 的過程寫下來：沿途發現、實踐歷程、學習地圖。">
+<meta name="theme-color" content="#faf6ef">
+<meta property="og:title" content="實踐筆記 — Fervela.ai">
+<meta property="og:description" content="把做軟體、用 AI 的過程寫下來：沿途發現、實踐歷程、學習地圖。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://fervela.ai/notes/">
+<meta property="og:image" content="https://fervela.ai/assets/v5/og-home.jpg">
+<link rel="icon" type="image/png" href="/assets/fervela-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/v5/v5.css">
+<link rel="stylesheet" href="/assets/v5/notes.css">
+<script src="/assets/v5/v5.js" defer></script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"9791694bcfb64758948d79fecdce88b1","spa":false}'></script>
+</head>
+<body id="top">
+<a class="skip" href="#main">跳至內容</a>
+<header class="header"><div class="header-in"><a class="brand" href="/" aria-label="Fervela.ai 首頁"><img class="logo" src="/assets/logo-a.svg" width="34" height="34" alt=""><span>Fervela.ai</span></a><button class="menu" aria-label="開啟選單" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button><nav id="nav" aria-label="主選單"><ul><li><a href="/#work">作品</a></li><li><a href="/#journal">實踐筆記</a></li><li><a href="mailto:contact@fervela.ai">聊聊你的想法</a></li></ul></nav></div></header>
+<main id="main" class="wrap nt">
+  <section class="nt-head">
+    <h1>實踐筆記</h1>
+    <p>把做軟體、用 AI 的過程寫下來。</p>
+  </section>
+  <div class="nt-tabs" role="tablist" aria-label="筆記分類">
+    <a class="nt-tab" role="tab" href="#" data-cat="all">全部</a>
+    <a class="nt-tab" role="tab" href="#discover" data-cat="discover"><i class="dot discover"></i>沿途發現</a>
+    <a class="nt-tab" role="tab" href="#practice" data-cat="practice"><i class="dot practice"></i>實踐歷程</a>
+    <a class="nt-tab" role="tab" href="#map" data-cat="map"><i class="dot map"></i>學習地圖</a>
   </div>
-  <a class="back" href="/">← 回首頁</a>
-  <footer>
-    <div>問題回報與合作洽詢：<a href="mailto:contact@fervela.ai">contact@fervela.ai</a></div>
-    <div class="fnote">作品以 <b>Fervela.ai</b> 為名發佈。© 2026 雲帆研創有限公司（Fervela.ai）</div>
-  </footer>
-</div>
+  <div class="nt-grid" id="grid">
+    <a class="nt-card" href="founding.html" data-cat="practice">
+      <picture><source srcset="/assets/v5/note1.webp" type="image/webp"><img src="/assets/v5/note1.jpg" alt="" width="1200" height="800" loading="lazy" decoding="async"></picture>
+      <div class="nt-body">
+        <span class="nt-label practice"><i class="dot practice"></i>實踐歷程</span>
+        <h2>【雲帆研創成立日記】從刻章、求金雞到半夜開通公司信箱：成立公司的這一週</h2>
+        <time>2026.10.06</time>
+        <p>2026 年 10 月 6 日，雲帆研創有限公司正式核准設立。刻章才知道一間公司有好幾組章、國慶日政府不上班不能核准、一天限額讓 168,888 變成 88,888，最後到紫南宮求金雞，半夜開完公司信箱才收工。</p>
+      </div>
+    </a>
+    <a class="nt-card" href="/courses/ai-coding/" data-cat="map">
+      <picture><source srcset="/assets/v5/note2.webp" type="image/webp"><img src="/assets/v5/note2.jpg" alt="" width="1200" height="800" loading="lazy" decoding="async"></picture>
+      <div class="nt-body">
+        <span class="nt-label map"><i class="dot map"></i>學習地圖</span>
+        <h2>用 AI 寫軟體自學地圖</h2>
+        <time>2026.10.01</time>
+        <p>不用先當工程師。先學會三件事：把要做的東西講清楚、讓 AI 動手、自己驗收。三條路線各附一個做得出來的產出，加上本站自己踩過的四個坑——它們看起來都像成功。</p>
+      </div>
+    </a>
+    <a class="nt-card" href="wanjuan.html" data-cat="practice">
+      <picture><source srcset="/assets/v5/note3.webp" type="image/webp"><img src="/assets/v5/note3.jpg" alt="" width="1200" height="800" loading="lazy" decoding="async"></picture>
+      <div class="nt-body">
+        <span class="nt-label practice"><i class="dot practice"></i>實踐歷程</span>
+        <h2>不會寫程式的我，三天做出一套讀書軟體，是怎麼做的？</h2>
+        <time>2026.09.20</time>
+        <p>朋友問我萬卷從頭到尾是怎麼做的。一萬多行程式，我一行都沒寫也沒看，那三天我到底做了什麼？先開會、先拿四本真的書去撞，還有一個讓框從十九中六變成十九全中的外行問題。</p>
+      </div>
+    </a>
+    <a class="nt-card" href="/courses/us-brokers/" data-cat="map">
+      <picture><source srcset="/assets/v5/step1.webp" type="image/webp"><img src="/assets/v5/step1.jpg" alt="" width="1200" height="800" loading="lazy" decoding="async"></picture>
+      <div class="nt-body">
+        <span class="nt-label map"><i class="dot map"></i>學習地圖</span>
+        <h2>美股券商怎麼選：複委託、Firstrade、IBKR</h2>
+        <time>2026.09.13</time>
+        <p>想在美股掛移動停損、想自己寫交易程式，台灣的複委託做得到嗎？逐家查完 15 家之後，把元大、Firstrade、IBKR 放在同一張表上比：功能、手續費、遺產稅。</p>
+      </div>
+    </a>
+    <a class="nt-card" href="/courses/investing/" data-cat="map">
+      <picture><source srcset="/assets/v5/step2.webp" type="image/webp"><img src="/assets/v5/step2.jpg" alt="" width="1200" height="800" loading="lazy" decoding="async"></picture>
+      <div class="nt-body">
+        <span class="nt-label map"><i class="dot map"></i>學習地圖</span>
+        <h2>投資自學課程地圖</h2>
+        <time>2026.09.11</time>
+        <p>「8 月 CPI，市場預期月增 0.4%，這是九月最關鍵的數字」—— 看不懂這句話的話，這張地圖從這裡開始。從總體經濟到自己寫回測程式，分五層排的免費資源。</p>
+      </div>
+    </a>
+    <a class="nt-card" href="/courses/ai/" data-cat="map">
+      <picture><source srcset="/assets/v5/step3.webp" type="image/webp"><img src="/assets/v5/step3.jpg" alt="" width="1200" height="800" loading="lazy" decoding="async"></picture>
+      <div class="nt-body">
+        <span class="nt-label map"><i class="dot map"></i>學習地圖</span>
+        <h2>AI 自學課程地圖</h2>
+        <time>2026.09.11</time>
+        <p>想自學 AI，第一個問題不是「要看哪門課」，是「該去哪裡找課」。台灣與全球的開放式課程入口都在這裡，按實用性排序，每個站都標了定位和該不該花時間。</p>
+      </div>
+    </a>
+    <a class="nt-card" href="lobster.html" data-cat="practice">
+      <picture><source srcset="/assets/v5/hero.webp" type="image/webp"><img src="/assets/v5/hero.jpg" alt="" width="1200" height="800" loading="lazy" decoding="async"></picture>
+      <div class="nt-body">
+        <span class="nt-label practice"><i class="dot practice"></i>實踐歷程</span>
+        <h2>自己養一隻 AI 助理，現在划算了嗎？</h2>
+        <time>2026.09.03</time>
+        <p>去年底第一次自架 AI 助理，兩天兩夜失敗。今年二月做好了，但 API 帳單太貴，五月它掛掉我反而鬆一口氣。第三次終於不用再多付一份錢。</p>
+      </div>
+    </a>
+    <a class="nt-card" href="interrupt.html" data-cat="practice">
+      <picture><source srcset="/assets/v5/note1.webp" type="image/webp"><img src="/assets/v5/note1.jpg" alt="" width="1200" height="800" loading="lazy" decoding="async"></picture>
+      <div class="nt-body">
+        <span class="nt-label practice"><i class="dot practice"></i>實踐歷程</span>
+        <h2>AI 董事會全自動幫我找答案，可行嗎？</h2>
+        <time>2026.08.29</time>
+        <p>我想讓幾家 AI 坐上同一張桌子，吵完給我結論，我去做別的事。做出來之後才發現：沒有我參與，那份報告我一件事都用不上。</p>
+      </div>
+    </a>
+  </div>
+  <div class="nt-empty" id="empty" hidden>
+    <p>第一則沿途發現，很快會出現在這裡。</p>
+    <a href="/timeline/">先看 AI 的重要時刻 →</a>
+  </div>
+</main>
+<footer class="footer"><div class="footer-in"><a class="brand" href="/" aria-label="Fervela.ai 首頁"><img class="logo" src="/assets/logo-a.svg" width="34" height="34" alt=""><span>Fervela.ai</span></a><p class="tag">Research. Create. Share.</p><div class="flinks"><a href="/#work">作品</a><a href="/#journal">實踐筆記</a><a href="mailto:contact@fervela.ai">聊聊你的想法</a></div><p class="copy">© 2026 雲帆研創有限公司（Fervela.ai）　用心設計的好軟體，解決生活的真問題。</p></div></footer>
+<script>
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('.nt-tab')),
+      cards=[].slice.call(document.querySelectorAll('.nt-card')),
+      empty=document.getElementById('empty'),
+      valid=["discover", "practice", "map"];
+  function show(c){
+    if(c!=='all'&&valid.indexOf(c)<0)c='all';
+    var n=0;
+    cards.forEach(function(el){var on=c==='all'||el.dataset.cat===c;el.hidden=!on;if(on)n++});
+    tabs.forEach(function(t){var on=t.dataset.cat===c;t.classList.toggle('on',on);t.setAttribute('aria-selected',String(on))});
+    empty.hidden=n>0;
+  }
+  tabs.forEach(function(t){t.addEventListener('click',function(e){
+    e.preventDefault();var c=t.dataset.cat;
+    history.replaceState(null,'',c==='all'?location.pathname:'#'+c);show(c);
+  })});
+  window.addEventListener('hashchange',function(){show(location.hash.slice(1)||'all')});
+  show(location.hash.slice(1)||'all');
+})();
+</script>
 </body>
 </html>

@@ -88,7 +88,7 @@ PAGE = '''<!doctype html>
 <meta property="og:description" content="{desc}">
 <meta property="og:type" content="article">
 <link rel="stylesheet" href="style.css">
-</head>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{{"token":"9791694bcfb64758948d79fecdce88b1","spa":false}}'></script></head>
 <body data-lang="zh">
 <div class="topbar"><div class="wrap">
     <a class="brand" href="/"><span class="tmark"><svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><rect width="120" height="120" rx="26" fill="#ffffff"/><g color="#008B8B" transform="translate(6 6) scale(0.9)"><g transform="translate(2 14) scale(.88)">
@@ -123,56 +123,105 @@ PAGE = '''<!doctype html>
 </html>
 '''
 
+CATS = [("discover", "沿途發現"), ("practice", "實踐歷程"), ("map", "學習地圖")]
+CAT_NAME = dict(CATS)
+# 縮圖：只用站上現有的 V5 照片，依序輪流配，不放人臉
+THUMBS = ["note1", "note2", "note3", "step1", "step2", "step3", "hero"]
+
 INDEX = '''<!doctype html>
 <html lang="zh-Hant">
 <head>
 <meta charset="utf-8">
-<link rel="icon" type="image/png" href="/assets/fervela-icon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>筆記 — Fervela.ai</title>
-<meta name="description" content="實作過程的紀錄——怎麼做、為什麼那樣選、哪裡踩坑，以及事後回頭看哪些判斷是錯的。">
-<link rel="stylesheet" href="style.css">
+<title>實踐筆記 — Fervela.ai</title>
+<meta name="description" content="把做軟體、用 AI 的過程寫下來：沿途發現、實踐歷程、學習地圖。">
+<meta name="theme-color" content="#faf6ef">
+<meta property="og:title" content="實踐筆記 — Fervela.ai">
+<meta property="og:description" content="把做軟體、用 AI 的過程寫下來：沿途發現、實踐歷程、學習地圖。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://fervela.ai/notes/">
+<meta property="og:image" content="https://fervela.ai/assets/v5/og-home.jpg">
+<link rel="icon" type="image/png" href="/assets/fervela-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/v5/v5.css">
+<link rel="stylesheet" href="/assets/v5/notes.css">
+<script src="/assets/v5/v5.js" defer></script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{{"token":"9791694bcfb64758948d79fecdce88b1","spa":false}}'></script>
 </head>
-<body data-lang="zh">
-<div class="topbar"><div class="wrap">
-    <a class="brand" href="/"><span class="tmark"><svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><rect width="120" height="120" rx="26" fill="#ffffff"/><g color="#008B8B" transform="translate(6 6) scale(0.9)"><g transform="translate(2 14) scale(.88)">
-      <path d="M60 8C34 10 14 30 13 55c-2 28 18 50 48 54 21 3 41-8 48-27-7 11-22 18-39 17-28-1-45-19-44-42 1-23 15-41 34-49Z" fill="currentColor"/>
-      <path d="m66 31-30 54 27-7 3-47Z" fill="currentColor"/>
-      <path d="m71 31 0 50 16-8Z" fill="currentColor" opacity=".9"/>
-      <path d="M69 27v56" stroke="currentColor" stroke-width="1.25"/>
-      <path d="M29 82c12 8 25 11 39 10-12 4-28 2-41-5l2-5Z" fill="currentColor"/>
-      <path d="M78 70c5-5 12-3 13 3 5-5 13-1 12 6 5-1 8 3 7 8-1 7-8 11-16 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M27 84c19 10 43 13 65 6 7-2 12-6 16-12-2 8-8 14-17 18-19 8-45 6-59-3-3-2-5-6-5-9Z" fill="#fff" opacity=".94"/>
-      <path d="M25 87c20 10 45 13 67 5 7-2 12-6 16-11-3 8-9 14-18 18-19 7-44 5-58-4-4-2-6-5-7-8Z" fill="currentColor"/>
-      <path d="M31 88c18 7 39 8 56 2-14 9-38 10-56 2Z" fill="#fff" opacity=".92"/>
-      <path d="M20 85c14 4 27 3 39-2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
-      </g>
-      <path d="m84 7 2.6 8.4L95 18l-8.4 2.6L84 29l-2.6-8.4L73 18l8.4-2.6L84 7Z" fill="#F5A623"/></g></svg></span><span class="tname">Fervela.ai</span></a>
-    <a class="tlink" href="/notes/">筆記</a>
-  </div></div>
-<div class="wrap">
-  <div class="sec" style="margin-top:30px">
-    <div class="sech">筆記</div>
+<body id="top">
+<a class="skip" href="#main">跳至內容</a>
+<header class="header"><div class="header-in"><a class="brand" href="/" aria-label="Fervela.ai 首頁"><img class="logo" src="/assets/logo-a.svg" width="34" height="34" alt=""><span>Fervela.ai</span></a><button class="menu" aria-label="開啟選單" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button><nav id="nav" aria-label="主選單"><ul><li><a href="/#work">作品</a></li><li><a href="/#journal">實踐筆記</a></li><li><a href="mailto:contact@fervela.ai">聊聊你的想法</a></li></ul></nav></div></header>
+<main id="main" class="wrap nt">
+  <section class="nt-head">
+    <h1>實踐筆記</h1>
+    <p>把做軟體、用 AI 的過程寫下來。</p>
+  </section>
+  <div class="nt-tabs" role="tablist" aria-label="筆記分類">
+{tabs}
+  </div>
+  <div class="nt-grid" id="grid">
 {items}
   </div>
-  <a class="back" href="/">← 回首頁</a>
-  <footer>
-    <div>問題回報與合作洽詢：<a href="mailto:contact@fervela.ai">contact@fervela.ai</a></div>
-    <div class="fnote">作品以 <b>Fervela.ai</b> 為名發佈。© 2026 雲帆研創有限公司（Fervela.ai）</div>
-  </footer>
-</div>
+  <div class="nt-empty" id="empty" hidden>
+    <p>第一則沿途發現，很快會出現在這裡。</p>
+    <a href="/timeline/">先看 AI 的重要時刻 →</a>
+  </div>
+</main>
+<footer class="footer"><div class="footer-in"><a class="brand" href="/" aria-label="Fervela.ai 首頁"><img class="logo" src="/assets/logo-a.svg" width="34" height="34" alt=""><span>Fervela.ai</span></a><p class="tag">Research. Create. Share.</p><div class="flinks"><a href="/#work">作品</a><a href="/#journal">實踐筆記</a><a href="mailto:contact@fervela.ai">聊聊你的想法</a></div><p class="copy">© 2026 雲帆研創有限公司（Fervela.ai）　用心設計的好軟體，解決生活的真問題。</p></div></footer>
+<script>
+(function(){{
+  var tabs=[].slice.call(document.querySelectorAll('.nt-tab')),
+      cards=[].slice.call(document.querySelectorAll('.nt-card')),
+      empty=document.getElementById('empty'),
+      valid={valid};
+  function show(c){{
+    if(c!=='all'&&valid.indexOf(c)<0)c='all';
+    var n=0;
+    cards.forEach(function(el){{var on=c==='all'||el.dataset.cat===c;el.hidden=!on;if(on)n++}});
+    tabs.forEach(function(t){{var on=t.dataset.cat===c;t.classList.toggle('on',on);t.setAttribute('aria-selected',String(on))}});
+    empty.hidden=n>0;
+  }}
+  tabs.forEach(function(t){{t.addEventListener('click',function(e){{
+    e.preventDefault();var c=t.dataset.cat;
+    history.replaceState(null,'',c==='all'?location.pathname:'#'+c);show(c);
+  }})}});
+  window.addEventListener('hashchange',function(){{show(location.hash.slice(1)||'all')}});
+  show(location.hash.slice(1)||'all');
+}})();
+</script>
 </body>
 </html>
 '''
 
-def card(href, title, date, desc):
+
+def tab(cat, label):
+    dot = '<i class="dot %s"></i>' % cat if cat != "all" else ""
+    return ('    <a class="nt-tab" role="tab" href="#%s" data-cat="%s">%s%s</a>'
+            % (cat if cat != "all" else "", cat, dot, label))
+
+
+def card(href, title, date, desc, cat, thumb):
     """索引上的一張卡。文章與外連卡片共用同一個樣子。"""
-    return '''    <div class="card">
-      <h2><a href="{h}" style="color:inherit;text-decoration:none">{t}</a></h2>
-      <div class="pinfo">{d}</div>
-      <p>{x}</p>
-    </div>'''.format(h=html.escape(href), t=html.escape(title),
-                     d=html.escape(date), x=html.escape(desc))
+    return '''    <a class="nt-card" href="{h}" data-cat="{c}">
+      <picture><source srcset="/assets/v5/{im}.webp" type="image/webp"><img src="/assets/v5/{im}.jpg" alt="" width="1200" height="800" loading="lazy" decoding="async"></picture>
+      <div class="nt-body">
+        <span class="nt-label {c}"><i class="dot {c}"></i>{cn}</span>
+        <h2>{t}</h2>
+        <time>{d}</time>
+        <p>{x}</p>
+      </div>
+    </a>'''.format(h=html.escape(href), t=html.escape(title), c=cat, cn=CAT_NAME[cat], im=thumb,
+                   d=html.escape(date.replace("-", ".")), x=html.escape(desc))
+
+
+def need_cat(key, m):
+    c = m.get("category")
+    if c not in CAT_NAME:
+        raise SystemExit("❌ posts.json 的 %s 沒有有效的 category（要是 %s 其中之一），請先分類再建置"
+                         % (key, "／".join(CAT_NAME)))
+    return c
 
 
 # ── 首頁的筆記清單 ────────────────────────────────────────────
@@ -187,8 +236,9 @@ def card(href, title, date, desc):
 # 那就要大聲失敗——「沒檢查」和「檢查通過」不能長得一樣。
 HOME = os.path.join(os.path.dirname(HERE), "index.html")
 HOME_SECTION = 'id="journal"'
-# 首頁筆記區放幾篇由版面決定（目前 3 篇）；這裡只看最新幾篇有沒有漏。
-HOME_CHECK = 3
+# 首頁筆記區 = 三張分類大卡（連到 /notes/#分類）＋「最新一篇」清單（最新 2 篇）。
+# 這裡檢查：三個分類錨點都在、最新 2 篇都在。
+HOME_CHECK = 2
 
 
 def check_home(latest):
@@ -204,19 +254,25 @@ def check_home(latest):
     # 首頁用絕對網址（https://fervela.ai/notes/x.html），posts.json 用站內路徑，比對時去掉網域。
     hrefs = {re.sub(r"^https?://[^/]+", "", h) for h in re.findall(r'href="([^"]+)"', block)}
     missing = [(h, t) for h, t in latest if h not in hrefs]
+    for c, n in CATS:
+        if "/notes/#" + c not in hrefs:
+            missing.append(("/notes/#" + c, "分類大卡：" + n))
     if missing:
         print("⚠️ 首頁筆記區沒有這幾篇（首頁是手排的，要不要補請人決定）：")
         for h, t in missing:
             print("   " + t + "　→　" + h)
     else:
-        print("✓ 首頁筆記區已包含最新 %d 篇" % len(latest))
+        print("✓ 首頁筆記區已包含三個分類入口與最新 %d 篇" % len(latest))
     return missing
 
 
 def main():
     meta = json.load(io.open(META, encoding="utf-8")) if os.path.exists(META) else {}
-    items = []
-    rows = []          # (order, 網址, 標題)，拿來檢查首頁有沒有漏
+    # 每一筆要發佈的都必須有 category，漏了就停下
+    for key, m in meta.items():
+        if m.get("publish", False):
+            need_cat(key, m)
+    entries = []       # (date, order, 網址, 標題, 摘要, 分類)
     for fn in sorted(os.listdir(DRAFTS)):
         if not fn.endswith(".md"):
             continue
@@ -229,8 +285,7 @@ def main():
         io.open(os.path.join(HERE, slug + ".html"), "w", encoding="utf-8").write(
             PAGE.format(title=html.escape(title), desc=html.escape(desc), date=date, body=body))
         print("✓", slug + ".html　—　" + title)
-        items.append((m.get("order", 0), card(slug + ".html", title, date, desc)))
-        rows.append((m.get("order", 0), "/notes/" + slug + ".html", title))
+        entries.append((date, m.get("order", 0), slug + ".html", title, desc, m["category"]))
 
     # posts.json 裡帶 "link" 的條目不是文章，是指到站內其他頁的卡片
     # （例如 /courses/ 那種自己一頁、不走這個建置流程的東西）。
@@ -238,18 +293,19 @@ def main():
     for key, m in meta.items():
         if not m.get("link") or not m.get("publish", False):
             continue
-        items.append((m.get("order", 0),
-                      card(m["link"], m.get("title", key), m.get("date", ""), m.get("desc", ""))))
-        rows.append((m.get("order", 0), m["link"], m.get("title", key)))
+        entries.append((m.get("date", ""), m.get("order", 0), m["link"], m.get("title", key),
+                        m.get("desc", ""), m["category"]))
         print("✓ 外連卡片　—　" + m.get("title", key) + "　→　" + m["link"])
 
-    items.sort(reverse=True)
+    entries.sort(reverse=True)     # 新的在前（日期，同日看 order）
+    cards = [card(href, t, d, x, c, THUMBS[i % len(THUMBS)])
+             for i, (d, o, href, t, x, c) in enumerate(entries)]
+    tabs = "\n".join([tab("all", "全部")] + [tab(c, n) for c, n in CATS])
     io.open(os.path.join(HERE, "index.html"), "w", encoding="utf-8").write(
-        INDEX.format(items="\n".join(x[1] for x in items)))
-    print("✓ index.html（%d 篇）" % len(items))
+        INDEX.format(tabs=tabs, items="\n".join(cards), valid=json.dumps([c for c, _ in CATS])))
+    print("✓ index.html（%d 篇）" % len(entries))
 
-    rows.sort(reverse=True)
-    check_home([(r[1], r[2]) for r in rows][:HOME_CHECK])
+    check_home([("/notes/" + e[2] if not e[2].startswith("/") else e[2], e[3]) for e in entries][:HOME_CHECK])
 
 
 if __name__ == "__main__":

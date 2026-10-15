@@ -4,14 +4,16 @@
     "order": 1,
     "date": "2026-08-29",
     "desc": "我想讓幾家 AI 坐上同一張桌子，吵完給我結論，我去做別的事。做出來之後才發現：沒有我參與，那份報告我一件事都用不上。",
-    "title_en": "Can an AI boardroom just go find the answer for me?"
+    "title_en": "Can an AI boardroom just go find the answer for me?",
+    "category": "practice"
   },
   "02-lobster.md": {
     "publish": true,
     "order": 2,
     "date": "2026-09-03",
     "desc": "去年底第一次自架 AI 助理，兩天兩夜失敗。今年二月做好了，但 API 帳單太貴，五月它掛掉我反而鬆一口氣。第三次終於不用再多付一份錢。",
-    "title_en": "Is running your own AI assistant worth it now?"
+    "title_en": "Is running your own AI assistant worth it now?",
+    "category": "practice"
   },
   "courses-map": {
     "publish": true,
@@ -20,7 +22,8 @@
     "title": "AI 自學課程地圖",
     "date": "2026-09-11",
     "desc": "想自學 AI，第一個問題不是「要看哪門課」，是「該去哪裡找課」。台灣與全球的開放式課程入口都在這裡，按實用性排序，每個站都標了定位和該不該花時間。",
-    "title_en": "A map of where to learn AI for free"
+    "title_en": "A map of where to learn AI for free",
+    "category": "map"
   },
   "investing-map": {
     "publish": true,
@@ -29,7 +32,8 @@
     "title": "投資自學課程地圖",
     "date": "2026-09-11",
     "desc": "「8 月 CPI，市場預期月增 0.4%，這是九月最關鍵的數字」—— 看不懂這句話的話，這張地圖從這裡開始。從總體經濟到自己寫回測程式，分五層排的免費資源。",
-    "title_en": "A map of where to learn investing for free"
+    "title_en": "A map of where to learn investing for free",
+    "category": "map"
   },
   "us-brokers": {
     "publish": true,
@@ -38,14 +42,16 @@
     "title": "美股券商怎麼選：複委託、Firstrade、IBKR",
     "date": "2026-09-13",
     "desc": "想在美股掛移動停損、想自己寫交易程式，台灣的複委託做得到嗎？逐家查完 15 家之後，把元大、Firstrade、IBKR 放在同一張表上比：功能、手續費、遺產稅。",
-    "title_en": "Choosing a U.S. stock broker from Taiwan: sub-brokerage vs. Firstrade vs. IBKR"
+    "title_en": "Choosing a U.S. stock broker from Taiwan: sub-brokerage vs. Firstrade vs. IBKR",
+    "category": "map"
   },
   "03-wanjuan.md": {
     "publish": true,
     "order": 6,
     "date": "2026-09-20",
     "desc": "朋友問我萬卷從頭到尾是怎麼做的。一萬多行程式，我一行都沒寫也沒看，那三天我到底做了什麼？先開會、先拿四本真的書去撞，還有一個讓框從十九中六變成十九全中的外行問題。",
-    "title_en": "I can't code. How did I build a reading app in three days?"
+    "title_en": "I can't code. How did I build a reading app in three days?",
+    "category": "practice"
   },
   "ai-coding-map": {
     "publish": true,
@@ -54,13 +60,15 @@
     "title": "用 AI 寫軟體自學地圖",
     "date": "2026-10-01",
     "desc": "不用先當工程師。先學會三件事：把要做的東西講清楚、讓 AI 動手、自己驗收。三條路線各附一個做得出來的產出，加上本站自己踩過的四個坑——它們看起來都像成功。",
-    "title_en": "A map for building software with AI"
+    "title_en": "A map for building software with AI",
+    "category": "map"
   },
   "05-founding.md": {
     "publish": true,
     "order": 8,
     "date": "2026-10-06",
     "desc": "2026 年 10 月 6 日，雲帆研創有限公司正式核准設立。刻章才知道一間公司有好幾組章、國慶日政府不上班不能核准、一天限額讓 168,888 變成 88,888，最後到紫南宮求金雞，半夜開完公司信箱才收工。",
-    "title_en": "Founding diary: the week I started a company"
+    "title_en": "Founding diary: the week I started a company",
+    "category": "practice"
   }
 }
