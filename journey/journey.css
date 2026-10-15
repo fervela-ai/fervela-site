@@ -1,49 +1,57 @@
-/* 飛鴻產品頁專用樣式（只供 /journey/index.html 使用） */
-.phone{margin:0 auto;width:100%;max-width:300px;border-radius:34px;padding:9px;background:#10201e;border:1px solid rgba(159,217,208,.35);box-shadow:0 18px 50px rgba(0,0,0,.45)}
-.phone img{display:block;width:100%;height:auto;border-radius:26px}
-.journey .product-visual.actual-product{display:flex;justify-content:center;align-items:center;padding:46px 20px;background:radial-gradient(ellipse at 50% 10%,var(--deep),#0e191f 80%);border:1px solid var(--line)}
-.journey-focused .product-copy .lead{font-size:18px;line-height:1.9}
-.journey-focused .product-copy .badge{font-size:14px}
-.journey-focused .hero-actions .btn,.journey-focused .hero-actions .text-link{font-size:16px}
-.journey-focused .breadcrumb{font-size:14px}
-.journey-focused .footer{margin-top:70px}
-.journey-focused .product-copy h2{font-size:26px}
-
-.trip-note{background:#1f4a45;color:#f0f3ef;border-bottom:1px solid rgba(159,217,208,.4)}
+/* 飛鴻產品頁（V5 暖白有人味）：與 /assets/v5/v5.css 並用，只供 /journey/index.html */
+.trip-note{background:#e9f1ee;color:var(--ink);border-bottom:1px solid var(--line)}
 .trip-note[hidden]{display:none}
-.trip-note .wrap{display:flex;gap:24px;align-items:center;justify-content:space-between;padding:18px 0;flex-wrap:wrap}
-.trip-note p{font-size:16px;line-height:1.7;max-width:760px}
+.trip-note .wrap{display:flex;gap:24px;align-items:center;justify-content:space-between;padding:16px 0;flex-wrap:wrap}
+.trip-note p{font-size:16px;line-height:1.7;max-width:760px;margin:0}
 .trip-note .btn{white-space:nowrap}
-
-.journey-play{background:#eef1ea;color:#1f2a27;padding:80px 0}
-.journey-play-intro{display:grid;grid-template-columns:1fr 1.15fr;gap:70px;align-items:center}
-.journey-play-intro h2{font-family:var(--serif);font-size:44px;line-height:1.6;letter-spacing:1px}
-.journey-play-intro p{font-size:20px;line-height:1.95;color:#56645f}
-.journey-appeal{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:55px;border-top:1px solid #aebbb3;padding-top:36px}
-.journey-appeal small{display:block;font-size:14px;letter-spacing:2px;color:#3E7C6B;margin-bottom:10px}
-.journey-appeal h3{font-size:26px;font-weight:600;line-height:1.5;margin-bottom:18px;color:#2d5f51}
-.journey-appeal p{font-size:18px;line-height:1.95;color:#56645f}
-.journey-play-entry{display:flex;justify-content:space-between;align-items:center;gap:30px;margin-top:50px;padding-top:30px;border-top:1px solid #aebbb3}
-.journey-play-entry h3{font-size:24px}
-.journey-play-entry .btn{background:#3E7C6B;color:#fff;font-size:16px}
-@media(max-width:800px){
- .journey-play{padding:60px 0}
- .journey-play-intro{grid-template-columns:1fr;gap:25px}
- .journey-play-intro h2{font-size:36px}
- .journey-play-intro p{font-size:18px}
- .journey-appeal{grid-template-columns:1fr;gap:30px;margin-top:35px;padding-top:30px}
- .journey-appeal h3{font-size:25px;margin-bottom:12px}
- .journey-appeal p{font-size:18px}
- .journey-play-entry{margin-top:35px}
- .journey-play-entry h3{font-size:21px}
- .journey .product-visual.actual-product{padding:34px 16px}
+.breadcrumb{display:flex;gap:8px;font-size:13px;color:var(--ink2);padding:10px 0}
+.breadcrumb a{text-decoration:underline;text-underline-offset:3px}
+/* 主視覺：照片與手機螢幕疊圖共用同一個比例框，百分比定位，任何寬度都對得準 */
+.jhero{position:relative;overflow:hidden}
+.jstage{position:relative;width:100%;overflow:hidden}
+.jinner{position:relative;width:100%;aspect-ratio:2000/867}
+.jinner picture,.jbg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+/* 空白螢幕位置（hero.jpg 2000×867：x 1374–1693、y 62–664） */
+.jscreen{position:absolute;left:68.7%;top:7.15%;width:15.95%;height:69.4%;object-fit:cover;object-position:top;border-radius:2.6% / 1.2%;border-radius:clamp(8px,2.1vw,30px)}
+.jhero:before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,var(--bg) 0%,rgba(250,246,239,.9) 22%,rgba(250,246,239,.3) 42%,rgba(250,246,239,0) 58%)}
+.jcopy{position:absolute;z-index:2;left:max(32px,calc((100% - 1320px)/2));top:0;bottom:0;width:min(520px,44%);display:flex;flex-direction:column;justify-content:center;padding:20px 0}
+.eyebrow{font-size:clamp(11px,1vw,14px);letter-spacing:.06em;color:var(--ink);margin:0 0 6px}
+.eyebrow span{margin-left:6px}
+.jcopy h1{font-size:clamp(48px,5.6vw,80px);margin:0 0 8px;line-height:1.15}
+.jcopy h2{font-size:clamp(22px,2.4vw,34px);line-height:1.4;margin:0 0 12px}
+.jcopy .lead{font-size:clamp(13px,1.15vw,16px);line-height:1.85;margin:0 0 18px;color:var(--ink)}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.btn.ghost{background:rgba(255,253,249,.85);color:var(--ink);border:1.5px solid var(--ink)}
+.btn.ghost:hover{background:#fff}
+.platform{margin:12px 0 0;font-size:13px;color:var(--ink2)}
+.journey-play{padding:0}
+.journey-play-intro{text-align:center;padding:64px 0 36px}
+.journey-play-intro h2{display:flex;align-items:center;gap:28px;justify-content:center;margin:0 0 20px}
+.journey-play-intro h2:before,.journey-play-intro h2:after{content:"";height:1px;background:var(--ink);opacity:.5;flex:1;max-width:260px}
+.journey-play-intro p{font-family:var(--serif);font-size:clamp(15px,1.5vw,19px);line-height:2;margin:0;color:var(--ink)}
+.journey-appeal{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.journey-appeal article{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 10px 22px;box-shadow:0 2px 10px rgba(14,42,59,.04)}
+.journey-appeal article img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:8px;background:#e8dfcc}
+.atxt{padding:14px 14px 0}
+.journey-appeal small{display:block;font-family:var(--serif);font-weight:800;font-size:28px;color:var(--ink);line-height:1.3}
+.journey-appeal h3{font-size:18px;font-weight:500;margin:6px 0 8px;color:var(--ink)}
+.journey-appeal p{font-size:15px;line-height:1.8;color:var(--ink2);margin:0}
+.jcta{margin-top:56px}
+.jgoose{position:absolute;z-index:2;right:max(24px,calc((100% - 1200px)/2));bottom:0;width:clamp(80px,11vw,150px)}
+.jgoose img{position:static;width:100%;height:auto}
+.jcta>picture:first-child{position:absolute;inset:0}
+@media(max-width:900px){
+ .jstage{height:min(72vw,360px)}
+ .jinner{position:absolute;right:0;top:0;width:auto;height:100%;aspect-ratio:2000/867}
+ .jhero:before{display:none}
+ .jcopy{position:static;width:calc(100% - 32px);margin:0 auto;padding:22px 0 34px}
+ .jcopy h1{font-size:clamp(46px,13vw,60px)}
+ .jcopy h2{font-size:24px}.jcopy .lead{font-size:15px}
+ .hero-actions .btn{width:100%;max-width:340px;justify-content:center}
+ .journey-play-intro{padding:40px 0 22px}
+ .journey-appeal{grid-template-columns:1fr;gap:14px}
+ .jgoose{left:12px;right:auto;width:84px;bottom:4px}
 }
-@media(max-width:540px){
- .journey-focused .product-copy h2{font-size:24px}
- .journey-focused .hero-actions{gap:15px}
- .journey-focused .hero-actions .btn,.journey-focused .hero-actions .text-link{font-size:14px}
- .journey-play-intro h2{font-size:32px}
- .journey-play-entry{align-items:start;flex-direction:column;gap:22px}
- .journey-play-entry .btn{width:100%}
- .journey-focused .footer{margin-top:50px}
-}
+.cta>picture.jgoose{inset:auto;width:clamp(80px,11vw,150px);height:auto;right:max(24px,calc((100% - 1200px)/2));bottom:0;left:auto;top:auto}
+.cta>picture.jgoose img{position:static;inset:auto;width:100%;height:auto;object-fit:contain}
+@media(max-width:900px){.cta>picture.jgoose{left:12px;right:auto;width:84px;bottom:4px}}
