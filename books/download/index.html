@@ -157,6 +157,8 @@
   .more{ margin-top:22px; text-align:center; font-size:15px; }
   .more a{ color:var(--teal); font-weight:700; }
 </style>
+<style>/* 中文只在標點、空白處換行，不把詞拆兩半；太長才硬斷。標題平均分行、內文避免最後一行孤字（Miles 10/16「我不要一句話被斷句」） */
+body{word-break:keep-all;overflow-wrap:anywhere;line-break:strict}h1,h2,h3,h4{text-wrap:balance}p,li,dd,figcaption,blockquote{text-wrap:pretty}</style>
 </head>
 <body>
 <div class="wrap">
@@ -185,7 +187,7 @@
     <div class="q">書架越來越滿，翻開的卻越來越少？</div>
     <div class="body">
       <b>拍一張書架照，那張照片就是你的書架。</b>AI 認出每一本書、框在照片上；點一本，它會從書架上「抽出來」。
-      接著選一種讀法、按下計時、記下讀到哪、寫一句 memo。讀完的書會疊成一面書牆，你讀過的領域會在星圖上一顆一顆亮起來。
+      接著選一種讀法、按下計時、記下讀到哪、寫一句 memo。讀完的書會疊成一面書牆，你讀過的領域<wbr>會在星圖上一顆一顆亮起來。
     </div>
     <div class="fine">免費使用。書庫、照片、閱讀紀錄都只存在你自己的 Mac（<a href="privacy.html">哪些東西會送到 AI 和書店 ↗</a>）。</div>
   </div>

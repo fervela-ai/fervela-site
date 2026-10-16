@@ -128,3 +128,6 @@ footer a{color:var(--teal)}
 .post figure img,.post figure video{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:10px}
 .post figcaption{margin-top:9px;color:var(--grey);font-size:14px;line-height:1.7;text-align:center}
 .post figure video{background:#0b1430}
+
+/* 中文只在標點、空白處換行，不把詞拆兩半；太長才硬斷。標題平均分行、內文避免最後一行孤字（Miles 10/16「我不要一句話被斷句」） */
+body{word-break:keep-all;overflow-wrap:anywhere;line-break:strict}h1,h2,h3,h4{text-wrap:balance}p,li,dd,figcaption,blockquote{text-wrap:pretty}

@@ -165,3 +165,6 @@ footer p{margin:0;max-width:52em;line-height:1.75}
 .sec-head .output{max-width:44em}
 /* 路線卡：需求標記放到名稱下面。放右邊時標記一長，名稱就被擠成兩行，三張卡標題對不齊 */
 .route .entry-top{flex-direction:column;align-items:flex-start;gap:6px}
+
+/* 中文只在標點、空白處換行，不把詞拆兩半；太長才硬斷。標題平均分行、內文避免最後一行孤字（Miles 10/16「我不要一句話被斷句」） */
+body{word-break:keep-all;overflow-wrap:anywhere;line-break:strict}h1,h2,h3,h4{text-wrap:balance}p,li,dd,figcaption,blockquote{text-wrap:pretty}

@@ -208,3 +208,6 @@ footer{border-top:0;padding:0 max(16px,calc((100% - 1080px)/2)) 36px;color:var(-
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 .card+.day{margin-top:26px}
 @media(max-width:700px){.card+.day{margin-top:22px}}
+
+/* 中文只在標點、空白處換行，不把詞拆兩半；太長才硬斷。標題平均分行、內文避免最後一行孤字（Miles 10/16「我不要一句話被斷句」） */
+body{word-break:keep-all;overflow-wrap:anywhere;line-break:strict}h1,h2,h3,h4{text-wrap:balance}p,li,dd,figcaption,blockquote{text-wrap:pretty}

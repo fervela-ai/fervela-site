@@ -55,3 +55,6 @@ html[lang=en] .hero h1{font-size:clamp(50px,6vw,86px);line-height:1.22;letter-sp
 
 /* 10/14 Miles 選字型：思源黑體（決策：選擇頁 font=2）。標題改黑體後收回明體用的寬字距 */
 html[lang=zh-Hant] .making-name h3,html[lang=zh-Hant] .research-card h3,html[lang=zh-Hant] .about h2,html[lang=zh-Hant] .manifesto h2,html[lang=zh-Hant] .product-copy h1,html[lang=zh-Hant] .origin blockquote p{letter-spacing:0;font-weight:600}
+
+/* 中文只在標點、空白處換行，不把詞拆兩半；太長才硬斷。標題平均分行、內文避免最後一行孤字（Miles 10/16「我不要一句話被斷句」） */
+body{word-break:keep-all;overflow-wrap:anywhere;line-break:strict}h1,h2,h3,h4{text-wrap:balance}p,li,dd,figcaption,blockquote{text-wrap:pretty}

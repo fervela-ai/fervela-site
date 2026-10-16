@@ -28,7 +28,9 @@ footer img{height:36px;vertical-align:middle;margin-right:8px}footer a{color:inh
 .doc blockquote{margin:12px 0;padding:8px 16px;border-left:3px solid var(--green);background:var(--warm);border-radius:0 8px 8px 0}
 a.back{display:inline-block;margin:20px 20px 0;color:var(--sub)}
 @media(max-width:760px){.steps,.dl,.trust{grid-template-columns:1fr}h2{font-size:22px;margin:40px 0 18px}.hero img{max-height:none;object-position:70% 50%}}
-</style></head><body>
+</style><style>/* 中文只在標點、空白處換行，不把詞拆兩半；太長才硬斷。標題平均分行、內文避免最後一行孤字（Miles 10/16「我不要一句話被斷句」） */
+body{word-break:keep-all;overflow-wrap:anywhere;line-break:strict}h1,h2,h3,h4{text-wrap:balance}p,li,dd,figcaption,blockquote{text-wrap:pretty}</style>
+</head><body>
 <header class="hero"><img src="img/hero.jpg" alt="會心的水獺吉祥物趴在書堆上睡覺，旁邊是一顆心形與一張投影片"><h1 class="sr">研討會現場錄下來，回家一鍵變成報告</h1></header>
 <main class="wrap">
 <h2>三個步驟，完成會議記錄</h2>

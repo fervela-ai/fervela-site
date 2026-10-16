@@ -28,7 +28,9 @@ footer img{height:36px;vertical-align:middle;margin-right:8px}footer a{color:inh
 .doc blockquote{margin:12px 0;padding:8px 16px;border-left:3px solid var(--green);background:var(--warm);border-radius:0 8px 8px 0}
 a.back{display:inline-block;margin:20px 20px 0;color:var(--sub)}
 @media(max-width:760px){.steps,.dl,.trust{grid-template-columns:1fr}h2{font-size:22px;margin:40px 0 18px}.hero img{max-height:none;object-position:70% 50%}}
-</style></head><body><a class="back" href="/report/app/">← 回到會心下載頁</a><main class="doc"><p>版本日期：2026/10/15 朋友試用版</p>
+</style><style>/* 中文只在標點、空白處換行，不把詞拆兩半；太長才硬斷。標題平均分行、內文避免最後一行孤字（Miles 10/16「我不要一句話被斷句」） */
+body{word-break:keep-all;overflow-wrap:anywhere;line-break:strict}h1,h2,h3,h4{text-wrap:balance}p,li,dd,figcaption,blockquote{text-wrap:pretty}</style>
+</head><body><a class="back" href="/report/app/">← 回到會心下載頁</a><main class="doc"><p>版本日期：2026/10/15 朋友試用版</p>
 <p>會心手機版會記錄你建立的錄音、照片、標記，以及你輸入的活動與場次名稱。這些內容先保存在你的手機上。本版不使用 Android 系統備份；換手機時，請用「整場打包」搬資料。</p>
 <p>會心手機版不會自行上傳你的錄音、照片或筆記。只有你按下「分享」或「整場打包」，才會產生分享檔案；你可以自行決定要傳給誰、傳到哪裡。你也可以在「報告」頁主動選擇把場次傳到你配對的電腦。這段連線有加密（HTTPS），只傳到你配對過的那一台；若傳送中斷，重新連線後會繼續傳送你已選擇的場次，包括錄音檔與照片。</p>
 <p>會心手機版不會把你的內容交給任何 AI 服務。讀議程截圖時，文字辨識在你的手機上完成，截圖不會送出。Google 的文字辨識元件可能會把 App 版本、手機型號、效能數據等技術資料傳給 Google，不含你的錄音、照片與截圖內容。</p>
