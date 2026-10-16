@@ -1,8 +1,8 @@
 {
- "versionCode": 70,
- "versionName": "0.7.0",
- "apk": "huixin-0.7.0-70.apk",
- "sha256": "20241be4b011935ff7a829b65ba53b4aad25a77ffc90a0fecbaba4c9f1100fac",
- "size": 58638764,
- "notes": "朋友試用版：第一次開啟的歡迎頁、傳到電腦教學、回報問題入口、新圖示"
+ "versionCode": 71,
+ "versionName": "0.7.1",
+ "apk": "huixin-0.7.1-71.apk",
+ "sha256": "4c2e2023e63e7c546d23e2fc42246c03397e488a2b0cef84612ad3a00cc66f87",
+ "size": 58683820,
+ "notes": "新增：可以從手機日曆匯入研討會行程（要你允許讀取日曆才會用，不允許也沒關係）。另外：App 圖示換新、首頁進度圈文字不再被壓到。"
 }
