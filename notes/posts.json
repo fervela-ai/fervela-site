@@ -70,5 +70,13 @@
     "desc": "2026 年 10 月 6 日，雲帆研創有限公司正式核准設立。刻章才知道一間公司有好幾組章、國慶日政府不上班不能核准、一天限額讓 168,888 變成 88,888，最後到紫南宮求金雞，半夜開完公司信箱才收工。",
     "title_en": "Founding diary: the week I started a company",
     "category": "practice"
+  },
+  "06-haiku55.md": {
+    "publish": true,
+    "order": 9,
+    "date": "2026-10-17",
+    "category": "discover",
+    "desc": "新模型便宜了十倍，但便宜不等於能用。我拿平常真的會交給 AI 的四類小事各測一批，看它哪裡夠用、哪裡會漏。",
+    "title_en": "Is the new cheap AI model good enough to do real work?"
   }
 }
