@@ -14,7 +14,7 @@
 用法：
     python3 build.py            重建全部文章與索引
 """
-import io, os, re, html, json
+import io, os, re, html, json, shutil, subprocess
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DRAFTS = os.path.join(HERE, "_drafts")
@@ -108,7 +108,7 @@ PAGE = '''<!doctype html>
     <span class="nt-label {cat}"><i class="dot {cat}"></i>{catname}</span>
     <h1 class="ar-title">{title}</h1>
     <div class="ar-date">{datedot} · Miles</div>
-    <p class="ar-lede {cat}">{desc}</p>
+    <p class="ar-lede {cat}">{ledehtml}</p>
     <div class="ar-body">
 {body}
     </div>
@@ -276,7 +276,22 @@ def check_home(latest):
 WBR = [
     ("讓框從十九中六變成", "讓框從十九中六<wbr>變成"),
     ("去銀行我再去刻一組半手工但不用這麼漂亮的來用吧", "去銀行我再去刻一組<wbr>半手工但不用這麼漂亮的<wbr>來用吧"),
+    ("董事會全自動幫我找答案", "董事會<wbr>全自動<wbr>幫我找答案"),   # 標題：手機上一行放不下時在詞的交界換
 ]
+
+
+def wordwrap(frag):
+    """內文在詞與詞之間插 <wbr>（notes/wbr.mjs，用 Node 內建的中文分詞）。
+    沒有 node 就原樣回傳：版面一樣能看，只是長句可能斷在詞中間。"""
+    node = shutil.which("node")
+    if not node:
+        print("⚠ 找不到 node，文章內文沒有插斷詞點")
+        return frag
+    r = subprocess.run([node, os.path.join(HERE, "wbr.mjs")], input=frag, capture_output=True, text=True)
+    if r.returncode != 0:
+        print("⚠ wbr.mjs 失敗，文章內文沒有插斷詞點：", r.stderr.strip()[:200])
+        return frag
+    return r.stdout
 
 
 def write_html(name, text):
@@ -333,7 +348,7 @@ def main():
         n = pages[(i + 1) % len(pages)]
         write_html(p["slug"] + ".html", PAGE.format(
             title=html.escape(p["title"]), desc=html.escape(p["desc"]), datedot=p["date"].replace("-", "."),
-            body=p["body"], cat=p["cat"], catname=CAT_NAME[p["cat"]],
+            body=wordwrap(p["body"]), ledehtml=wordwrap(html.escape(p["desc"])), cat=p["cat"], catname=CAT_NAME[p["cat"]],
             nhref=n["slug"] + ".html", nthumb=thumb_of[n["slug"] + ".html"], ntitle=html.escape(n["title"]),
             header=HEADER, footer=FOOTER))
         print("✓", p["slug"] + ".html　—　" + p["title"])
