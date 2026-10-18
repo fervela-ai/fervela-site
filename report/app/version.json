@@ -1,8 +1,8 @@
 {
- "versionCode": 71,
- "versionName": "0.7.1",
- "apk": "huixin-0.7.1-71.apk",
- "sha256": "4c2e2023e63e7c546d23e2fc42246c03397e488a2b0cef84612ad3a00cc66f87",
- "size": 58683820,
- "notes": "新增：可以從手機日曆匯入研討會行程（要你允許讀取日曆才會用，不允許也沒關係）。另外：App 圖示換新、首頁進度圈文字不再被壓到。"
+ "versionCode": 72,
+ "versionName": "0.7.2",
+ "apk": "huixin-0.7.2-72.apk",
+ "sha256": "1f2e26a8df509defc7c086c8781dee97210e10da1dc6910d6aac8cb9613a8a29",
+ "size": 58679725,
+ "notes": "App 圖示換成活力橘。其他功能跟 0.7.1 一樣。"
 }
