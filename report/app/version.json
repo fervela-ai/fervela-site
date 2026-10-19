@@ -1,8 +1,8 @@
 {
- "versionCode": 72,
- "versionName": "0.7.2",
- "apk": "huixin-0.7.2-72.apk",
- "sha256": "1f2e26a8df509defc7c086c8781dee97210e10da1dc6910d6aac8cb9613a8a29",
- "size": 58679725,
- "notes": "App 圖示換成活力橘。其他功能跟 0.7.1 一樣。"
+ "versionCode": 73,
+ "versionName": "0.7.3",
+ "apk": "huixin-0.7.3-73.apk",
+ "sha256": "0f2aaefb0e329462c5be657c7c9a3317659365d4ec6bdb65f4d4d8ba53db1d36",
+ "size": 58724780,
+ "notes": "日曆裡的研討會會自動建好；議程只列正式場次，題目和講者整理得更清楚；修正幾個畫面小問題。"
 }
