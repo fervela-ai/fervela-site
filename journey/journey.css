@@ -1,3 +1,4 @@
+/* 圖示：Lucide（ISC 授權，見 LICENSES-lucide.txt） */
 /* 飛鴻產品頁（V5 暖白有人味）：與 /assets/v5/v5.css 並用，只供 /journey/index.html */
 .trip-note{background:#e9f1ee;color:var(--ink);border-bottom:1px solid var(--line)}
 .trip-note[hidden]{display:none}
@@ -78,12 +79,13 @@
 .st-stop{display:grid;grid-template-columns:50px 30px minmax(0,1fr) auto;gap:12px;align-items:center;padding:11px 0;border-top:1px solid var(--line)}
 .st-stop:first-child{border-top:0}
 .st-time{font-variant-numeric:tabular-nums;font-size:16px;color:var(--ink)}
-.st-dot{width:30px;height:30px;border-radius:50%;background:#eee}
-.st-dot.k-sight{background:#f6d4d0}
-.st-dot.k-food{background:#fbddb4}
-.st-dot.k-stay{background:#d9cdf1}
-.st-dot.k-move{background:#cfe3f5}
-.st-dot.k-other{background:#d8e9d4}
+.st-dot{width:30px;height:30px;border-radius:50%;background:#eee;display:flex;align-items:center;justify-content:center;color:#6b5f55}
+.st-ic{display:block;width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.st-dot.k-sight{color:#a8453b;background:#f6d4d0}
+.st-dot.k-food{color:#9a5a0c;background:#fbddb4}
+.st-dot.k-stay{color:#5b43a0;background:#d9cdf1}
+.st-dot.k-move{color:#2f6a9e;background:#cfe3f5}
+.st-dot.k-other{color:#4a7a43;background:#d8e9d4}
 .st-name{font-size:17px;font-weight:700;overflow-wrap:anywhere}
 .st-dur{font-size:14px;color:var(--ink2);white-space:nowrap;text-align:right}
 .st-privacy{font-size:12px;color:var(--ink2);text-align:center;margin:22px 0 0}

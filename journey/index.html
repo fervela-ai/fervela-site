@@ -2,7 +2,13 @@
 <header class="header"><div class="header-in"><a class="brand" href="/" aria-label="Fervela.ai 首頁"><img class="logo" src="/assets/logo-a.svg" width="34" height="34" alt=""><span>Fervela.ai</span></a><button class="menu" aria-label="開啟選單" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button><nav id="nav" aria-label="主選單"><ul><li><a href="/#work">作品</a></li><li><a href="/#journal">實踐筆記</a></li><li><a href="mailto:contact@fervela.ai">聊聊你的想法</a></li></ul></nav></div></header>
 <main id="main">
 <div id="trip-note" class="trip-note" hidden><div class="wrap"><p>朋友分享了一趟行程給你。安裝飛鴻後，再點一次朋友傳來的連結，就能在 App 裡打開。</p><a class="btn" href="/journey/download/?r=share#download"><span>下載飛鴻</span><span aria-hidden="true">↓</span></a></div></div>
-<section id="shared-trip" class="shared-trip" hidden aria-labelledby="st-title"><div class="st-banner" aria-hidden="true"></div><div class="st-wrap">
+<section id="shared-trip" class="shared-trip" hidden aria-labelledby="st-title"><!-- 圖示：Lucide（ISC 授權，見 /journey/LICENSES-lucide.txt）；24px 線條小圖示，一次定義、站列用 <use> 引用 -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<symbol id="ic-pin" viewBox="0 0 24 24"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></symbol>
+<symbol id="ic-utensils" viewBox="0 0 24 24"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></symbol>
+<symbol id="ic-bed" viewBox="0 0 24 24"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></symbol>
+<symbol id="ic-train" viewBox="0 0 24 24"><path d="M8 3.1V7a4 4 0 0 0 8 0V3.1"/><path d="m9 15-1-1"/><path d="m15 15 1-1"/><path d="M9 19c-2.8 0-5-2.2-5-5v-4a8 8 0 0 1 16 0v4c0 2.8-2.2 5-5 5Z"/><path d="m8 19-2 3"/><path d="m16 19 2 3"/></symbol>
+</defs></svg><div class="st-banner" aria-hidden="true"></div><div class="st-wrap">
 <div class="st-head"><p class="st-eyebrow">朋友分享了一趟行程給你</p>
 <h1 id="st-title"></h1>
 <p id="st-meta" class="st-meta"></p></div>
@@ -23,6 +29,9 @@
 (function(){
 var KIND={sight:'景點',breakfast:'吃飯',lunch:'吃飯',dinner:'吃飯',stay:'住宿',transit:'交通',transport:'交通',break:'其他',free:'其他'};
 var KCLS={'景點':'sight','吃飯':'food','住宿':'stay','交通':'move','其他':'other'};
+var KIC={sight:'ic-pin',food:'ic-utensils',stay:'ic-bed',move:'ic-train',other:'ic-pin'};
+var SVGNS='http://www.w3.org/2000/svg';
+function icon(id){var v=document.createElementNS(SVGNS,'svg'),u=document.createElementNS(SVGNS,'use');v.setAttribute('class','st-ic');v.setAttribute('width','20');v.setAttribute('height','20');v.setAttribute('aria-hidden','true');v.setAttribute('focusable','false');u.setAttribute('href','#'+id);v.appendChild(u);return v}
 var WD=['日','一','二','三','四','五','六'];
 function el(tag,cls,text){var e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e}
 function fail(){document.documentElement.classList.remove('shared-view');var n=document.getElementById('trip-note');if(n)n.hidden=false}
@@ -72,7 +81,7 @@ function render(t){
     var ol=el('ol','st-stops'),list=map[d].slice().sort(function(x,y){return (x.time&&y.time&&x.time!==y.time)?(x.time<y.time?-1:1):x._i-y._i});
     list.forEach(function(s){
       var li=el('li','st-stop'),kn=KIND[s.kind]||'其他',dot=el('span','st-dot k-'+KCLS[kn]);
-      dot.setAttribute('role','img');dot.setAttribute('aria-label',kn);dot.title=kn;
+      dot.setAttribute('role','img');dot.setAttribute('aria-label',kn);dot.title=kn;dot.appendChild(icon(KIC[KCLS[kn]]));
       li.appendChild(el('span','st-time',s.time||'—'));
       li.appendChild(dot);
       li.appendChild(el('span','st-name',s.name));
