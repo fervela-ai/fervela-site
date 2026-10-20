@@ -1,0 +1,48 @@
+/* 燎原、溫故、氣噗噗產品頁：沿用萬卷頁（books.css）同一組規則，另加截圖並排、重點卡、版本沿革；與 /assets/v5/v5.css 並用 */
+/* 萬卷產品頁（V5 暖白有人味）：與 /assets/v5/v5.css 並用，只供 /books/index.html */
+.breadcrumb{display:flex;gap:8px;font-size:13px;color:var(--ink2);padding:10px 0}
+.breadcrumb a{text-decoration:underline;text-underline-offset:3px}
+.bhero{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:48px;align-items:center;padding:36px 0 24px}
+.bcopy{min-width:0;overflow-wrap:anywhere}
+.eyebrow{display:flex;align-items:center;gap:12px;font-size:13px;letter-spacing:.1em;color:var(--ink);margin:0 0 10px}
+.bicon{width:40px;height:40px;border-radius:10px;flex:none;object-fit:contain}
+.badge{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:var(--ink);background:#e9f1ee;border:1px solid var(--line);border-radius:999px;padding:4px 12px;margin:0 0 12px}
+.badge i{width:8px;height:8px;border-radius:50%;background:#2f9e7a;display:inline-block}
+.bcopy h1{font-size:clamp(52px,6vw,80px);margin:0 0 8px;line-height:1.15}
+.bcopy h2{font-size:clamp(22px,2.4vw,34px);line-height:1.4;margin:0 0 14px}
+.bcopy .lead{font-size:clamp(15px,1.2vw,17px);line-height:1.9;margin:0 0 22px;color:var(--ink)}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.btn.ghost{background:rgba(255,253,249,.85);color:var(--ink);border:1.5px solid var(--ink)}
+.btn.ghost:hover{background:#fff}
+.platform{margin:14px 0 0;font-size:13px;color:var(--ink2)}
+.bvisual{min-width:0;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px;box-shadow:0 10px 32px rgba(14,42,59,.10)}
+.bvisual img{width:100%;height:auto;border-radius:10px;background:#e8dfcc}
+.shots3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;align-items:start}
+.shots3 img{width:100%;height:auto;border-radius:8px;background:#e8dfcc}
+.shots3.wide{grid-template-columns:minmax(0,1fr)}
+.shots3 .cap{grid-column:1/-1;font-size:12px;color:var(--ink2);margin:4px 2px 0}
+.bvisual .one{width:100%;height:auto;border-radius:10px;background:#e8dfcc}
+.pfeat{padding:0}.pfeat-intro{text-align:center;padding:56px 0 28px}.pfeat-intro h2{margin:0}
+.pfeat-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.pfeat-grid article{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px 24px;box-shadow:0 2px 10px rgba(14,42,59,.04);min-width:0}
+.pfeat-grid h3{font-family:var(--serif);font-weight:800;font-size:22px;margin:0 0 8px;line-height:1.35}
+.pfeat-grid p{font-size:15px;line-height:1.8;color:var(--ink2);margin:0;overflow-wrap:anywhere}
+.vlog{padding:0}.vlog h2{text-align:center;padding-top:56px;margin:0 0 24px}
+.vlog-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.vlog-list article{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 22px}
+.vlog-list h3{font-family:var(--serif);font-weight:800;font-size:19px;margin:0 0 4px}
+.vlog-list small{display:block;color:var(--ink2);font-size:13px;margin-bottom:8px}
+.vlog-list ul{margin:0;padding-left:1.2em;font-size:14.5px;line-height:1.75;color:var(--ink2)}
+.bcta{margin-top:56px;padding:76px 0}
+.bcta h2{overflow-wrap:anywhere}.bcta p{position:relative;z-index:2;margin:-12px 0 22px;color:var(--ink)}
+@media(max-width:900px){
+ .bhero{grid-template-columns:minmax(0,1fr);gap:22px;padding:18px 0 8px}
+ .bcopy h1{font-size:clamp(46px,13vw,60px)}
+ .bcopy h2{font-size:24px}.bcopy .lead{font-size:15px}
+ .hero-actions .btn{width:100%;max-width:340px;justify-content:center}
+ .pfeat-intro{padding:24px 0 16px}.pfeat-intro h2{font-size:clamp(26px,7.5vw,34px)}
+ .pfeat-grid,.vlog-list{grid-template-columns:minmax(0,1fr);gap:12px}
+ .vlog h2{padding-top:32px;font-size:clamp(26px,7.5vw,34px)}
+ .bcta{padding:48px 0;margin-top:40px}
+}
+html,body{max-width:100%}
