@@ -76,3 +76,36 @@ section{padding:56px 0 0}
 
 /* 中文只在標點、空白處換行，不把詞拆兩半；太長才硬斷。標題平均分行、內文避免最後一行孤字（Miles 10/16「我不要一句話被斷句」） */
 body{word-break:keep-all;overflow-wrap:anywhere;line-break:strict}h1,h2,h3,h4{text-wrap:balance}p,li,dd,figcaption,blockquote{text-wrap:pretty}
+
+/* 首頁三扇門（Miles 10/21）：只用既有變數；桌機三欄、手機做成籤，無 JS 時三組全部顯示 */
+.doors{display:grid;grid-template-columns:repeat(3,1fr);column-gap:20px;row-gap:16px;grid-template-rows:auto repeat(3,1fr)}
+.door{display:flex;flex-direction:column;gap:16px;grid-row:span 4}
+@supports (grid-template-rows:subgrid){.door{display:grid;grid-template-rows:subgrid}}
+.door-tabs{display:none}
+.door-h{padding:0 4px 12px;border-bottom:1px solid var(--line)}
+.door-name{font-family:var(--serif);font-weight:800;font-size:26px;margin:0 0 2px;line-height:1.3}
+.door-h p{margin:0;font-size:15px;color:var(--ink2)}
+.door .card{padding:18px 22px;gap:18px;min-height:128px}
+.door .card h3{font-size:19px;line-height:1.4}
+.door .card p{font-size:15px}
+.card .tag{display:inline-block;margin:0 0 0 8px;padding:0 8px;font-size:12px;letter-spacing:.04em;line-height:1.6;border:1px solid var(--ink2);border-radius:999px;color:var(--ink2);vertical-align:1px;white-space:nowrap}
+@media(max-width:900px){
+ .doors{display:block}
+ .door{display:flex;margin-bottom:22px}
+ .doors.js .door{display:none;margin-bottom:0}.doors.js .door.on{display:flex}
+ .doors.js .door-name{display:none}
+ .doors.js .door-h{border-bottom:0;padding:0 2px}
+ .doors.js .door-tabs{display:flex;gap:8px;margin-bottom:12px}
+ .door-tabs button{flex:1;min-height:44px;padding:8px 6px;font:inherit;font-size:15px;font-weight:500;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:999px;cursor:pointer;white-space:nowrap}
+ .door-tabs button[aria-selected="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+ .door{gap:12px}
+ .door .card{padding:14px 18px;min-height:88px;gap:16px}.door .card h3{font-size:17px;margin-bottom:2px}.door .card p{font-size:14px}
+}
+/* 實踐筆記第四張（通鑑）：圖示置中不拉伸，四張卡同高；覆蓋 notes.css 的三欄 */
+.dot.timeline{background:var(--ink2)}
+@media(min-width:901px){#journal .cats{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1100px){#journal .cats{grid-template-columns:repeat(4,1fr)}}
+.cat.cat-icon picture{background:var(--bg)}
+.cat.cat-icon img{object-fit:contain;padding:22px;background:var(--bg)}
+@media(max-width:900px){.cat.cat-icon img{padding:14px}}
+@media(max-width:900px){.cat.cat-icon{min-height:136px}}
