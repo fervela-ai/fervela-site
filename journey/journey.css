@@ -62,8 +62,8 @@
 .shared-view .home-only{display:none!important}
 .shared-trip{position:relative}
 .shared-trip[hidden]{display:none}
-/* 頂部橫幅：先用淡色漸層占位（暖白→淡藍），之後把 .st-banner 換成圖片（background-image 或 <img>） */
-.st-banner{position:absolute;left:0;right:0;top:0;height:300px;pointer-events:none;background:linear-gradient(180deg,var(--bg) 0%,rgba(206,230,242,.75) 70%,rgba(206,230,242,.45) 100%);-webkit-mask-image:linear-gradient(#000 70%,transparent);mask-image:linear-gradient(#000 70%,transparent)}
+/* 頂部橫幅：GPT 生圖的通用插圖（不分目的地），品牌/視覺/飛鴻_分享頁插圖_1021 款 1 */
+.st-banner{position:absolute;left:0;right:0;top:0;height:300px;pointer-events:none;background:var(--bg) url(/journey/media/share-banner.webp) center top/cover no-repeat;-webkit-mask-image:linear-gradient(#000 55%,transparent);mask-image:linear-gradient(#000 55%,transparent)}
 .st-wrap{position:relative;width:min(1180px,calc(100% - 32px));margin:0 auto;padding:30px 0 30px}
 .st-head{text-align:center}
 .st-eyebrow{display:flex;align-items:center;justify-content:center;gap:14px;font-size:15px;color:var(--ink2);margin:0 0 8px}
