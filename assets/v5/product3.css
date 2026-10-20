@@ -46,3 +46,31 @@
  .bcta{padding:48px 0;margin-top:40px}
 }
 html,body{max-width:100%}
+/* 範例區塊（燎原頁）：籤沿用首頁三扇門寫法；無 JS 時五張全部顯示 */
+.demo{padding:0}.demo-intro{text-align:center;padding:56px 0 20px}.demo-intro h2{margin:0 0 8px}.demo-intro p{margin:0;color:var(--ink2);font-size:16px}
+.demo-src,.demo-card{background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:0 2px 10px rgba(14,42,59,.04);min-width:0}
+.demo-src{margin:0 0 20px;padding:0}
+.demo-src>summary,.demo-more>summary{cursor:pointer;font-weight:500;min-height:44px;display:flex;align-items:center}
+.demo-src>summary{padding:6px 22px}
+.demo-src .demo-body{padding:0 22px 18px}
+.demo-body{font-size:15px;line-height:1.85;color:var(--ink);overflow-wrap:anywhere}
+.demo-body p{margin:0 0 .8em;white-space:pre-line}.demo-body ol{margin:0 0 .8em;padding-left:1.4em}
+.demo-tabs{display:none}
+.demo.js .demo-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.demo-tabs button{flex:1 1 auto;min-height:44px;padding:8px 14px;font:inherit;font-size:15px;font-weight:500;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:999px;cursor:pointer;white-space:nowrap}
+.demo-tabs button[aria-selected="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.demo-cards{display:grid;gap:16px}
+.demo.js .demo-card:not(.on){display:none}
+.demo-card{padding:22px 24px}
+.demo-plat{margin:0 0 4px;font-size:13px;letter-spacing:.08em;color:var(--ink2)}
+.demo-card h3{font-family:var(--serif);font-weight:800;font-size:22px;margin:0 0 12px;line-height:1.4;overflow-wrap:anywhere}
+.demo-more{margin-top:4px}.demo-more>summary{text-decoration:underline;text-underline-offset:3px}
+.demo-card:has(.demo-more[open]) .demo-pre{display:none}
+.demo-note{margin:16px 0 0;font-size:13px;color:var(--ink2);text-align:center}
+.demo-act{display:flex;justify-content:center;margin-top:20px}
+@media(max-width:900px){
+ .demo-intro{padding:32px 0 16px}.demo-intro h2{font-size:clamp(26px,7.5vw,34px)}
+ .demo-tabs button{padding:8px 10px;font-size:14px}
+ .demo-card{padding:18px}.demo-card h3{font-size:19px}
+ .demo-act .btn{width:100%;max-width:340px;justify-content:center}
+}
