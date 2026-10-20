@@ -1,0 +1,7 @@
+[
+  {"id":"sample-any-1","category":"any","level":"low","slot":"any","title":"這口氣，慢慢放走了","body":"今天第 {n} 次把氣吹成小泡泡。日期：{date}。","reward":"一個軟綿綿的下午"},
+  {"id":"sample-any-2","category":"any","level":"mid","slot":"any","title":"河豚已經鬆一口氣","body":"今天第 {n} 次消氣，值得拍拍自己。{date}","reward":"一杯想像中的珍珠奶茶"},
+  {"id":"sample-any-3","category":"any","level":"high","slot":"any","title":"大口氣也能慢慢變小","body":"第 {n} 次的氣，噗一聲飄走啦。{date}","reward":"三顆看不見的小星星"},
+  {"id":"sample-meeting","category":"開會","level":"mid","slot":"any","title":"會議豚先下班","body":"今天第 {n} 次讓會議的氣變輕。{date}","reward":"五分鐘放空券"},
+  {"id":"sample-traffic","category":"塞車","level":"high","slot":"evening","title":"塞車豚抵達好心情站","body":"今天第 {n} 次把塞車的氣慢慢吹走。{date}","reward":"一路綠燈幻想券"}
+]

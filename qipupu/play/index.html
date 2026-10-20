@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#fdf6ed">
+  <!-- 資安長 10/17 建議①：網頁不准連外（殼攔不到 WebSocket／WebRTC，這裡當第二道） -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: blob:; connect-src 'self' data:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:">
+  <title>氣噗噗</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="app">
+    <main>
+      <section id="tab-calm" class="tab active" aria-label="消氣">
+        <div id="step-pick" class="step active">
+          <h1 class="hero-title">你在<em>氣</em>什麼？</h1>
+          <div class="puffer-zone"><img id="pick-puffer" class="puff-img" src="./assets/puff-medium.png" alt="" aria-hidden="true"></div>
+          <div id="category-buttons" class="category-grid" aria-label="選氣的類別"></div>
+          <div class="level-card">
+            <div class="level-head"><label for="before-level">有多氣？</label><strong id="before-label">很氣</strong></div>
+            <input id="before-level" type="range" min="1" max="5" value="3" aria-label="有多氣">
+            <div class="level-ends"><span>有點悶</span><span>氣炸了</span></div>
+          </div>
+          <button id="start-button" class="primary full" disabled>開始消氣</button>
+        </div>
+
+        <div id="step-breathe" class="step">
+          <div class="breathe-top">
+            <button id="back-pick" class="back-button" type="button" aria-label="回去選氣">‹ 回去選氣</button>
+          </div>
+          <h1 id="breath-instruction" class="instruction">慢慢吹，讓河豚消氣——</h1>
+          <p id="breath-debug" hidden style="margin:0;text-align:center;font-size:12px;color:#8a8f94;font-variant-numeric:tabular-nums"></p>
+          <p id="mode-note" class="mode-note"></p>
+          <div class="breath-stage">
+            <img id="breath-puffer" class="puff-img breathing" src="./assets/puff-angry.png" alt="" aria-hidden="true">
+            <div id="breath-message" class="breath-message" role="status" aria-live="polite"></div>
+            <div id="bubbles" class="bubbles" aria-hidden="true"></div>
+          </div>
+          <div class="ring-row">
+            <div id="ring" class="ring" role="progressbar" aria-label="消氣進度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+              <div class="ring-text"><strong id="progress-text">0%</strong><span id="ring-hint">消氣中</span></div>
+            </div>
+            <div class="mic-note"><img src="./assets/icon-mic.png" alt=""><span>不錄音、不存檔</span></div>
+          </div>
+          <button id="mode-button" class="pill-button full" type="button" hidden>繼續吹</button>
+        </div>
+
+        <div id="step-result" class="step">
+          <h1 class="sr-only">消氣成功！</h1>
+          <div class="cert-wrap"><img id="result-image" class="certificate-image" alt="這次的消氣證明書"></div>
+          <div class="result-mid">
+            <img id="result-puffer" class="result-puffer" src="./assets/puff-relaxed.png" alt="" aria-hidden="true">
+            <div class="after-card">
+              <p>現在還有多氣？<small>1 消了　5 還很氣</small></p>
+              <div id="after-buttons" class="after-buttons" aria-label="現在還有多氣"></div>
+            </div>
+          </div>
+          <button id="share-button" class="primary full" type="button">分享證明書</button>
+          <div class="action-row"><button id="save-button" class="pill-button" type="button">存成圖</button><button id="collect-button" class="pill-button" type="button">收進圖鑑</button></div>
+          <button id="again-button" class="text-button" type="button">再消一次</button>
+        </div>
+      </section>
+
+      <section id="tab-games" class="tab" aria-label="挑戰">
+        <div id="game-home" class="game-screen active">
+          <h1>慢慢吹，來挑戰</h1>
+          <p class="subheading">六款小遊戲，每次一分鐘內。</p>
+          <div id="game-cards" class="game-cards"></div>
+          <p class="game-record" id="game-home-record"></p>
+        </div>
+        <div id="game-levels" class="game-screen">
+          <button id="game-levels-back" class="back-button" type="button">‹ 回挑戰</button>
+          <h1 id="game-levels-title"></h1>
+          <p id="game-levels-record" class="subheading"></p>
+          <div id="game-level-grid" class="game-level-grid"></div>
+        </div>
+        <div id="game-play" class="game-screen">
+          <div class="game-top"><button id="game-play-back" class="back-button" type="button">‹ 回去</button><strong id="game-clock">60 秒</strong></div>
+          <h1 id="game-play-title"></h1>
+          <p id="game-instruction" class="subheading"></p>
+          <div id="game-stage" class="game-stage" aria-live="polite"></div>
+          <p id="game-message" class="game-message" role="status"></p>
+          <div class="game-ring-row">
+            <div id="game-ring" class="ring" role="progressbar" aria-label="關卡進度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+              <div class="ring-text"><strong id="game-progress">0%</strong><span id="game-ring-hint">慢慢吹</span></div>
+            </div>
+          </div>
+          <p id="game-mic-note" class="mode-note">先別吹，聽 1 秒周圍聲音…</p>
+          <button id="game-retry-mic" class="pill-button full" type="button" hidden>重新開麥克風</button>
+        </div>
+        <div id="game-result" class="game-screen">
+          <button id="game-result-back" class="back-button" type="button">‹ 回關卡</button>
+          <h1 id="game-result-title"></h1>
+          <div id="game-result-stars" class="game-result-stars"></div>
+          <p id="game-result-copy" class="game-result-copy"></p>
+          <p id="game-result-record" class="game-record"></p>
+          <div class="game-result-actions">
+            <button id="game-next" class="primary full" type="button">下一關</button>
+            <button id="game-replay" class="pill-button full" type="button">再玩一次</button>
+            <button id="game-share" class="pill-button full" type="button">分享紀錄</button>
+            <button id="game-save" class="text-button" type="button">存成圖</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="tab-collection" class="tab" aria-label="圖鑑">
+        <h1>河豚圖鑑</h1>
+        <p class="subheading">每消一種氣，就遇見一隻河豚。</p>
+        <div id="collection-grid" class="collection-grid"></div>
+      </section>
+
+      <section id="tab-certificates" class="tab" aria-label="證明書">
+        <h1>我的證明書</h1>
+        <p class="subheading">最近 30 張，點一下可再看看。</p>
+        <div id="certificate-list" class="certificate-list"></div>
+      </section>
+
+      <section id="tab-settings" class="tab" aria-label="設定">
+        <h1>設定</h1>
+        <div class="settings-list">
+          <button id="calibrate-button" class="setting-row" type="button"><span>試吹一下<small>量一量周圍聲音與吹氣音量</small></span><span>›</span></button>
+          <p id="calibrate-status" class="setting-note" role="status"></p>
+          <div class="setting-row static"><span>麥克風<small>只看音量，不錄音、不存檔、不上傳。</small></span></div>
+          <label class="setting-row" for="sound-switch"><span>音效</span><input id="sound-switch" type="checkbox" checked></label>
+          <button id="update-button" class="setting-row" type="button"><span>檢查更新<small>看看有沒有新版</small></span><span>›</span></button>
+          <a class="setting-row" href="mailto:contact@fervela.ai?subject=%E6%B0%A3%E5%99%97%E5%99%97%20%E6%84%8F%E8%A6%8B"><span>意見回饋<small>哪裡吹不動、想要什麼，寫信告訴我們</small></span><span>›</span></a>
+          <a class="setting-row" href="./privacy.html"><span>隱私說明<small>麥克風只看音量；證明書只存在你的手機</small></span><span>›</span></a>
+          <button id="reset-button" class="setting-row danger" type="button">重設所有紀錄</button>
+          <p class="help-line">真的撐不住，打 <a href="tel:1925">1925 安心專線（24 小時免費）</a></p>
+          <p id="version" class="version"></p>
+        </div>
+      </section>
+    </main>
+    <nav class="bottom-nav" aria-label="主選單">
+      <button class="nav-button active" data-tab="calm" aria-current="page"><span>◡</span>消氣</button>
+      <button class="nav-button" data-tab="games"><span>★︎</span>挑戰</button>
+      <button class="nav-button" data-tab="collection"><span>✿︎</span>圖鑑</button>
+      <button class="nav-button" data-tab="certificates"><span>▤</span>證明書</button>
+      <button class="nav-button" data-tab="settings"><span>⚙︎</span>設定</button>
+    </nav>
+  </div>
+  <div id="reveal" class="reveal" hidden role="button" tabindex="0" aria-label="點一下看證明書">
+    <div class="rays" aria-hidden="true">✦ ✧ ✦</div><img id="reveal-puffer" class="reveal-puffer" src="./assets/puff-relaxed.png" alt="" aria-hidden="true">
+    <strong id="reveal-name"></strong><span>點一下看證明書</span>
+  </div>
+  <div id="viewer" class="viewer" hidden><button id="viewer-close" class="viewer-close" type="button">關閉</button><img id="viewer-image" alt="收藏的消氣證明書"></div>
+  <script src="./js/native-bridge.js"></script>
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>
