@@ -1001,7 +1001,7 @@ function run(){
     var any=s.querySelector('.card:not([hidden])');
     s.hidden=!any;
     var sm=s.querySelector('.month small');if(sm){if(!sm.hasAttribute('data-all'))sm.setAttribute('data-all',sm.textContent);sm.textContent=(words.length||company||kind||levelTouched)?s.querySelectorAll('.card:not([hidden])').length+' 則':sm.getAttribute('data-all')}
-    if(words.length||company||levelTouched){if(any)s.open=true}else{s.open=opened[i]}
+    if(words.length||company||levelTouched){if(any)s.open=true}else{s.open=false}   // 10/21 行銷長：沒條件時月份全收（R102），不要 242 則全展開
     if(kind&&any)s.open=true;
     [].slice.call(s.querySelectorAll('.day')).forEach(function(d){
       var n=d.nextElementSibling,vis=false;
@@ -1022,8 +1022,7 @@ document.getElementById('clear-search').addEventListener('click',function(){q.va
 [].slice.call(document.querySelectorAll('.company-chip')).forEach(function(b){b.addEventListener('click',function(){var selected=b.getAttribute('data-company');company=company===selected?'':selected;run()})});
 levelButtons.forEach(function(b){b.addEventListener('click',function(){var v=b.getAttribute('data-filter-level'),i=sel.indexOf(v),a=sel.slice();if(i>=0)a.splice(i,1);else a.push(v);setSel(a);run()})});
 kindButtons.forEach(function(b){b.addEventListener('click',function(){var v=b.getAttribute('data-filter-kind');kind=kind===v?'':v;run()})});
-secs.forEach(function(s,i){s.addEventListener('toggle',function(){if(!q.value.trim()&&!company&&!levelTouched)opened[i]=s.open})});
-window.tongjianSearch={enter:function(){searchMode=true;run()},leave:function(){searchMode=false;cards.forEach(function(c){c.hidden=false});none.hidden=true;secs.forEach(function(s){s.querySelectorAll('.day').forEach(function(d){d.hidden=false})})},run:run};
+window.tongjianSearch={enter:function(){if(!searchMode)opened=secs.map(function(s){return s.open});searchMode=true;run()},leave:function(){if(searchMode)secs.forEach(function(s,i){s.open=opened[i]});searchMode=false;cards.forEach(function(c){c.hidden=false});none.hidden=true;secs.forEach(function(s){s.querySelectorAll('.day').forEach(function(d){d.hidden=false})})},run:run};
 })();(function(){
 var links=[].slice.call(document.querySelectorAll('.month-chip'));
 var sections=[].slice.call(document.querySelectorAll('.msec'));
