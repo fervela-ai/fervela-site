@@ -2,10 +2,10 @@
 <header class="header"><div class="header-in"><a class="brand" href="/" aria-label="Fervela.ai 首頁"><img class="logo" src="/assets/logo-a.svg" width="34" height="34" alt=""><span>Fervela.ai</span></a><button class="menu" aria-label="開啟選單" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button><nav id="nav" aria-label="主選單"><ul><li><a href="/#work">作品</a></li><li><a href="/#journal">實踐筆記</a></li><li><a href="mailto:contact@fervela.ai">聊聊你的想法</a></li></ul></nav></div></header>
 <main id="main">
 <div id="trip-note" class="trip-note" hidden><div class="wrap"><p>朋友分享了一趟行程給你。安裝飛鴻後，再點一次朋友傳來的連結，就能在 App 裡打開。</p><a class="btn" href="/journey/download/?r=share#download"><span>下載飛鴻</span><span aria-hidden="true">↓</span></a></div></div>
-<section id="shared-trip" class="shared-trip" hidden aria-labelledby="st-title"><div class="st-wrap">
-<p class="st-eyebrow">朋友分享了一趟行程給你</p>
+<section id="shared-trip" class="shared-trip" hidden aria-labelledby="st-title"><div class="st-banner" aria-hidden="true"></div><div class="st-wrap">
+<div class="st-head"><p class="st-eyebrow">朋友分享了一趟行程給你</p>
 <h1 id="st-title"></h1>
-<p id="st-meta" class="st-meta"></p>
+<p id="st-meta" class="st-meta"></p></div>
 <div id="st-days" class="st-days"></div>
 <p class="st-privacy">行程內容只在你的瀏覽器解碼、不經過我們主機。</p>
 <div class="st-cta"><a id="st-dl" class="btn" href="/journey/download/?r=share#download"><span>用飛鴻排你的旅行</span><span aria-hidden="true">→</span></a><small>免費・Android</small></div>
@@ -22,6 +22,7 @@
    計數（journey/share.js 的 shareCount）只送固定字串，這裡不把任何網址內容傳給它。 */
 (function(){
 var KIND={sight:'景點',breakfast:'吃飯',lunch:'吃飯',dinner:'吃飯',stay:'住宿',transit:'交通',transport:'交通',break:'其他',free:'其他'};
+var KCLS={'景點':'sight','吃飯':'food','住宿':'stay','交通':'move','其他':'other'};
 var WD=['日','一','二','三','四','五','六'];
 function el(tag,cls,text){var e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e}
 function fail(){document.documentElement.classList.remove('shared-view');var n=document.getElementById('trip-note');if(n)n.hidden=false}
@@ -59,7 +60,7 @@ function render(t){
   t.stops.forEach(function(s,i){s._i=i;if(!map[s.day]){map[s.day]=[];days.push(s.day)}map[s.day].push(s)});
   days.sort();
   var a=dayParts(t.start),b=dayParts(t.end),n=(a!=null&&b!=null&&b>=a&&(b-a)/864e5<90)?Math.round((b-a)/864e5)+1:days.length;
-  var meta=[];if(t.dest)meta.push(t.dest);meta.push(n+' 天');meta.push(t.stops.length+' 站');
+  var meta=[];if(t.dest)meta.push('📍 '+t.dest);meta.push(n+' 天');meta.push(t.stops.length+' 站');
   document.getElementById('st-meta').textContent=meta.join('・');
   var box=document.getElementById('st-days');box.textContent='';
   days.forEach(function(d,k){
@@ -70,11 +71,12 @@ function render(t){
     card.appendChild(head);
     var ol=el('ol','st-stops'),list=map[d].slice().sort(function(x,y){return (x.time&&y.time&&x.time!==y.time)?(x.time<y.time?-1:1):x._i-y._i});
     list.forEach(function(s){
-      var li=el('li','st-stop');
+      var li=el('li','st-stop'),kn=KIND[s.kind]||'其他',dot=el('span','st-dot k-'+KCLS[kn]);
+      dot.setAttribute('role','img');dot.setAttribute('aria-label',kn);dot.title=kn;
       li.appendChild(el('span','st-time',s.time||'—'));
-      var mid=el('span','st-main');mid.appendChild(el('span','st-name',s.name));
-      var d2=dur(s.dur);if(d2)mid.appendChild(el('span','st-dur','停留 '+d2));
-      li.appendChild(mid);li.appendChild(el('span','st-kind',KIND[s.kind]||'其他'));
+      li.appendChild(dot);
+      li.appendChild(el('span','st-name',s.name));
+      li.appendChild(el('span','st-dur',dur(s.dur)));
       ol.appendChild(li)
     });
     card.appendChild(ol);box.appendChild(card)

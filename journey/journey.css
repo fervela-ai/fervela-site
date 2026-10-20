@@ -57,25 +57,48 @@
 .cta>picture.jgoose{inset:auto;width:clamp(80px,11vw,150px);height:auto;right:max(24px,calc((100% - 1200px)/2));bottom:0;left:auto;top:auto}
 .cta>picture.jgoose img{position:static;inset:auto;width:100%;height:auto;object-fit:contain}
 @media(max-width:900px){.cta>picture.jgoose{left:12px;right:auto;width:84px;bottom:4px}}
-/* 朋友分享的行程頁（骨架；外觀之後照 GPT 視覺稿調）。有 #trip= 時 head 會先加 shared-view，避免首頁閃一下 */
+/* 朋友分享的行程頁（照 GPT 視覺稿 10/21；導覽列與頁尾維持官網現有的）。有 #trip= 時 head 會先加 shared-view，避免首頁閃一下 */
 .shared-view .home-only{display:none!important}
+.shared-trip{position:relative}
 .shared-trip[hidden]{display:none}
-.st-wrap{width:min(720px,calc(100% - 32px));margin:0 auto;padding:28px 0 0}
-.st-eyebrow{font-size:14px;color:var(--ink2);margin:0 0 6px}
-.shared-trip h1{font-size:clamp(28px,6vw,40px);line-height:1.3;margin:0 0 6px}
-.st-meta{font-size:16px;color:var(--ink2);margin:0 0 22px}
-.st-day{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px 6px;margin:0 0 16px;box-shadow:0 2px 10px rgba(14,42,59,.04)}
-.st-dayhead{display:flex;align-items:baseline;gap:10px;font-size:20px;margin:0 0 6px}
-.st-date{font-size:14px;font-weight:400;color:var(--ink2)}
+/* 頂部橫幅：先用淡色漸層占位（暖白→淡藍），之後把 .st-banner 換成圖片（background-image 或 <img>） */
+.st-banner{position:absolute;left:0;right:0;top:0;height:300px;pointer-events:none;background:linear-gradient(180deg,var(--bg) 0%,rgba(206,230,242,.75) 70%,rgba(206,230,242,.45) 100%);-webkit-mask-image:linear-gradient(#000 70%,transparent);mask-image:linear-gradient(#000 70%,transparent)}
+.st-wrap{position:relative;width:min(1180px,calc(100% - 32px));margin:0 auto;padding:30px 0 30px}
+.st-head{text-align:center}
+.st-eyebrow{display:flex;align-items:center;justify-content:center;gap:14px;font-size:15px;color:var(--ink2);margin:0 0 8px}
+.st-eyebrow:before,.st-eyebrow:after{content:"";height:1px;width:clamp(24px,8vw,92px);background:var(--ink);opacity:.45}
+.shared-trip h1{font-family:var(--serif);font-weight:900;font-size:clamp(32px,7vw,64px);line-height:1.25;margin:0 0 10px;text-align:center}
+.st-meta{font-size:16px;color:var(--ink);text-align:center;margin:0 0 26px}
+.st-days{display:grid;grid-template-columns:1fr;gap:16px}
+.st-day{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px 8px;box-shadow:0 2px 10px rgba(14,42,59,.05);min-width:0}
+.st-dayhead{display:flex;align-items:baseline;flex-wrap:wrap;font-family:var(--serif);font-weight:800;font-size:22px;line-height:1.3;margin:0 0 6px;letter-spacing:0}
+.st-date{font-size:18px}
+.st-date:before{content:"・";margin:0 6px}
 .st-stops{list-style:none;margin:0;padding:0}
-.st-stop{display:grid;grid-template-columns:52px 1fr auto;gap:10px;align-items:baseline;padding:11px 0;border-top:1px solid var(--line)}
+.st-stop{display:grid;grid-template-columns:50px 30px minmax(0,1fr) auto;gap:12px;align-items:center;padding:11px 0;border-top:1px solid var(--line)}
 .st-stop:first-child{border-top:0}
-.st-time{font-variant-numeric:tabular-nums;font-size:15px;color:var(--ink2)}
-.st-main{display:flex;flex-direction:column;gap:2px;min-width:0}
-.st-name{font-size:17px;font-weight:500;overflow-wrap:anywhere}
-.st-dur{font-size:13px;color:var(--ink2)}
-.st-kind{font-size:12px;border:1px solid var(--line);border-radius:999px;padding:2px 9px;color:var(--ink2);background:#fff;white-space:nowrap}
-.st-privacy{font-size:12px;color:var(--ink2);text-align:center;margin:18px 0 0}
-.st-cta{position:sticky;bottom:0;z-index:5;display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px 0 calc(12px + env(safe-area-inset-bottom));margin-top:12px;background:linear-gradient(rgba(250,246,239,0),var(--bg) 24%)}
-.st-cta .btn{max-width:420px}
+.st-time{font-variant-numeric:tabular-nums;font-size:16px;color:var(--ink)}
+.st-dot{width:30px;height:30px;border-radius:50%;background:#eee}
+.st-dot.k-sight{background:#f6d4d0}
+.st-dot.k-food{background:#fbddb4}
+.st-dot.k-stay{background:#d9cdf1}
+.st-dot.k-move{background:#cfe3f5}
+.st-dot.k-other{background:#d8e9d4}
+.st-name{font-size:17px;font-weight:700;overflow-wrap:anywhere}
+.st-dur{font-size:14px;color:var(--ink2);white-space:nowrap;text-align:right}
+.st-privacy{font-size:12px;color:var(--ink2);text-align:center;margin:22px 0 0}
+/* 主按鈕：手機固定在畫面底部；桌機在清單下方置中 */
+.st-cta{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(250,246,239,.97);border-top:1px solid var(--line);box-shadow:0 -4px 14px rgba(14,42,59,.08)}
+.st-cta .btn{width:100%;max-width:520px;justify-content:center;background:#EA5513;color:#fff;font-weight:700;font-size:17px}
+.st-cta .btn:hover{background:#d44a0f}
 .st-cta small{font-size:12px;color:var(--ink2)}
+.shared-view .footer{padding-bottom:110px}
+@media(min-width:900px){
+ .st-banner{height:340px}
+ .st-wrap{padding:36px 0 40px}
+ .st-eyebrow{font-size:17px}
+ .st-days{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:start}
+ .st-cta{position:static;background:none;border:0;box-shadow:none;padding:30px 0 0}
+ .st-cta .btn{width:auto;min-width:360px}
+ .shared-view .footer{padding-bottom:0}
+}
