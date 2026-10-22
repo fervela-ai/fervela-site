@@ -176,12 +176,11 @@ body{word-break:keep-all;overflow-wrap:anywhere;line-break:strict}h1,h2,h3,h4{te
     <div class="fine">免費使用。會議記錄與金鑰只存在你自己的裝置（<a href="privacy.html">你問的內容會送到你選的 AI ↗</a>）。</div>
   </div>
 
-  <span class="ver">最新版本 V3.8（2026-09-27）</span>
+  <span class="ver">最新版本 V3.9（2026-10-22）</span>
 
   <div class="lead" style="border-left-color:var(--gold)">
-    <b>🔔 V3.8：開會時跟得上。</b><br>
-你往上捲讀前面的發言時，畫面<b>不再被下一位的新字拉走</b>；右下角顯示「誰發言中：最新一句」，想看最新的再按一下。
-型號也更新了：<b>Claude Opus 5.5、GPT-6</b>。<br>
+    <b>🔔 V3.9：第一次打開更快，開完會還能分享給朋友。</b><br>
+使用須知縮成一頁五件事、勾選同意就能開始；決策報告底下多一顆「分享」，預設只傳一句介紹和下載連結，<b>不帶任何會議內容</b>。電腦版也能用手機遙控、手機版重新排版。新增<b>匿名使用統計（可以在設定關掉）</b>，只記你走到哪一步，不含會議內容與金鑰（<a href="privacy.html">詳見隱私頁</a>）。<br>
 <span style="color:var(--sub)">V3.6 以前的使用者請務必更新：Mac 版自 V3.7 起修正兩項安全問題（<a href="privacy.html#grok-v37">詳見隱私頁</a>）；Windows 版驗證中。</span>
   </div>
 
@@ -272,12 +271,12 @@ body{word-break:keep-all;overflow-wrap:anywhere;line-break:strict}h1,h2,h3,h4{te
       <div class="card">
         <h2>🍎 macOS</h2>
         <div class="tag">Intel 與 Apple 晶片通用</div>
-        <a class="btn" href="https://github.com/fervela-ai/fervela-site/releases/download/v3.8/AI-Boardroom-Mac-V3.8.zip">⬇ 下載 Mac 版</a>
+        <a class="btn" href="https://github.com/fervela-ai/fervela-site/releases/download/v3.9/AI-Boardroom-Mac-V3.9.zip">⬇ 下載 Mac 版</a>
       </div>
       <div class="card">
         <h2>🪟 Windows</h2>
         <div class="tag">Windows 10 / 11・Beta</div>
-        <a class="btn win" href="https://github.com/fervela-ai/fervela-site/releases/download/v3.8/AI-Boardroom-Windows-V3.8.zip">⬇ 下載 Windows 版</a>
+        <a class="btn win" href="https://github.com/fervela-ai/fervela-site/releases/download/v3.9/AI-Boardroom-Windows-V3.9.zip">⬇ 下載 Windows 版</a>
         <div class="fine" style="margin-top:8px"><b>Windows 版尚未包含這兩項安全修正</b>（Grok 席夾帶設定檔、GPT 席可被誘導讀檔），還在 Windows 上驗證。在那之前，請先不要選 Grok 當董事；用 GPT 當董事時，不要附上來路不明的文件。<a href="privacy.html#grok-v37">詳見隱私頁</a>。</div>
       </div>
     </div>
@@ -377,6 +376,23 @@ body{word-break:keep-all;overflow-wrap:anywhere;line-break:strict}h1,h2,h3,h4{te
     <h2>版本沿革</h2>
     <div class="rels">
       <details class="rel" open>
+        <summary><b>V3.9</b><span>2026-10-22</span></summary>
+        <ul>
+        <li><b>第一次打開快很多</b>——原本要先翻完十頁使用須知，現在一頁五件事、勾選同意就能開始；完整十頁一鍵可看，使用須知按鈕隨時能重看。用過舊版、已經同意過的人不會再被問一次。</li>
+        <li><b>開完會可以分享給朋友</b>——決策報告底下多一顆「📣 分享」：預設只傳一句介紹和下載連結，不帶任何會議內容；你自己勾了才附上這次的結論，送出前看得到會傳出去的那段字。</li>
+        <li><b>用手機遙控這台電腦</b>（電腦版）——在系統設定打開、手機掃 QR，同一個 Wi-Fi 下就能用手機開會，AI 照樣在電腦上跑；電腦端按「允許」才配對，換網路或閒置 8 小時自動關。</li>
+        <li><b>手機版重新排版</b>——直式畫面重新設計；上方常駐席位列，點頭像就請那一席發言、勾選決定誰出席，「⋯」可以換人或移除；精要／認真／深入三顆鍵放在手邊。每則發言底下直接打 1～5 分與 ★ 必收錄，逐句 ✓✗ 也找回來了。</li>
+        <li><b>Mac 正式版</b>——有自己的視窗，改成拖進「應用程式」就能裝的安裝檔；第一次打開時，會帶你把舊版的會議紀錄搬過來。</li>
+        <li><b>內建「個人決策董事會」</b>——五席現成的席位範本放在會議室選單最前面，可以複製一份照自己的需要改。</li>
+        <li><b>精要回答不再一直打斷你</b>——一輪最多停下來問你一次，其他想確認的事放進報告的「還要主席確認」。</li>
+        <li><b>Windows 安裝不用再自己打指令</b>——安裝視窗會自動帶你登入 Claude；裝好卻說「找不到 AI 引擎」時，App 會自己重新找、也有「自動修復」鈕，仍不行再一鍵複製診斷資訊給我們。</li>
+        <li><b>Claude 登入不再卡住</b>——安裝精靈直接打開瀏覽器登入頁；以前登入過期時會停在對話畫面，要自己打 /login。</li>
+        <li><b>匿名使用統計（可以關）</b>——第一次走到幾個固定步驟時送一則匿名紀錄，不含會議內容、問題、AI 回答或金鑰；設定裡可以關。</li>
+        <li><b>自動檢查新版本可以關</b>——系統設定多一個開關，關掉後就完全不連外；更新通知只會給官方網址的下載連結。</li>
+        <li>Windows 版尚未包含 V3.7 的兩項安全修正（還在 Windows 上驗證），其餘改進都有。</li>
+        </ul>
+      </details>
+      <details class="rel">
         <summary><b>V3.8</b><span>2026-09-27</span></summary>
         <ul>
         <li><b>開會時跟得上</b>——往上捲讀前面的發言時，畫面不再被下一位的新字拉走；右下角一顆按鈕顯示「誰發言中：最新一句」，講完變「有 N 則新發言」，按了才回到最新。</li>

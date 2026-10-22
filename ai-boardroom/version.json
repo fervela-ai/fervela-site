@@ -1,5 +1,5 @@
 {
-  "version": "3.8",
-  "notes": "V3.8：開會時往上捲讀，畫面不再被新字拉走；型號更新為 Claude Opus 5.5、GPT-6。V3.6 以前的使用者請務必更新（Mac 版自 V3.7 起修正兩項安全問題；Windows 版驗證中）。",
+  "version": "3.9",
+  "notes": "V3.9：第一次打開更快、開完會可分享給朋友、手機遙控電腦、手機版重新排版、Mac 正式版安裝檔、Windows 安裝自動登入、匿名使用統計（可關）。V3.6 以前的使用者請務必更新（Mac 版自 V3.7 起修正兩項安全問題；Windows 版驗證中）。",
   "url": "https://fervela.ai/ai-boardroom/"
 }
