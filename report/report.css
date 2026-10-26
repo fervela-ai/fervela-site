@@ -58,3 +58,11 @@ html,body{max-width:100%}.demo-bar span,.paper-head span{overflow-wrap:anywhere}
 .text-link{font-size:15px;padding:12px 4px;text-decoration:underline;text-underline-offset:5px;text-decoration-color:var(--gold)}
 .rcopy .platform+.platform{margin-top:4px}
 @media(max-width:900px){.breadcrumb .edition{flex-basis:100%;margin-left:0}.hero-actions .text-link{width:100%}}
+
+/* 10/27 首屏示意卡改 GPT 生圖、加典故段（比照飛鴻） */
+.rvisual-card{padding:0}.hero-card{width:100%;height:auto;display:block;border-radius:18px}
+.rallusion{text-align:center;padding:56px 0 32px}
+.rallusion h2{display:flex;align-items:center;gap:28px;justify-content:center;margin:0 0 20px}
+.rallusion h2:before,.rallusion h2:after{content:"";height:1px;background:var(--ink);opacity:.5;flex:1;max-width:260px}
+.rallusion p{text-wrap:balance;font-family:var(--serif);font-size:clamp(15px,1.5vw,19px);line-height:2;margin:0;color:var(--ink)}
+@media(max-width:900px){.rvisual-card{padding:0}.rallusion{padding:24px 0 20px}.rallusion p{font-size:15px;line-height:1.9}.rallusion h2{gap:14px;font-size:clamp(26px,7.5vw,34px)}}
