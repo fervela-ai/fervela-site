@@ -1,5 +1,5 @@
 {
-  "version": "3.9",
-  "notes": "V3.9：第一次打開更快、開完會可分享給朋友、手機遙控電腦、手機版重新排版、Mac 正式版安裝檔、Windows 安裝自動登入、匿名使用統計（可關）。V3.6 以前的使用者請務必更新（Mac 版自 V3.7 起修正兩項安全問題；Windows 版驗證中）。",
+  "version": "3.10",
+  "notes": "V3.10：安全加強（PDF 元件、Tailscale 外部連線）、分享結論限 300 字、Windows 安裝失敗會說清楚、手機遙控 8 小時自動失效。V3.6 以前的使用者請務必更新（Mac 版自 V3.7 起修正兩項安全問題；Windows 版驗證中）。",
   "url": "https://fervela.ai/ai-boardroom/"
 }
