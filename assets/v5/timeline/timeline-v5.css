@@ -118,7 +118,7 @@ body:has(.detail:not([hidden])) .v5-tl-hero p{margin-top:4px;font-size:15px}
 .up:hover{color:var(--ink)}
 
 /* ── 每則詳細頁 ── */
-.detail{max-width:820px;margin:8px auto 0;padding:36px 48px 32px;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:0 2px 14px rgba(14,42,59,.05)}
+.detail{max-width:1120px;margin:8px auto 0;padding:36px 48px 32px;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:0 2px 14px rgba(14,42,59,.05)}
 .detail h2{font-family:var(--serif);font-weight:800;font-size:clamp(26px,3vw,36px);line-height:1.4;color:var(--ink);margin:10px 0 14px}
 .dmeta{color:var(--sub);font-size:14px}
 .detail .lede{color:var(--ink2);font-size:17px}
