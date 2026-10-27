@@ -53,6 +53,16 @@
     "title_en": "I can't code. How did I build a reading app in three days?",
     "category": "practice"
   },
+  "loop-engineering-map": {
+    "publish": true,
+    "order": 10,
+    "link": "/courses/loop-engineering/",
+    "title": "迴圈工程自學地圖",
+    "date": "2026-10-28",
+    "desc": "從「下指令的人」變成「設計會下指令的系統的人」：七個階段，每階段有要讀的一手資料、要做的事、不過不進下一階的驗收。",
+    "title_en": "A self-study map for loop engineering",
+    "category": "map"
+  },
   "ai-coding-map": {
     "publish": true,
     "order": 7,

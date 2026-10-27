@@ -3,7 +3,7 @@
    字型：Noto Serif TC（標題）＋Noto Sans TC（內文），由各頁 <head> 的 Google Fonts 載入；載不到退回系統字。
    字級底線：正文不小於 17px；標記與頁首日期是標籤，收到 14px。 */
 :root{
-  --fv-bg:#FAF6EF; --fv-card:#FFFDF9; --fv-line:#E6DDCC; --fv-ink:#0E2A3B; --fv-ink2:#3D5563;
+  --fv-bg:#FFFFFF; --fv-card:#FFFFFF; --fv-line:#E6DDCC; --fv-ink:#0E2A3B; --fv-ink2:#3D5563;
   --fv-accent:#EA5513; --fv-accent-ink:#B8430D; --fv-accent-soft:#FDEEE6;
   --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
   --serif:"Noto Serif TC","Songti TC",serif;
@@ -19,18 +19,6 @@
   --g-ai-bg:#FBE3D5;    --g-ai-line:#F0B999;
   --g-paid-bg:#F1EEE8;  --g-paid-line:#DDD8CE;
 }
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  color-scheme:dark;
-  --fv-bg:#1A1D16; --fv-card:#23271C; --fv-line:#404633; --fv-ink:#F1EEE3; --fv-ink2:#C9CBB9;
-  --fv-accent-ink:#FF8A57; --fv-accent-soft:#2F2A1B;
-  --g-hub-bg:#2F2A1B;   --g-hub-line:#5A4A2C;
-  --g-uni-bg:#262A1E;   --g-uni-line:#454B35;
-  --g-prof-bg:#302B1A;  --g-prof-line:#5C5030;
-  --g-world-bg:#282A20; --g-world-line:#484B3A;
-  --g-find-bg:#232A1F;  --g-find-line:#434F3C;
-  --g-ai-bg:#33271B;    --g-ai-line:#6A4A2E;
-  --g-paid-bg:#25261F;  --g-paid-line:#43443A;
-}}
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
 body{
