@@ -27,12 +27,15 @@ export function saveResult(game, levelNo, stars, records = {}, storage = localSt
   if (!GAME_IDS.includes(game) || !Number.isInteger(levelNo) || levelNo < 1 || levelNo > 10) throw new RangeError('遊戲或關卡錯誤');
   if (!unlocked(game, levelNo, storage)) throw new Error('關卡尚未解鎖');
   const best = Math.max(bestStars(game, levelNo, storage), Math.max(0, Math.min(3, Math.floor(stars))));
-  storage.setItem(PREFIX + `${game}.level.${levelNo}`, JSON.stringify(best));
+  let saved = true;
+  try { storage.setItem(PREFIX + `${game}.level.${levelNo}`, JSON.stringify(best)); }
+  catch { saved = false; }
   for (const [key, value] of Object.entries(records)) {
     if (!['candlesMax', 'notesMax', 'longestBreathMs', 'socksFound', 'truckStreak', 'meetingPerfect'].includes(key)) continue;
     const updated = ['socksFound', 'meetingPerfect'].includes(key)
       ? record(key, storage) + Math.max(0, value) : Math.max(record(key, storage), value);
-    storage.setItem(PREFIX + `record.${key}`, JSON.stringify(updated));
+    try { storage.setItem(PREFIX + `record.${key}`, JSON.stringify(updated)); }
+    catch { saved = false; }
   }
-  return best;
+  return saved ? best : { best, saved: false };
 }

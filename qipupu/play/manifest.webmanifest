@@ -1,0 +1,18 @@
+{
+  "name": "氣噗噗",
+  "short_name": "氣噗噗",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#fdf6ed",
+  "theme_color": "#fdf6ed",
+  "lang": "zh-Hant",
+  "icons": [
+    {
+      "src": "./assets/puff-normal.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

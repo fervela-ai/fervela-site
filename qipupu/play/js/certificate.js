@@ -65,12 +65,12 @@ export function durationText(sec) {
 }
 
 export function statementText({ categoryLabel, pct, sec }) {
-  return `茲證明本河豚於本日因『${categoryLabel}』氣到鼓脹 ${pct}%，經慢慢吹氣 ${durationText(sec)}，已完全消氣。`;
+  return `茲證明本河豚於本日因『${categoryLabel}』氣到鼓脹 ${pct}%，經慢慢吹氣 ${durationText(sec)}，河豚慢慢放鬆了。`;
 }
 
 // 分三行寫，避免折行把「『開會』」或數字拆開
 export function statementLines({ categoryLabel, pct, sec }) {
-  return [`茲證明本河豚於本日因『${categoryLabel}』`, `氣到鼓脹 ${pct}%，經慢慢吹氣 ${durationText(sec)}，`, '已完全消氣。'];
+  return [`茲證明本河豚於本日因『${categoryLabel}』`, `氣到鼓脹 ${pct}%，經慢慢吹氣 ${durationText(sec)}，`, '河豚慢慢放鬆了。'];
 }
 
 const NO_LINE_START = '，。、；：！？」』）,.;:!?)';
@@ -130,7 +130,7 @@ const LAST_BASELINE = 1085;  // 正文最後一行不能碰到右下角印章
 
 // 證明書 1080×1350。內文在框內自動縮字（正文不低於 44px）、縮行距；標題 104px、正文 44～48px，
 // 手機上看（卡片寬約 340px）正文約 14px，比視覺稿的 12.5px 還大。
-export async function drawCertificate({ template, categoryLabel, date, serial, n, pct, sec }) {
+export async function drawCertificate({ template, categoryLabel, date, serial, n, pct, sec, share = false }) {
   const canvas = document.createElement('canvas');
   canvas.width = 1080;
   canvas.height = 1350;
@@ -140,14 +140,16 @@ export async function drawCertificate({ template, categoryLabel, date, serial, n
   const frame = await loadFrame(ASSETS.certificateFrame);
   if (frame) ctx.drawImage(frame, 0, 0, canvas.width, canvas.height);
 
-  const copy = fillTemplate(template, { n, date });
+  const copy = share
+    ? { title: '消氣完成', body: '河豚慢慢放鬆了。', reward: '給自己一點時間' }
+    : fillTemplate(template, { n, date });
   const set = (size, bold = false) => { ctx.font = `${bold ? 'bold ' : ''}${size}px ${FONT}`; };
   ctx.textAlign = 'center';
   ctx.textBaseline = 'alphabetic';
 
   // 類別小標籤（保留在標題上方）
   set(32, true);
-  const tag = `#${categoryLabel}`;
+  const tag = share ? '#氣噗噗' : `#${categoryLabel}`;
   const tagW = ctx.measureText(tag).width + 56;
   ctx.fillStyle = '#f9dccb';
   ctx.beginPath();
@@ -172,7 +174,8 @@ export async function drawCertificate({ template, categoryLabel, date, serial, n
   // 這次的真實數字（鼓脹 %、吹氣秒數）
   ctx.fillStyle = INK;
   set(44, true);
-  const statement = statementLines({ categoryLabel, pct, sec }).flatMap(line => wrapLines(ctx, line, 860));
+  const statement = (share ? ['河豚慢慢放鬆了。'] : statementLines({ categoryLabel, pct, sec }))
+    .flatMap(line => wrapLines(ctx, line, 860));
   let y = drawLines(ctx, statement, 540, 458, 66, 860);
 
   // 範本標題（14 字內，一行放得下；放不下就縮字）

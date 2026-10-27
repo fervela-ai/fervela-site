@@ -1,5 +1,9 @@
 let context;
 
+export function suspendSound() {
+  if (context?.state === 'running') void context.suspend().catch(() => {});
+}
+
 function tone(startHz, endHz, duration, startAt = 0, kind = 'sine') {
   const AudioContextClass = window.AudioContext || window.webkitAudioContext;
   if (!AudioContextClass) return;

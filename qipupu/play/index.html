@@ -5,8 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#fdf6ed">
   <!-- 資安長 10/17 建議①：網頁不准連外（殼攔不到 WebSocket／WebRTC，這裡當第二道） -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: blob:; connect-src 'self' data:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: blob:; connect-src 'self' data: https://t.fervela.ai; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:">
   <title>氣噗噗</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="apple-touch-icon" href="./assets/puff-normal.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="氣噗噗">
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>
@@ -31,7 +35,7 @@
           </div>
           <h1 id="breath-instruction" class="instruction">慢慢吹，讓河豚消氣——</h1>
           <p id="breath-debug" hidden style="margin:0;text-align:center;font-size:12px;color:#8a8f94;font-variant-numeric:tabular-nums"></p>
-          <p id="mode-note" class="mode-note"></p>
+          <p id="mode-note" class="mode-note" role="status" aria-live="polite"></p>
           <div class="breath-stage">
             <img id="breath-puffer" class="puff-img breathing" src="./assets/puff-angry.png" alt="" aria-hidden="true">
             <div id="breath-message" class="breath-message" role="status" aria-live="polite"></div>
@@ -53,7 +57,7 @@
             <img id="result-puffer" class="result-puffer" src="./assets/puff-relaxed.png" alt="" aria-hidden="true">
             <div class="after-card">
               <p>現在還有多氣？<small>1 消了　5 還很氣</small></p>
-              <div id="after-buttons" class="after-buttons" aria-label="現在還有多氣"></div>
+              <div id="after-buttons" class="after-buttons" role="group" aria-label="現在還有多氣"></div>
             </div>
           </div>
           <button id="share-button" class="primary full" type="button">分享證明書</button>
@@ -86,7 +90,7 @@
               <div class="ring-text"><strong id="game-progress">0%</strong><span id="game-ring-hint">慢慢吹</span></div>
             </div>
           </div>
-          <p id="game-mic-note" class="mode-note">先別吹，聽 1 秒周圍聲音…</p>
+          <p id="game-mic-note" class="mode-note" role="status" aria-live="polite">先別吹，聽 1 秒周圍聲音…</p>
           <button id="game-retry-mic" class="pill-button full" type="button" hidden>重新開麥克風</button>
         </div>
         <div id="game-result" class="game-screen">
@@ -121,11 +125,14 @@
         <div class="settings-list">
           <button id="calibrate-button" class="setting-row" type="button"><span>試吹一下<small>量一量周圍聲音與吹氣音量</small></span><span>›</span></button>
           <p id="calibrate-status" class="setting-note" role="status"></p>
-          <div class="setting-row static"><span>麥克風<small>只看音量，不錄音、不存檔、不上傳。</small></span></div>
+          <div class="setting-row static"><span>麥克風<small>在手機上分析音量和聲音的高低頻比例，判斷有沒有在吹；不錄音、不存檔、不上傳。</small></span></div>
           <label class="setting-row" for="sound-switch"><span>音效</span><input id="sound-switch" type="checkbox" checked></label>
+          <label class="setting-row" for="haptic-switch"><span>震動<small>吹氣與過關的觸覺回饋</small></span><input id="haptic-switch" type="checkbox" checked></label>
+          <label class="setting-row" for="funnel-switch"><span>匿名使用統計<small>只記第一次走到哪幾步，不含你的內容</small></span><input id="funnel-switch" type="checkbox" checked></label>
           <button id="update-button" class="setting-row" type="button"><span>檢查更新<small>看看有沒有新版</small></span><span>›</span></button>
+          <button id="install-button" class="setting-row" type="button" hidden><span>加到主畫面<small id="install-hint" class="install-hint" aria-live="polite">像 App 一樣從主畫面打開</small></span><span aria-hidden="true">›</span></button>
           <a class="setting-row" href="mailto:contact@fervela.ai?subject=%E6%B0%A3%E5%99%97%E5%99%97%20%E6%84%8F%E8%A6%8B"><span>意見回饋<small>哪裡吹不動、想要什麼，寫信告訴我們</small></span><span>›</span></a>
-          <a class="setting-row" href="./privacy.html"><span>隱私說明<small>麥克風只看音量；證明書只存在你的手機</small></span><span>›</span></a>
+          <a class="setting-row" href="./privacy.html"><span>隱私說明<small>麥克風只在手機上分析；證明書只存在你的手機</small></span><span>›</span></a>
           <button id="reset-button" class="setting-row danger" type="button">重設所有紀錄</button>
           <p class="help-line">真的撐不住，打 <a href="tel:1925">1925 安心專線（24 小時免費）</a></p>
           <p id="version" class="version"></p>
@@ -140,12 +147,19 @@
       <button class="nav-button" data-tab="settings"><span>⚙︎</span>設定</button>
     </nav>
   </div>
-  <div id="reveal" class="reveal" hidden role="button" tabindex="0" aria-label="點一下看證明書">
+  <div id="reveal" class="reveal" hidden role="dialog" aria-modal="true" aria-label="新河豚登場" tabindex="-1">
     <div class="rays" aria-hidden="true">✦ ✧ ✦</div><img id="reveal-puffer" class="reveal-puffer" src="./assets/puff-relaxed.png" alt="" aria-hidden="true">
     <strong id="reveal-name"></strong><span>點一下看證明書</span>
   </div>
-  <div id="viewer" class="viewer" hidden><button id="viewer-close" class="viewer-close" type="button">關閉</button><img id="viewer-image" alt="收藏的消氣證明書"></div>
-  <script src="./js/native-bridge.js"></script>
+  <div id="viewer" class="viewer" hidden role="dialog" aria-modal="true" aria-label="證明書檢視器"><button id="viewer-close" class="viewer-close" type="button">關閉</button><img id="viewer-image" alt="收藏的消氣證明書"></div>
+  <div id="funnel-consent" class="funnel-consent" hidden role="dialog" aria-modal="true" aria-labelledby="consent-title" aria-describedby="consent-text">
+    <div class="consent-card">
+      <h2 id="consent-title">幫我們改進氣噗噗？</h2>
+      <p id="consent-text">只記你第一次走到哪一步，匿名，不含你吹的內容、不含你選的事。之後可以在設定關掉。</p>
+      <div class="consent-actions"><button id="consent-yes" type="button">好</button><button id="consent-no" type="button">不要</button></div>
+    </div>
+  </div>
+  <script defer src="./js/native-bridge.js"></script>
   <script type="module" src="./js/app.js"></script>
 </body>
 </html>

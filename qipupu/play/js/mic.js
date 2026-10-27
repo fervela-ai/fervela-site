@@ -83,6 +83,8 @@ export function startBreathInput(onTick, { calibration = null, onReady = () => {
   };
   const tick = (volume, lowRatio) => {
     if (stopped) return;
+    if (!Number.isFinite(volume) || volume < 0) return;
+    if (!Number.isFinite(lowRatio) || lowRatio < 0) lowRatio = 0;
     if (count++ < FLOOR_MS / SAMPLE_MS) { floorSamples.push(volume); return; }
     if (count === FLOOR_MS / SAMPLE_MS + 1) {
       floor = quietFloor(floorSamples, calibration?.floor);
@@ -101,8 +103,15 @@ export function startBreathInput(onTick, { calibration = null, onReady = () => {
   (async () => {
     try {
       if (!navigator.mediaDevices?.getUserMedia) throw new Error('no microphone');
-      stream = await navigator.mediaDevices.getUserMedia(micConstraints());
-      if (stopped || document.hidden) { stop(); return; }
+      const acquired = await navigator.mediaDevices.getUserMedia(micConstraints());
+      if (stopped || document.hidden) {
+        acquired.getTracks().forEach(track => track.stop());
+        return;
+      }
+      stream = acquired;
+      stream.getTracks().forEach(track => track.addEventListener?.('ended', () => {
+        if (!stopped) { stop(); onError({ name: 'NotReadableError' }); }
+      }, { once: true }));
       const AudioContextClass = window.AudioContext || window.webkitAudioContext;
       if (!AudioContextClass) throw new Error('no audio context');
       audioContext = new AudioContextClass();

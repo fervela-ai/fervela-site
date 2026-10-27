@@ -19,11 +19,13 @@ export const BOOST_MAX = 1.3;           // 最多 1.3 倍速（0.9.2 從 2.5 降
 export const BREATH_CAP = 0.25;         // 0.9.2：一口氣最多消 25%（至少 4 口）
 export const BREATH_GAP_MS = 400;       // 停超過 0.4 秒才算這口結束、換下一口
 export const MAX_CERTIFICATES = 30;
-export const VERSION = '0.18';
+export const VERSION = '0.23';
 // 匿名使用漏斗（決策 885、產品長 10/21 定步驟）。總開關：法遵核過隱私說明段＋收集端上線（Miles 說「發佈」）才改 true，
 // 同一版要一起換 privacy.html 的「匿名使用統計」段（草稿 docs/隱私說明_匿名使用統計_草稿.md）。false 時完全不送、不寫任何紀錄。
-export const FUNNEL_ON = false;
-export const FUNNEL_STEPS = ['首次打開', '選類別', '開始吹氣', '消完氣', '第一個成果', '按分享', '從分享進來', '分享頁按下載'];
+// 分享時附的一句話＋網頁版連結（朋友點了直接玩，不用裝 App）
+export const SHARE_TEXT = '我剛幫河豚消氣了，你也來吹吹看（免安裝）：https://fervela.ai/qipupu/play/';
+export const FUNNEL_ON = true;
+export const FUNNEL_STEPS = ['首次打開', '選類別', '開始吹氣', '消完氣', '第一個成果'];  // 法遵 10/21：還沒有分享連結與分享頁，另兩步做好時同一版加回
 
 export const CATEGORIES = [
   { id: 'meeting', label: '開會', name: '會議豚' },

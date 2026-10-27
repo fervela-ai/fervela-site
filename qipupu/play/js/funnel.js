@@ -3,6 +3,8 @@ const DAY_MS = 24 * 60 * 60 * 1000;
 const RETURN_STEPS = [[1, '回訪_d1'], [7, '回訪_d7'], [30, '回訪_d30']];
 let current = null;
 let work = Promise.resolve();
+let enabledOverride = null;
+let pendingInit = null;
 
 function schedule(action) {
   work = work.then(action, action).catch(() => {});
@@ -39,21 +41,34 @@ function saveQueue(state) {
   state.storage.setItem(state.prefix + 'queue', JSON.stringify(state.queue));
 }
 
+function cleanEvent(state, event, oldest, today) {
+  if (!event || typeof event !== 'object' || !state.allow.has(event.step)) return null;
+  if (typeof event.date !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(event.date) ||
+      Number.isNaN(Date.parse(`${event.date}T00:00:00Z`)) ||
+      new Date(`${event.date}T00:00:00Z`).toISOString().slice(0, 10) !== event.date ||
+      event.date < oldest || event.date > today) return null;
+  if (!['<1', '1-5', '5-30', '30-1440', '>1440'].includes(event.mins)) return null;
+  return { product: state.product, version: state.version, platform: state.platform,
+    step: event.step, mins: event.mins, date: event.date };
+}
+
 async function flush(state) {
   if (state.off || !state.queue.length) return;
   // 收集端只收 31 天內的；更舊的丟掉
   const oldest = taiwanDay(Date.now() - 31 * DAY_MS);
-  state.queue = state.queue.filter((e) => e && e.date >= oldest).slice(-50);
+  const today = taiwanDay(Date.now());
+  state.queue = state.queue.map(event => cleanEvent(state, event, oldest, today)).filter(Boolean).slice(-50);
   if (!state.queue.length) { saveQueue(state); return; }
   // 收集端每批最多 30 則、每分鐘 30 則：一次 flush 只送一批，剩下的等下次 init／step 再送
   const batch = state.queue.slice(0, 30);
   let response;
   try {
     // 不設標頭：字串 body 預設 text/plain，不觸發 CORS 預檢
-    response = await fetch(state.endpoint, { method: 'POST', keepalive: true, body: JSON.stringify(batch) });
+    response = await fetch(state.endpoint, { method: 'POST', keepalive: true, body: JSON.stringify(batch), signal: state.controller.signal });
   } catch {
     return;
   }
+  if (state.off) return;
   const status = response?.status;
   if (status === 410) {
     state.off = true;
@@ -95,13 +110,16 @@ async function record(state, name) {
 
 const FervelaFunnel = {
   init(options) {
+    if (options && typeof options.product === 'string') pendingInit = { storage: globalThis.localStorage, prefix: `ffunnel:${options.product}:` };
     return schedule(async () => {
       if (!options || typeof options.product !== 'string' ||
           typeof options.version !== 'string' || typeof options.platform !== 'string' ||
           typeof options.endpoint !== 'string' || !Array.isArray(options.allow)) return;
       const storage = globalThis.localStorage;
       const prefix = `ffunnel:${options.product}:`;
-      const off = storage.getItem(prefix + 'off') === '1' || storage.getItem(prefix + 'optout') === '1';
+      const pendingOff = enabledOverride?.storage === storage && enabledOverride.on === false;
+      const off = storage.getItem(prefix + 'off') === '1' || storage.getItem(prefix + 'optout') === '1' || pendingOff;
+      if (pendingOff) storage.setItem(prefix + 'optout', '1');
       const storedFirst = storage.getItem(prefix + 'firstAt');
       const firstAt = storedFirst === null ? Date.now() : Number(storedFirst);
       if (!Number.isFinite(firstAt)) return;
@@ -119,9 +137,12 @@ const FervelaFunnel = {
         sent: new Set(readJSON(storage, prefix + 'sent', [])),
         queue: readJSON(storage, prefix + 'queue', []).slice(-50),
         off,
+        controller: new AbortController(),
       };
       current = state;
-      if (state.off) return;
+      enabledOverride = null;
+      pendingInit = null;
+      if (state.off) { state.queue = []; storage.removeItem(prefix + 'queue'); return; }
       await flush(state);
       if (state.off) return;
       if (storedFirst === null) await record(state, '首次打開');
@@ -134,19 +155,27 @@ const FervelaFunnel = {
   },
   // 設定頁的開關（法遵 10/16 建議：預設開）；關掉＝不再送、清暫存
   setEnabled(on) {
-    return schedule(async () => {
-      const state = current;
-      if (!state) return;
-      if (on) {
-        state.storage.removeItem(state.prefix + 'optout');
-        state.off = state.storage.getItem(state.prefix + 'off') === '1';
-      } else {
-        state.storage.setItem(state.prefix + 'optout', '1');
-        state.storage.removeItem(state.prefix + 'queue');
-        state.queue = [];
-        state.off = true;
+    const state = current;
+    if (!state) {
+      enabledOverride = { storage: globalThis.localStorage, on: Boolean(on) };
+      if (!on && pendingInit && pendingInit.storage === globalThis.localStorage) {
+        pendingInit.storage.setItem(pendingInit.prefix + 'optout', '1');
+        pendingInit.storage.removeItem(pendingInit.prefix + 'queue');
       }
-    });
+      return Promise.resolve();
+    }
+    if (on) {
+      state.storage.removeItem(state.prefix + 'optout');
+      state.off = state.storage.getItem(state.prefix + 'off') === '1';
+      if (!state.off) state.controller = new AbortController();
+    } else {
+      state.off = true;
+      state.queue = [];
+      state.controller.abort();
+      state.storage.setItem(state.prefix + 'optout', '1');
+      state.storage.removeItem(state.prefix + 'queue');
+    }
+    return Promise.resolve();
   },
   step(name) {
     return schedule(async () => {

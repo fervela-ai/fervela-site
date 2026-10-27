@@ -1,37 +1,29 @@
-import { CATEGORIES, LEVEL_LABELS, SAMPLE_MS, GENTLE_MIN, VERSION, BASE_SECONDS, FLOOR_FACTOR, LOW_RATIO_MIN, FUNNEL_ON, FUNNEL_STEPS } from './config.js';
+import { CATEGORIES, LEVEL_LABELS, SAMPLE_MS, GENTLE_MIN, VERSION, BASE_SECONDS, FLOOR_FACTOR, LOW_RATIO_MIN, FUNNEL_ON, FUNNEL_STEPS, SHARE_TEXT } from './config.js';
 import FervelaFunnel from './funnel.js';
+import { createConsentGate } from './consent.js';
 import { ASSETS, formImage, levelPuff, LEVEL_SCALE } from './assets.js';
 import { averageFloor, createBreathState, stepBreath, progress } from './breath.js';
 import { startBreathInput, startNativeMic, readVolume, micConstraints } from './mic.js';
-import { selectTemplate, dateKey, displayDate, makeSerial, drawCertificate, inflatePercent } from './certificate.js';
+import { selectTemplate, fillTemplate, statementText, dateKey, displayDate, makeSerial, drawCertificate, inflatePercent } from './certificate.js';
 import { read, write, sessions, collection, certificates, countFor, countForDay, saveCompletion, setAfter, resetAll } from './storage.js';
-import { playSound } from './audio.js';
-import { createLevel as createCandles, stepGame as stepCandles } from './games/candles.js';
-import { createLevel as createSoup, stepGame as stepSoup } from './games/soup.js';
-import { createLevel as createNotes, stepGame as stepNotes } from './games/notes.js';
-import { createLevel as createSocks, stepGame as stepSocks, spotlightAt } from './games/socks.js';
-import { createLevel as createTruck, stepGame as stepTruck } from './games/truck.js';
-import { createLevel as createMeeting, stepGame as stepMeeting, wheelAt } from './games/meeting.js';
-import { SOCK_CATALOG } from './games/levels.js';
-import { bestStars, unlocked, totalStars, record, saveResult } from './games/progress.js';
-import { GAME_ASSETS } from './games/assets.js';
-import { drawGameCard } from './games/share.js';
+import { playSound, suspendSound } from './audio.js';
+import { setupInstallRow } from './install.js';
 
-const GAMES = {
-  candles: { name: '吹蠟燭', about: '一口氣吹熄整排蠟燭', instruction: '慢慢吹，看看一口氣能熄幾根', create: createCandles, step: stepCandles },
-  soup: { name: '吹涼珍奶／熱湯', about: '慢慢吹涼才能喝', instruction: '慢慢吹到 60°C，別讓湯濺出來', create: createSoup, step: stepSoup },
-  notes: { name: '吹走便利貼', about: '把待辦一張張吹走', instruction: '慢慢吹，每張都要吹夠久', create: createNotes, step: stepNotes },
-  socks: { name: '襪子失蹤案', about: '看準另一隻襪子', instruction: '聚光燈裡看到同款襪，短吹一下', create: createSocks, step: stepSocks },
-  truck: { name: '垃圾車節拍長', about: '看燈號抓住節拍', instruction: '先看三拍倒數，橘燈短吹，灰燈別吹', create: createTruck, step: stepTruck },
-  meeting: { name: '視訊會議濾鏡就位', about: '定格表情和背景', instruction: '看題目，在正確格短吹定格', create: createMeeting, step: stepMeeting },
-};
+let GAMES, spotlightAt, wheelAt, SOCK_CATALOG, bestStars, unlocked, totalStars, record, saveResult, GAME_ASSETS, drawGameCard;
+let gamesPromise;
+async function loadGames() {
+  gamesPromise ??= import('./game-loader.js').then(game => {
+    ({ GAMES, spotlightAt, wheelAt, SOCK_CATALOG, bestStars, unlocked, totalStars, record, saveResult, GAME_ASSETS, drawGameCard } = game);
+  }).catch(error => { gamesPromise = null; throw error; });
+  return gamesPromise;
+}
 
 const $ = id => document.getElementById(id);
 const state = {
   tab: 'calm', step: 'pick', category: null, before: 3, mode: 'mic',
   breath: null, floor: 0, stream: null, audioContext: null, timer: null, micStop: null,
-  token: 0, templates: [], png: null, currentSession: null, startedAt: 0,
-  sound: read('sound', true), lastPuff: 0, finishing: false,
+  token: 0, breathToken: 0, templates: [], templatesPromise: null, png: null, certificateArgs: null, currentSession: null, startedAt: 0,
+  sound: read('sound', true), haptic: read('haptic', true), lastPuff: 0, finishing: false,
   gameId: null, gameLevel: 1, game: null, gameMicStop: null, gameBreathMs: 0,
   gameLongestMs: 0, gamePng: null,
   gameCardToken: 0, gameArt: null,
@@ -50,18 +42,82 @@ async function loadTemplates() {
   return [];
 }
 
+async function ensureTemplates() {
+  if (state.templates.length) return state.templates;
+  state.templatesPromise ??= loadTemplates();
+  const pending = state.templatesPromise;
+  const templates = await state.templatesPromise;
+  if (state.templatesPromise === pending) {
+    if (templates.length) state.templates = templates;
+    else state.templatesPromise = null;
+  }
+  return templates;
+}
+
 function categoryInfo(id) { return CATEGORIES.find(item => item.id === id) ?? CATEGORIES.at(-1); }
 function sound(name) { playSound(name, state.sound); }
 // 匿名使用漏斗：總開關關著時什麼都不做（見 config.js FUNNEL_ON）
-function funnelStep(name) { if (FUNNEL_ON) FervelaFunnel.step(name); }
+let consentGate;
+function funnelStep(name) { if (FUNNEL_ON) consentGate?.step(name); }
 function funnelPlatform() {
   if (location.protocol === 'app:' || window.qipupuNative?.ios) return 'ios';
   if (location.host === 'appassets.androidplatform.net') return 'android';
   return 'web';
 }
 function haptic(style) {
+  if (!state.haptic) return;
   if (window.qipupuNative?.ios) window.qipupuNative.postMessage(JSON.stringify({ type: 'haptic', style }));
   else try { navigator.vibrate?.(30); } catch { /* 瀏覽器不支援震動 */ }
+}
+
+const preloadedImages = new Set();
+function preloadImage(src) {
+  if (preloadedImages.has(src)) return;
+  preloadedImages.add(src);
+  if (document.querySelector(`img[src="${src}"]`)) return;
+  new Image().src = src;
+}
+function preloadBreathImages() {
+  for (const src of Object.values(ASSETS.puff)) preloadImage(src);
+}
+function preloadFormImage(category) { preloadImage(formImage(category)); }
+
+function focusActiveScreen() {
+  if (!$('viewer').hidden || !$('reveal').hidden) return;
+  const screen = document.querySelector('.tab.active .step.active, .tab.active .game-screen.active, .tab.active');
+  const heading = screen?.querySelector('h1');
+  if (!heading) return;
+  heading.tabIndex = -1;
+  heading.focus({ preventScroll: true });
+}
+
+let dialogReturnFocus = null;
+function openDialog(dialog, trigger = document.activeElement) {
+  dialogReturnFocus = trigger;
+  document.querySelector('.app').inert = true;
+  dialog.hidden = false;
+  (dialog.querySelector('button') ?? dialog).focus({ preventScroll: true });
+}
+function closeDialog(dialog) {
+  dialog.hidden = true;
+  document.querySelector('.app').inert = false;
+  const target = dialogReturnFocus;
+  dialogReturnFocus = null;
+  if (target?.isConnected && !target.closest('[hidden], .step:not(.active), .tab:not(.active)')) target.focus({ preventScroll: true });
+  else focusActiveScreen();
+}
+function closeReveal() { closeDialog($('reveal')); }
+function closeViewer() { closeDialog($('viewer')); }
+function trapDialogKey(event, dialog) {
+  if (event.key !== 'Tab') return;
+  const targets = [...dialog.querySelectorAll('button, [href], [tabindex]:not([tabindex="-1"])')].filter(item => !item.hidden);
+  if (!targets.length) { event.preventDefault(); dialog.focus(); return; }
+  const first = targets[0], last = targets.at(-1);
+  if (event.shiftKey && (document.activeElement === first || document.activeElement === dialog)) {
+    event.preventDefault(); last.focus();
+  } else if (!event.shiftKey && document.activeElement === last) {
+    event.preventDefault(); first.focus();
+  }
 }
 
 let toastTimer;
@@ -80,15 +136,22 @@ window.qipupuNativeToast = message => {
 };
 
 function setStep(step) {
-  if (state.step === 'breathe' && step !== 'breathe') stopBreathing();
+  if (state.step === 'breathe' && step !== 'breathe') {
+    state.breathToken++;
+    state.finishing = false;
+    stopBreathing();
+  }
   state.step = step;
   $('tab-calm').dataset.step = step;
   for (const name of ['pick', 'breathe', 'result']) $('step-' + name).classList.toggle('active', name === step);
+  queueMicrotask(focusActiveScreen);
   syncBackStack();
 }
 
 function setTab(tab) {
   if (state.tab === 'calm' && tab !== 'calm' && state.step === 'breathe') {
+    state.breathToken++;
+    state.finishing = false;
     stopBreathing();
     $('mode-note').textContent = '已暫停。按下方按鈕繼續吹。';
     $('mode-button').hidden = false;  // 0.18：暫停後原本沒有按鈕可以繼續，卡住
@@ -106,8 +169,10 @@ function setTab(tab) {
     else button.removeAttribute('aria-current');
   });
   if (tab === 'collection') renderCollection();
-  if (tab === 'certificates') renderCertificates();
+  if (tab === 'certificates') { void ensureTemplates(); renderCertificates(); }
+  if (tab === 'settings' && consentGate) $('funnel-switch').checked = consentGate.checked;
   if (tab === 'games') showGameHome();
+  else queueMicrotask(focusActiveScreen);
   syncBackStack();
 }
 
@@ -128,7 +193,11 @@ function renderCategories() {
       state.category = item.id;
       funnelStep('選類別');
       $('start-button').disabled = false;
-      renderCategories();
+      for (const other of $('category-buttons').children) {
+        const selected = other === button;
+        other.classList.toggle('selected', selected);
+        other.setAttribute('aria-pressed', String(selected));
+      }
     });
     return button;
   }));
@@ -197,7 +266,12 @@ function micErrorText(error) {
   const name = error?.name || error?.message || '未知';
   // 0.18：畫面不給使用者看英文錯誤代碼；代碼只在測試數值打開時附上
   const code = read('debug', false) ? `（${name}）` : '';
-  if (name === 'NotAllowedError' || name === 'SecurityError') return `還沒允許使用麥克風${code}：到手機的 設定 → 應用程式 → 氣噗噗 → 權限 → 麥克風，改成「使用期間允許」，再按下方按鈕。`;
+  if (name === 'NotAllowedError' || name === 'SecurityError') {
+    const nativeApp = Boolean(window.qipupuNative) || location.protocol === 'app:' || location.host === 'appassets.androidplatform.net';
+    return nativeApp
+      ? `還沒允許使用麥克風${code}：到手機的 設定 → 應用程式 → 氣噗噗 → 權限 → 麥克風，改成「使用期間允許」，再按下方按鈕。`
+      : `還沒允許使用麥克風${code}：到瀏覽器網址列旁的網站設定，允許使用麥克風，再按下方按鈕。`;
+  }
   if (name === 'NotFoundError') return `找不到麥克風${code}，請確認手機的麥克風可以使用。`;
   if (name === 'NotReadableError' || name === 'AbortError') return `麥克風正被別的 App 使用，或被系統關掉了${code}：關掉通話或錄音的 App，並檢查快速設定的「麥克風存取」，再按下方按鈕。`;
   return `麥克風暫時打不開${code}，請再按一次下方按鈕。`;
@@ -282,9 +356,14 @@ function beginBreathing() {
   if (!state.category) return;
   funnelStep('開始吹氣');
   state.finishing = false;
+  state.breathToken++;
+  state.certificateArgs = null;
   state.startedAt = Date.now();  // 證明書上的「吹氣 N 秒」＝從這裡到消完實際經過（含打嗝重來）
   state.breath = createBreathState(state.before);
   state.lastPuff = 0;
+  void ensureTemplates();
+  preloadBreathImages();
+  preloadFormImage(state.category);
   $('breath-puffer').classList.remove('finished');
   $('breath-message').textContent = '';
   setStep('breathe');
@@ -295,6 +374,7 @@ function beginBreathing() {
 async function finishBreathing() {
   if (state.finishing) return;
   state.finishing = true;
+  const token = ++state.breathToken;
   stopBreathing();
   $('breath-message').textContent = '噗——';
   $('breath-puffer').classList.add('finished');
@@ -302,10 +382,26 @@ async function finishBreathing() {
   setPuffImage($('breath-puffer'), ASSETS.puff.relaxed);
   sound('finish');
   await new Promise(resolve => setTimeout(resolve, 650));
-  if (state.step !== 'breathe') return;
+  if (state.step !== 'breathe' || state.tab !== 'calm' || state.breathToken !== token) return;
+  $('mode-note').textContent = '證明書範本讀取中…';
+  const templatesReady = ensureTemplates();
+  const pending = state.templatesPromise;
+  let timeout;
+  state.templates = await Promise.race([
+    templatesReady,
+    new Promise(resolve => { timeout = setTimeout(() => resolve([]), 8000); }),
+  ]);
+  clearTimeout(timeout);
+  if (!state.templates.length && state.templatesPromise === pending) state.templatesPromise = null;
+  if (state.step !== 'breathe' || state.tab !== 'calm' || state.breathToken !== token) return;
+  if (!state.templates.length) {
+    $('mode-note').textContent = '證明書範本讀取失敗，請再試一次。';
+    state.finishing = false;
+    return;
+  }
   const now = new Date();
   const today = dateKey(now);
-  const usedIds = certificates().filter(item => item.date === today).map(item => item.templateId);
+  const usedIds = certificates().filter(item => item && item.date === today).map(item => item.templateId);
   const template = selectTemplate(state.templates, { category: categoryInfo(state.category).label, level: state.before, date: now, usedIds });
   if (!template) {
     $('mode-note').textContent = '證明書範本讀取失敗，請再試一次。';
@@ -315,11 +411,20 @@ async function finishBreathing() {
   const sec = Math.max(1, Math.round((Date.now() - state.startedAt) / 1000));
   const pct = inflatePercent(state.before);
   const n = countForDay(state.category, now) + 1;
-  const serial = makeSerial(now, sessions().filter(item => new Date(item.ts).toDateString() === now.toDateString()).length + 1);
+  const serial = makeSerial(now, sessions().filter(item => item && new Date(item.ts).toDateString() === now.toDateString()).length + 1);
+  const certificateArgs = { template, categoryLabel: categoryInfo(state.category).label, date: now, serial, n, pct, sec };
+  const png = await drawCertificate(certificateArgs);
+  if (state.step !== 'breathe' || state.tab !== 'calm' || state.breathToken !== token) return;
   const saved = saveCompletion({ ts: now.toISOString(), category: state.category, before: state.before, templateId: template.id, date: today, serial, pct, sec });
-  state.currentSession = saved.sessionIndex;
-  state.png = await drawCertificate({ template, categoryLabel: categoryInfo(state.category).label, date: now, serial, n, pct, sec });
+  state.currentSession = saved.saved || !saved.failed.includes('sessions') ? saved.sessionIndex : null;
+  state.certificateArgs = certificateArgs;
+  state.png = png;
+  const content = fillTemplate(template, { n, date: now });
+  $('result-image').alt = `${content.title}。${statementText({ categoryLabel: categoryInfo(state.category).label, pct, sec })}${content.body}。${content.reward}。${displayDate(now)}，第 ${serial} 號。`;
   showResult(saved.first);
+  $('collect-button').textContent = saved.saved ? '收進圖鑑' : '這次沒存成';
+  $('collect-button').disabled = !saved.saved;
+  if (!saved.saved) window.qipupuNativeToast('這次沒存成，但證明書還能存成圖。');
 }
 
 function showResult(first) {
@@ -334,6 +439,7 @@ function showResult(first) {
     $('reveal-name').textContent = `${categoryInfo(state.category).name}登場！`;
     $('reveal-puffer').src = formImage(state.category);
     $('reveal').hidden = false;
+    openDialog($('reveal'));
     sound('reveal');
   }
 }
@@ -345,7 +451,19 @@ function renderAfter(selected) {
     button.textContent = String(value);
     button.className = value === selected ? 'selected' : '';
     button.setAttribute('aria-pressed', String(value === selected));
-    button.addEventListener('click', () => { setAfter(state.currentSession, value); renderAfter(value); });
+    button.setAttribute('aria-label', `現在還有多氣：${value}`);
+    button.addEventListener('click', () => {
+      if (state.currentSession === null || !setAfter(state.currentSession, value)) {
+        window.qipupuNativeToast('這次沒存成。');
+        return;
+      }
+      for (const other of $('after-buttons').children) {
+        const active = other === button;
+        other.classList.toggle('selected', active);
+        other.setAttribute('aria-pressed', String(active));
+      }
+      button.focus();
+    });
     return button;
   }));
 }
@@ -373,8 +491,8 @@ function renderCollection(preview = null) {
 function parseDate(key) { return new Date(Number(key.slice(0, 4)), Number(key.slice(4, 6)) - 1, Number(key.slice(6, 8))); }
 
 function certificateSession(item) {
-  const daily = sessions().filter(session => dateKey(new Date(session.ts)) === item.date);
-  const index = Number(item.serial.slice(4)) - 1;
+  const daily = sessions().filter(session => session?.ts && dateKey(new Date(session.ts)) === item.date);
+  const index = Number(item.serial?.slice(4)) - 1;
   const session = daily[index];
   return {
     category: session?.category ?? 'other',
@@ -407,13 +525,19 @@ function renderCertificates() {
     arrow.textContent = '›';
     row.append(info, arrow);
     row.addEventListener('click', async () => {
-      const template = state.templates.find(t => t.id === item.templateId);
-      if (!template) return;
+      const templates = await ensureTemplates();
+      if (state.tab !== 'certificates') return;
+      const template = templates.find(t => t.id === item.templateId);
+      if (!template) { window.qipupuNativeToast('證明書範本讀取失敗，請再試一次。'); return; }
       // 0.1 版存的證明書沒有鼓脹%與秒數，用當時的「多氣」補一個合理值
       const pct = item.pct ?? inflatePercent(before, () => .5);
       const sec = item.sec ?? BASE_SECONDS[before - 1];
       $('viewer-image').src = await drawCertificate({ template, categoryLabel: categoryInfo(category).label, date: parseDate(item.date), serial: item.serial, n, pct, sec });
-      $('viewer').hidden = false;
+      const date = parseDate(item.date);
+      const content = fillTemplate(template, { n, date });
+      $('viewer-image').alt = `${content.title}。${statementText({ categoryLabel: categoryInfo(category).label, pct, sec })}${content.body}。${content.reward}。${displayDate(date)}，第 ${item.serial} 號。`;
+      openDialog($('viewer'), row);
+      syncBackStack();
     });
     return row;
   }));
@@ -429,7 +553,8 @@ function downloadPng(png = state.png) {
   link.click();
 }
 
-async function saveOrShare(type, png = state.png) {
+async function saveOrShare(type, png = null) {
+  if (png === null && state.certificateArgs) png = await drawCertificate({ ...state.certificateArgs, share: true });
   if (!png) return;
   if (window.qipupuNative?.postMessage) {
     window.qipupuNative.postMessage(JSON.stringify({ type, png }));
@@ -440,7 +565,7 @@ async function saveOrShare(type, png = state.png) {
     const blob = await (await fetch(png)).blob();
     const file = new File([blob], 'qipupu.png', { type: 'image/png' });
     if (navigator.share && (!navigator.canShare || navigator.canShare({ files: [file] }))) {
-      await navigator.share({ files: [file] });
+      await navigator.share({ files: [file], text: SHARE_TEXT });
       return;
     }
   } catch (error) {
@@ -511,16 +636,24 @@ function setGameScreen(name) {
   for (const screen of ['home', 'levels', 'play', 'result']) {
     $('game-' + screen).classList.toggle('active', name === screen);
   }
+  queueMicrotask(focusActiveScreen);
   syncBackStack();
 }
 
 // 0.18：手機返回鍵／右滑回上一層，不要直接跳出 App（陌生人最常因此給一星；Miles 10/21 在溫故也要求同樣行為）
 // 做法：不在首頁時，網頁歷史裡留一格；按返回＝吃掉那一格，我們自己退一層，還沒回到首頁就再留一格。
-function atRoot() { return state.tab === 'calm' && state.step === 'pick'; }
+function atRoot() { return state.tab === 'calm' && state.step === 'pick' && $('viewer').hidden && $('reveal').hidden && $('funnel-consent').hidden; }
+let returningToRoot = false;
 function syncBackStack() {
-  if (!atRoot() && !history.state?.qipupuInner) history.pushState({ qipupuInner: true }, '');
+  if (atRoot() && history.state?.qipupuInner && !returningToRoot) {
+    returningToRoot = true;
+    history.back();
+  } else if (!atRoot() && !history.state?.qipupuInner) history.pushState({ qipupuInner: true }, '');
 }
 function goBackOneLevel() {
+  if (!$('funnel-consent').hidden) { history.pushState({ qipupuInner: true }, ''); return; }
+  if (!$('viewer').hidden) { closeViewer(); return; }
+  if (!$('reveal').hidden) { closeReveal(); return; }
   if (state.tab === 'games') {
     const screen = state.gameScreen ?? 'home';
     if (screen === 'play' || screen === 'result') showGameLevels();
@@ -565,8 +698,13 @@ function gameStars(container, earned) {
   container.setAttribute('aria-label', `${earned} 顆星，共 3 顆`);
 }
 
-function showGameHome() {
+async function showGameHome() {
   setGameScreen('home');
+  if (!GAMES) {
+    try { await loadGames(); }
+    catch { $('game-home-record').textContent = '挑戰暫時無法載入，切換分頁後可重試。'; return; }
+  }
+  if (state.tab !== 'games') return;
   $('game-cards').replaceChildren(...Object.entries(GAMES).map(([id, game]) => {
     const button = document.createElement('button');
     button.type = 'button';
@@ -921,6 +1059,7 @@ async function finishGame() {
   const game = state.game;
   const id = state.gameId;
   const levelNo = state.gameLevel;
+  let savedGame = null;
   if (game.done) {
     haptic('success');
     const records = { longestBreathMs: state.gameLongestMs };
@@ -929,7 +1068,7 @@ async function finishGame() {
     if (id === 'socks') records.socksFound = game.pairs;
     if (id === 'truck') records.truckStreak = game.maxStreak;
     if (id === 'meeting') records.meetingPerfect = game.perfect;
-    saveResult(id, levelNo, game.stars, records);
+    savedGame = saveResult(id, levelNo, game.stars, records);
   }
   setGameScreen('result');
   $('game-result-title').textContent = game.done ? '過關！' : id === 'socks' && game.event === 'tooManyWrong' ? '洗衣機贏了'
@@ -947,7 +1086,8 @@ async function finishGame() {
     : id === 'meeting' ? `完美定格 ${record('meetingPerfect')} 次`
     : `${record(id === 'candles' ? 'candlesMax' : 'notesMax')} ${id === 'candles' ? '根' : '張'}`}`
     : '再試一次，短吹抓準時機。';
-  $('game-next').hidden = !game.done || levelNo === 10;
+  if (game.done && savedGame?.saved === false) $('game-result-record').textContent = '這次沒存成，但過關結果還能存成圖。';
+  $('game-next').hidden = !game.done || levelNo === 10 || savedGame?.saved === false;
   $('game-share').hidden = !game.done;
   $('game-save').hidden = !game.done;
   $('game-share').disabled = game.done;
@@ -977,22 +1117,53 @@ function bindEvents() {
     else $('calibrate-status').textContent = '網頁版重新整理就是最新版。';
   });
   $('save-button').addEventListener('click', () => saveOrShare('save'));
-  $('share-button').addEventListener('click', () => { funnelStep('按分享'); saveOrShare('share'); });
+  $('share-button').addEventListener('click', () => { saveOrShare('share'); });
   $('game-levels-back').addEventListener('click', showGameHome);
   $('game-play-back').addEventListener('click', () => showGameLevels());
   $('game-result-back').addEventListener('click', () => showGameLevels());
   $('game-next').addEventListener('click', () => startGame(state.gameId, state.gameLevel + 1));
   $('game-replay').addEventListener('click', () => startGame(state.gameId, state.gameLevel));
   $('game-retry-mic').addEventListener('click', startGameMic);
-  $('game-share').addEventListener('click', () => { funnelStep('按分享'); saveOrShare('share', state.gamePng); });
+  $('game-share').addEventListener('click', () => { saveOrShare('share', state.gamePng); });
   $('game-save').addEventListener('click', () => saveOrShare('save', state.gamePng));
   $('collect-button').addEventListener('click', () => setTab('collection'));
   $('again-button').addEventListener('click', () => { state.category = null; $('start-button').disabled = true; renderCategories(); setStep('pick'); });
-  const closeReveal = () => { $('reveal').hidden = true; };
   $('reveal').addEventListener('click', closeReveal);
-  $('reveal').addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') closeReveal(); });
-  $('viewer-close').addEventListener('click', () => { $('viewer').hidden = true; });
+  $('reveal').addEventListener('keydown', event => {
+    trapDialogKey(event, $('reveal'));
+    if (event.key === 'Enter' || event.key === ' ' || event.key === 'Escape') { event.preventDefault(); closeReveal(); }
+  });
+  $('viewer-close').addEventListener('click', closeViewer);
+  $('viewer').addEventListener('keydown', event => {
+    trapDialogKey(event, $('viewer'));
+    if (event.key === 'Escape') { event.preventDefault(); closeViewer(); }
+  });
   $('sound-switch').addEventListener('change', event => { state.sound = event.target.checked; write('sound', state.sound); });
+  $('haptic-switch').addEventListener('change', event => { state.haptic = event.target.checked; write('haptic', state.haptic); });
+  // 匿名使用統計開關（法遵 10/21：同一版要有；預設開，關掉＝不再送、清掉還沒送出的）
+  if (funnelPlatform() !== 'ios') $('funnel-switch').addEventListener('change', event => FervelaFunnel.setEnabled(event.target.checked));
+  else $('funnel-switch').addEventListener('change', event => consentGate.setEnabled(event.target.checked));
+  $('funnel-switch').addEventListener('change', async event => {
+    const requested = event.target.checked;
+    await Promise.resolve();
+    event.target.checked = consentGate?.checked ?? false;
+    if (requested && !event.target.checked) window.qipupuNativeToast('匿名使用統計目前無法傳送。');
+  });
+  if (funnelPlatform() === 'ios') {
+    $('consent-yes').addEventListener('click', () => {
+      consentGate.respond(true);
+      closeDialog($('funnel-consent'));
+      syncBackStack();
+      $('funnel-switch').checked = consentGate.checked;
+    });
+    $('consent-no').addEventListener('click', () => {
+      consentGate.respond(false);
+      closeDialog($('funnel-consent'));
+      syncBackStack();
+      $('funnel-switch').checked = false;
+    });
+    $('funnel-consent').addEventListener('keydown', event => trapDialogKey(event, $('funnel-consent')));
+  }
   $('calibrate-button').addEventListener('click', calibrate);
   $('reset-button').addEventListener('click', event => {
     if (event.target.dataset.confirm !== 'yes') {
@@ -1000,28 +1171,46 @@ function bindEvents() {
       event.target.textContent = '再按一次，確定重設';
       return;
     }
-    resetAll();
+    if (!resetAll()) {
+      $('calibrate-status').textContent = '這次沒重設成功，請再試一次。';
+      return;
+    }
     state.sound = true;
     $('sound-switch').checked = true;
+    state.haptic = true;
+    $('haptic-switch').checked = true;
     event.target.dataset.confirm = '';
     event.target.textContent = '重設所有紀錄';
     $('calibrate-status').textContent = '紀錄已重設。';
     renderCollection();
     renderCertificates();
   });
-  window.addEventListener('popstate', () => { goBackOneLevel(); syncBackStack(); });
-  window.addEventListener('qipupu-pause', () => { stopBreathing(); stopGameMic(); stopMicrophone(); });  // 殼切背景時送來（資安長 10/17 建議②）
-  document.addEventListener('visibilitychange', () => {
-    if (!document.hidden) return;
-    stopBreathing();
-    stopGameMic();
-    if (state.step === 'breathe') { $('mode-note').textContent = '已暫停。按下方按鈕繼續吹。'; $('mode-button').hidden = false; }
-    if (state.tab === 'games' && $('game-play').classList.contains('active')) {
-      $('game-mic-note').textContent = '已暫停。按下方按鈕繼續。';
-      $('game-retry-mic').hidden = false;
-    }
-    else $('calibrate-status').textContent = '';
+  window.addEventListener('popstate', () => {
+    if (returningToRoot) { returningToRoot = false; syncBackStack(); return; }
+    goBackOneLevel();
+    syncBackStack();
   });
+  window.addEventListener('qipupu-pause', pauseInputs);  // 殼切背景時送來（資安長 10/17 建議②）
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) pauseInputs();
+  });
+}
+
+function pauseInputs() {
+  suspendSound();
+  if (state.tab === 'calm' && state.step === 'breathe') {
+    state.breathToken++;
+    state.finishing = false;
+    $('mode-note').textContent = '已暫停。按下方按鈕繼續吹。';
+    $('mode-button').hidden = false;
+  }
+  if (state.tab === 'games' && $('game-play').classList.contains('active')) {
+    $('game-mic-note').textContent = '已暫停。按下方按鈕繼續。';
+    $('game-retry-mic').hidden = false;
+  }
+  stopBreathing();
+  stopGameMic();
+  stopMicrophone();
 }
 
 // 除錯／驗收用：網址帶 ?demo=blow|hiccup|result（可加 &p=40 進度、&first=1 看新河豚登場）或 ?tab=collection 直接跳到畫面。
@@ -1033,6 +1222,10 @@ async function applyDemo() {
   if (tab) setTab(tab);
   if (params.get('unlock')) renderCollection({ meeting: '20261017', traffic: '20261016', partner: '20261015', other: '20261014' });  // 只畫畫面看，不寫入紀錄
   if (!demo) return;
+  if (demo === 'result' || demo === 'stress') {
+    state.templatesPromise ??= loadTemplates();
+    state.templates = await state.templatesPromise;
+  }
   state.category = params.get('cat') || 'meeting';
   state.before = Number(params.get('lv') || 4);
   $('before-level').value = String(state.before);
@@ -1062,21 +1255,31 @@ async function applyDemo() {
     const now = new Date();
     const template = selectTemplate(state.templates, { category: categoryInfo(state.category).label, level: state.before, date: now });
     const serial = makeSerial(now, 127);
-    state.png = await drawCertificate({ template, categoryLabel: categoryInfo(state.category).label, date: now, serial, n: 1, pct: 87, sec: 42 });
+    state.certificateArgs = { template, categoryLabel: categoryInfo(state.category).label, date: now, serial, n: 1, pct: 87, sec: 42 };
+    state.png = await drawCertificate(state.certificateArgs);
     showResult(params.get('first') === '1');
   }
 }
 
 async function init() {
+  // iPhone 殼沒有更新站（交給 App Store），設定頁的「檢查更新」按了沒有反應，直接拿掉
+  if (funnelPlatform() === 'ios') $('update-button')?.remove();
+  setupInstallRow(window, navigator, $('install-button'), $('install-hint'));
   if (FUNNEL_ON) {
-    FervelaFunnel.init({ product: 'qipupu', version: VERSION, platform: funnelPlatform(),
-      endpoint: 'https://t.fervela.ai/e', allow: FUNNEL_STEPS });
-    if (new URLSearchParams(location.search).get('r') === 'share') FervelaFunnel.step('從分享進來');
+    const platform = funnelPlatform();
+    consentGate = createConsentGate({ platform, storage: localStorage, funnel: FervelaFunnel,
+      initFunnel: () => FervelaFunnel.init({ product: 'qipupu', version: VERSION, platform,
+        endpoint: 'https://t.fervela.ai/e', allow: FUNNEL_STEPS }),
+      showPrompt: () => { openDialog($('funnel-consent')); syncBackStack(); } });
+    if (platform !== 'ios') consentGate.start();
   }
-  state.templates = await loadTemplates();
   renderCategories();
   renderLevel();
   $('sound-switch').checked = state.sound;
+  $('haptic-switch').checked = state.haptic;
+  // off=1 代表收集端永久停送；設定狀態也要反映實際能否傳送。
+  try { $('funnel-switch').checked = (consentGate?.checked ?? true) && localStorage.getItem('ffunnel:qipupu:off') !== '1'; }
+  catch (e) { $('funnel-switch').checked = false; }
   $('version').textContent = `版本 ${VERSION}`;
   let taps = 0, tapTimer = null;
   $('version').addEventListener('click', () => {
@@ -1093,8 +1296,8 @@ async function init() {
     if (state.mode === 'mic' && state.micStop) startMic();  // 進度不歸零，只換麥克風設定
   });
   bindEvents();
-  for (const src of [...Object.values(ASSETS.puff), ...Object.values(ASSETS.forms)]) new Image().src = src;  // 預先載入，切狀態不閃
   await applyDemo();
+  if (FUNNEL_ON && funnelPlatform() === 'ios') requestAnimationFrame(() => consentGate.start());
 }
 
 init();
