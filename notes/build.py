@@ -335,6 +335,9 @@ def main():
 
     entries.sort(reverse=True)     # 新的在前（日期，同日看 order）
     thumb_of = {e[2]: THUMBS[i % len(THUMBS)] for i, e in enumerate(entries)}   # 與索引卡片同一套縮圖
+    for m in meta.values():          # 外連卡片可在 posts.json 用 "thumb" 指定自己的封面（assets/v5/ 下的檔名，不含副檔名）
+        if m.get("link") and m.get("thumb") and m["link"] in thumb_of:
+            thumb_of[m["link"]] = m["thumb"]
     cards = [card(href, t, d, x, c, thumb_of[href])
              for (d, o, href, t, x, c) in entries]
     tabs = "\n".join([tab("all", "全部")] + [tab(c, n) for c, n in CATS])

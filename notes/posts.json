@@ -23,7 +23,8 @@
     "date": "2026-09-11",
     "desc": "想自學 AI，第一個問題不是「要看哪門課」，是「該去哪裡找課」。台灣與全球的開放式課程入口都在這裡，按實用性排序，每個站都標了定位和該不該花時間。",
     "title_en": "A map of where to learn AI for free",
-    "category": "map"
+    "category": "map",
+    "thumb": "cover-ai-learning"
   },
   "investing-map": {
     "publish": true,
@@ -33,7 +34,8 @@
     "date": "2026-09-11",
     "desc": "「8 月 CPI，市場預期月增 0.4%，這是九月最關鍵的數字」—— 看不懂這句話的話，這張地圖從這裡開始。從總體經濟到自己寫回測程式，分五層排的免費資源。",
     "title_en": "A map of where to learn investing for free",
-    "category": "map"
+    "category": "map",
+    "thumb": "cover-investing"
   },
   "us-brokers": {
     "publish": true,
@@ -43,7 +45,8 @@
     "date": "2026-09-13",
     "desc": "想在美股掛移動停損、想自己寫交易程式，台灣的複委託做得到嗎？逐家查完 15 家之後，把元大、Firstrade、IBKR 放在同一張表上比：功能、手續費、遺產稅。",
     "title_en": "Choosing a U.S. stock broker from Taiwan: sub-brokerage vs. Firstrade vs. IBKR",
-    "category": "map"
+    "category": "map",
+    "thumb": "cover-us-brokers"
   },
   "03-wanjuan.md": {
     "publish": true,
@@ -61,7 +64,8 @@
     "date": "2026-10-28",
     "desc": "從「下指令的人」變成「設計會下指令的系統的人」：七個階段，每階段有要讀的一手資料、要做的事、不過不進下一階的驗收。",
     "title_en": "A self-study map for loop engineering",
-    "category": "map"
+    "category": "map",
+    "thumb": "cover-loop-engineering"
   },
   "ai-coding-map": {
     "publish": true,
@@ -71,7 +75,8 @@
     "date": "2026-10-01",
     "desc": "不用先當工程師。先學會三件事：把要做的東西講清楚、讓 AI 動手、自己驗收。三條路線各附一個做得出來的產出，加上本站自己踩過的四個坑——它們看起來都像成功。",
     "title_en": "A map for building software with AI",
-    "category": "map"
+    "category": "map",
+    "thumb": "cover-ai-coding"
   },
   "05-founding.md": {
     "publish": true,
