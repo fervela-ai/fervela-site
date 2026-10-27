@@ -1,0 +1,134 @@
+<!doctype html>
+<!-- Fervela.ai — © 2026 Fervela. All rights reserved. -->
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<link rel="icon" type="image/png" href="/assets/fervela-icon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>把 Ralph Wiggum 當成「軟體工程師」來用 — 中文整理 — Fervela.ai</title>
+<meta name="description" content="把 Ralph Wiggum 當成「軟體工程師」來用：本站的中文整理，附原文連結。">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./style.css">
+<style>
+code{background:rgba(127,127,127,.15);padding:1px 5px;border-radius:4px;font-size:.92em;word-break:break-all}
+.doc{margin:34px 0 0}.doc h2{font-size:1.35rem;line-height:1.4;margin:0 0 12px}.doc h3{font-size:1.1rem;margin:22px 0 8px}
+.doc p{line-height:1.85;margin:.7em 0}.doc ul,.doc ol{padding-left:1.3em;margin:.6em 0}.doc li{line-height:1.8;margin:.45em 0}
+.doc li>ol,.doc li>ul{margin:.3em 0}
+.callout{border:1px solid rgba(127,127,127,.3);border-left:4px solid #008B8B;border-radius:10px;padding:18px 20px;background:rgba(0,139,139,.06)}
+.callout p{margin:.2em 0;font-size:1.05rem}
+.toc{margin:26px 0 0;padding:16px 20px;border:1px solid rgba(127,127,127,.3);border-radius:10px}
+.toc b{display:block;margin-bottom:6px}.toc ol{margin:0;padding-left:1.4em;columns:1}.toc li{margin:.25em 0}
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="wrap">
+    <a class="brand" href="/"><span class="tmark"><svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><rect width="120" height="120" rx="26" fill="#ffffff"/><g color="#008B8B" transform="translate(6 6) scale(0.9)"><g transform="translate(2 14) scale(.88)">
+      <path d="M60 8C34 10 14 30 13 55c-2 28 18 50 48 54 21 3 41-8 48-27-7 11-22 18-39 17-28-1-45-19-44-42 1-23 15-41 34-49Z" fill="currentColor"/>
+      <path d="m66 31-30 54 27-7 3-47Z" fill="currentColor"/>
+      <path d="m71 31 0 50 16-8Z" fill="currentColor" opacity=".9"/>
+      <path d="M69 27v56" stroke="currentColor" stroke-width="1.25"/>
+      <path d="M29 82c12 8 25 11 39 10-12 4-28 2-41-5l2-5Z" fill="currentColor"/>
+      <path d="M78 70c5-5 12-3 13 3 5-5 13-1 12 6 5-1 8 3 7 8-1 7-8 11-16 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M27 84c19 10 43 13 65 6 7-2 12-6 16-12-2 8-8 14-17 18-19 8-45 6-59-3-3-2-5-6-5-9Z" fill="#fff" opacity=".94"/>
+      <path d="M25 87c20 10 45 13 67 5 7-2 12-6 16-11-3 8-9 14-18 18-19 7-44 5-58-4-4-2-6-5-7-8Z" fill="currentColor"/>
+      <path d="M31 88c18 7 39 8 56 2-14 9-38 10-56 2Z" fill="#fff" opacity=".92"/>
+      <path d="M20 85c14 4 27 3 39-2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+      </g>
+      <path d="m84 7 2.6 8.4L95 18l-8.4 2.6L84 29l-2.6-8.4L73 18l8.4-2.6L84 7Z" fill="#F5A623"/></g></svg></span><span class="tname">Fervela.ai</span></a>
+    <a class="tlink" href="/notes/">筆記</a>
+  </div></div>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="eyebrow">中文整理・最後更新 2026.10.26</div>
+    <h1>把 Ralph Wiggum 當成「軟體工程師」來用</h1>
+    <p class="lede">原文：Ralph Wiggum as a "software engineer"｜Geoffrey Huntley｜2025-07-14｜<a href="https://ghuntley.com/ralph/">https://ghuntley.com/ralph/</a><br>以下是本站用自己的話做的整理，不是官方翻譯，細節與確切用語請看<a href="https://ghuntley.com/ralph/">原文</a>。<br><a href="./index.html">← 回迴圈工程自學地圖</a></p>
+  </header>
+<div class="toc"><b>目錄</b><ol><li><a href="#s0">一句話重點</a></li><li><a href="#s1">這篇在講什麼</a></li><li><a href="#s2">重點整理</a></li><li><a href="#s3">對學習者的意思</a></li><li><a href="#s4">要小心的地方</a></li></ol></div>
+<section class="doc callout" id="s0"><h2>一句話重點</h2>
+<p>Ralph 是一種把提示檔（prompt）丟進無限迴圈、讓程式代理人（coding agent）每輪只做一件事的做法；它靠固定的規格檔、自動檢查與反覆調整提示來運作，作者認為它適合從零開始的專案。</p>
+</section><section class="doc" id="s1"><h2>這篇在講什麼</h2>
+<p>作者介紹他稱為 Ralph 的做法：用最簡單的 Bash 迴圈，一遍又一遍把同一份提示交給 AI 寫程式。文章說明每輪該怎麼控制範圍、怎麼讓上下文保持精簡、怎麼用測試擋掉壞結果、怎麼讓代理人把學到的東西留給下一輪，也坦白講了這招的限制。作者用它做出一個實驗性的程式語言，並說明自己如何邊觀察邊調整。</p>
+</section><section class="doc" id="s2"><h2>重點整理</h2>
+<h3>最小迴圈寫法</h3>
+<ul>
+<li>最純粹的形式就是一行：<code>while :; do cat PROMPT.md | claude-code ; done</code>。</li>
+<li>作者說這個做法「確定地很糟，卻身處不確定的世界」：缺點是確定、可預期的，所以能靠調提示逐步修。</li>
+<li>只要代理人沒有限制工具呼叫與用量，原則上都能套用。</li>
+<li>整個做法是單一程序、單一程式庫（monolithic），作者不贊成讓多個代理人互相溝通，覺得那像用不確定的零件拼微服務。</li>
+</ul>
+<h3>每輪只做一件事</h3>
+<ul>
+<li>每一輪只處理一項任務，由 Ralph 自己判斷哪項最重要，作者主張要信任這個選擇。</li>
+<li>每輪開頭都載入同樣的核心資料：計畫檔與規格檔，讓起點固定。</li>
+</ul>
+<h3>乾淨、精簡的視窗</h3>
+<ul>
+<li>上下文視窗（context window）大約只有 170k 詞元（token），越塞越滿，品質越差，所以要盡量少用。</li>
+<li>主視窗扮演排程者，把耗資源的工作（例如整理測試結果）交給子代理人（subagent）。</li>
+<li>建置與測試只讓一個子代理人跑，避免產生背壓（backpressure）式的卡頓。</li>
+<li>代理人用搜尋工具（ripgrep）常會誤判「這功能還沒做」，所以提示要明講：改程式前不要假設某項尚未實作。</li>
+</ul>
+<h3>規格與計畫放固定檔</h3>
+<ul>
+<li>需求先和代理人長時間對話釐清，再由它把規格寫成檔案，一份規格一個檔，放進 specs 資料夾。</li>
+<li>待辦清單放在 <code>fix_plan.md</code>：讓 Ralph 讀規格與原始碼，找出 TODO 與佔位程式，排出優先順序。</li>
+<li>作者常把清單整個丟掉重生，並說自己不親自規劃，因為模型比他更懂編譯器之類的細節。</li>
+<li>控制點在於標準函式庫與規格：模型用錯寫法就改函式庫，做錯東西就查規格。作者提到他一個月後才發現自己的詞法規格（lexer）把同一個關鍵字定義了兩次。</li>
+</ul>
+<h3>用測試與型別檢查當背壓</h3>
+<ul>
+<li>產生程式碼很便宜，真正的把關是自動檢查：測試、型別檢查器、靜態分析、安全掃描。</li>
+<li>選語言是取捨：型別越嚴格越能擋錯，但編譯越慢；動態型別語言要另外接靜態檢查。</li>
+<li>每次修改後只跑與該單元相關的測試，並要求 Ralph 寫下每個測試為什麼重要，因為之後的輪次看不到當時的思路。</li>
+</ul>
+<h3>禁止佔位實作</h3>
+<ul>
+<li>Claude 傾向寫假的、先放著的實作（placeholder）。提示要明確要求完整實作。</li>
+<li>作者承認早期它仍可能無視，建議另外跑幾輪專門找出並列出這些佔位。</li>
+<li>也可以讓系統能檢視自己的輸出，例如加日誌或檢查中間產物，讓迴圈回頭驗證自己。</li>
+</ul>
+<h3>學到的東西寫進固定檔</h3>
+<ul>
+<li><code>AGENT.md</code> 記錄如何建置與執行專案，要求保持簡短，學到有用的事就更新。</li>
+<li>順手發現的臭蟲，不論是否與當前任務有關，都要修掉或記進計畫檔。</li>
+</ul>
+<h3>用 git 存進度</h3>
+<ul>
+<li>測試通過就更新計畫，然後 <code>git add -A</code>、<code>git commit</code>、<code>git push</code>。</li>
+<li>建置乾淨時打標籤（tag），從 0.0.0 起，每次把修訂號（patch）加一。</li>
+<li>程式庫偶爾會壞到無法編譯，操作者得決定整個重置重來，還是寫新提示救回來。</li>
+</ul>
+<h3>作者的警告</h3>
+<ul>
+<li>作者不會把它用在既有程式庫，只適合從零開始，預期大約完成九成。</li>
+<li>仍然需要資深工程師把關；他反對「工具能取代工程師」的說法。</li>
+<li>提示不是完美的，直接複製他的提示無法重現結果，因為提示是邊看輸出邊調出來的。他把這比喻成調吉他弦，看到壞行為就加一個「路標」。</li>
+</ul>
+</section><section class="doc" id="s3"><h2>對學習者的意思</h2>
+<ul>
+<li>先練會「一輪一件事」：把任務切小，讓每輪結果可以單獨檢查。</li>
+<li>把規格、計畫、操作筆記存在檔案裡，而不是依賴對話記憶，每輪從同樣的起點開始。</li>
+<li>迴圈能不能放心跑，取決於有沒有自動檢查；先把測試與型別檢查備好，再談讓它自己跑。</li>
+<li>觀察輸出、發現壞行為就補進提示，這是持續的調整工作，不是寫一次就結束。</li>
+<li>每次成功就用 git 存下來，壞掉時才有退路。</li>
+</ul>
+</section><section class="doc" id="s4"><h2>要小心的地方</h2>
+<ul>
+<li>作者明說這是從零開始專案的做法，不會用在既有程式庫，且大約只做到九成。</li>
+<li>結果帶有不確定性：可能重複實作、無視指令或偏離方向，需要人持續盯著調整，也不能照抄他的提示。</li>
+<li>文中的成本與成果是轉述的單一案例（作者說他教過的一位工程師，用 Ralph 加 Amp 做完一份 5 萬美元合約的 MVP，並測試與審查完，成本約 297 美元），他自己的實驗專案也坦承還不能上線。</li>
+</ul></section>
+
+  <a class="back" href="./index.html">← 回迴圈工程自學地圖</a>
+
+  <footer>
+    <p>本頁是本站的中文整理，不是原作者或官方翻譯；若與原文不同以<a href="https://ghuntley.com/ralph/">原文</a>為準。發現錯誤，麻煩告訴我：<a href="mailto:contact@fervela.ai">contact@fervela.ai</a></p>
+    <div class="fnote">作品以 <b>Fervela.ai</b> 為名發佈。© 2026 雲帆研創有限公司（Fervela.ai）</div>
+  </footer>
+
+</div>
+</body>
+</html>

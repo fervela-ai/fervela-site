@@ -1,0 +1,115 @@
+<!doctype html>
+<!-- Fervela.ai — © 2026 Fervela. All rights reserved. -->
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<link rel="icon" type="image/png" href="/assets/fervela-icon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>為 AI 代理做有效的脈絡工程 — 中文整理 — Fervela.ai</title>
+<meta name="description" content="為 AI 代理做有效的脈絡工程：本站的中文整理，附原文連結。">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./style.css">
+<style>
+code{background:rgba(127,127,127,.15);padding:1px 5px;border-radius:4px;font-size:.92em;word-break:break-all}
+.doc{margin:34px 0 0}.doc h2{font-size:1.35rem;line-height:1.4;margin:0 0 12px}.doc h3{font-size:1.1rem;margin:22px 0 8px}
+.doc p{line-height:1.85;margin:.7em 0}.doc ul,.doc ol{padding-left:1.3em;margin:.6em 0}.doc li{line-height:1.8;margin:.45em 0}
+.doc li>ol,.doc li>ul{margin:.3em 0}
+.callout{border:1px solid rgba(127,127,127,.3);border-left:4px solid #008B8B;border-radius:10px;padding:18px 20px;background:rgba(0,139,139,.06)}
+.callout p{margin:.2em 0;font-size:1.05rem}
+.toc{margin:26px 0 0;padding:16px 20px;border:1px solid rgba(127,127,127,.3);border-radius:10px}
+.toc b{display:block;margin-bottom:6px}.toc ol{margin:0;padding-left:1.4em;columns:1}.toc li{margin:.25em 0}
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="wrap">
+    <a class="brand" href="/"><span class="tmark"><svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><rect width="120" height="120" rx="26" fill="#ffffff"/><g color="#008B8B" transform="translate(6 6) scale(0.9)"><g transform="translate(2 14) scale(.88)">
+      <path d="M60 8C34 10 14 30 13 55c-2 28 18 50 48 54 21 3 41-8 48-27-7 11-22 18-39 17-28-1-45-19-44-42 1-23 15-41 34-49Z" fill="currentColor"/>
+      <path d="m66 31-30 54 27-7 3-47Z" fill="currentColor"/>
+      <path d="m71 31 0 50 16-8Z" fill="currentColor" opacity=".9"/>
+      <path d="M69 27v56" stroke="currentColor" stroke-width="1.25"/>
+      <path d="M29 82c12 8 25 11 39 10-12 4-28 2-41-5l2-5Z" fill="currentColor"/>
+      <path d="M78 70c5-5 12-3 13 3 5-5 13-1 12 6 5-1 8 3 7 8-1 7-8 11-16 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M27 84c19 10 43 13 65 6 7-2 12-6 16-12-2 8-8 14-17 18-19 8-45 6-59-3-3-2-5-6-5-9Z" fill="#fff" opacity=".94"/>
+      <path d="M25 87c20 10 45 13 67 5 7-2 12-6 16-11-3 8-9 14-18 18-19 7-44 5-58-4-4-2-6-5-7-8Z" fill="currentColor"/>
+      <path d="M31 88c18 7 39 8 56 2-14 9-38 10-56 2Z" fill="#fff" opacity=".92"/>
+      <path d="M20 85c14 4 27 3 39-2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+      </g>
+      <path d="m84 7 2.6 8.4L95 18l-8.4 2.6L84 29l-2.6-8.4L73 18l8.4-2.6L84 7Z" fill="#F5A623"/></g></svg></span><span class="tname">Fervela.ai</span></a>
+    <a class="tlink" href="/notes/">筆記</a>
+  </div></div>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="eyebrow">中文整理・最後更新 2026.10.26</div>
+    <h1>為 AI 代理做有效的脈絡工程</h1>
+    <p class="lede">原文：Effective context engineering for AI agents｜Anthropic 應用 AI 團隊（Prithvi Rajasekaran 等）｜2025-09-29｜<a href="https://www.anthropic.com/research/effective-context-engineering-for-ai-agents">https://www.anthropic.com/research/effective-context-engineering-for-ai-agents</a><br>以下是本站用自己的話做的整理，不是官方翻譯，細節與確切用語請看<a href="https://www.anthropic.com/research/effective-context-engineering-for-ai-agents">原文</a>。<br><a href="./index.html">← 回迴圈工程自學地圖</a></p>
+  </header>
+<div class="toc"><b>目錄</b><ol><li><a href="#s0">一句話重點</a></li><li><a href="#s1">這篇在講什麼</a></li><li><a href="#s2">重點整理</a></li><li><a href="#s3">對學習者的意思</a></li><li><a href="#s4">要小心的地方</a></li></ol></div>
+<section class="doc callout" id="s0"><h2>一句話重點</h2>
+<p>模型每一步能看到的內容（脈絡，context）是有限的注意力預算，好的代理要做的是只留下最有用的少量資訊，而不是一直往裡面塞。</p>
+</section><section class="doc" id="s1"><h2>這篇在講什麼</h2>
+<p>作者把「脈絡工程」（context engineering）定位成提示工程（prompt engineering）的延伸：提示工程在寫好指令，脈絡工程則要管理模型推論時看到的全部內容，包括系統提示、工具、外部資料與對話歷史。文章先解釋為什麼脈絡越長不一定越好，再說明怎麼設計脈絡、怎麼讓代理邊做邊找資料，最後介紹三種處理長時間任務的做法：壓縮、做筆記、拆給子代理。</p>
+</section><section class="doc" id="s2"><h2>重點整理</h2>
+<h3>什麼是脈絡工程</h3>
+<ul>
+<li>脈絡指的是模型取樣時所帶入的全部詞元（token）。</li>
+<li>核心問題是：什麼樣的脈絡配置，最可能讓模型做出想要的行為？</li>
+</ul>
+<h3>為什麼脈絡要節制</h3>
+<ul>
+<li>詞元變多時，模型找回資訊的準確度會下降，作者稱為脈絡腐化（context rot）。</li>
+<li>退化是漸進的，不是突然懸崖，所以脈絡應視為邊際效益遞減的有限資源，也就是「注意力預算」（attention budget）。</li>
+</ul>
+<h3>好脈絡的組成</h3>
+<ul>
+<li>總原則：找出最小的一組高訊號詞元，讓期望結果最可能出現。</li>
+<li>系統提示要抓對「高度」：不要寫成脆弱的 if-else 規則堆，也不要模糊到沒有具體訊號。可用 XML 標籤或 Markdown 標題分區。</li>
+<li>工具要自成一體、參數清楚、省詞元；工具集太肥、功能重疊是常見失敗，人類工程師分不清用哪個，代理也分不清。</li>
+</ul>
+<h3>執行時才取資料（just-in-time）</h3>
+<ul>
+<li>原文把代理簡化定義為「在迴圈中自主使用工具的 LLM」。</li>
+<li>傳統做法是先用嵌入（embedding）檢索把資料預先塞進去；即時取用則是只帶檔案路徑、查詢、連結等輕量識別，需要時才用工具載入。</li>
+<li>代價：執行時探索比預先檢索慢，而且需要好的工具與引導，否則會在死路上浪費脈絡。</li>
+<li>折衷是混合式：一部分先載入求速度，其餘讓代理自行探索。原文舉的例子是先讀 CLAUDE.md，再用 glob、grep 即時查找。</li>
+</ul>
+<h3>長時間任務一：壓縮（compaction）</h3>
+<ul>
+<li>做法是脈絡快滿時，請模型摘要，再用摘要開新視窗。</li>
+<li>摘要保留架構決策、未解錯誤、實作細節，丟掉重複的工具輸出。</li>
+</ul>
+<h3>長時間任務二：結構化筆記（agentic memory）</h3>
+<ul>
+<li>代理把筆記寫到脈絡以外的地方（例如待辦清單、NOTES.md），之後再讀回來。</li>
+</ul>
+<h3>長時間任務三：子代理架構（sub-agent）</h3>
+<ul>
+<li>主代理負責整體計畫，子代理在乾淨的視窗裡處理聚焦的任務。</li>
+<li>子代理內部可能用掉數萬詞元，但只回傳約 1,000 到 2,000 詞元的精簡摘要。</li>
+</ul>
+</section><section class="doc" id="s3"><h2>對學習者的意思</h2>
+<ul>
+<li>寫代理迴圈時，每一輪都要問：下一步真正需要看到什麼？不要把所有歷史原封不動帶著跑。</li>
+<li>工具設計是脈絡設計的一部分：少而清楚、不重疊，輸出也要精簡。</li>
+<li>資料可先只存「指標」（路徑、查詢），迴圈裡再用工具取，這能讓脈絡保持乾淨。</li>
+<li>任務拉長時，三招可依情境選：對話來回多用壓縮，有里程碑用筆記，要平行研究用子代理。</li>
+</ul>
+</section><section class="doc" id="s4"><h2>要小心的地方</h2>
+<ul>
+<li>原文沒有專門的限制章節，但自承即時探索較慢、需要好工具；壓縮過度會遺失日後有用的細節。</li>
+<li>三種長任務技術各有適用情境，沒有通用最佳解；Claude Code 與寶可夢的例子是說明用，不是對照實驗的結果。</li>
+<li>作者也說，隨著模型變強，提示格式等細節的重要性可能下降，所以文中某些具體建議未必長期適用。</li>
+</ul></section>
+
+  <a class="back" href="./index.html">← 回迴圈工程自學地圖</a>
+
+  <footer>
+    <p>本頁是本站的中文整理，不是原作者或官方翻譯；若與原文不同以<a href="https://www.anthropic.com/research/effective-context-engineering-for-ai-agents">原文</a>為準。發現錯誤，麻煩告訴我：<a href="mailto:contact@fervela.ai">contact@fervela.ai</a></p>
+    <div class="fnote">作品以 <b>Fervela.ai</b> 為名發佈。© 2026 雲帆研創有限公司（Fervela.ai）</div>
+  </footer>
+
+</div>
+</body>
+</html>

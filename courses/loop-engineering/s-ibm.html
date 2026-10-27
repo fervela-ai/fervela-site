@@ -1,0 +1,116 @@
+<!doctype html>
+<!-- Fervela.ai — © 2026 Fervela. All rights reserved. -->
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<link rel="icon" type="image/png" href="/assets/fervela-icon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>什麼是迴圈工程？打造更好的 AI 代理 — 中文整理 — Fervela.ai</title>
+<meta name="description" content="什麼是迴圈工程？打造更好的 AI 代理：本站的中文整理，附原文連結。">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./style.css">
+<style>
+code{background:rgba(127,127,127,.15);padding:1px 5px;border-radius:4px;font-size:.92em;word-break:break-all}
+.doc{margin:34px 0 0}.doc h2{font-size:1.35rem;line-height:1.4;margin:0 0 12px}.doc h3{font-size:1.1rem;margin:22px 0 8px}
+.doc p{line-height:1.85;margin:.7em 0}.doc ul,.doc ol{padding-left:1.3em;margin:.6em 0}.doc li{line-height:1.8;margin:.45em 0}
+.doc li>ol,.doc li>ul{margin:.3em 0}
+.callout{border:1px solid rgba(127,127,127,.3);border-left:4px solid #008B8B;border-radius:10px;padding:18px 20px;background:rgba(0,139,139,.06)}
+.callout p{margin:.2em 0;font-size:1.05rem}
+.toc{margin:26px 0 0;padding:16px 20px;border:1px solid rgba(127,127,127,.3);border-radius:10px}
+.toc b{display:block;margin-bottom:6px}.toc ol{margin:0;padding-left:1.4em;columns:1}.toc li{margin:.25em 0}
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="wrap">
+    <a class="brand" href="/"><span class="tmark"><svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><rect width="120" height="120" rx="26" fill="#ffffff"/><g color="#008B8B" transform="translate(6 6) scale(0.9)"><g transform="translate(2 14) scale(.88)">
+      <path d="M60 8C34 10 14 30 13 55c-2 28 18 50 48 54 21 3 41-8 48-27-7 11-22 18-39 17-28-1-45-19-44-42 1-23 15-41 34-49Z" fill="currentColor"/>
+      <path d="m66 31-30 54 27-7 3-47Z" fill="currentColor"/>
+      <path d="m71 31 0 50 16-8Z" fill="currentColor" opacity=".9"/>
+      <path d="M69 27v56" stroke="currentColor" stroke-width="1.25"/>
+      <path d="M29 82c12 8 25 11 39 10-12 4-28 2-41-5l2-5Z" fill="currentColor"/>
+      <path d="M78 70c5-5 12-3 13 3 5-5 13-1 12 6 5-1 8 3 7 8-1 7-8 11-16 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M27 84c19 10 43 13 65 6 7-2 12-6 16-12-2 8-8 14-17 18-19 8-45 6-59-3-3-2-5-6-5-9Z" fill="#fff" opacity=".94"/>
+      <path d="M25 87c20 10 45 13 67 5 7-2 12-6 16-11-3 8-9 14-18 18-19 7-44 5-58-4-4-2-6-5-7-8Z" fill="currentColor"/>
+      <path d="M31 88c18 7 39 8 56 2-14 9-38 10-56 2Z" fill="#fff" opacity=".92"/>
+      <path d="M20 85c14 4 27 3 39-2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+      </g>
+      <path d="m84 7 2.6 8.4L95 18l-8.4 2.6L84 29l-2.6-8.4L73 18l8.4-2.6L84 7Z" fill="#F5A623"/></g></svg></span><span class="tname">Fervela.ai</span></a>
+    <a class="tlink" href="/notes/">筆記</a>
+  </div></div>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="eyebrow">中文整理・最後更新 2026.10.26</div>
+    <h1>什麼是迴圈工程？打造更好的 AI 代理</h1>
+    <p class="lede">影片：What Is Loop Engineering? Building Better AI Agents｜IBM Technology｜2026-10-19｜<a href="https://youtu.be/DQBqh6gcx7U">https://youtu.be/DQBqh6gcx7U</a>（約 10 分 48 秒）<br>以下是本站用自己的話做的整理，不是官方翻譯，細節與確切用語請看<a href="https://youtu.be/DQBqh6gcx7U">原文</a>。<br><a href="./index.html">← 回迴圈工程自學地圖</a></p>
+  </header>
+<div class="toc"><b>目錄</b><ol><li><a href="#s0">一句話重點</a></li><li><a href="#s1">這支影片在講什麼</a></li><li><a href="#s2">重點整理</a></li><li><a href="#s3">對學習者的意思</a></li><li><a href="#s4">要小心的地方</a></li></ol></div>
+<section class="doc callout" id="s0"><h2>一句話重點</h2>
+<p>迴圈工程（loop engineering）是設計一套系統，讓它替你反覆下指令、檢查結果，直到達成有明確終點的目標；但目標、意圖與最後把關仍要由人負責。</p>
+</section><section class="doc" id="s1"><h2>這支影片在講什麼</h2>
+<p>影片把迴圈工程視為提示工程（prompt engineering）的進化版：不再手寫一則則完美提示，而是設計能自動驅動 AI 代理（agent）的迴圈。講者先以「修好失敗的單元測試」示範迴圈本體，再說明迴圈外的配套，最後談人必須做的事與四個陷阱。</p>
+</section><section class="doc" id="s2"><h2>重點整理</h2>
+<h3>迴圈本體與停止條件</h3>
+<ul>
+<li>迴圈有四站：目標、行動、觀察、調整。</li>
+<li>例：代理改程式（行動），看測試結果（觀察），紅燈就換個修法再繞一圈（調整）。</li>
+<li>每圈都回頭檢查目標，目標決定代理是否繼續。</li>
+</ul>
+<h3>好目標與壞目標</h3>
+<ul>
+<li>「讓結帳變快」無法量測，代理可能永遠不停，或一輪就宣告成功；講者以「變得更快樂」的新年願望類比。</li>
+<li>「結帳測試組的所有單元測試都通過」具體可驗證，有明確的停止條件。</li>
+</ul>
+<h3>迴圈外的前三樣：觸發、上下文、脊椎</h3>
+<ul>
+<li>觸發（trigger）：排程（如每晚跑的 cron job）或掛鉤（hook，檔案變動、有人開合併請求時啟動，多用於資安與品質規範）。</li>
+<li>上下文工程（context engineering）：每圈產生的輸出會堆積，要挑選代理看得到什麼，可壓縮，或用技能（skills）漸進揭露。</li>
+<li>脊椎（spine）：持久狀態，如用 Markdown 記下做過什麼、有沒有效。</li>
+</ul>
+<h3>迴圈外的後兩樣：工具、子代理</h3>
+<ul>
+<li>工具：透過 MCP 或直接呼叫 API，執行程式、讀寫檔案、查資料庫。</li>
+<li>子代理（sub-agent）當檢查者：不讓寫程式的代理自己驗收，改由有獨立指令與上下文、甚至不同模型的第二個代理檢查。</li>
+</ul>
+<h3>人的三件事</h3>
+<ul>
+<li>寫出帶停止條件的目標。</li>
+<li>把意圖寫在代理找得到的地方並保持更新。</li>
+<li>實際閱讀代理的產出。</li>
+</ul>
+<h3>四個坑：沒驗證的程式與理解債</h3>
+<ul>
+<li>檢查者子代理終究也是代理，上線的程式碼最後仍需真人讀過並負責。</li>
+<li>理解債（comprehension debt）：系統程式碼總量與人真正理解程度之間的落差；代理寫越多、人看越少，債越高，遇到緊急故障或遷移時最痛。</li>
+</ul>
+<h3>四個坑：意圖債與認知投降</h3>
+<ul>
+<li>意圖債（intent debt）：代理看得出系統做了什麼，卻不知為什麼，除非寫進像 agents.md 的檔案。例：為了讓測試通過而放寬折扣碼驗證，技術上可行，卻傷害商業利益。</li>
+<li>認知投降（cognitive surrender）：因為「是 AI 做的應該沒錯」就全盤接受，使理解債更高。</li>
+</ul>
+</section><section class="doc" id="s3"><h2>對學習者的意思</h2>
+<ul>
+<li>寫目標時先問：有沒有客觀可判斷「完成」的條件？沒有就先改寫。</li>
+<li>把自動化當系統設計題：觸發、資訊、記憶、工具、檢查者各放什麼，比單次提示更重要。</li>
+<li>把「為什麼這樣做」寫成文件，別只留程式碼。</li>
+<li>即使有檢查用的子代理，也要保留自己讀產出的時間。</li>
+</ul>
+</section><section class="doc" id="s4"><h2>要小心的地方</h2>
+<ul>
+<li>這是約 10 分鐘的入門影片，概念點到為止，沒有實作細節、工具比較或量化成效。</li>
+<li>例子以寫程式與修測試為主，能否套用到其他工作，影片未討論。</li>
+<li>本整理依影片改寫，名詞譯法為自訂，內容以影片為準。</li>
+</ul></section>
+
+  <a class="back" href="./index.html">← 回迴圈工程自學地圖</a>
+
+  <footer>
+    <p>本頁是本站的中文整理，不是原作者或官方翻譯；若與原文不同以<a href="https://youtu.be/DQBqh6gcx7U">原文</a>為準。發現錯誤，麻煩告訴我：<a href="mailto:contact@fervela.ai">contact@fervela.ai</a></p>
+    <div class="fnote">作品以 <b>Fervela.ai</b> 為名發佈。© 2026 雲帆研創有限公司（Fervela.ai）</div>
+  </footer>
+
+</div>
+</body>
+</html>

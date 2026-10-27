@@ -1,0 +1,185 @@
+/* 官網標準版「活力橘 A」＋暗色款「B 深橄欖」（品牌/標準/共用樣式/fervela-standard.css；Miles 10/26 選定）。
+   原本的深海藍版已換掉。舊變數名保留（--navy 等），只改指向，內文 class 不動。
+   字型：Noto Serif TC（標題）＋Noto Sans TC（內文），由各頁 <head> 的 Google Fonts 載入；載不到退回系統字。
+   字級底線：正文不小於 17px；標記與頁首日期是標籤，收到 14px。 */
+:root{
+  --fv-bg:#FAF6EF; --fv-card:#FFFDF9; --fv-line:#E6DDCC; --fv-ink:#0E2A3B; --fv-ink2:#3D5563;
+  --fv-accent:#EA5513; --fv-accent-ink:#B8430D; --fv-accent-soft:#FDEEE6;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --serif:"Noto Serif TC","Songti TC",serif;
+  --sans:"Noto Sans TC",system-ui,-apple-system,"PingFang TC","Segoe UI",sans-serif;
+  --mist:var(--fv-bg); --card:var(--fv-card); --txt:var(--fv-ink); --line:var(--fv-line);
+  --grey:var(--fv-ink2); --navy:var(--fv-ink); --teal:var(--fv-accent-ink); --teal-ink:var(--fv-accent-ink);
+  --gold:var(--fv-accent); --gold-ink:var(--fv-accent-ink); --gold-bg:var(--fv-accent-soft); --teal-bg:var(--fv-accent-soft);
+  --g-hub-bg:#FDEEE6;   --g-hub-line:#F3C9B3;
+  --g-uni-bg:#F6EFE2;   --g-uni-line:#E6D7BC;
+  --g-prof-bg:#F8EBCC;  --g-prof-line:#E4D0A0;
+  --g-world-bg:#EFE9DC; --g-world-line:#DDD2BC;
+  --g-find-bg:#E8EFE2;  --g-find-line:#C9D8BE;
+  --g-ai-bg:#FBE3D5;    --g-ai-line:#F0B999;
+  --g-paid-bg:#F1EEE8;  --g-paid-line:#DDD8CE;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  color-scheme:dark;
+  --fv-bg:#1A1D16; --fv-card:#23271C; --fv-line:#404633; --fv-ink:#F1EEE3; --fv-ink2:#C9CBB9;
+  --fv-accent-ink:#FF8A57; --fv-accent-soft:#2F2A1B;
+  --g-hub-bg:#2F2A1B;   --g-hub-line:#5A4A2C;
+  --g-uni-bg:#262A1E;   --g-uni-line:#454B35;
+  --g-prof-bg:#302B1A;  --g-prof-line:#5C5030;
+  --g-world-bg:#282A20; --g-world-line:#484B3A;
+  --g-find-bg:#232A1F;  --g-find-line:#434F3C;
+  --g-ai-bg:#33271B;    --g-ai-line:#6A4A2E;
+  --g-paid-bg:#25261F;  --g-paid-line:#43443A;
+}}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--fv-bg); color:var(--txt);
+  font:17px/1.75 var(--sans);
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+
+/* ── 頁首色帶：跟筆記頁同一條，讓這頁不像另一個站 ── */
+.topbar{background:var(--fv-card);border-bottom:1px solid var(--fv-line)}
+.topbar .wrap{display:flex;align-items:center;gap:18px;padding-top:13px;padding-bottom:13px}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none;margin-right:auto}
+.tmark{width:30px;height:30px;flex:0 0 30px}
+.tmark svg{width:100%;height:100%;display:block;border-radius:8px}
+.tname{color:var(--fv-ink);font-size:16px;font-weight:700;letter-spacing:.01em}
+.tlink{color:var(--fv-ink2);text-decoration:none;font-size:15px}
+.tlink:hover{color:var(--fv-accent-ink)}
+
+/* ── 主標區 ── */
+.masthead{padding:44px 0 0;display:flex;flex-direction:column;gap:14px}
+.eyebrow{font-family:var(--mono);font-size:14px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--grey)}
+h1{margin:0;font-family:var(--serif);font-weight:900;font-size:38px;line-height:1.25;color:var(--navy);
+  letter-spacing:.01em;position:relative;padding-bottom:16px;text-wrap:balance}
+h1::after{content:"";position:absolute;left:0;bottom:0;
+  width:52px;height:3px;border-radius:2px;background:var(--gold)}
+.lede{margin:0;max-width:40em;font-size:18.5px;line-height:1.85;color:var(--fv-ink2)}
+
+/* ── 精選盒 ── */
+.shortlist{background:var(--card);border:1px solid var(--line);border-radius:16px;
+  padding:28px 30px;margin:34px 0 0;box-shadow:0 2px 10px rgba(13,27,61,.04);
+  display:flex;flex-direction:column;gap:18px}
+.shortlist h2{margin:0;font-size:22px;color:var(--navy)}
+.picks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:17px}
+.pick{display:flex;gap:15px;align-items:flex-start}
+.pick-num{flex:none;width:1.9em;padding-top:4px;font-family:var(--mono);
+  font-size:14px;color:var(--teal)}
+.pick-body{display:flex;flex-direction:column;gap:4px}
+.pick-name{font-weight:700;font-size:18px}
+.pick-name a{color:var(--teal);text-decoration:none;border-bottom:1px solid var(--line)}
+.pick-name a:hover{border-bottom-color:var(--teal)}
+.pick-why{font-size:17px;line-height:1.8;color:var(--txt)}
+
+/* ── 區塊 ── */
+.sec{margin:46px 0 0;display:flex;flex-direction:column;gap:24px}
+.sec-head{display:flex;flex-direction:column;gap:9px}
+.sec-head h2{margin:0;font-size:27px;color:var(--navy)}
+.sec-note{margin:0;max-width:44em;font-size:17px;color:var(--fv-ink2)}
+.group{display:flex;flex-direction:column;gap:14px}
+.group h3{margin:0 0 -2px;font-size:20px;font-weight:700;
+  letter-spacing:.01em;color:var(--navy)}
+hr.rule{border:0;height:1px;background:var(--line);margin:46px 0 0}
+
+/* ── 條目卡：底色依分組，深淺就是輕重 ── */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.entry{display:flex;flex-direction:column;gap:9px;text-decoration:none;color:inherit;
+  background:var(--g-bg,var(--card));border:1px solid var(--g-line,var(--line));
+  border-radius:16px;padding:19px 21px;
+  transition:border-color .15s ease,transform .15s ease,box-shadow .15s ease}
+.entry:hover{border-color:var(--fv-accent);transform:translateY(-2px);
+  box-shadow:0 6px 18px rgba(13,27,61,.10)}
+.entry:focus-visible{outline:2px solid var(--fv-accent);outline-offset:2px}
+.entry-top{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.name{font-size:17px;font-weight:700;line-height:1.4;color:var(--navy)}
+.desc{margin:0;font-size:17px;line-height:1.72}
+
+.g-hub  .entry{--g-bg:var(--g-hub-bg);   --g-line:var(--g-hub-line)}
+.g-uni  .entry{--g-bg:var(--g-uni-bg);   --g-line:var(--g-uni-line)}
+.g-prof .entry{--g-bg:var(--g-prof-bg);  --g-line:var(--g-prof-line)}
+.g-world .entry{--g-bg:var(--g-world-bg);--g-line:var(--g-world-line)}
+.g-find .entry{--g-bg:var(--g-find-bg);  --g-line:var(--g-find-line)}
+.g-ai   .entry{--g-bg:var(--g-ai-bg);    --g-line:var(--g-ai-line)}
+.g-paid .entry{--g-bg:var(--g-paid-bg);  --g-line:var(--g-paid-line)}
+
+/* ── 標記：標籤不是正文，維持小字 ── */
+.pill{flex:none;font-size:14px;letter-spacing:.04em;padding:3px 11px;
+  border-radius:999px;font-weight:600;white-space:nowrap;background:var(--fv-card)}
+.pill.main{color:var(--fv-accent-ink);box-shadow:inset 0 0 0 1px var(--fv-line)}
+.pill.know{color:var(--fv-ink2);box-shadow:inset 0 0 0 1px var(--fv-line)}
+.pill.file{color:var(--fv-accent-ink);box-shadow:inset 0 0 0 1px var(--fv-line)}
+
+/* ── 頁尾 ── */
+.back{display:inline-block;margin-top:34px;color:var(--grey);
+  text-decoration:none;font-size:17px}
+.back:hover{color:var(--navy)}
+footer{border-top:1px solid var(--line);margin-top:30px;padding:26px 0 44px;
+  color:var(--fv-ink2);font-size:17px;display:flex;flex-direction:column;gap:11px}
+footer a{color:var(--teal)}
+footer p{margin:0;max-width:52em;line-height:1.75}
+.fnote{margin-top:6px;font-size:14px;color:var(--grey)}
+
+@media (prefers-reduced-motion:reduce){
+  .entry{transition:none}
+  .entry:hover{transform:none}
+}
+@media (max-width:640px){
+  .topbar .wrap{gap:12px}
+  .tname{font-size:15px}
+  .masthead{padding-top:34px}
+  h1{font-size:28px}
+  .lede{font-size:17.5px}
+  .shortlist{padding:22px;border-radius:14px}
+  .entry{border-radius:14px}
+  .sec-head h2{font-size:24px}
+}
+
+/* ── 投資地圖專用：拆解一句新聞的區塊 ──
+   每一個片段對應地圖的一層，讀者從「看不懂的那句話」直接被帶到該去的地方。 */
+.decode{background:var(--fv-accent-soft);border:1px solid var(--fv-line);color:var(--fv-ink);border-radius:16px;padding:28px 30px;
+  margin:34px 0 0;display:flex;flex-direction:column;gap:20px}
+.decode .q{margin:0;font-size:21px;line-height:1.7;font-weight:700;color:var(--fv-ink)}
+.decode .q b{color:var(--fv-accent-ink);font-weight:700}
+.decode .why{margin:0;color:var(--fv-ink2);font-size:17px;max-width:44em}
+.decode-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.dec{background:var(--fv-card);border:1px solid var(--fv-line);
+  border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:6px}
+.dec .frag{font-weight:700;color:var(--fv-accent-ink);font-size:17px}
+.dec .mean{color:var(--fv-ink);font-size:17px;line-height:1.65}
+.dec .layer{color:var(--fv-ink2);font-size:14px;letter-spacing:.04em}
+
+/* 書單：不是連結，所以不用 <a>，長得跟條目卡一樣但不會有 hover 位移 */
+.book{cursor:default}
+.book:hover{transform:none;box-shadow:none;border-color:var(--g-line,var(--line))}
+
+@media (max-width:640px){
+  .decode{padding:22px 20px;border-radius:14px}
+  .decode .q{font-size:19px}
+}
+
+/* ── 路線卡裡的步驟與「產出」 ──
+   路線卡要回答「下一堂學什麼」，所以列出有順序的具體課；
+   產出是驗收標準：做得出來才算學會，不是看完幾講。 */
+.steps{margin:2px 0 0;padding-left:1.3em;display:flex;flex-direction:column;gap:6px;font-size:17px;line-height:1.65}
+.steps a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--fv-line)}
+.steps a:hover{border-bottom-color:var(--teal-ink)}
+.steps .hint{color:var(--fv-ink2)}
+.output{margin:4px 0 0;background:var(--fv-card);border:1px solid var(--line);border-radius:12px;
+  padding:12px 16px;font-size:17px;line-height:1.7;color:var(--txt)}
+.output .lbl{display:inline-block;margin-right:.55em;font-size:14px;font-weight:700;
+  letter-spacing:.06em;color:var(--teal-ink)}
+.sec-head .output{max-width:44em}
+/* 路線卡：需求標記放到名稱下面。放右邊時標記一長，名稱就被擠成兩行，三張卡標題對不齊 */
+.route .entry-top{flex-direction:column;align-items:flex-start;gap:6px}
+
+h2,h3{font-family:var(--serif)}
+h2{font-weight:800}
+h3{font-weight:700}
+.sec-head h2::after{content:"。";color:var(--fv-accent)}
+
+h1{text-wrap:balance}
+h2,h3{text-wrap:pretty}

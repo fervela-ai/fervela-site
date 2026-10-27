@@ -1,0 +1,129 @@
+<!doctype html>
+<!-- Fervela.ai — © 2026 Fervela. All rights reserved. -->
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<link rel="icon" type="image/png" href="/assets/fervela-icon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>用掛鉤（hooks）自動化動作 — 中文整理 — Fervela.ai</title>
+<meta name="description" content="用掛鉤（hooks）自動化動作：本站的中文整理，附原文連結。">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./style.css">
+<style>
+code{background:rgba(127,127,127,.15);padding:1px 5px;border-radius:4px;font-size:.92em;word-break:break-all}
+.doc{margin:34px 0 0}.doc h2{font-size:1.35rem;line-height:1.4;margin:0 0 12px}.doc h3{font-size:1.1rem;margin:22px 0 8px}
+.doc p{line-height:1.85;margin:.7em 0}.doc ul,.doc ol{padding-left:1.3em;margin:.6em 0}.doc li{line-height:1.8;margin:.45em 0}
+.doc li>ol,.doc li>ul{margin:.3em 0}
+.callout{border:1px solid rgba(127,127,127,.3);border-left:4px solid #008B8B;border-radius:10px;padding:18px 20px;background:rgba(0,139,139,.06)}
+.callout p{margin:.2em 0;font-size:1.05rem}
+.toc{margin:26px 0 0;padding:16px 20px;border:1px solid rgba(127,127,127,.3);border-radius:10px}
+.toc b{display:block;margin-bottom:6px}.toc ol{margin:0;padding-left:1.4em;columns:1}.toc li{margin:.25em 0}
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="wrap">
+    <a class="brand" href="/"><span class="tmark"><svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><rect width="120" height="120" rx="26" fill="#ffffff"/><g color="#008B8B" transform="translate(6 6) scale(0.9)"><g transform="translate(2 14) scale(.88)">
+      <path d="M60 8C34 10 14 30 13 55c-2 28 18 50 48 54 21 3 41-8 48-27-7 11-22 18-39 17-28-1-45-19-44-42 1-23 15-41 34-49Z" fill="currentColor"/>
+      <path d="m66 31-30 54 27-7 3-47Z" fill="currentColor"/>
+      <path d="m71 31 0 50 16-8Z" fill="currentColor" opacity=".9"/>
+      <path d="M69 27v56" stroke="currentColor" stroke-width="1.25"/>
+      <path d="M29 82c12 8 25 11 39 10-12 4-28 2-41-5l2-5Z" fill="currentColor"/>
+      <path d="M78 70c5-5 12-3 13 3 5-5 13-1 12 6 5-1 8 3 7 8-1 7-8 11-16 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M27 84c19 10 43 13 65 6 7-2 12-6 16-12-2 8-8 14-17 18-19 8-45 6-59-3-3-2-5-6-5-9Z" fill="#fff" opacity=".94"/>
+      <path d="M25 87c20 10 45 13 67 5 7-2 12-6 16-11-3 8-9 14-18 18-19 7-44 5-58-4-4-2-6-5-7-8Z" fill="currentColor"/>
+      <path d="M31 88c18 7 39 8 56 2-14 9-38 10-56 2Z" fill="#fff" opacity=".92"/>
+      <path d="M20 85c14 4 27 3 39-2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+      </g>
+      <path d="m84 7 2.6 8.4L95 18l-8.4 2.6L84 29l-2.6-8.4L73 18l8.4-2.6L84 7Z" fill="#F5A623"/></g></svg></span><span class="tname">Fervela.ai</span></a>
+    <a class="tlink" href="/notes/">筆記</a>
+  </div></div>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="eyebrow">中文整理・最後更新 2026.10.26</div>
+    <h1>用掛鉤（hooks）自動化動作</h1>
+    <p class="lede">原文：Automate actions with hooks｜Anthropic（Claude Code 官方文件）｜<a href="https://code.claude.com/docs/en/hooks-guide">https://code.claude.com/docs/en/hooks-guide</a><br>以下是本站用自己的話做的整理，不是官方翻譯，細節與確切用語請看<a href="https://code.claude.com/docs/en/hooks-guide">原文</a>。<br><a href="./index.html">← 回迴圈工程自學地圖</a></p>
+  </header>
+<div class="toc"><b>目錄</b><ol><li><a href="#s0">一句話重點</a></li><li><a href="#s1">這篇在講什麼</a></li><li><a href="#s2">重點整理</a></li><li><a href="#s3">對學習者的意思</a></li><li><a href="#s4">要小心的地方</a></li></ol></div>
+<section class="doc callout" id="s0"><h2>一句話重點</h2>
+<p>掛鉤（hook）是在 Claude Code 生命週期的固定時間點自動執行的程式，讓「一定會發生」的事不再靠模型自己決定要不要做。</p>
+</section><section class="doc" id="s1"><h2>這篇在講什麼</h2>
+<p>這是官方的入門指南，說明如何在 Claude Code 工作流程中的特定時刻觸發自訂動作，例如編輯檔案後自動排版、執行危險指令前攔截、需要你回應時發通知、在結束前驗證成果。文中先帶你做第一個通知掛鉤，再列出常見範例，接著講輸入輸出、回傳碼、篩選條件、設定位置、進階的提示詞與代理人掛鉤，最後是限制與除錯。</p>
+</section><section class="doc" id="s2"><h2>重點整理</h2>
+<h3>掛鉤是什麼、怎麼設定</h3>
+<ul>
+<li>掛鉤是使用者自訂的動作，在生命週期特定點由 Claude Code 執行，提供確定性的控制。</li>
+<li>設定寫在設定檔的 <code>hooks</code> 區塊，每個事件名稱是裡面的一個鍵，內容含 <code>matcher</code>（篩選）與 <code>hooks</code> 陣列（含 <code>type</code>、<code>command</code>）。</li>
+<li>位置決定範圍：<code>~/.claude/settings.json</code> 是你所有專案；<code>.claude/settings.json</code> 是單一專案且可進版本庫；<code>.claude/settings.local.json</code> 不共享；另有組織管理設定、外掛的 <code>hooks/hooks.json</code>、技能與子代理人的前置欄位。</li>
+<li>在介面輸入 <code>/hooks</code> 可瀏覽已設定的掛鉤；設定 <code>"disableAllHooks": true</code> 可停用。</li>
+</ul>
+<h3>有哪些事件</h3>
+<ul>
+<li>工作階段類：<code>SessionStart</code>、<code>SessionEnd</code>、<code>Setup</code>。</li>
+<li>提問與工具類：<code>UserPromptSubmit</code>、<code>PreToolUse</code>（工具執行前，可擋）、<code>PostToolUse</code>（成功後）、<code>PostToolUseFailure</code>、<code>PermissionRequest</code>。</li>
+<li>結束與子代理人類：<code>Stop</code>（Claude 回答完時）、<code>SubagentStart</code>、<code>SubagentStop</code>。</li>
+<li>其他還有 <code>Notification</code>、<code>PreCompact</code>、<code>PostCompact</code>、<code>ConfigChange</code>、<code>CwdChanged</code>、<code>FileChanged</code> 等。</li>
+<li>掛鉤類型除了 <code>command</code>，還有 <code>http</code>、<code>mcp_tool</code>、<code>prompt</code>、<code>agent</code>。</li>
+</ul>
+<h3>常見範例</h3>
+<ul>
+<li>通知：用 <code>Notification</code> 事件，在 Claude 等你輸入時跳桌面通知，各作業系統指令不同。</li>
+<li>改檔後自動排版：<code>PostToolUse</code> 搭配 <code>"matcher": "Edit|Write"</code>，用 <code>jq</code> 取出檔案路徑再交給排版工具。</li>
+<li>保護檔案：<code>PreToolUse</code> 掛鉤執行腳本，路徑符合 <code>.env</code> 等保護模式就以代碼 2 結束，腳本需先 <code>chmod +x</code>。</li>
+<li>壓縮後重新注入背景：<code>SessionStart</code> 搭配 <code>compact</code> 篩選，把標準輸出文字加進脈絡。</li>
+<li>其他：設定異動稽核（<code>ConfigChange</code>）、切換目錄重載環境、自動批准特定權限提示。</li>
+</ul>
+<h3>輸入、輸出與回傳碼</h3>
+<ul>
+<li>事件觸發時，Claude Code 把 JSON 從標準輸入（stdin）交給腳本，含 <code>session_id</code>、<code>cwd</code>、<code>hook_event_name</code>，工具事件另有 <code>tool_name</code>、<code>tool_input</code>。</li>
+<li>結束碼 0 代表沒意見，走正常流程（對 <code>PreToolUse</code> 並不等於批准）。</li>
+<li>結束碼 2 代表擋下，把原因寫到標準錯誤（stderr），多數事件會回饋給 Claude 讓它調整。</li>
+<li>想要更細的控制，結束碼 0 並輸出 JSON，例如 <code>hookSpecificOutput</code> 裡的 <code>permissionDecision</code>（<code>allow</code>、<code>deny</code>、<code>ask</code>）與 <code>permissionDecisionReason</code>。<code>PostToolUse</code> 與 <code>Stop</code> 則用最上層的 <code>decision: "block"</code>。</li>
+<li>一個掛鉤只選一種方式，別混用結束碼與 JSON。</li>
+</ul>
+<h3>篩選：matcher 與 if</h3>
+<ul>
+<li><code>matcher</code> 依事件不同而比對不同欄位，例如工具名稱、<code>SessionStart</code> 的啟動來源；空白代表全部觸發。比對區分大小寫。</li>
+<li><code>if</code> 欄位用權限規則語法（如 <code>Bash(git *)</code>）同時看工具與參數，只對工具類事件有效。</li>
+<li>多個掛鉤命中同一事件時並行執行，<code>PreToolUse</code> 的結果取最嚴格者（<code>deny</code> 勝過 <code>ask</code> 勝過 <code>allow</code>）。</li>
+</ul>
+<h3>提示詞掛鉤與代理人掛鉤</h3>
+<ul>
+<li><code>type: "prompt"</code> 把判斷交給模型，只回 <code>"ok": true/false</code> 與 <code>reason</code>。</li>
+<li>用在 <code>Stop</code> 時，<code>ok</code> 為 false 會把 <code>reason</code> 當下一步指示，讓 Claude 繼續做。</li>
+<li><code>type: "agent"</code> 能讀檔、跑指令再下判斷，例如結束前實際跑測試；文件標示為實驗性功能。</li>
+</ul>
+<h3>除錯</h3>
+<ul>
+<li>掛鉤沒觸發：用 <code>/hooks</code> 確認事件與篩選正確。</li>
+<li>腳本出錯：用 <code>echo '{"tool_name":"Bash",...}' | ./my-hook.sh</code> 手動餵 JSON 並檢查結束碼。</li>
+<li>JSON 沒效果：常見原因是欄位放錯層，或 shell 設定檔先印出文字，擠掉開頭的 <code>{</code>。</li>
+<li>想看細節：用 <code>claude --debug-file</code> 寫日誌，或在對話中輸入 <code>/debug</code>；按 <code>Ctrl+O</code> 可看轉錄中的掛鉤結果。</li>
+</ul>
+</section><section class="doc" id="s3"><h2>對學習者的意思</h2>
+<ul>
+<li>寫迴圈時，想要「一定會做」的步驟（排版、跑檢查）放進掛鉤，比在提示詞裡叮嚀可靠。</li>
+<li>做「沒證據不准停」：在 <code>Stop</code> 掛鉤檢查證據（例如測試輸出、檔案是否存在），不足就回報 <code>decision: "block"</code> 並附 <code>reason</code>，Claude 會被迫繼續；證據齊全才放行。</li>
+<li>證據要可驗證：用 <code>agent</code> 類型實際跑測試，比單靠模型自述完成更有說服力。</li>
+<li>設計「出口」：務必讀 <code>stop_hook_active</code> 並在已觸發過時放行，避免無限卡住。</li>
+<li>先用手動餵 JSON 的方式測腳本，再接進迴圈，除錯成本最低。</li>
+</ul>
+</section><section class="doc" id="s4"><h2>要小心的地方</h2>
+<ul>
+<li>連續擋下 <code>Stop</code> 達八次且中間 Claude 沒有任何工具呼叫，系統會強制放行，並顯示警告。可用環境變數 <code>CLAUDE_CODE_STOP_HOOK_BLOCK_CAP</code> 調高，但腳本本身仍應有收斂條件。</li>
+<li><code>Stop</code> 在每次回答結束都會觸發，不只是任務完成；使用者中斷時不觸發。<code>PostToolUse</code> 無法復原已執行的動作。</li>
+<li>篩選有盲區：Claude 也能透過 shell 指令改檔，只比對 <code>Edit|Write</code> 會漏掉；<code>if</code> 屬盡力篩選，硬性允許或禁止應用權限系統。掛鉤腳本以你的權限執行，上線前需審視；代理人掛鉤為實驗性功能，行為可能改變。</li>
+</ul></section>
+
+  <a class="back" href="./index.html">← 回迴圈工程自學地圖</a>
+
+  <footer>
+    <p>本頁是本站的中文整理，不是原作者或官方翻譯；若與原文不同以<a href="https://code.claude.com/docs/en/hooks-guide">原文</a>為準。發現錯誤，麻煩告訴我：<a href="mailto:contact@fervela.ai">contact@fervela.ai</a></p>
+    <div class="fnote">作品以 <b>Fervela.ai</b> 為名發佈。© 2026 雲帆研創有限公司（Fervela.ai）</div>
+  </footer>
+
+</div>
+</body>
+</html>

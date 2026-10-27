@@ -1,0 +1,119 @@
+<!doctype html>
+<!-- Fervela.ai — © 2026 Fervela. All rights reserved. -->
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<link rel="icon" type="image/png" href="/assets/fervela-icon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>打造有效的 AI 代理 — 中文整理 — Fervela.ai</title>
+<meta name="description" content="打造有效的 AI 代理：本站的中文整理，附原文連結。">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./style.css">
+<style>
+code{background:rgba(127,127,127,.15);padding:1px 5px;border-radius:4px;font-size:.92em;word-break:break-all}
+.doc{margin:34px 0 0}.doc h2{font-size:1.35rem;line-height:1.4;margin:0 0 12px}.doc h3{font-size:1.1rem;margin:22px 0 8px}
+.doc p{line-height:1.85;margin:.7em 0}.doc ul,.doc ol{padding-left:1.3em;margin:.6em 0}.doc li{line-height:1.8;margin:.45em 0}
+.doc li>ol,.doc li>ul{margin:.3em 0}
+.callout{border:1px solid rgba(127,127,127,.3);border-left:4px solid #008B8B;border-radius:10px;padding:18px 20px;background:rgba(0,139,139,.06)}
+.callout p{margin:.2em 0;font-size:1.05rem}
+.toc{margin:26px 0 0;padding:16px 20px;border:1px solid rgba(127,127,127,.3);border-radius:10px}
+.toc b{display:block;margin-bottom:6px}.toc ol{margin:0;padding-left:1.4em;columns:1}.toc li{margin:.25em 0}
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="wrap">
+    <a class="brand" href="/"><span class="tmark"><svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><rect width="120" height="120" rx="26" fill="#ffffff"/><g color="#008B8B" transform="translate(6 6) scale(0.9)"><g transform="translate(2 14) scale(.88)">
+      <path d="M60 8C34 10 14 30 13 55c-2 28 18 50 48 54 21 3 41-8 48-27-7 11-22 18-39 17-28-1-45-19-44-42 1-23 15-41 34-49Z" fill="currentColor"/>
+      <path d="m66 31-30 54 27-7 3-47Z" fill="currentColor"/>
+      <path d="m71 31 0 50 16-8Z" fill="currentColor" opacity=".9"/>
+      <path d="M69 27v56" stroke="currentColor" stroke-width="1.25"/>
+      <path d="M29 82c12 8 25 11 39 10-12 4-28 2-41-5l2-5Z" fill="currentColor"/>
+      <path d="M78 70c5-5 12-3 13 3 5-5 13-1 12 6 5-1 8 3 7 8-1 7-8 11-16 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M27 84c19 10 43 13 65 6 7-2 12-6 16-12-2 8-8 14-17 18-19 8-45 6-59-3-3-2-5-6-5-9Z" fill="#fff" opacity=".94"/>
+      <path d="M25 87c20 10 45 13 67 5 7-2 12-6 16-11-3 8-9 14-18 18-19 7-44 5-58-4-4-2-6-5-7-8Z" fill="currentColor"/>
+      <path d="M31 88c18 7 39 8 56 2-14 9-38 10-56 2Z" fill="#fff" opacity=".92"/>
+      <path d="M20 85c14 4 27 3 39-2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+      </g>
+      <path d="m84 7 2.6 8.4L95 18l-8.4 2.6L84 29l-2.6-8.4L73 18l8.4-2.6L84 7Z" fill="#F5A623"/></g></svg></span><span class="tname">Fervela.ai</span></a>
+    <a class="tlink" href="/notes/">筆記</a>
+  </div></div>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="eyebrow">中文整理・最後更新 2026.10.26</div>
+    <h1>打造有效的 AI 代理</h1>
+    <p class="lede">原文：Building Effective AI Agents｜Anthropic（作者 Erik S.、Barry Zhang）｜2024-12-19｜<a href="https://www.anthropic.com/research/building-effective-agents">https://www.anthropic.com/research/building-effective-agents</a><br>以下是本站用自己的話做的整理，不是官方翻譯，細節與確切用語請看<a href="https://www.anthropic.com/research/building-effective-agents">原文</a>。<br><a href="./index.html">← 回迴圈工程自學地圖</a></p>
+  </header>
+<div class="toc"><b>目錄</b><ol><li><a href="#s0">一句話重點</a></li><li><a href="#s1">這篇在講什麼</a></li><li><a href="#s2">重點整理</a></li><li><a href="#s3">對學習者的意思</a></li><li><a href="#s4">要小心的地方</a></li></ol></div>
+<section class="doc callout" id="s0"><h2>一句話重點</h2>
+<p>做 AI 代理不必先上複雜框架，從單次呼叫、固定流程到自主代理，只有簡單做法不夠用時才往上加一層。</p>
+</section><section class="doc" id="s1"><h2>這篇在講什麼</h2>
+<p>作者群與許多團隊合作打造大型語言模型（LLM）代理後發現，最成功的案例用的是簡單、可組合的設計模式，而非繁複框架。文章先區分「工作流程」與「代理」，再介紹五種常見模式、使用時機、框架的取捨，最後以客服與寫程式為例，並談工具介面設計。</p>
+</section><section class="doc" id="s2"><h2>重點整理</h2>
+<h3>工作流程與代理的差別</h3>
+<ul>
+<li>「代理式系統」（agentic systems）是總稱，分兩種架構。</li>
+<li>工作流程（workflows）：LLM 與工具照事先寫好的程式路徑運作。</li>
+<li>代理（agents）：由 LLM 自己決定流程與工具怎麼用。</li>
+</ul>
+<h3>什麼時候才需要代理</h3>
+<ul>
+<li>從最簡單的做法開始，需要時才加複雜度。</li>
+<li>代理式系統常以較高延遲與成本換取較好表現，要先評估划不划算。</li>
+<li>任務明確、要穩定，用工作流程；需要彈性與模型大規模判斷，才用代理。</li>
+<li>許多應用只要單次呼叫配上檢索（retrieval）與範例就夠了。</li>
+</ul>
+<h3>框架的取捨</h3>
+<ul>
+<li>框架簡化呼叫模型、定義工具、串接步驟，但多一層抽象會藏住提示詞與回應，除錯變難。</li>
+<li>建議先直接呼叫 API；若用框架，要弄懂底層在做什麼。</li>
+</ul>
+<h3>基礎積木與五種工作流程</h3>
+<ul>
+<li>增強型 LLM（augmented LLM）：帶有檢索、工具、記憶的模型，是所有模式的基礎。</li>
+<li>提示詞串接（prompt chaining）：拆成固定順序的步驟，中間可加程式檢查。例：先寫文案再翻譯。</li>
+<li>路由（routing）：先分類輸入，再交給專門流程。例：簡單問題給小模型，難題給大模型。</li>
+<li>平行化（parallelization）：分段（獨立子任務同時跑）或投票（同一任務跑多次）。</li>
+<li>協調者與工人（orchestrator-workers）：中央 LLM 現場拆任務、分派、整合；子任務不是事先定好的。</li>
+<li>評估者與優化者（evaluator-optimizer）：一個產出、一個給回饋，來回修正；需有明確評分標準。</li>
+</ul>
+<h3>自主代理怎麼運作</h3>
+<ul>
+<li>代理從人的指令開始，弄清楚任務後自己規劃執行，必要時回頭問人。</li>
+<li>每一步要從環境取得「真實回饋」（ground truth），如工具或程式執行結果，常設最大迭代次數等停止條件。</li>
+<li>實作上就是 LLM 在迴圈中依回饋使用工具；代價是成本高、錯誤可能累積，應在沙盒測試並設護欄。</li>
+</ul>
+<h3>實務案例與工具設計</h3>
+<ul>
+<li>客服：能查資料並以程式處理退款，成效可用「是否解決」衡量。</li>
+<li>寫程式：可用自動測試驗證並迭代，但仍需人檢查整體是否合用。</li>
+<li>工具介面（ACI）要像人機介面一樣用心：描述含範例與邊界，並大量測試。</li>
+<li>用「防呆」（poka-yoke）改參數設計；例如要求絕對路徑，解決了相對路徑出錯。</li>
+</ul>
+</section><section class="doc" id="s3"><h2>對學習者的意思</h2>
+<ul>
+<li>寫迴圈前先問單次呼叫加檢索能不能解決；能就不要用迴圈。</li>
+<li>代理迴圈的重點是每一輪如何取得真實回饋、何時停止。</li>
+<li>五種模式是可組合的積木，先各做小例子，再用量測決定值不值得加複雜度。</li>
+<li>作者做 SWE-bench 代理時，花在最佳化工具的時間比花在整體提示詞更多；工具值得和提示詞一樣用心設計。</li>
+<li>三原則可當檢查表：設計簡單、讓規劃步驟看得見、把工具文件與測試做好。</li>
+</ul>
+</section><section class="doc" id="s4"><h2>要小心的地方</h2>
+<ul>
+<li>原文承認代理成本高、錯誤會累積，需沙盒測試與護欄。</li>
+<li>頁面註明 2024 年 12 月後工具生態已變化，框架與模型名稱可能過時，宜當觀念而非現行清單。</li>
+<li>寫程式案例中，原文仍強調需要人工審查。</li>
+</ul></section>
+
+  <a class="back" href="./index.html">← 回迴圈工程自學地圖</a>
+
+  <footer>
+    <p>本頁是本站的中文整理，不是原作者或官方翻譯；若與原文不同以<a href="https://www.anthropic.com/research/building-effective-agents">原文</a>為準。發現錯誤，麻煩告訴我：<a href="mailto:contact@fervela.ai">contact@fervela.ai</a></p>
+    <div class="fnote">作品以 <b>Fervela.ai</b> 為名發佈。© 2026 雲帆研創有限公司（Fervela.ai）</div>
+  </footer>
+
+</div>
+</body>
+</html>

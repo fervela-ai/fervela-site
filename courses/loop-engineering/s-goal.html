@@ -1,0 +1,121 @@
+<!doctype html>
+<!-- Fervela.ai — © 2026 Fervela. All rights reserved. -->
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<link rel="icon" type="image/png" href="/assets/fervela-icon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>讓 Claude 朝著目標持續工作 — 中文整理 — Fervela.ai</title>
+<meta name="description" content="讓 Claude 朝著目標持續工作：本站的中文整理，附原文連結。">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./style.css">
+<style>
+code{background:rgba(127,127,127,.15);padding:1px 5px;border-radius:4px;font-size:.92em;word-break:break-all}
+.doc{margin:34px 0 0}.doc h2{font-size:1.35rem;line-height:1.4;margin:0 0 12px}.doc h3{font-size:1.1rem;margin:22px 0 8px}
+.doc p{line-height:1.85;margin:.7em 0}.doc ul,.doc ol{padding-left:1.3em;margin:.6em 0}.doc li{line-height:1.8;margin:.45em 0}
+.doc li>ol,.doc li>ul{margin:.3em 0}
+.callout{border:1px solid rgba(127,127,127,.3);border-left:4px solid #008B8B;border-radius:10px;padding:18px 20px;background:rgba(0,139,139,.06)}
+.callout p{margin:.2em 0;font-size:1.05rem}
+.toc{margin:26px 0 0;padding:16px 20px;border:1px solid rgba(127,127,127,.3);border-radius:10px}
+.toc b{display:block;margin-bottom:6px}.toc ol{margin:0;padding-left:1.4em;columns:1}.toc li{margin:.25em 0}
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="wrap">
+    <a class="brand" href="/"><span class="tmark"><svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><rect width="120" height="120" rx="26" fill="#ffffff"/><g color="#008B8B" transform="translate(6 6) scale(0.9)"><g transform="translate(2 14) scale(.88)">
+      <path d="M60 8C34 10 14 30 13 55c-2 28 18 50 48 54 21 3 41-8 48-27-7 11-22 18-39 17-28-1-45-19-44-42 1-23 15-41 34-49Z" fill="currentColor"/>
+      <path d="m66 31-30 54 27-7 3-47Z" fill="currentColor"/>
+      <path d="m71 31 0 50 16-8Z" fill="currentColor" opacity=".9"/>
+      <path d="M69 27v56" stroke="currentColor" stroke-width="1.25"/>
+      <path d="M29 82c12 8 25 11 39 10-12 4-28 2-41-5l2-5Z" fill="currentColor"/>
+      <path d="M78 70c5-5 12-3 13 3 5-5 13-1 12 6 5-1 8 3 7 8-1 7-8 11-16 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M27 84c19 10 43 13 65 6 7-2 12-6 16-12-2 8-8 14-17 18-19 8-45 6-59-3-3-2-5-6-5-9Z" fill="#fff" opacity=".94"/>
+      <path d="M25 87c20 10 45 13 67 5 7-2 12-6 16-11-3 8-9 14-18 18-19 7-44 5-58-4-4-2-6-5-7-8Z" fill="currentColor"/>
+      <path d="M31 88c18 7 39 8 56 2-14 9-38 10-56 2Z" fill="#fff" opacity=".92"/>
+      <path d="M20 85c14 4 27 3 39-2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+      </g>
+      <path d="m84 7 2.6 8.4L95 18l-8.4 2.6L84 29l-2.6-8.4L73 18l8.4-2.6L84 7Z" fill="#F5A623"/></g></svg></span><span class="tname">Fervela.ai</span></a>
+    <a class="tlink" href="/notes/">筆記</a>
+  </div></div>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="eyebrow">中文整理・最後更新 2026.10.26</div>
+    <h1>讓 Claude 朝著目標持續工作</h1>
+    <p class="lede">原文：Keep Claude working toward a goal｜Anthropic（Claude Code 官方文件）｜<a href="https://code.claude.com/docs/en/goal">https://code.claude.com/docs/en/goal</a><br>以下是本站用自己的話做的整理，不是官方翻譯，細節與確切用語請看<a href="https://code.claude.com/docs/en/goal">原文</a>。<br><a href="./index.html">← 回迴圈工程自學地圖</a></p>
+  </header>
+<div class="toc"><b>目錄</b><ol><li><a href="#s0">一句話重點</a></li><li><a href="#s1">這篇在講什麼</a></li><li><a href="#s2">重點整理</a></li><li><a href="#s3">對學習者的意思</a></li><li><a href="#s4">要小心的地方</a></li></ol></div>
+<section class="doc callout" id="s0"><h2>一句話重點</h2>
+<p>用 <code>/goal</code> 寫下一個「完成條件」，Claude 每做完一輪就由另一個模型檢查條件成立了沒，沒成立就自動接著做，不必你每一步下指令。</p>
+</section><section class="doc" id="s1"><h2>這篇在講什麼</h2>
+<p>這篇介紹 Claude Code 的 <code>/goal</code> 指令。你給它一個可以驗證的終點，例如「測試全過」，它會一輪接一輪地做下去，直到條件被判定達成、被判定不可能，或遇到需要你處理的錯誤才停。文件也說明條件怎麼寫、怎麼看狀態、怎麼取消，以及背景工作與錯誤時的行為。</p>
+</section><section class="doc" id="s2"><h2>重點整理</h2>
+<h3>適合用在哪裡</h3>
+<ul>
+<li>適合「大量工作、但終點可驗證」的任務：把模組遷移到新 API 直到測試通過、照設計文件做到驗收條件全成立、把大檔案拆小到符合大小上限、清空待辦議題佇列。</li>
+<li>同一個工作階段（session）一次只能有一個目標；再下一個 <code>/goal</code> 會取代舊的。</li>
+</ul>
+<h3>和其他讓工作持續的做法比較</h3>
+<ul>
+<li><code>/goal</code>：上一輪結束就開始下一輪，由評估模型判斷何時停。</li>
+<li><code>/loop</code>：依時間間隔觸發下一輪。</li>
+<li>停止掛鉤（Stop hook）：每輪結束觸發，停止與否由你自己的腳本或提示決定；<code>/goal</code> 其實就是只在當前工作階段有效的簡化版。</li>
+<li>自動模式（auto mode）只省掉每個工具呼叫的確認，不會自己開下一輪；兩者可搭配使用。</li>
+</ul>
+<h3>基本指令</h3>
+<ul>
+<li><code>/goal &lt;條件&gt;</code>：設定目標並立刻開始一輪，條件本身就是指示，畫面會出現 <code>◎ /goal active</code> 與已執行時間。</li>
+<li><code>/goal</code>（不帶參數）：看狀態，包含條件、已跑時間、已評估輪數、詞元（token）花費與評估者最近一次的理由。</li>
+<li><code>/goal clear</code>：取消目標；<code>stop</code>、<code>off</code>、<code>reset</code>、<code>none</code>、<code>cancel</code> 也可用。執行 <code>/clear</code> 開新對話同樣會移除目標。</li>
+<li>目標不會改變權限模式；若要無人看管地跑，要在自動模式下使用，否則手動模式遇到未預先允許的工具仍會詢問。</li>
+</ul>
+<h3>條件怎麼寫</h3>
+<ul>
+<li>評估者只看對話裡已出現的內容，不會自己跑指令或讀檔，所以條件要寫成 Claude 的輸出就能證明的事。</li>
+<li>好條件通常包含：一個可量測的終點（測試結果、建置結束碼、檔案數、空佇列）、一個明確的檢查方式（如 <code>npm test</code> 結束碼為 0）、以及不能動到的限制（如不得修改其他測試檔）。</li>
+<li>上限 4,000 字元。想限制跑多久，可在條件裡加上輪數或時間子句，例如 <code>or stop after 20 turns</code>。</li>
+</ul>
+<h3>評估與停止規則</h3>
+<ul>
+<li>每輪結束，一個小型快速模型拿條件與對話判斷，回傳三種結果：未達成（附理由，Claude 以此為下一輪方向）、已達成（清除目標並記錄）、不可能達成（清除目標並記錄理由）。</li>
+<li>若 Claude 連續數輪都只回應評估者、沒有實際使用工具，迴圈會停下並警告，目標保留，等你下次輸入再恢復評估。</li>
+<li>可用 <code>ANTHROPIC_DEFAULT_HAIKU_MODEL</code> 換評估用模型，但這個變數也會影響其他用到小型快速模型的功能。評估成本通常遠低於主要工作。</li>
+</ul>
+<h3>背景工作與錯誤處理</h3>
+<ul>
+<li>一輪結束時若還有子代理（subagent）或背景指令在跑，該輪不評估，等沒有背景工作的下一輪再評估。</li>
+<li>背景工作讓目標等待滿 30 分鐘就會進行一次檢查（check-in），之後間隔加倍，最多到首次間隔的四倍；可用 <code>CLAUDE_CODE_GOAL_CHECKIN_MINUTES</code> 調整，設 <code>0</code> 則關閉檢查與自動重試。互動模式下閒置時最多自動發起三次檢查。</li>
+<li>必須由你修好的錯誤會清除目標：驗證失敗（由 Claude Code 自行管理憑證時）、額度用盡、自動壓縮仍無法解決的上下文溢出、模型不可用；修好後要重新下 <code>/goal</code>。</li>
+<li>其他錯誤目標保留：暫時性問題（伺服器過載、斷線）自動重試，三次後暫停；重試也沒用的（速率限制、用量上限）則暫停。</li>
+</ul>
+<h3>續接與非互動模式</h3>
+<ul>
+<li>恢復工作階段時，仍有效的目標會被還原，但輪數、計時與詞元基準會重置；已達成或已清除的不會還原。</li>
+<li>可用於非互動模式，例如 <code>claude -p "/goal ..."</code>，會一次跑到結束；建議加 <code>--output-format stream-json --verbose</code> 才看得到過程，Ctrl+C 可中斷。桌面版與遠端控制（Remote Control）也支援。</li>
+</ul>
+</section><section class="doc" id="s3"><h2>對學習者的意思</h2>
+<ul>
+<li>寫迴圈的核心是「終點條件」：先想清楚什麼證據能證明完成，再讓機器自己重複，而不是靠人每輪推一把。</li>
+<li>條件要寫成「對話中看得到證據」的樣子，評估者看不到你的硬碟，只看 Claude 說了、貼了什麼。</li>
+<li>把停止條件分成成功、不可能、人工介入三種，並加上輪數或時間上限，是設計任何自動迴圈都該有的保險。</li>
+<li>做事的模型與判斷是否完成的模型分開，能降低「自己說做完了」的偏誤，值得在自己的迴圈設計中借用。</li>
+</ul>
+</section><section class="doc" id="s4"><h2>要小心的地方</h2>
+<ul>
+<li><code>/goal</code> 依賴掛鉤（hooks）機制：若設定 <code>disableAllHooks</code> 為 <code>true</code>，或受管理設定限制只能用受管理掛鉤，就無法使用；工作區信任規則也與掛鉤相同。</li>
+<li>部分行為有版本門檻：檢查需 Claude Code v2.1.234 以上，閒置檢查需 v2.1.236 以上，互動模式的重試與暫停提示需 v2.1.269 以上；實際以你安裝的版本為準。</li>
+<li>評估者不會執行指令，條件若寫成 Claude 無法在對話中展示的事，就可能一直無法判定達成。</li>
+</ul></section>
+
+  <a class="back" href="./index.html">← 回迴圈工程自學地圖</a>
+
+  <footer>
+    <p>本頁是本站的中文整理，不是原作者或官方翻譯；若與原文不同以<a href="https://code.claude.com/docs/en/goal">原文</a>為準。發現錯誤，麻煩告訴我：<a href="mailto:contact@fervela.ai">contact@fervela.ai</a></p>
+    <div class="fnote">作品以 <b>Fervela.ai</b> 為名發佈。© 2026 雲帆研創有限公司（Fervela.ai）</div>
+  </footer>
+
+</div>
+</body>
+</html>

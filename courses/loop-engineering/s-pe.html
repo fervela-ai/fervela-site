@@ -1,0 +1,120 @@
+<!doctype html>
+<!-- Fervela.ai — © 2026 Fervela. All rights reserved. -->
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<link rel="icon" type="image/png" href="/assets/fervela-icon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>什麼是「迴圈工程」？ — 中文整理 — Fervela.ai</title>
+<meta name="description" content="什麼是「迴圈工程」？：本站的中文整理，附原文連結。">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./style.css">
+<style>
+code{background:rgba(127,127,127,.15);padding:1px 5px;border-radius:4px;font-size:.92em;word-break:break-all}
+.doc{margin:34px 0 0}.doc h2{font-size:1.35rem;line-height:1.4;margin:0 0 12px}.doc h3{font-size:1.1rem;margin:22px 0 8px}
+.doc p{line-height:1.85;margin:.7em 0}.doc ul,.doc ol{padding-left:1.3em;margin:.6em 0}.doc li{line-height:1.8;margin:.45em 0}
+.doc li>ol,.doc li>ul{margin:.3em 0}
+.callout{border:1px solid rgba(127,127,127,.3);border-left:4px solid #008B8B;border-radius:10px;padding:18px 20px;background:rgba(0,139,139,.06)}
+.callout p{margin:.2em 0;font-size:1.05rem}
+.toc{margin:26px 0 0;padding:16px 20px;border:1px solid rgba(127,127,127,.3);border-radius:10px}
+.toc b{display:block;margin-bottom:6px}.toc ol{margin:0;padding-left:1.4em;columns:1}.toc li{margin:.25em 0}
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="wrap">
+    <a class="brand" href="/"><span class="tmark"><svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><rect width="120" height="120" rx="26" fill="#ffffff"/><g color="#008B8B" transform="translate(6 6) scale(0.9)"><g transform="translate(2 14) scale(.88)">
+      <path d="M60 8C34 10 14 30 13 55c-2 28 18 50 48 54 21 3 41-8 48-27-7 11-22 18-39 17-28-1-45-19-44-42 1-23 15-41 34-49Z" fill="currentColor"/>
+      <path d="m66 31-30 54 27-7 3-47Z" fill="currentColor"/>
+      <path d="m71 31 0 50 16-8Z" fill="currentColor" opacity=".9"/>
+      <path d="M69 27v56" stroke="currentColor" stroke-width="1.25"/>
+      <path d="M29 82c12 8 25 11 39 10-12 4-28 2-41-5l2-5Z" fill="currentColor"/>
+      <path d="M78 70c5-5 12-3 13 3 5-5 13-1 12 6 5-1 8 3 7 8-1 7-8 11-16 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M27 84c19 10 43 13 65 6 7-2 12-6 16-12-2 8-8 14-17 18-19 8-45 6-59-3-3-2-5-6-5-9Z" fill="#fff" opacity=".94"/>
+      <path d="M25 87c20 10 45 13 67 5 7-2 12-6 16-11-3 8-9 14-18 18-19 7-44 5-58-4-4-2-6-5-7-8Z" fill="currentColor"/>
+      <path d="M31 88c18 7 39 8 56 2-14 9-38 10-56 2Z" fill="#fff" opacity=".92"/>
+      <path d="M20 85c14 4 27 3 39-2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+      </g>
+      <path d="m84 7 2.6 8.4L95 18l-8.4 2.6L84 29l-2.6-8.4L73 18l8.4-2.6L84 7Z" fill="#F5A623"/></g></svg></span><span class="tname">Fervela.ai</span></a>
+    <a class="tlink" href="/notes/">筆記</a>
+  </div></div>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="eyebrow">中文整理・最後更新 2026.10.26</div>
+    <h1>什麼是「迴圈工程」？</h1>
+    <p class="lede">原文：What is "loop engineering?"｜Gergely Orosz，The Pragmatic Engineer｜2026-07-14｜<a href="https://newsletter.pragmaticengineer.com/p/what-is-loop-engineering">https://newsletter.pragmaticengineer.com/p/what-is-loop-engineering</a> （後半付費，本整理只涵蓋公開部分）<br>以下是本站用自己的話做的整理，不是官方翻譯，細節與確切用語請看<a href="https://newsletter.pragmaticengineer.com/p/what-is-loop-engineering">原文</a>。<br><a href="./index.html">← 回迴圈工程自學地圖</a></p>
+  </header>
+<div class="toc"><b>目錄</b><ol><li><a href="#s0">一句話重點</a></li><li><a href="#s1">這篇在講什麼</a></li><li><a href="#s2">重點整理</a></li><li><a href="#s3">對學習者的意思</a></li><li><a href="#s4">要小心的地方</a></li></ol></div>
+<section class="doc callout" id="s0"><h2>一句話重點</h2>
+<p>「迴圈工程」（loop engineering）是把開發者的角色從「親自對 AI 下提示」轉成「設計會自動反覆提示 AI 的迴圈」；公開部分談定義、來源、現成指令與實際用法。</p>
+</section><section class="doc" id="s1"><h2>這篇在講什麼</h2>
+<p>作者觀察到，幾位知名開發者開始說自己不再直接對程式代理人（coding agent）下指令，而是寫一個迴圈，讓程式去反覆驅動代理人。文章先交代這個說法的起點與演變，再整理各個工具內建的迴圈功能，最後根據作者蒐集的大量網友回覆，歸納大家實際拿迴圈做什麼。後半談失望與成本等議題，屬付費內容。</p>
+</section><section class="doc" id="s2"><h2>重點整理</h2>
+<h3>定義：把「下提示的人」換掉</h3>
+<ul>
+<li>有人把迴圈工程形容為取代自己「負責對代理人下提示的那個人」。</li>
+<li>Claude Code 的創作者曾公開表示，他不再直接提示模型，而是跑迴圈去提示它，自稱工作就是寫迴圈。</li>
+<li>另一位代理人工具創作者也在推廣設計迴圈的做法。</li>
+</ul>
+<h3>源頭：Ralph 迴圈</h3>
+<ul>
+<li>起點是 Geoffrey Huntley 提出的做法，最簡單的形式就是用 Bash 腳本反覆把同一份提示檔餵給代理人。</li>
+<li>流程是先寫好含成功條件的計畫，每圈只處理一項，檢查目標是否達成，沒達成就用乾淨的上下文（context）重新啟動代理人。</li>
+<li>2025 年底因 Matt Pocock 的教學而流行：維護一份持續更新的產品需求文件（PRD）與進度紀錄，測試通過才提交一項功能，作者形容像動態看板。</li>
+<li>主要動機是繞開上下文視窗的限制：把進度存在檔案系統、讓代理人每次從乾淨狀態開始，可減輕「上下文腐化」（context rot，內容塞滿後表現變差）。</li>
+</ul>
+<h3>工具內建的迴圈指令</h3>
+<ul>
+<li>Claude Code 在 3 月加入 <code>/loop</code>，可依間隔重複執行任務直到完成。</li>
+<li>Codex 在 4 月推出 Goals，讓同一串對話朝既定目標跨回合持續工作。</li>
+<li>Hermes agent 在 5 月 2 日推出 <code>/goal</code>，據稱受 Codex 啟發；Claude Code 5 月 12 日也推出 <code>/goal</code>，每回合後由一個小而快的模型判斷完成條件是否成立。</li>
+<li>也出現了開源的對應外掛與套件。</li>
+</ul>
+<h3>實際用途：觸發與排程</h3>
+<ul>
+<li>作者蒐集約 210 則回覆（多來自 X 與 LinkedIn），歸納出兩大類。</li>
+<li>觸發型（trigger）：事件發生時啟動代理人，例如出現錯誤紀錄、新工單、客戶回饋；過去多靠 webhook、Slack 機器人、Zapier、n8n 完成。</li>
+<li>排程型（cron job）：定時執行代理人。有主管質疑這並不新，因為重複性工作在大型語言模型出現前就能自動化。</li>
+</ul>
+<h3>開發者分享的例子</h3>
+<ul>
+<li>定時檢查錯誤監控、為新問題開 PR（拉取請求），並提醒未審的 PR。</li>
+<li>用 /loop 反覆修不穩定的測試，累計開出 13 個 PR。</li>
+<li>分析警報、實作修正、開 PR，再請人類審查。</li>
+<li>讓代理人反覆審設計文件，直到找不到新的重大問題。</li>
+<li>讀取 24 小時的日誌與使用者回饋，草擬修正，仍由人審。</li>
+<li>調查夜間端對端測試失敗，嘗試修復，超過重試上限就上報。</li>
+<li>另有人用每 30 分鐘的排程，把 React 應用逐步轉成 React Native。</li>
+</ul>
+<h3>公開部分的預告：失望與成本</h3>
+<ul>
+<li>文章開頭提到，有些開發者試過後放棄，原因包括代理人會偏離方向，以及有人參與的流程成果更好。</li>
+<li>在按 API 計價的公司，迴圈的成本也會快速上升。</li>
+<li>這部分的詳細論述在付費區，本整理不展開。</li>
+</ul>
+</section><section class="doc" id="s3"><h2>對學習者的意思</h2>
+<ul>
+<li>先弄懂單次提示與上下文管理，再談迴圈；迴圈的許多設計就是為了繞開上下文限制。</li>
+<li>迴圈的核心是「明確的完成條件」加「每圈可檢查的小步驟」，沒有這兩樣就容易空轉。</li>
+<li>現有的事件觸發與排程自動化觀念，可直接搬來理解代理人迴圈，不必當成全新領域。</li>
+<li>別人的例子多半仍保留人工審查（PR 由人看），初學時照這個節奏較穩。</li>
+</ul>
+</section><section class="doc" id="s4"><h2>要小心的地方</h2>
+<ul>
+<li>後半付費，未涵蓋。</li>
+<li>例子來自社群自述，作者並未逐一驗證成效，不宜當作保證有效的證據。</li>
+<li>工具指令與版本變動很快，文中日期與功能以原文發表時為準，使用前請查最新文件。</li>
+</ul></section>
+
+  <a class="back" href="./index.html">← 回迴圈工程自學地圖</a>
+
+  <footer>
+    <p>本頁是本站的中文整理，不是原作者或官方翻譯；若與原文不同以<a href="https://newsletter.pragmaticengineer.com/p/what-is-loop-engineering">原文</a>為準。發現錯誤，麻煩告訴我：<a href="mailto:contact@fervela.ai">contact@fervela.ai</a></p>
+    <div class="fnote">作品以 <b>Fervela.ai</b> 為名發佈。© 2026 雲帆研創有限公司（Fervela.ai）</div>
+  </footer>
+
+</div>
+</body>
+</html>

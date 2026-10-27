@@ -1,0 +1,163 @@
+<!doctype html>
+<!-- Fervela.ai — © 2026 Fervela. All rights reserved. -->
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<link rel="icon" type="image/png" href="/assets/fervela-icon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude Code 官方最佳做法白話版 — Fervela.ai</title>
+<meta name="description" content="把 Anthropic 官方的 Claude Code 最佳做法文件逐章整理成白話：給它一個能跑的檢查、先計畫再動手、管好對話視窗、五種常見失敗。">
+<meta property="og:title" content="Claude Code 官方最佳做法白話版">
+<meta property="og:description" content="給它一個能跑的檢查，是整份文件的核心。逐章整理成白話。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://fervela.ai/courses/loop-engineering/best-practices.html">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./style.css">
+<style>
+code{background:rgba(127,127,127,.15);padding:1px 5px;border-radius:4px;font-size:.92em;word-break:break-all}
+.doc{margin:34px 0 0}.doc h2{font-size:1.35rem;line-height:1.4;margin:0 0 12px}.doc h3{font-size:1.1rem;margin:22px 0 8px}
+.doc p{line-height:1.85;margin:.7em 0}.doc ul,.doc ol{padding-left:1.3em;margin:.6em 0}.doc li{line-height:1.8;margin:.45em 0}
+.doc li>ol,.doc li>ul{margin:.3em 0}
+.callout{border:1px solid rgba(127,127,127,.3);border-left:4px solid #008B8B;border-radius:10px;padding:18px 20px;background:rgba(0,139,139,.06)}
+.callout p{margin:.2em 0;font-size:1.05rem}
+.toc{margin:26px 0 0;padding:16px 20px;border:1px solid rgba(127,127,127,.3);border-radius:10px}
+.toc b{display:block;margin-bottom:6px}.toc ol{margin:0;padding-left:1.4em;columns:1}.toc li{margin:.25em 0}
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="wrap">
+    <a class="brand" href="/"><span class="tmark"><svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><rect width="120" height="120" rx="26" fill="#ffffff"/><g color="#008B8B" transform="translate(6 6) scale(0.9)"><g transform="translate(2 14) scale(.88)">
+      <path d="M60 8C34 10 14 30 13 55c-2 28 18 50 48 54 21 3 41-8 48-27-7 11-22 18-39 17-28-1-45-19-44-42 1-23 15-41 34-49Z" fill="currentColor"/>
+      <path d="m66 31-30 54 27-7 3-47Z" fill="currentColor"/>
+      <path d="m71 31 0 50 16-8Z" fill="currentColor" opacity=".9"/>
+      <path d="M69 27v56" stroke="currentColor" stroke-width="1.25"/>
+      <path d="M29 82c12 8 25 11 39 10-12 4-28 2-41-5l2-5Z" fill="currentColor"/>
+      <path d="M78 70c5-5 12-3 13 3 5-5 13-1 12 6 5-1 8 3 7 8-1 7-8 11-16 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M27 84c19 10 43 13 65 6 7-2 12-6 16-12-2 8-8 14-17 18-19 8-45 6-59-3-3-2-5-6-5-9Z" fill="#fff" opacity=".94"/>
+      <path d="M25 87c20 10 45 13 67 5 7-2 12-6 16-11-3 8-9 14-18 18-19 7-44 5-58-4-4-2-6-5-7-8Z" fill="currentColor"/>
+      <path d="M31 88c18 7 39 8 56 2-14 9-38 10-56 2Z" fill="#fff" opacity=".92"/>
+      <path d="M20 85c14 4 27 3 39-2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+      </g>
+      <path d="m84 7 2.6 8.4L95 18l-8.4 2.6L84 29l-2.6-8.4L73 18l8.4-2.6L84 7Z" fill="#F5A623"/></g></svg></span><span class="tname">Fervela.ai</span></a>
+    <a class="tlink" href="/notes/">筆記</a>
+  </div></div>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="eyebrow">最後更新 2026.10.26</div>
+    <h1>Claude Code 官方最佳做法白話版</h1>
+    <p class="lede">這份是 Anthropic 官方文件〈Best practices for Claude Code〉較早版本的白話整理。官方文件之後已改版，章節與開頭說法和本頁不同，本頁章節以舊版為準。要查細節或確切用語，請看<a href="https://code.claude.com/docs/en/best-practices">官方原文</a>。<br><a href="./index.html">← 回迴圈工程自學地圖</a></p>
+  </header>
+<div class="toc"><b>目錄</b><ol style="list-style:none;padding-left:0"><li><a href="#s0">一句話總結</a></li><li><a href="#s1">0. 最重要的限制：對話視窗會滿，滿了就變笨</a></li><li><a href="#s2">1. 給 Claude 一個它自己能跑的檢查（全文最核心）</a></li><li><a href="#s3">2. 先探索、再計畫、再動手</a></li><li><a href="#s4">3. 指令要具體</a></li><li><a href="#s5">4. 環境怎麼設</a></li><li><a href="#s6">5. 溝通</a></li><li><a href="#s7">6. 管理對話</a></li><li><a href="#s8">7. 自動化與放大</a></li><li><a href="#s9">8. 常見失敗（五種）</a></li><li><a href="#s10">9. 培養直覺</a></li></ol></div>
+<section class="doc callout" id="s0"><h2>一句話總結</h2>
+<p><b>Claude 做完會自己停，但它只知道「看起來做完了」。你不給它一個能自己跑的檢查，你就變成那個檢查。</b> 整份文件 90% 都在講這件事的各種做法。</p>
+</section><section class="doc" id="s1"><h2>0. 最重要的限制：對話視窗會滿，滿了就變笨</h2>
+<ul>
+<li>Claude 的「記憶」就是這個對話視窗。每句話、每個讀過的檔、每個指令輸出都佔位子。</li>
+<li>視窗越滿，表現越差：會忘記前面的規矩、開始犯錯。</li>
+<li>所以大部分做法都是為了「別讓視窗塞滿」。</li>
+</ul>
+</section><section class="doc" id="s2"><h2>1. 給 Claude 一個它自己能跑的檢查（全文最核心）</h2>
+<ul>
+<li>沒有檢查，「看起來做完」是它唯一的訊號，每個錯都要等你發現。</li>
+<li>有檢查（會回「過／不過」的東西），迴圈自己閉合：它做→跑檢查→看結果→改→再跑，直到過。</li>
+<li>檢查可以是：測試、建置成功與否、程式碼檢查器、比對輸出的腳本、截圖跟設計稿比。</li>
+<li>檢查要多硬，四個等級由鬆到緊：</li>
+<ol>
+<li>寫在同一句指令裡：「做完跑測試，不過就改」。</li>
+<li>整個對話都守著：設一個「目標」（/goal），每一回合有另一個評分者重查，沒達標就不准停。</li>
+<li>確定性的門：「停止 hook」（Stop hook，對話要結束前自動跑你的腳本，不過就不讓它停）。</li>
+<li>第二意見：另開一個乾淨的子代理（subagent，沒看過過程的另一個 Claude）來推翻它的結果，做的人不能當評分的人。</li>
+</ol>
+<li><b>要它拿證據，不是宣稱做完</b>：測試輸出、跑了什麼指令回了什麼、截圖。看證據比你自己重跑快，而且你不在場的工作也能這樣驗。</li>
+<li>三個改寫例子：「寫一個驗證信箱的函式」→「寫函式，測試案例：a@b.com 要過、invalid 不過；寫完跑測試」。「把儀表板弄好看」→「照這張截圖做，做完截圖跟原圖比，列差異修掉」。「建置壞了」→「錯誤訊息如下，修好並確認建置成功，要修根因不是把錯誤壓掉」。</li>
+</ul>
+</section><section class="doc" id="s3"><h2>2. 先探索、再計畫、再動手</h2>
+<ul>
+<li>直接動手常常解錯問題。用「計畫模式」（plan mode，只讀不改）先讓它讀程式、回答問題，再要它列計畫，你看過才放手做，最後存版本。</li>
+<li>但小事不用：改錯字、加一行紀錄、改名，直接做。「一句話講得完的改動，跳過計畫」。</li>
+</ul>
+</section><section class="doc" id="s4"><h2>3. 指令要具體</h2>
+<ul>
+<li>它能猜你的意思，但猜不到你腦子裡的。指名檔案、講限制、指向可以照抄的範例。</li>
+<li>例：「幫 foo.py 加測試」→「加一個測試，涵蓋使用者已登出的情況，不要用假物件」。「修登入的 bug」→「使用者回報逾時後登入失敗，看 src/auth 的權杖更新，先寫一個會失敗的測試重現它，再修」。</li>
+<li>可以直接貼檔案（@）、貼截圖、給網址、把資料灌進去。</li>
+<li>模糊指令在探索時有用：「這個檔你會改什麼？」能挖到你沒想到的。</li>
+</ul>
+</section><section class="doc" id="s5"><h2>4. 環境怎麼設</h2>
+<h3>CLAUDE.md（每次開對話都會讀的規矩檔）</h3>
+<ul>
+<li>放：它猜不到的指令、跟預設不同的風格、測試怎麼跑、分支命名、專案特有的架構決定、環境怪癖、不明顯的坑。</li>
+<li>不放：讀程式就知道的、標準慣例、詳細文件（給連結就好）、常變的資訊、長篇教學、「寫乾淨的程式」這種廢話。</li>
+<li><b>要短</b>。每一行問自己：「拿掉這行它會犯錯嗎？」不會就刪。<b>太長的 CLAUDE.md 會讓它忽略你真正重要的規矩。</b></li>
+<li>它一直做你不要的事、明明有規矩？多半是檔太長、那條被淹沒。它問你 CLAUDE.md 已經寫的問題？多半是那句寫得模糊。</li>
+<li>把 CLAUDE.md 當程式：出事就回頭看、定期修剪、改了要觀察行為有沒有真的變。</li>
+<li>只對一條加「IMPORTANT」有用；每條都加就沒有一條突出。</li>
+<li>偶爾才用的知識不放 CLAUDE.md，放 skill（技能檔，用到才載入）。</li>
+</ul>
+<h3>權限</h3>
+<ul>
+<li>每個動作都問你很安全但很煩，問到第十次你就只是按過去。兩個解法：允許清單（你信任的指令預先放行）、沙箱（作業系統層級限制它能碰哪些檔案和網路，在框框裡隨便跑）。</li>
+</ul>
+<h3>用指令列工具、接 MCP</h3>
+<ul>
+<li>跟外部服務互動，用指令列工具（例：gh）最省視窗；它不會的工具叫它先看 --help 自己學。</li>
+<li>MCP 伺服器可以接工單系統、資料庫、設計稿。</li>
+</ul>
+<h3>hook（固定會跑的腳本）</h3>
+<ul>
+<li><b>「必須每次都發生、零例外的事，用 hook。」</b> CLAUDE.md 是勸告，hook 是確定的。</li>
+<li>可以叫 Claude 幫你寫 hook：「寫一個 hook，每次改檔後跑檢查」「寫一個 hook，擋住對 migrations 資料夾的寫入」。</li>
+</ul>
+<h3>skill（技能檔）與子代理</h3>
+<ul>
+<li>skill：專案或領域知識、可重複的流程，放一個資料夾，它需要時自動用，或你打 /名稱 叫它。有副作用的流程設成只能手動叫。</li>
+<li>子代理：有自己獨立視窗、自己的工具權限，適合「要讀很多檔」或「要專注一件事」而不想弄髒主視窗。</li>
+</ul>
+</section><section class="doc" id="s6"><h2>5. 溝通</h2>
+<ul>
+<li>問它你會問資深工程師的問題：「紀錄怎麼運作？」「為什麼這裡呼叫 foo 不是 bar？」不用特別的提示法。</li>
+<li>大功能先讓它<b>訪談你</b>：「我要做〇〇，用提問工具詳細訪談我：技術、介面、邊界情況、取捨，別問顯而易見的，挖我沒想到的，問完寫成規格檔。」然後<b>開新視窗照規格做</b>，乾淨的視窗只裝實作。</li>
+<li>好規格的樣子：寫明檔案與介面、寫明不做什麼、最後一步是「端到端驗證怎麼證明它能用」。<b>花時間把規格寫準，比花時間盯著它做划算。</b></li>
+</ul>
+</section><section class="doc" id="s7"><h2>6. 管理對話</h2>
+<ul>
+<li><b>早糾正、常糾正</b>：發現歪了馬上按 Esc 停、Esc Esc 倒帶到之前的狀態、「撤銷」、/clear 清空換題。</li>
+<li><b>同一件事糾正超過兩次還錯</b>：視窗已被失敗的嘗試污染，/clear 重來，用一句更好的第一句話把學到的寫進去。「乾淨視窗＋好的第一句，幾乎總是贏過長視窗＋一堆糾正。」</li>
+<li>不相關的任務之間 /clear；長對話會自動壓縮，可以在 CLAUDE.md 寫「壓縮時一定保留改過的檔案清單與測試指令」。</li>
+<li>研究用子代理，別讓讀檔佔主視窗。</li>
+<li>每次送出都是一個存檔點，可以倒帶對話或程式；大膽試，不行就倒帶。（倒帶只管 Claude 自己改的檔，不是 git。）</li>
+<li>對話可以命名、續接，像分支一樣每條工作線一個。</li>
+</ul>
+</section><section class="doc" id="s8"><h2>7. 自動化與放大</h2>
+<ul>
+<li><b>非互動模式</b>：<code>claude -p "指令"</code> 可以放進排程、腳本、CI，輸出可以是純文字或 JSON，接進資料管線。</li>
+<li><b>多視窗平行</b>：各開一個工作複本（worktree）互不打架；視窗之間可以傳訊息；桌面版可視覺化管理；雲端版在 Anthropic 機器上跑。</li>
+<li><b>寫手／審查者分兩個視窗</b>：A 寫，B 用乾淨視窗審「邊界情況、競爭條件、跟既有模式一不一致」，再把 B 的意見給 A 改。乾淨視窗審查更公正，因為它不偏袒自己剛寫的。也可以一個寫測試、另一個寫程式去過測試。</li>
+<li><b>大批量展開</b>：2,000 個檔要搬，先列清單，寫一個迴圈對每個檔叫 <code>claude -p</code>，先試 2～3 個修好指令再全跑。</li>
+<li><b>自動模式</b>：有一個分類模型在背後審每個指令，擋升權、不明基礎設施、被惡意內容驅動的動作，其餘不問直接跑。</li>
+<li><b>對抗式審查</b>：當成「做完」之前，開一個乾淨子代理只看差異和你給的標準，報缺口；但要叫它「只報影響正確性或需求的，其他算選配」，否則它一定會找出東西來、你會過度工程。</li>
+</ul>
+</section><section class="doc" id="s9"><h2>8. 常見失敗（五種）</h2>
+<ol>
+<li><b>大雜燴視窗</b>：一個題做到一半問別的又回來。→ 不相關就 /clear。</li>
+<li><b>糾正不完</b>：錯、糾正、還錯、再糾正。→ 兩次沒好就清空重來。</li>
+<li><b>CLAUDE.md 過長</b>：重要規矩被淹沒。→ 狠心刪；它不用規矩也做對的，刪掉或改成 hook。</li>
+<li><b>信了沒驗</b>：看起來合理但邊界沒處理。→ 一定給驗證；「驗不了就不要出貨」。</li>
+<li><b>無止境探索</b>：「幫我研究一下」沒劃範圍，它讀幾百個檔把視窗塞滿。→ 劃小範圍或交子代理。</li>
+</ol>
+</section><section class="doc" id="s10"><h2>9. 培養直覺</h2>
+<p>這些不是鐵律。有時候該讓視窗累積（你在一個難題裡，歷史有價值）；有時候該跳過計畫（探索性的事）；有時候模糊指令正好（想看它怎麼理解）。它做得好時注意你做了什麼，做不好時問為什麼：視窗太吵？指令太糊？一次做太大？</p></section>
+
+  <a class="back" href="./index.html">← 回迴圈工程自學地圖</a>
+
+  <footer>
+    <p>本頁是本站對官方文件的中文整理，不是官方翻譯，若與原文不同以<a href="https://code.claude.com/docs/en/best-practices">原文</a>為準。發現錯誤，麻煩告訴我：<a href="mailto:contact@fervela.ai">contact@fervela.ai</a></p>
+    <div class="fnote">作品以 <b>Fervela.ai</b> 為名發佈。© 2026 雲帆研創有限公司（Fervela.ai）</div>
+  </footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,225 @@
+<!doctype html>
+<!-- Fervela.ai — © 2026 Fervela. All rights reserved. -->
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<link rel="icon" type="image/png" href="/assets/fervela-icon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>迴圈工程自學地圖 — Fervela.ai</title>
+<meta name="description" content="從「下指令的人」變成「設計會下指令的系統的人」：七個階段，每階段有要讀的一手資料、要做的事、不過不進下一階的驗收。">
+<meta property="og:title" content="迴圈工程（Loop engineering）自學地圖">
+<meta property="og:description" content="七個階段，從觀念到寫出一條無人看管、自己驗收、自己存狀態、會在該停時停的迴圈。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://fervela.ai/courses/loop-engineering/">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./style.css">
+<style>.masthead .lede{max-width:none}#preface p{margin:0 0 .9em;max-width:none;font-size:18.5px;line-height:1.85;color:var(--fv-ink2)}@media(max-width:640px){#preface p{font-size:17.5px}}code{background:rgba(127,127,127,.15);padding:1px 5px;border-radius:4px;font-size:.92em;word-break:break-all}.five{margin:6px 0 0;padding-left:1.2em}.five li{margin:.35em 0}.warn li{margin:.4em 0}</style>
+</head>
+<body>
+
+<div class="topbar"><div class="wrap">
+    <a class="brand" href="/"><span class="tmark"><svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><rect width="120" height="120" rx="26" fill="#ffffff"/><g color="#008B8B" transform="translate(6 6) scale(0.9)"><g transform="translate(2 14) scale(.88)">
+      <path d="M60 8C34 10 14 30 13 55c-2 28 18 50 48 54 21 3 41-8 48-27-7 11-22 18-39 17-28-1-45-19-44-42 1-23 15-41 34-49Z" fill="currentColor"/>
+      <path d="m66 31-30 54 27-7 3-47Z" fill="currentColor"/>
+      <path d="m71 31 0 50 16-8Z" fill="currentColor" opacity=".9"/>
+      <path d="M69 27v56" stroke="currentColor" stroke-width="1.25"/>
+      <path d="M29 82c12 8 25 11 39 10-12 4-28 2-41-5l2-5Z" fill="currentColor"/>
+      <path d="M78 70c5-5 12-3 13 3 5-5 13-1 12 6 5-1 8 3 7 8-1 7-8 11-16 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M27 84c19 10 43 13 65 6 7-2 12-6 16-12-2 8-8 14-17 18-19 8-45 6-59-3-3-2-5-6-5-9Z" fill="#fff" opacity=".94"/>
+      <path d="M25 87c20 10 45 13 67 5 7-2 12-6 16-11-3 8-9 14-18 18-19 7-44 5-58-4-4-2-6-5-7-8Z" fill="currentColor"/>
+      <path d="M31 88c18 7 39 8 56 2-14 9-38 10-56 2Z" fill="#fff" opacity=".92"/>
+      <path d="M20 85c14 4 27 3 39-2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+      </g>
+      <path d="m84 7 2.6 8.4L95 18l-8.4 2.6L84 29l-2.6-8.4L73 18l8.4-2.6L84 7Z" fill="#F5A623"/></g></svg></span><span class="tname">Fervela.ai</span></a>
+    <a class="tlink" href="/notes/">筆記</a>
+  </div></div>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="eyebrow">最後更新 2026.10.26</div>
+    <h1>迴圈工程自學地圖</h1>
+    <p class="lede">迴圈工程（loop engineering）的意思是：把自己從「一句一句下指令的人」換掉，改成設計那個會下指令的系統。<b>五分鐘</b>看懂它是什麼（前言＋下面那支影片）；<b>認真跟著做，一週內</b>跑起你的第一條有停止條件、有硬擋的迴圈（階段 0～2，每天約 1 小時）。要走到無人看管、自己驗收、會教別人，再往後走階段 3～6。這張地圖本身也是一條迴圈：每階段有要讀的、要做的、驗收標準，驗收不過就不進下一階。</p>
+  </header>
+
+  <section class="sec" id="preface">
+    <div class="sec-head">
+      <h2>前言：從提示工程到迴圈工程</h2>
+    </div>
+    <p>以前談的是提示工程（prompt engineering）：每次寫一句盡量完美的指令，等模型回答，再寫下一句。</p>
+    <p>這條路不是一天冒出來的。2025 年 7 月，Geoffrey Huntley 公開了「Ralph」做法：用一個 Bash 迴圈，讓 AI 代理反覆跑同一份提示（<a href="#ref-ralph">Ralph</a>）。2025 年底，Matt Pocock 的教學讓它流行起來（<a href="#ref-pe">Pragmatic Engineer</a>）。</p>
+    <p>2026 年 6 月，三件事在同一個月內接連出現：Claude Code 的創作者 Boris Cherny 說他不再直接提示模型，而是讓迴圈去提示，自稱工作就是寫迴圈；OpenClaw 的作者 Peter Steinberger 公開主張工程師該改去設計迴圈；Addy Osmani 寫了〈Loop Engineering〉，把這個做法整理成可以學的架構（<a href="#ref-osm">Osmani</a>、<a href="#ref-mlm">Machine Learning Mastery</a>）。</p>
+    <p>誰最先用這個詞，各來源說法不一：有研究論文把它定在 2026 年 6 月、由這三件事一起帶起來（<a href="#ref-arxiv">arXiv 論文</a>），也有文章把命名歸給 Osmani，但沒有哪篇一手資料說「是我先取的名」。所以這是個還很新、沒有標準定義的詞，也有人認為它只是舊的排程自動化換了名字（<a href="#ref-pe">Pragmatic Engineer</a>）。這張地圖把它當成一門可以練的技術。</p>
+  </section>
+
+  <div class="shortlist">
+    <h2>明天就能開始：先看這一支</h2>
+    <ol class="picks">
+      <li class="pick">
+        <div class="pick-num">01</div>
+        <div class="pick-body">
+          <div class="pick-name"><a href="s-ibm.html">IBM Technology — What Is Loop Engineering?</a> <a href="https://youtu.be/DQBqh6gcx7U">（原文）</a></div>
+          <div class="pick-why">10 分 48 秒、2026 年 10 月 19 日的影片，講法最白。看完你會有四站（目標、行動、觀察、調整）、一個判斷好壞目標的方法（有沒有停止條件），和人在迴圈裡剩下的三件事：寫有停止條件的目標、把意圖寫在代理找得到的地方、讀輸出。</div>
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  <section class="sec">
+    <div class="sec-head">
+      <h2>先把定義講白</h2>
+      <p class="sec-note">上面影片的四站，講的是迴圈「怎麼轉」；這裡的五件東西，講的是迴圈「要備齊什麼」。兩者大致對得上（目標↔目標值、行動↔動作、觀察↔感測、調整↔回授），多出來的「停止與升級」是影片只用「目標有停止條件」帶過、但實作時最常被漏掉的一件。缺哪一件，就是你下一步要補的。</p>
+    </div>
+    <div class="group g-find">
+      <div class="grid">
+        <div class="entry book">
+          <div class="entry-top"><span class="name">迴圈的五件東西</span></div>
+          <ol class="five">
+            <li><b>目標值</b>：要達到什麼，量得出來。</li>
+            <li><b>感測</b>：程式怎麼量現在做到哪。</li>
+            <li><b>動作</b>：誰去做下一步。</li>
+            <li><b>回授</b>：做完怎麼驗。</li>
+            <li><b>停止與升級</b>：預算用完、連續失敗、碰到該由人決定的事，就停下來交給人。</li>
+          </ol>
+        </div>
+        <div class="entry book">
+          <div class="entry-top"><span class="name">三個會被騙的地方</span></div>
+          <ul class="five warn">
+            <li>「做完」是宣稱，不是證明，所以每階段的驗收都要拿證據。</li>
+            <li>迴圈會慢慢偏離目標。</li>
+            <li>詞元（token）成本會飆，要先設上限。</li>
+          </ul>
+        </div>
+        <div class="entry book">
+          <div class="entry-top"><span class="name">IBM 影片提的四個坑</span></div>
+          <ul class="five warn">
+            <li><b>沒驗證的程式</b>：沒有檢查就上線。</li>
+            <li><b>理解債</b>：系統裡的程式越多，人懂的越少。</li>
+            <li><b>意圖債</b>：代理知道系統做什麼，不知道為什麼。例：為了讓測試變綠，把折扣碼驗證放寬，對帳面是壞修法。</li>
+            <li><b>認知投降</b>：覺得「AI 做的一定對」。</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head">
+      <h2>七個階段</h2>
+      <p class="sec-note">每階段都要「做」出東西、拿「證據」驗收。看完文章不算學會。量大的實作可以交給 AI，你只做設計和驗收。<b>一週版＝階段 0～2</b>（約 5 天，每天 1～2 小時）；階段 3 以後是進階。</p>
+    </div>
+    <div class="group g-find">
+      <div class="grid">
+        <div class="entry book route">
+          <div class="entry-top"><span class="name">階段 0　觀念</span><span class="pill know">一週版・約 1 天</span></div>
+          <ol class="steps"><li><a href="s-ibm.html">IBM Technology — What Is Loop Engineering?</a> <a href="https://youtu.be/DQBqh6gcx7U">（原文）</a> <span class="hint">— 10 分 48 秒，最白的入門。迴圈四站：目標 → 行動 → 觀察 → 調整，繞回目標時問一次「做完了嗎」。目標要有停止條件：「讓結帳更快」量不了，「結帳的每個單元測試都過才停」才是。</span></li><li><a href="s-bea.html">Anthropic — Building effective agents</a> <a href="https://www.anthropic.com/research/building-effective-agents">（原文）</a> <span class="hint">— 工作流（路徑先寫好）和代理（模型自己決定路徑）差在哪；五種工作流模式裡的「評估者與優化者」，就是一個做、一個評、循環到過。</span></li><li><span class="hint">本頁上面「先把定義講白」那一段（五件東西）</span></li></ol>
+          <p class="output"><span class="lbl">要做</span>拿你手上三件重複做的事，各畫一張表：目標值／感測／動作／回授／停止與升級，缺的那格寫「缺」。</p>
+          <p class="output"><span class="lbl">驗收</span>不看筆記講得出四站、人的三件事、四個坑；每張表至少指出一個缺的格（最常缺的是「停止與升級」只寫在腦子裡、沒寫成程式）。</p>
+        </div>
+        <div class="entry book route">
+          <div class="entry-top"><span class="name">階段 1　單迴圈</span><span class="pill know">一週版・約 2 天</span></div>
+          <ol class="steps"><li><a href="s-ralph.html">Geoffrey Huntley — Ralph Wiggum as a software engineer</a> <a href="https://ghuntley.com/ralph/">（原文）</a> <span class="hint">— 最純的迴圈就是 <code>while :; do cat PROMPT.md | claude ; done</code>。每輪只做一件、每輪乾淨視窗、用測試擋壞程式、學到的寫進固定檔、用 git 存進度。作者自己警告：結果不確定，且只驗證過新專案。</span></li><li><a href="best-practices.html">Claude Code 官方最佳做法（白話版）</a> <a href="https://code.claude.com/docs/en/best-practices">（原文）</a> <span class="hint">— 重點是「給它一個能跑的檢查」：沒有檢查，你就是檢查。本站把官方文件逐章整理成白話，可從這裡讀。</span></li><li><a href="s-goal.html">Claude Code — /goal</a> <a href="https://code.claude.com/docs/en/goal">（原文）</a> <span class="hint">— 設一個可量的終點加怎麼證明，每回合由另一個小模型判斷「未達／達成／不可能」，沒進展會自己停；可以寫「或 20 回合後停」。</span></li></ol>
+          <p class="output"><span class="lbl">要做</span>題一：在一份工作複本裡設 <code>/goal 測試全過且 git status 乾淨，或 20 回合後停</code>，走開，回來看證據。題二：把一件每天要做的小事寫成「提示檔＋進度檔」，裝上排程跑 3 輪。</p>
+          <p class="output"><span class="lbl">驗收</span>兩題都有「你不在場」的證據（判定紀錄、進度檔 3 行）；記下每題花的詞元與分鐘數，以及哪裡偏離、你怎麼改提示。</p>
+        </div>
+        <div class="entry book route">
+          <div class="entry-top"><span class="name">階段 2　硬停止與防護</span><span class="pill know">一週版・約 2 天</span></div>
+          <ol class="steps"><li><a href="s-hooks.html">Claude Code — hooks 指南</a> <a href="https://code.claude.com/docs/en/hooks-guide">（原文）</a> <span class="hint">— 規矩只是勸告，hook 是確定會跑的腳本。事件有工具呼叫前後、停止前、送出訊息時；Stop hook 可以擋住「結束」直到你的腳本放行。</span></li></ol>
+          <p class="output"><span class="lbl">要做</span>挑一條你一直叫 AI「不要這樣做」的規矩，寫成 hook；再做一個 Stop hook：這回合說「完成了」但證據欄是空的，就不准停。</p>
+          <p class="output"><span class="lbl">驗收</span>變異測試：故意違規三次，三次都被擋、紀錄檔有三行。再記下它誤擋了什麼正常動作、怎麼放寬。</p>
+        </div>
+        <div class="entry book route">
+          <div class="entry-top"><span class="name">階段 3　狀態與視窗</span><span class="pill know">進階・約 1 天</span></div>
+          <ol class="steps"><li><a href="s-ctx.html">Anthropic — Effective context engineering for AI agents</a> <a href="https://www.anthropic.com/research/effective-context-engineering-for-ai-agents">（原文）</a> <span class="hint">— 視窗是「注意力預算」。長任務三招：壓縮後開新視窗、把進度寫進筆記檔再讀回、用子代理在乾淨視窗做細節只回摘要。</span></li><li><span class="hint">Ralph 那篇的一句話：代理會忘，檔案不會。</span></li></ol>
+          <p class="output"><span class="lbl">要做</span>把階段 1 的迴圈改成：狀態只放在進度檔，每輪從乾淨視窗讀檔開始。</p>
+          <p class="output"><span class="lbl">驗收</span>跑到第 2 輪中途把視窗殺掉，重啟後第 3 輪從檔案接上，沒重做、沒漏；每輪視窗詞元比改之前少。</p>
+        </div>
+        <div class="entry book route">
+          <div class="entry-top"><span class="name">階段 4　多代理、做驗分離</span><span class="pill know">進階・約 3 天</span></div>
+          <ol class="steps"><li><a href="s-osm.html">Addy Osmani — Loop Engineering</a> <a href="https://addyosmani.com/blog/loop-engineering/">（原文）</a> <span class="hint">— 五要素：排程自動化、工作樹（平行代理各自一個目錄）、skill（知識檔）、連接器、子代理（做的人跟驗的人分開），外加「狀態存在對話之外」。作者的提醒：還早、要懷疑、詞元會飆、別對 AI 說的話照單全收。</span></li><li><a href="best-practices.html">官方最佳做法（白話版）</a> <a href="https://code.claude.com/docs/en/best-practices">（原文）</a> <span class="hint">— 寫手／審查者兩個視窗、對抗式審查（只報影響正確性的）、批量展開（用 <code>claude -p</code> 對一批檔案各跑一次，先試 3 個）。</span></li></ol>
+          <p class="output"><span class="lbl">要做</span>讓第二個視窗專門驗收，做的那個不能判自己過；用批量展開處理一批同類資料（先試 2 份）；開兩個工作複本平行跑兩條迴圈，確認互不干擾。</p>
+          <p class="output"><span class="lbl">驗收</span>一週內「假完成被退回」的件數量得出來；批量結果你抽 3 份人工核對，錯誤率記下。</p>
+        </div>
+        <div class="entry book route">
+          <div class="entry-top"><span class="name">階段 5　迴圈的迴圈</span><span class="pill know">進階・持續</span></div>
+          <ol class="steps"><li><a href="s-pe.html">Pragmatic Engineer — What is loop engineering</a> <a href="https://newsletter.pragmaticengineer.com/p/what-is-loop-engineering">（原文）</a> <span class="hint">— 適合事件觸發與定時；不適合全部。有人試了失望：會偏離、人在迴路反而好、成本高（後半付費，本表只讀到前半）。</span></li></ol>
+          <p class="output"><span class="lbl">要做</span>定四個你自己的目標數字，每週固定一天量、只改一處；另列一張「不做成迴圈」的清單（對客戶、口味、方向、對外定稿這類）。</p>
+          <p class="output"><span class="lbl">驗收</span>四個數字連兩週達標；達標前不加新迴圈，先修舊的。</p>
+        </div>
+        <div class="entry book route">
+          <div class="entry-top"><span class="name">階段 6　教別人</span><span class="pill know">進階・持續</span></div>
+          <ol class="steps"><li><span class="hint">把每階段踩到的雷整理成一頁，就是講義。</span></li></ol>
+          <p class="output"><span class="lbl">要做</span>找一個不會寫程式的朋友，照你的講義在他自己的事上跑出第一條迴圈（例：每天整理信箱）。</p>
+          <p class="output"><span class="lbl">驗收</span>他自己跑得出來、你沒有在旁邊補洞，才算教會。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head">
+      <h2>怎麼不半途而廢</h2>
+      <p class="sec-note">用迴圈的五件東西管自己的學習：</p>
+    </div>
+    <div class="group g-find">
+      <div class="grid">
+        <div class="entry book">
+          <ol class="five">
+            <li><b>目標值</b>：本階段的驗收條件。</li>
+            <li><b>感測</b>：每天固定時間問自己「今天在階段幾、驗收過了沒」，寫一行進度。</li>
+            <li><b>動作</b>：每天 1 小時，實作交給 AI，你做設計和驗收。</li>
+            <li><b>回授</b>：驗收不過就把踩到的雷寫下來、重做，不是跳過。</li>
+            <li><b>停止</b>：連三天沒動，就是迴圈卡住了，回頭縮小目標。</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="group g-find">
+      <h3>其他自學地圖</h3>
+      <div class="grid">
+        <a class="entry" href="/courses/ai-coding/">
+          <div class="entry-top"><span class="name">用 AI 寫軟體自學地圖</span></div>
+          <p class="desc">還不會讓 AI 動手寫程式，先看這張；這張的階段 1 假設你已經會跑 Claude Code。</p>
+        </a>
+        <a class="entry" href="/courses/ai/">
+          <div class="entry-top"><span class="name">AI 自學課程地圖</span></div>
+          <p class="desc">想懂 AI 本身、或開發接了 AI 的應用。</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="references">
+    <div class="sec-head">
+      <h2>參考資料</h2>
+      <p class="sec-note">前言與各階段引用的全部來源。每一條都在 2026 年 10 月 28 日打開核對過；中文整理是本站自己的話，不是官方翻譯。</p>
+    </div>
+    <ol>
+      <li id="ref-osm">Addy Osmani，〈Loop Engineering〉，2026-06-07。<a href="https://addyosmani.com/blog/loop-engineering/">https://addyosmani.com/blog/loop-engineering/</a></li>
+      <li id="ref-ralph">Geoffrey Huntley，〈Ralph Wiggum as a "software engineer"〉，2025-07-14。<a href="https://ghuntley.com/ralph/">https://ghuntley.com/ralph/</a></li>
+      <li id="ref-pe">Gergely Orosz，〈What is "loop engineering?"〉，The Pragmatic Engineer，2026-07-14（後半付費，只讀公開部分）。<a href="https://newsletter.pragmaticengineer.com/p/what-is-loop-engineering">https://newsletter.pragmaticengineer.com/p/what-is-loop-engineering</a></li>
+      <li id="ref-mlm">Shittu Olumide，〈An Introduction to Loop Engineering〉，Machine Learning Mastery，2026-07-23。<a href="https://machinelearningmastery.com/an-introduction-to-loop-engineering/">https://machinelearningmastery.com/an-introduction-to-loop-engineering/</a></li>
+      <li id="ref-arxiv">Lulla 等，〈Loop Engineering: Building Blocks, Adoption, and Impact〉，arXiv 2608.21884（JAWs@ASE 2026 工作坊）。<a href="https://arxiv.org/pdf/2608.21884">https://arxiv.org/pdf/2608.21884</a></li>
+      <li id="ref-ibm">IBM Technology，〈What Is Loop Engineering? Building Better AI Agents〉，影片，2026-10-19。<a href="https://youtu.be/DQBqh6gcx7U">https://youtu.be/DQBqh6gcx7U</a></li>
+      <li id="ref-bea">Anthropic，〈Building Effective AI Agents〉，2024-12-19。<a href="https://www.anthropic.com/research/building-effective-agents">https://www.anthropic.com/research/building-effective-agents</a></li>
+      <li id="ref-ctx">Anthropic，〈Effective context engineering for AI agents〉，2025-09-29。<a href="https://www.anthropic.com/research/effective-context-engineering-for-ai-agents">https://www.anthropic.com/research/effective-context-engineering-for-ai-agents</a></li>
+      <li id="ref-bp">Anthropic，Claude Code 官方文件〈Best practices〉。<a href="https://code.claude.com/docs/en/best-practices">https://code.claude.com/docs/en/best-practices</a></li>
+      <li id="ref-goal">Anthropic，Claude Code 官方文件〈Keep Claude working toward a goal〉。<a href="https://code.claude.com/docs/en/goal">https://code.claude.com/docs/en/goal</a></li>
+      <li id="ref-hooks">Anthropic，Claude Code 官方文件〈Automate actions with hooks〉。<a href="https://code.claude.com/docs/en/hooks-guide">https://code.claude.com/docs/en/hooks-guide</a></li>
+    </ol>
+  </section>
+
+  <a class="back" href="/courses/">← 回自學地圖</a>
+
+  <footer>
+    <p><b>來源</b> —— 以上資料 2026 年 10 月 26 日逐一打開核對過。沒有採用「某公司整夜跑數百個代理」「內部 PR 全經 AI」這類二手數字，查不到一手出處。Pragmatic Engineer 那篇後半付費，只讀到前半。</p>
+    <p>發現死連結或該補的資源，麻煩告訴我：<a href="mailto:contact@fervela.ai">contact@fervela.ai</a></p>
+    <div class="fnote">作品以 <b>Fervela.ai</b> 為名發佈。© 2026 雲帆研創有限公司（Fervela.ai）</div>
+  </footer>
+
+</div>
+</body>
+</html>
