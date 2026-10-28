@@ -1,0 +1,39 @@
+{
+  "說明": "連結頁的清單。改完這個檔，在 links 資料夾跑 python3 build.py，index.html 就更新。圖放 /assets/v5/ 底下。external=true 會用新分頁開。",
+  "latest": {
+    "title": "最新",
+    "items": [
+      {"name": "迴圈工程", "desc": "學習地圖：讓 AI 一輪輪做出成果", "href": "/courses/loop-engineering/", "img": "/assets/v5/cover-loop-engineering.webp", "tag": "新"}
+    ]
+  },
+  "hero": {
+    "title": "主打",
+    "name": "飛鴻",
+    "tagline": "旅行規劃與集章",
+    "icon": "/assets/v5/icons/journey.webp",
+    "photo": "/assets/v5/journey/card.webp",
+    "desc": "拉一下就出發，走過的都留下。幾秒排好一整趟，到了現場蓋一枚章，回家把走過的鄉鎮點亮。",
+    "button": "下載 Android 體驗版　→",
+    "note": "iPhone 版即將推出",
+    "href": "/journey/"
+  },
+  "works": {
+    "title": "全部作品",
+    "items": [
+      {"name": "通鑑", "desc": "AI 的重要時刻，白話說清楚", "href": "/timeline/", "icon": "/assets/v5/icons/timeline.webp"},
+      {"name": "會心", "desc": "把會議整理成讀得懂的記錄", "href": "/report/", "icon": "/assets/v5/icons/report.webp"},
+      {"name": "AI 董事會", "desc": "多個 AI 為你的問題交鋒", "href": "/ai-boardroom/", "icon": "/assets/v5/icons/boardroom.webp"},
+      {"name": "萬卷", "desc": "拍書架照，管理你的閱讀", "href": "/books/", "icon": "/assets/v5/icons/books.webp"},
+      {"name": "四國軍棋", "desc": "免註冊，大廳直接湊桌", "href": "https://army.fervela.ai/ui/#lobby", "icon": "/assets/v5/icons/army.webp", "external": true}
+    ]
+  },
+  "more": {
+    "title": "更多",
+    "items": [
+      {"name": "Fervela.ai 官網", "desc": "全部作品與介紹", "href": "/", "plain": true},
+      {"name": "實踐筆記", "desc": "做這些軟體的過程", "href": "/notes/", "img": "/assets/v5/note1.webp"},
+      {"name": "追蹤臉書粉專", "desc": "更多 AI 分享，歡迎追蹤", "href": "https://www.facebook.com/fervelaai", "img": "/assets/v5/note2.webp", "external": true},
+      {"name": "聊聊你的想法", "desc": "contact@fervela.ai", "href": "mailto:contact@fervela.ai", "img": "/assets/v5/note3.webp"}
+    ]
+  }
+}

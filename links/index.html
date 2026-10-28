@@ -56,6 +56,7 @@ a:focus-visible{outline:3px solid #1e7f86;outline-offset:3px;border-radius:8px}
 .more b{display:block;font-family:var(--serif);font-weight:700;font-size:17px}
 .more small{display:block;font-size:13px;color:var(--ink2);overflow-wrap:anywhere}
 footer{margin:28px 20px 0;padding-top:20px;border-top:1px solid var(--line);text-align:center;font-family:var(--serif);font-weight:700;font-size:16px}
+.tag{display:inline-block;margin-right:6px;padding:0 8px;border-radius:999px;background:#ea5513;color:#fff;font:700 12px/20px var(--sans);vertical-align:2px}
 .social{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
 .social a{flex:1 1 calc(33% - 8px);min-width:96px;min-height:48px;display:flex;align-items:center;justify-content:center;background:var(--card);border:1px solid var(--line);border-radius:999px;font-weight:600;font-size:15px;color:var(--ink);text-decoration:none;transition:box-shadow .2s,transform .2s}
 .social a:hover{box-shadow:0 8px 24px rgba(14,42,59,.12);transform:translateY(-1px)}
@@ -70,6 +71,12 @@ body{word-break:keep-all;overflow-wrap:anywhere;line-break:strict}h1,h2,h3,h4{te
   <header class="top"><a href="/" aria-label="Fervela.ai 首頁"><img class="logo" src="/assets/logo-a.svg" width="34" height="34" alt=""><span>Fervela.ai</span></a></header>
   <p class="bio">以智慧造器，為日常解題；<br>擇新知分享，與諸君共思。</p>
   <main class="body">
+  <!--LINKS:START-->
+  <h2 class="label">最新</h2>
+  <div class="more">
+    <a href="/courses/loop-engineering/"><img src="/assets/v5/cover-loop-engineering.webp" alt="" width="200" height="130"><div><b><span class="tag">新</span>迴圈工程</b><small>學習地圖：讓 AI 一輪輪做出成果</small></div><span class="chev"></span></a>
+  </div>
+
   <h2 class="label">主打</h2>
   <a class="hero" href="/journey/">
     <div class="hero-top">
@@ -94,9 +101,10 @@ body{word-break:keep-all;overflow-wrap:anywhere;line-break:strict}h1,h2,h3,h4{te
   <div class="more">
     <a class="plain" href="/"><div><b>Fervela.ai 官網</b><small>全部作品與介紹</small></div><span class="chev"></span></a>
     <a href="/notes/"><img src="/assets/v5/note1.webp" alt="" width="200" height="130"><div><b>實踐筆記</b><small>做這些軟體的過程</small></div><span class="chev"></span></a>
-    <a href="https://www.facebook.com/fervelaai" target="_blank" rel="noopener"><img src="/assets/v5/note2.webp" alt="" width="200" height="130"><div><b>臉書粉專</b><small>Fervela.ai</small></div><span class="chev"></span></a>
+    <a href="https://www.facebook.com/fervelaai" target="_blank" rel="noopener"><img src="/assets/v5/note2.webp" alt="" width="200" height="130"><div><b>追蹤臉書粉專</b><small>更多 AI 分享，歡迎追蹤</small></div><span class="chev"></span></a>
     <a href="mailto:contact@fervela.ai"><img src="/assets/v5/note3.webp" alt="" width="200" height="130"><div><b>聊聊你的想法</b><small>contact@fervela.ai</small></div><span class="chev"></span></a>
   </div>
+  <!--LINKS:END-->
   <h2 class="label">找到我們</h2>
   <nav class="social" aria-label="社群帳號">
     <a id="s-line" href="#" target="_blank" rel="noopener noreferrer" hidden>LINE</a>
