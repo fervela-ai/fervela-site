@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AI 董事會 — 下載統計</title>
+<title>下載統計 — 全部軟體</title>
 <meta name="robots" content="noindex">
 <style>
   :root{ --navy:#0D1B3D; --teal:#008B8B; --gold:#F5A623; --grey:#6B7280; --mist:#F5F7FA; }
@@ -24,52 +24,77 @@
   th:first-child,td:first-child{ text-align:left; }
   th{ background:var(--mist); color:var(--navy); font-size:12.5px; }
   .err{ color:#b3261e; background:#fdecea; border-radius:10px; padding:12px 16px; }
+  .tabs{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+  .tab{ border:1px solid #dde3ec; background:#fff; color:var(--navy); border-radius:999px; padding:6px 14px; font-size:14px; cursor:pointer; font-family:inherit; }
+  .tab.on{ background:var(--navy); color:#fff; border-color:var(--navy); }
+  .note{ font-size:12px; color:var(--grey); margin:10px 0 0; }
   .since{ font-size:11px; color:var(--grey); font-weight:400; }
   .ft{ margin-top:22px; font-size:12px; color:var(--grey); text-align:center; }
 </style>
-<style>/* 中文只在標點、空白處換行，不把詞拆兩半；太長才硬斷。標題平均分行、內文避免最後一行孤字（Miles 10/16「我不要一句話被斷句」） */
-body{word-break:keep-all;overflow-wrap:anywhere;line-break:strict}h1,h2,h3,h4{text-wrap:balance}p,li,dd,figcaption,blockquote{text-wrap:pretty}</style>
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"9791694bcfb64758948d79fecdce88b1","spa":false}'></script></head>
+</head>
 <body>
 <div class="wrap">
-  <h1>📊 AI 董事會 — 下載統計</h1>
+  <h1>📊 下載統計</h1>
   <div class="sub">資料即時來自 GitHub Releases・重新整理即更新</div>
   <div id="out">讀取中…</div>
   <div class="ft">
     此頁僅顯示匿名的下載次數，無任何個人資料。<br>
     ⚠️ 計數綁在「檔案」上：<b>重新上傳同名檔案會從 0 重新計算</b>（表格已標起算日）。<br>
-    V2.2 以前是直接傳檔給朋友、沒經過這裡，因此不在統計內。<br>
+    AI 董事會 V2.2 以前是直接傳檔給朋友、沒經過這裡，因此不在統計內。<br>
     © 2026 雲帆研創有限公司（Fervela.ai）
   </div>
 </div>
 <script>
 (async () => {
   const out = document.getElementById("out");
+  const PRODUCTS = [ // 檔名開頭 → 顯示名；新產品沒列到會用檔名開頭自動分組
+    [/^AI-Boardroom/i, "AI 董事會"], [/^Fervela-Books/i, "萬卷"], [/^Feihong/i, "飛鴻"] ];
+  const PLATS = [ ["mac", "🍎 Mac", /mac|\.dmg$/i], ["win", "🪟 Windows", /win/i], ["android", "🤖 Android", /\.apk$/i] ];
+  const esc = t => String(t).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+  const prodOf = n => { for (const [re, label] of PRODUCTS) if (re.test(n)) return label; return n.split(/[-_.]/)[0]; };
+  const platOf = n => { for (const [k, , re] of PLATS) if (re.test(n)) return k; return "other"; };
   try {
-    const r = await fetch("https://api.github.com/repos/fervela-ai/fervela-site/releases");
+    const r = await fetch("https://api.github.com/repos/fervela-ai/fervela-site/releases?per_page=100");
     if (!r.ok) throw new Error("HTTP " + r.status);
     const rels = await r.json();
-    let mac = 0, win = 0, rows = "";
+    const prods = {}; // 軟體 → {total, plat:{}, rows:[{tag, since, plat:{}}]}
     for (const rel of rels) {
-      let m = 0, w = 0;
+      const byProd = {};
       for (const a of (rel.assets || [])) {
-        if (/mac/i.test(a.name)) m += a.download_count;
-        else if (/win/i.test(a.name)) w += a.download_count;
+        if (/\.sha256$|\.txt$/i.test(a.name)) continue;
+        const p = prodOf(a.name), pl = platOf(a.name);
+        const e = byProd[p] = byProd[p] || { plat: {}, since: "" };
+        e.plat[pl] = (e.plat[pl] || 0) + a.download_count;
+        if (!e.since || a.created_at < e.since) e.since = a.created_at;
       }
-      mac += m; win += w;
-      // 顯示「起算日」：GitHub 的下載數綁在「資產檔案」上，重新上傳同名資產會歸零重算。
-      const since = (rel.assets && rel.assets[0] ? rel.assets[0].created_at : "").slice(0, 10);
-      rows += `<tr><td>${rel.tag_name}<div class="since">起算 ${since}</div></td><td>${m}</td><td>${w}</td><td><b>${m + w}</b></td></tr>`;
+      for (const [p, e] of Object.entries(byProd)) {
+        const P = prods[p] = prods[p] || { total: 0, plat: {}, rows: [] };
+        for (const [pl, n] of Object.entries(e.plat)) { P.plat[pl] = (P.plat[pl] || 0) + n; P.total += n; }
+        P.rows.push({ tag: rel.tag_name, since: e.since.slice(0, 10), plat: e.plat });
+      }
     }
-    out.innerHTML = `
-      <div class="big"><div class="n">${mac + win}</div><div class="l">總下載次數</div></div>
-      <div class="duo">
-        <div class="card"><div class="n">${mac}</div><div class="l">🍎 Mac</div></div>
-        <div class="card"><div class="n">${win}</div><div class="l">🪟 Windows</div></div>
-      </div>
-      <table><tr><th>版本</th><th>Mac</th><th>Windows</th><th>小計</th></tr>${rows}</table>`;
+    const names = Object.keys(prods).sort((a, b) => prods[b].total - prods[a].total);
+    const platCols = P => [...PLATS.filter(([k]) => P.plat[k] != null), ...(P.plat.other != null ? [["other", "其他"]] : [])];
+    const view = sel => {
+      if (sel === "all") {
+        const sum = names.reduce((t, n) => t + prods[n].total, 0);
+        return `<div class="big"><div class="n">${sum}</div><div class="l">全部軟體 總下載次數</div></div>
+          <table><tr><th>軟體</th><th>版本數</th><th>下載</th></tr>${names.map(n => `<tr><td>${esc(n)}</td><td>${prods[n].rows.length}</td><td><b>${prods[n].total}</b></td></tr>`).join("")}</table>
+          <p class="note">點上方軟體名稱看各版本、各平台。</p>`;
+      }
+      const P = prods[sel], cols = platCols(P);
+      return `<div class="big"><div class="n">${P.total}</div><div class="l">${esc(sel)} 總下載次數</div></div>
+        <div class="duo" style="grid-template-columns:repeat(${Math.min(cols.length, 3) || 1},1fr)">${cols.map(([k, l]) => `<div class="card"><div class="n">${P.plat[k] || 0}</div><div class="l">${l}</div></div>`).join("")}</div>
+        <table><tr><th>版本</th>${cols.map(([, l]) => `<th>${l.replace(/^\S+ /, "")}</th>`).join("")}<th>小計</th></tr>${P.rows.map(r => `<tr><td>${esc(r.tag)}<div class="since">起算 ${r.since}</div></td>${cols.map(([k]) => `<td>${r.plat[k] || 0}</td>`).join("")}<td><b>${Object.values(r.plat).reduce((a, b) => a + b, 0)}</b></td></tr>`).join("")}</table>`;
+    };
+    const render = sel => {
+      if (sel !== "all" && !prods[sel]) sel = "all";
+      out.innerHTML = `<div class="tabs">${["all", ...names].map(n => `<button class="tab${n === sel ? " on" : ""}" data-p="${esc(n)}">${n === "all" ? "全部" : esc(n)}</button>`).join("")}</div>` + view(sel);
+      out.querySelectorAll(".tab").forEach(b => b.onclick = () => { history.replaceState(null, "", "#" + encodeURIComponent(b.dataset.p)); render(b.dataset.p); });
+    };
+    render(decodeURIComponent(location.hash.slice(1)) || "all");
   } catch (e) {
-    out.innerHTML = `<div class="err">讀取失敗（${e.message}）。稍後再試，或 GitHub API 每小時有次數上限。</div>`;
+    out.innerHTML = `<div class="err">讀取失敗（${esc(e.message)}）。稍後再試，或 GitHub API 每小時有次數上限。</div>`;
   }
 })();
 </script>
