@@ -6,6 +6,6 @@
   "apk": "https://github.com/fervela-ai/fervela-site/releases/download/feihong-0.9.31-96/Feihong-0.9.31-friend.apk",
   "sha256": "93d83e4bf432cf17ac81f672fad1c27627b74d0d120af049cf8a4c900979656c",
   "sizeBytes": 286313266,
-  "notes": "0.9.31：月曆上點行程就能刪除；「協助改善飛鴻」移到「我的」最下面；先收起微縮島。\n若這裡更新失敗，請到 fervela.ai/journey/download 下載安裝，直接蓋過去，行程資料都會保留。",
+  "notes": "0.9.31：月曆上點行程就能刪除，一些小地方修得更順手。\n若這裡更新失敗，請到 fervela.ai/journey/download 下載安裝，直接蓋過去，行程資料都會保留。",
   "publishedAt": "2026-10-31T20:40:02+08:00"
 }
