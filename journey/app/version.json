@@ -1,11 +1,11 @@
 {
   "product": "feihong",
   "channel": "preview",
-  "versionName": "0.9.29",
-  "versionCode": 94,
-  "apk": "https://github.com/fervela-ai/fervela-site/releases/download/feihong-0.9.29-94/Feihong-0.9.29-friend.apk",
-  "sha256": "f28eaf1a214016a133f7df2cc9e8f00442e6390e453e756014e95439dfba9c9e",
-  "sizeBytes": 286264066,
-  "notes": "0.9.29：行程方塊可以拉長調時間、左右滑換景點；下午點心、飯後小吃與在地必吃名店會排進空檔；雞排、滷味這類不再當午晚餐；點去過的鄉鎮看到訪月份與照片；每趟行程可以打分數。\n若這裡更新失敗，請到 fervela.ai/journey/download 下載安裝，直接蓋過去，行程資料都會保留。",
-  "publishedAt": "2026-10-31T11:53:30+08:00"
+  "versionName": "0.9.30",
+  "versionCode": 95,
+  "apk": "https://github.com/fervela-ai/fervela-site/releases/download/feihong-0.9.30-95/Feihong-0.9.30-friend.apk",
+  "sha256": "85b55cae5252da284a36a0658e9c7bd70153ccf598a88c0e0094b0aa79da9783",
+  "sizeBytes": 286296882,
+  "notes": "0.9.30：行程方塊拉長、左右滑換景點都會跟著手走，長按可上下拖，快點兩下有選單；重排一天變快；打分改成選一句話；人生時間軸點開就看得到。\n若這裡更新失敗，請到 fervela.ai/journey/download 下載安裝，直接蓋過去，行程資料都會保留。",
+  "publishedAt": "2026-10-31T17:23:30+08:00"
 }
