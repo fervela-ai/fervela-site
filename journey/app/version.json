@@ -1,10 +1,11 @@
 {
   "product": "feihong",
   "channel": "preview",
-  "versionName": "0.9.33",
-  "versionCode": 98,
-  "apk": "https://github.com/fervela-ai/fervela-site/releases/download/feihong-0.9.33-98/Feihong-0.9.33-friend.apk",
-  "sha256": "b8d978dafae25aace5167d0961728223e2cc8f6f02f3c4b2e711b5efaca04f2b",
-  "sizeBytes": 299515354,
-  "notes": "0.9.33：換餐廳時多了約 17 萬家店可以挑；你勾的景點更不容易被漏掉；行程更少漏排午餐和晚餐；手機重開機後不會再跳出飛鴻已停止的訊息；雪霸、泰安溫泉、南港溪橋橋柱換上正式配圖。\n若這裡更新失敗，請到 fervela.ai/journey/download 下載安裝，直接蓋過去，行程資料都會保留。"
+  "versionName": "0.9.36",
+  "versionCode": 100,
+  "apk": "https://github.com/fervela-ai/fervela-site/releases/download/feihong-0.9.36-100/Feihong-0.9.36-friend.apk",
+  "sha256": "b2e10a0e81ac19f1599410ff986846fc3995ad633c26ea2121bee4345614a6eb",
+  "sizeBytes": 299597368,
+  "notes": "0.9.36：你勾了但沒排進去的景點，現在會說原因（休息日、要搭船、離太遠、時間不夠）；可以直接按「換到另一天」「換掉別的點」或「多玩一天」，都能復原；修好部分手機按「完成」存檔時閃退。\n若這裡更新失敗，請到 fervela.ai/journey/download 下載安裝，直接蓋過去，行程資料都會保留。",
+  "publishedAt": "2026-11-08T16:38:13+08:00"
 }
