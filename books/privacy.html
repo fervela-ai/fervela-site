@@ -61,7 +61,7 @@ body{word-break:keep-all;overflow-wrap:anywhere;line-break:strict}h1,h2,h3,h4{te
       <li><b>書庫</b>：書、版本、目錄、閱讀紀錄、memo、行事曆、領域。存在你的使用者資料夾裡（資源庫 → Application Support → FervelaBooks）</li>
       <li><b>照片</b>：你拍的原始照片原封不動留在同一個資料夾，不對外提供</li>
       <li><b>執行紀錄</b>：存在資源庫 → Logs</li>
-      <li>萬卷（App）<b>沒有帳號、沒有登入、沒有我們自己的伺服器、不收集使用統計</b>。開發者看不到你有哪些書、讀了什麼</li>
+      <li>萬卷<b>沒有帳號、沒有登入</b>。書庫、照片、筆記與閱讀內容都留在你的 Mac，開發者看不到你有哪些書、讀了什麼。唯一例外是下面「匿名使用步驟」那幾個步驟名稱（可以關）</li>
     </ul>
     <div class="note">刪掉萬卷 App 不會刪掉書庫。要完全清除，請自己把 FervelaBooks 資料夾丟進垃圾桶。反過來說：更新或重裝 App，書庫不會不見。</div>
   </section>
@@ -72,6 +72,7 @@ body{word-break:keep-all;overflow-wrap:anywhere;line-break:strict}h1,h2,h3,h4{te
     <h3>送到你自己訂閱的 AI（Anthropic 的 Claude、OpenAI 的 ChatGPT，或 xAI 的 Grok；你在設定頁選哪一家就送哪一家）</h3>
     <ul>
       <li>經由你電腦上的官方程式（Claude Code／Codex／Grok）、用<b>你自己的登入</b>送出，用量算在你的訂閱裡</li>
+      <li>Codex 會照它平常的做法，帶上<b>你自己的 Codex 設定檔</b>（AGENTS.md），送到你自己的帳號；Claude Code 則以「安全模式」執行，不載入你的 CLAUDE.md 與 skill。萬卷不會另外去讀你其他的檔案</li>
       <li><b>認書架照、封面、封底條碼、目錄頁</b>：送出照片。送出的是轉正、縮小、<b>已去掉拍攝資訊（含 GPS 定位）</b>的版本，或只裁下來的書背小圖</li>
       <li><b>整理目錄</b>：送出書店商品頁上的目錄文字</li>
       <li><b>分領域、自動建議領域、教練模式</b>：送出書名與作者</li>
@@ -91,9 +92,23 @@ body{word-break:keep-all;overflow-wrap:anywhere;line-break:strict}h1,h2,h3,h4{te
 
     <h3>送到 fervela.ai</h3>
     <ul>
-      <li>只有啟動時讀一次版本檔，看有沒有新版。<b>不帶版號、不帶識別碼、不帶任何使用資料</b></li>
+      <li>啟動時讀一次版本檔，看有沒有新版。<b>這個請求不帶版號、不帶識別碼、不帶任何使用資料</b></li>
+      <li><b>匿名使用步驟</b>（V1.3 起新增，預設開，設定頁可關；下一節說明）會另外送到 Fervela.ai 的收集服務 t.fervela.ai</li>
       <li>主機的存取紀錄會看到你的 IP，這是任何上網請求都一樣的</li>
     </ul>
+  </section>
+
+  <section id="funnel">
+    <h2>匿名使用步驟（V1.3 起新增）</h2>
+    <p>為了知道大家卡在哪一步，萬卷會記下你「走到了哪一步」，只有這四個步驟：<b>首次打開、拍第一張書架、認出書、第一個成果（第一本書加進書房）</b>。每一步只送一次。</p>
+    <ul>
+      <li><b>只送</b>：產品代號（wanjuan）、步驟名稱、App 版本、平台（mac）、日期（只到日）、從第一次打開到這一步的粗略時間區間（例如「5 到 30 分鐘」）</li>
+      <li><b>不送</b>：書名、作者、ISBN、照片、筆記、閱讀位置與紀錄、檔案名稱與路徑、AI 的內容與登入狀態、你的姓名信箱電話。也沒有帳號可以對上你</li>
+      <li><b>傳送時</b>：連線到 t.fervela.ai 時，伺服器照一般上網請求會看到你的 IP；我們不把 IP 寫進統計內容</li>
+      <li><b>保存</b>：我們不存單則紀錄，送來的資料會直接加進當天各步驟的次數，只保存這些總數，也不寫入 IP 與裝置資訊。這些總數用來看長期趨勢，會持續保存；裡面沒有任何一筆對得到某一個人，所以沒有可以替你個別刪除的資料。不想再送，把設定頁的開關關掉即可。</li>
+      <li><b>能不能關</b>：能。設定頁「匿名使用步驟」關掉後就不再送出，還沒送出的也會清掉；隨時可再打開</li>
+    </ul>
+    <div class="note">這些資料無法讓我們知道你有哪些書、讀了什麼，只用來看「有多少人走到下一步」。</div>
   </section>
 
   <section>
@@ -123,7 +138,7 @@ body{word-break:keep-all;overflow-wrap:anywhere;line-break:strict}h1,h2,h3,h4{te
       <li>無法替你救回書庫——資料只在你那裡，我們沒有副本</li>
       <li>無法保證 AI 認出的書名、書店抓回的目錄都正確。畫面會標出來源與比對結果，但最後請以你手上那本書為準</li>
       <li>無法保證書店網站不改版。改版後抓不到資料時，計時、位置、memo 這些不靠書店的功能照常可用</li>
-      <li>無法控制 Anthropic、OpenAI 與各書店如何處理它們收到的資料</li>
+      <li>無法控制 Anthropic、OpenAI、xAI 與各書店如何處理它們收到的資料</li>
       <li>教練模式列出的「經典」是 AI 的意見。萬卷只確認那本書真的存在，無法保證它值得讀</li>
     </ul>
   </section>
