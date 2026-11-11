@@ -1,0 +1,26 @@
+# Fervela.ai
+> Fervela.ai：每個作品，都從一件卡住的小事開始。工作上、讀書與學習、出門與放鬆，七個順手的工具，現在就能用。
+
+## 作品
+
+- [AI 董事會 — Fervela.ai](https://fervela.ai/ai-boardroom/): 讓 Claude、GPT、Gemini、Grok 各自表態、彼此質疑。你不是收集答案，而是在主持一場能把問題想深的討論。
+- [萬卷 — Fervela.ai](https://fervela.ai/books/): 從一張封面或一排書開始，找回每本書；也記住你讀到哪裡、花了多久，和想留給下次自己的話。
+- [四國軍棋 — Fervela.ai](https://fervela.ai/army/): 和對家並肩，試探、推理，拿下敵方軍旗。四方暗棋的較量，每一步都藏著盤算。
+- [采風 — Fervela.ai](https://fervela.ai/scout/): 收集公開討論裡的抱怨與需求，整理出值得繼續追問的題目。
+- [飛鴻 — Fervela.ai](https://fervela.ai/journey/): 不知道去哪的時候，拉一下；想好要去了，幾秒排好一整趟。到了現場蓋一枚章，回家把走過的鄉鎮點亮。
+- [通鑑｜Fervela.ai](https://fervela.ai/timeline/): AI 的每一個重要時刻，用白話說清楚，每條都附出處。
+
+## 課程
+
+- [AI 自學課程地圖 — Fervela.ai](https://fervela.ai/courses/ai/): 從 AI 學習出發整理的開放式課程入口，台灣與全球。按實用性排序，不按知名度，每個站都標了定位和取捨判斷。
+- [迴圈工程自學地圖 — Fervela.ai](https://fervela.ai/courses/loop-engineering/): 從「下指令的人」變成「設計會下指令的系統的人」：七個階段，每階段有要讀的一手資料、要做的事、不過不進下一階的驗收。
+- [用 AI 寫軟體自學地圖 — Fervela.ai](https://fervela.ai/courses/ai-coding/): 不用先當工程師：學會把要做的東西講清楚、讓 AI 動手、自己驗收。三條路線各附一個做得出來的產出，加上本站自己踩過的四個坑。
+- [投資自學課程地圖 — Fervela.ai](https://fervela.ai/courses/investing/): 從看懂一句財經新聞開始，到能自己寫投資軟體：總體經濟、財報、投資學、技術分析、量化工具，分層整理的免費學習入口。
+- [美股券商怎麼選：複委託、Firstrade、IBKR — Fervela.ai](https://fervela.ai/courses/us-brokers/): 想在美股掛移動停損、想自己寫交易程式，台灣的複委託做不做得到？逐家查完 15 家之後，把元大、Firstrade、IBKR 放在同一張表上比：功能、手續費、遺產稅，還有每一個讓人猶豫的點。
+
+## 筆記
+
+- [【雲帆研創成立日記】從刻章、求金雞到半夜開通公司信箱：成立公司的這一週 — Fervela.ai](https://fervela.ai/notes/founding.html): 2026 年 10 月 6 日，雲帆研創有限公司正式核准設立。刻章才知道一間公司有好幾組章、國慶日政府不上班不能核准、一天限額讓 168,888 變成 88,888，最後到紫南宮求金雞，半夜開完公司信箱才收工。
+- [不會寫程式的我，三天做出一套讀書軟體，是怎麼做的？ — Fervela.ai](https://fervela.ai/notes/wanjuan.html): 朋友問我萬卷從頭到尾是怎麼做的。一萬多行程式，我一行都沒寫也沒看，那三天我到底做了什麼？先開會、先拿四本真的書去撞，還有一個讓框從十九中六變成十九全中的外行問題。
+- [自己養一隻 AI 助理，現在划算了嗎？ — Fervela.ai](https://fervela.ai/notes/lobster.html): 去年底第一次自架 AI 助理，兩天兩夜失敗。今年二月做好了，但 API 帳單太貴，五月它掛掉我反而鬆一口氣。第三次終於不用再多付一份錢。
+- [AI 董事會全自動幫我找答案，可行嗎？ — Fervela.ai](https://fervela.ai/notes/interrupt.html): 我想讓幾家 AI 坐上同一張桌子，吵完給我結論，我去做別的事。做出來之後才發現：沒有我參與，那份報告我一件事都用不上。
