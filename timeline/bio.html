@@ -1387,21 +1387,22 @@ d.querySelector('summary').addEventListener('click',function(e){if(!ev)return;e.
   <h3>怎麼用</h3><p>今天看重點<br>時間軸照月份看<br>找找看搜公司或名詞</p>
   <h3>加到主畫面</h3><p>在 iPhone 的 Safari 點「分享」→「加入主畫面」；Android 的 Chrome 點右上「⋮」→「加到主畫面」。</p>
 <h3 id="funnel-about">匿名使用統計</h3>
-<p>為了知道大家用到哪一步就離開、哪裡需要改，通鑑會在你<b>第一次</b>走到幾個固定步驟時（第一次打開、第一次展開一張卡、第一次點開詳細頁、第一次點開來源連結或用搜尋），送出一則匿名紀錄給我們。每一步、每台裝置只送一次。</p>
+<p>為了知道大家用到哪一步就離開、哪裡需要改，通鑑會在你<b>第一次</b>走到幾個固定步驟時（第一次打開、第一次展開一張卡、第一次點開詳細頁、第一次點開來源連結或用搜尋），送出一則匿名紀錄給我們。每一步、每台裝置只送一次。另外，每篇詳細頁每天被點開幾次也會計數，見下面「每篇點開數」。</p>
 <ul class="funnel-list">
 <li><b>只送</b>：產品名稱、版本、平台（網頁）、步驟名稱、日期（只到哪一天），以及距離第一次打開大約多久（只分「1 分鐘內」「5 分鐘內」這類區間）。</li>
-<li><b>不送</b>：你搜尋的字、你展開或點開的是哪一則、帳號、姓名、信箱、電話、位置、裝置或廣告編號。我們不會把這些紀錄對到任何人。</li>
+<li><b>每篇點開數</b>：你點開一篇詳細頁時，會送出那篇的編號和日期（只到哪一天），同一篇每天最多送一次；我們只保存每篇每天被點開的總次數，用來知道哪些文章最多人看，不知道是誰點的。</li>
+<li><b>不送</b>：你搜尋的字、你展開的是哪一張卡、帳號、姓名、信箱、電話、位置、裝置或廣告編號。我們也不會嘗試辨識你是誰。</li>
 <li><b>傳送時</b>：資料送到 t.fervela.ai（主機由 Cloudflare 提供，Cloudflare 是美國公司）。傳送時網路會帶出你的連線位址（IP），我們不儲存它。</li>
-<li><b>保存</b>：我們不存單則紀錄，送來的資料會直接加進當天各步驟的次數，只保存這些總數。</li>
-<li><b>在你的瀏覽器裡</b>：為了「每步只送一次」和算「距離第一次打開多久」，會在你的瀏覽器存「第一次打開的時間」和「哪些步驟送過了」，不用 Cookie。</li>
+<li><b>保存</b>：我們不存單則紀錄，送來的資料會直接加進當天各步驟的次數和各篇的點開次數，只保存這些總數。這些總數用來看長期趨勢，會持續保存；裡面沒有任何一筆對得到某一個人。</li>
+<li><b>在你的瀏覽器裡</b>：為了「每步只送一次」「每篇每天只算一次」和算「距離第一次打開多久」，會在你的瀏覽器存「第一次打開的時間」「哪些步驟送過了」和「今天點開過哪幾篇」（隔天換新），不用 Cookie。</li>
 </ul>
-<p>這是 1.5 版起新增的；之前的版本不會送出。</p>
+<p>這是 1.5 版起新增的；每篇點開數是 1.7 版起新增的。之前的版本不會送出。</p>
 <label class="funnel-row"><input id="funnel-switch" type="checkbox" checked> 匿名使用統計（關掉後不再送出，還沒送出的也一起清掉）</label>
 </section>
 <div id="detail-host" aria-live="polite"></div>
 </div>
 <div class="v5-tl-foot" aria-hidden="true"><img src="/assets/v5/note1.webp" alt="" aria-hidden="true" width="1200" height="900" loading="lazy"></div>
-<footer><div class="v5-foot-in"><a class="v5-brand" href="/" aria-label="Fervela.ai 首頁"><img class="v5-logo" src="/assets/logo-a.svg" width="34" height="34" alt="" aria-hidden="true" loading="lazy"><span>Fervela.ai</span></a><div class="v5-flinks"><a href="/#work">作品</a><a href="/#journal">實踐筆記</a><a href="mailto:contact@fervela.ai">聊聊你的想法</a><a href="/privacy.html">隱私權政策</a></div></div><!-- 10/12 法遵長定 P3：V1.0 不放隱私說明頁，頁尾照實寫；有影片嵌入或統計時再補正式頁送法遵 -->通鑑 by Fervela.ai｜卡片說明由 AI 依官方來源整理，以原文為準｜文中產品名稱與商標屬各公司所有｜發現錯誤或權利疑慮，請來信 contact@fervela.ai，我們會在 72 小時內處理｜<span class="nb">2026 年 592 則</span><br>通鑑由 AI 整理公開資料，可能有遺漏或錯誤，內容以原文為準，不構成投資或其他專業建議。<br>本站的照片、插圖與圖示由 AI 生成，僅為示意。<br>本站沒有帳號或 Cookie；用 Cloudflare 網站分析（Cloudflare 是美國公司）計算各頁瀏覽次數：不使用 Cookie、不收集你輸入的內容，也不記錄網址後面帶的參數。另有匿名使用統計（只記你第一次走到哪幾步，不含你搜尋的字與看的內容，可在「關於」關閉）。網站放在 GitHub Pages，主機業者會看到你的 IP。寫信給我們時，我們會看到你的信箱，只用來回覆。</footer>
+<footer><div class="v5-foot-in"><a class="v5-brand" href="/" aria-label="Fervela.ai 首頁"><img class="v5-logo" src="/assets/logo-a.svg" width="34" height="34" alt="" aria-hidden="true" loading="lazy"><span>Fervela.ai</span></a><div class="v5-flinks"><a href="/#work">作品</a><a href="/#journal">實踐筆記</a><a href="mailto:contact@fervela.ai">聊聊你的想法</a><a href="/privacy.html">隱私權政策</a></div></div><!-- 10/12 法遵長定 P3：V1.0 不放隱私說明頁，頁尾照實寫；有影片嵌入或統計時再補正式頁送法遵 -->通鑑 by Fervela.ai｜卡片說明由 AI 依官方來源整理，以原文為準｜文中產品名稱與商標屬各公司所有｜發現錯誤或權利疑慮，請來信 contact@fervela.ai，我們會在 72 小時內處理｜<span class="nb">2026 年 592 則</span><br>通鑑由 AI 整理公開資料，可能有遺漏或錯誤，內容以原文為準，不構成投資或其他專業建議。<br>本站的照片、插圖與圖示由 AI 生成，僅為示意。<br>本站沒有帳號或 Cookie；用 Cloudflare 網站分析（Cloudflare 是美國公司）計算各頁瀏覽次數：不使用 Cookie、不收集你輸入的內容，也不記錄網址後面帶的參數。另有匿名使用統計（只記你第一次走到哪幾步，以及每篇詳細頁每天被點開的總次數；不含你搜尋的字，也不知道是誰點的，可在「關於」關閉）。網站放在 GitHub Pages，主機業者會看到你的 IP。寫信給我們時，我們會看到你的信箱，只用來回覆。</footer>
 <nav class="site-tabs" role="tablist" aria-label="通鑑分頁">
   <button type="button" role="tab" id="tab-today" aria-controls="panel-today" aria-selected="true" data-tab="today">⌂<span>今天</span></button>
   <button type="button" role="tab" id="tab-timeline" aria-controls="panel-timeline" aria-selected="false" tabindex="-1" data-tab="timeline">◇<span>時間軸</span></button>
@@ -1877,11 +1878,35 @@ if (ready) {
     if (!t || !t.closest) return;
     if (t.closest('details.card > summary')) step('展開一張卡');
     const da = t.closest('a[href^="#d-"]');
-    if (da) step('點開一張詳細頁');   // 點詳細頁連結不一定觸發 hashchange
+    if (da) { step('點開一張詳細頁'); /*V*/view(da.getAttribute('href'));/*V*/ }   // 點詳細頁連結不一定觸發 hashchange
     if (t.closest('.card-extra .meta a[href^="http"], .dsources a[href^="http"]')) step('第一個成果');
   }, true);
   const q = document.getElementById('q');
   if (q) q.addEventListener('input', () => { if (q.value.trim()) step('第一個成果'); });
+  // <views>
+  // 每篇點開數（11/12 營運長派工，老闆要知道哪篇最多人看）：只送文章編號＋台灣日期；每台每篇每天最多一次；關掉統計就不送
+  const seen = () => {
+    const day = new Date(Date.now() + 8 * 3600e3).toISOString().slice(0, 10), key = 'ffunnel:tongjian:seen';
+    let s; try { s = JSON.parse(localStorage.getItem(key)); } catch (e) { s = null; }
+    if (!s || s.day !== day) s = { day: day, ids: [] };
+    return { day: day, s: s, save: () => { try { localStorage.setItem(key, JSON.stringify(s)); } catch (e) {} } };
+  };
+  const view = (hash) => {
+    if (typeof hash !== 'string') hash = location.hash;
+    if (!hash.startsWith('#d-')) return;
+    try { if (localStorage.getItem(OPT) === '1' || localStorage.getItem('ffunnel:tongjian:off') === '1') return; } catch (e) { return; }
+    let id; try { id = decodeURIComponent(hash.slice(3)); } catch (e) { return; }
+    // 詳細頁是點了才載入；只認首頁上有連結的編號（不是本站的文章不送）
+    if (!document.getElementById('d-' + id) && !document.querySelector('a[href="#d-' + CSS.escape(id) + '"]')) return;
+    const v = seen();
+    if (v.s.ids.includes(id)) return;
+    v.s.ids.push(id); v.s.ids = v.s.ids.slice(-300); v.save();
+    fetch('https://t.fervela.ai/e'.replace(/\/e$/, '/a'), { method: 'POST', keepalive: true,
+      body: JSON.stringify([{ product: 'tongjian', article: id, date: v.day }]) }).catch(() => {});
+  };
+  window.addEventListener('hashchange', view);
+  view();
+  // </views>
   const sw = document.getElementById('funnel-switch');
   if (sw) {
     try { sw.checked = localStorage.getItem(OPT) !== '1' && localStorage.getItem('ffunnel:tongjian:off') !== '1'; } catch (e) { sw.checked = false; }
