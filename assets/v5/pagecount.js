@@ -1,6 +1,6 @@
 /* 官網每頁「看過／按讚」（11/16 營運長；規格：產品長 全產品統計規格 11/12 第 4 節；視覺稿：行銷長 頁尾計數按讚 r2，產品長 11/16 核可）
- * - 看過：每台每頁每天最多送一次，只送「頁面路徑＋台灣日期」。
- * - 按讚：每台每頁永久只算一次（法遵長 11/12 必改），隔天再按也不送；按了才送。
+ * - 看過：每個瀏覽器每頁每天最多送一次（顯示「看過 N 次」，是次數不是人數，法遵長 11/18），只送「頁面路徑＋台灣日期」。
+ * - 按讚：每個瀏覽器每頁永久只算一次（法遵長 11/12 必改），隔天再按也不送；按了才送。
  * - 顯示：看過與讚各自判斷，累計少於 10 就不顯示那個數字（讚鍵永遠留著）。
  * - 瀏覽器禁止儲存時：不送看過、不顯示讚鍵，避免重複計算。 */
 (function (root) {
@@ -17,7 +17,7 @@
   function view(views, likes, liked) {
     return {
       showViews: typeof views === 'number' && views >= MIN,
-      viewsText: views + ' 人看過',
+      viewsText: '看過 ' + views + ' 次',
       showLikes: typeof likes === 'number' && likes >= MIN,
       likesText: String(likes),
       filled: !!liked
@@ -25,8 +25,9 @@
   }
 
   /* 看過：今天這頁送過就不送；回傳是否送出 */
-  function sendView(st, path, send, now) {
+  function sendView(st, path, send, now, nav) {
     try { if (st.getItem(OFF) === '1') return false; } catch (e) { return false; }
+    if (nav && (nav.globalPrivacyControl === true || nav.doNotTrack === '1')) return false;  // 不要追蹤／GPC 不送看過（法遵長 11/18 建議）
     var d = day(now), s;
     try { s = JSON.parse(st.getItem(SEEN)); } catch (e) { s = null; }
     if (!s || s.day !== d || !Array.isArray(s.ids)) s = { day: d, ids: [] };
@@ -97,7 +98,7 @@
   }
   box.insertBefore(row, box.firstChild);
   paint();
-  if (st) sendView(st, path, post);
+  if (st) sendView(st, path, post, undefined, root.navigator);
   fetch(EP + '/c?product=site&article=' + encodeURIComponent(path))
     .then(function (r) { return r.ok ? r.json() : null; })
     .then(function (j) { if (j && typeof j.views === 'number' && typeof j.likes === 'number') { c = j; paint(); } })
