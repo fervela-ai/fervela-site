@@ -1,11 +1,11 @@
 {
   "product": "feihong",
   "channel": "preview",
-  "versionName": "0.9.36",
-  "versionCode": 100,
-  "apk": "https://github.com/fervela-ai/fervela-site/releases/download/feihong-0.9.36-100/Feihong-0.9.36-friend.apk",
-  "sha256": "b2e10a0e81ac19f1599410ff986846fc3995ad633c26ea2121bee4345614a6eb",
-  "sizeBytes": 299597368,
-  "notes": "0.9.36：你勾了但沒排進去的景點，現在會說原因（休息日、要搭船、離太遠、時間不夠）；可以直接按「換到另一天」「換掉別的點」或「多玩一天」，都能復原；修好部分手機按「完成」存檔時閃退。\n若這裡更新失敗，請到 fervela.ai/journey/download 下載安裝，直接蓋過去，行程資料都會保留。",
-  "publishedAt": "2026-11-08T16:38:13+08:00"
+  "versionName": "0.9.38",
+  "versionCode": 102,
+  "apk": "https://github.com/fervela-ai/fervela-site/releases/download/feihong-0.9.38-102/Feihong-0.9.38-friend.apk",
+  "sha256": "c5aacdf7aeb576f1248f95e3d67d19d7b838ceafe09d45f627fbee56760f8dd1",
+  "sizeBytes": 300486172,
+  "notes": "0.9.38：百章收集冊 101 枚章面全部換成更細緻的新畫風，蓋章前的灰色樣子也一起更新。\n（含 0.9.37：第一次打開會先說清楚哪些資料會傳、哪些只留在手機；網路不穩時你給的評分和回報會留著下次再送。）\n⚠️ 還在用 0.9.36 以前的朋友，這一版要照三步搬家，資料才不會掉：①在舊的飛鴻「我的」按「匯出備份檔」，存到雲端硬碟或傳給自己 ②移除舊的飛鴻，到 fervela.ai/journey/download 下載安裝 ③打開後到「我的」→「匯入備份檔」。",
+  "publishedAt": "2026-11-21T02:49:36+08:00"
 }
