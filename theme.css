@@ -58,3 +58,6 @@ html[lang=zh-Hant] .making-name h3,html[lang=zh-Hant] .research-card h3,html[lan
 
 /* 中文只在標點、空白處換行，不把詞拆兩半；太長才硬斷。標題平均分行、內文避免最後一行孤字（Miles 10/16「我不要一句話被斷句」） */
 body{word-break:keep-all;overflow-wrap:anywhere;line-break:strict}h1,h2,h3,h4{text-wrap:balance}p,li,dd,figcaption,blockquote{text-wrap:pretty}
+
+/* 11/22 手機體檢：手機寬度字級下限 12px，桌機不變 */
+@media(max-width:800px){.wordmark small,.hero-bottom,.section-count,.card-stamp,.card-stamp>span,.screen-bar,.dots,.screen-frame figcaption,.badge,.making-top>span:first-child,.making-bottom,.footer-bottom,.edition,.platform,.visual-caption,.product-nav>span,.next-project small,.demo-bar,.demo-bar>span:last-child,.video-source small,.read-tabs button,.reading-panel>small,.time-mark,.time-mark>span,.paper-head,.report .demo-body>small,.report-insight p,.source-strip,.signal small,.signal p,.signal>div,.signal-more,.ops-metrics small,.project-row>span:nth-child(2),.table-head,.task-state,.research-stages>div>span,.research-stages small,html[lang=en] .demo-bar>span:last-child,html[lang=en] .task-state,.product-copy .eyebrow,.hero .eyebrow,.hero-bottom .navlink,.hero-bottom>span,.breadcrumb,.product-nav .navlink,.project-row,html[lang=en] .product-nav .navlink,.journal-list small,.option-label small{font-size:12px!important}}
