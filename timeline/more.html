@@ -1,0 +1,840 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>通鑑｜更多領域</title>
+<style>:root{--bg:#080e12;--panel:#0f1a20;--line:#1e2e36;--text:#e6f2ef;--sub:#8aa39c;--accent:#b4efdc;--gold:#d9b25b;--model:#9de3d4;--product:#a9c8ff;--tech:#d2b8ff;--event:#f0c37c;--paper:#f1aeca;--other:#b8cbd0}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;line-height:1.7}
+header{padding:40px 20px 24px;text-align:center;border-bottom:1px solid var(--line)}
+header h1{margin:0;font-size:40px;letter-spacing:.1em}
+header .brand{color:var(--sub);font-size:14px;letter-spacing:.2em}
+header p{color:var(--sub);margin:10px 0 0;font-size:15px;text-wrap:balance}
+.wrap{max-width:860px;margin:0 auto;padding:24px 16px 80px}
+.year{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
+.chip{border:1px solid var(--line);border-radius:999px;padding:4px 14px;font-size:14px;color:var(--sub)}
+.chip.on{border-color:var(--accent);color:var(--accent)}
+.chip.off{opacity:.45}
+.year-label{color:var(--sub);font-size:14px;letter-spacing:.08em;padding:4px 0}
+.headline{display:flex;flex-direction:column;align-items:flex-start;gap:8px;margin:0 0 26px;padding:24px;border:1px solid var(--kind);border-radius:18px;background:linear-gradient(135deg,#193037,var(--panel) 70%);color:var(--text);text-decoration:none;box-shadow:0 12px 32px #0004}
+.headline:hover,.headline:focus-visible{outline:2px solid var(--kind);outline-offset:2px}
+.head-kicker{color:var(--kind);font-size:13px;font-weight:700;letter-spacing:.1em}.head-name{font-size:clamp(25px,6vw,38px);line-height:1.3;text-wrap:balance}.head-meta{color:var(--sub);font-size:13px}.head-one{font-size:16px;line-height:1.6}.head-go{color:var(--kind);font-size:13px;font-weight:700}
+.kind-model,.card[data-kind="model"]{--kind:var(--model)}.kind-product,.card[data-kind="product"]{--kind:var(--product)}.kind-tech,.card[data-kind="tech"]{--kind:var(--tech)}.kind-event,.card[data-kind="event"]{--kind:var(--event)}.kind-paper,.card[data-kind="paper"]{--kind:var(--paper)}.kind-other,.card[data-kind="other"]{--kind:var(--other)}
+.icon{width:18px;height:18px;flex:none;vertical-align:-3px}.tag{display:inline-flex;align-items:center;gap:5px;color:var(--kind);background:color-mix(in srgb,var(--kind) 12%,var(--panel));border:1px solid color-mix(in srgb,var(--kind) 45%,transparent)}
+.months{display:flex;gap:8px 12px;flex-wrap:wrap;margin:-8px 0 10px;position:sticky;top:0;z-index:3;background:var(--bg);padding:10px 0;border-bottom:1px solid var(--line)}
+#q{flex:1 1 100%;min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:10px;color:var(--text);font:inherit;font-size:16px;padding:9px 12px;outline:none}
+#q:focus{border-color:var(--accent)}/* 10/14 太守：字放大時膠囊排三排、黏住的列佔掉三分之一螢幕 → 改成一排左右滑 */.mlinks{display:flex;gap:8px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;margin:0 -16px;padding:0 16px;scroll-padding:0 16px}.mlinks::-webkit-scrollbar{display:none}.month-chip{flex:none}.qn{margin-left:auto;font-size:13px;color:var(--accent)}
+.none{color:var(--sub);text-align:center;margin:40px 0;padding:20px}[hidden]{display:none!important}
+.none svg,.none .none-art{display:block;width:180px;height:auto;max-width:60vw;margin:0 auto 12px;color:var(--accent)}.none-title{color:var(--text);font-size:20px;font-weight:700;margin:0 0 16px;overflow-wrap:anywhere}.none-actions{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}.none button{border:1px solid var(--line);border-radius:999px;background:var(--panel);color:var(--accent);padding:7px 13px;font:inherit;cursor:pointer}.none button:hover,.none button:focus-visible{border-color:var(--accent)}.none-hint{margin:14px 0 6px;font-size:13px}
+.more{color:var(--text);text-decoration:none;border-bottom:1px solid var(--line)}.st{font-size:12px;color:var(--gold);border:1px solid var(--gold);border-radius:6px;padding:0 6px;margin-left:8px;vertical-align:middle}
+.rm{display:inline-block;margin:6px 0 2px;color:var(--accent);font-size:14px;text-decoration:none}
+.detail{max-width:760px;margin:0 auto;padding:8px 0 40px}.detail h2{font-size:26px;line-height:1.4;margin:6px 0 10px}.dmeta{color:var(--sub);font-size:13px}
+.detail-status{max-width:760px;margin:0 auto;padding:28px 20px;color:var(--text)}.detail-status a,.detail-status button{color:var(--accent)}.detail-status button{font:inherit;cursor:pointer;margin-right:18px}
+.detail .lede{color:var(--sub)}.detail h4{color:var(--gold);font-size:16px;margin:26px 0 8px}.detail p{line-height:1.85}
+p,li{word-break:normal;line-break:auto}
+.pt{border-left:2px solid var(--line);padding-left:14px;margin:14px 0}.pt .ex{color:var(--sub);margin:0 0 8px;background:#f3ebdd;border-radius:8px;padding:10px 12px}.pt .an{margin:0;background:#e9f1f3;border-radius:8px;padding:10px 12px}
+.tk li,.srcs li{margin:6px 0;line-height:1.7}.srcs a,.rel a,.dfoot a{color:var(--accent)}.rel a{margin-right:14px;display:inline}.todo{color:var(--gold)}
+.back{display:inline-block;color:var(--accent);text-decoration:none;margin:10px 0;font-size:14px}.dfoot{border-top:1px solid var(--line);margin-top:30px;padding-top:12px;color:var(--sub);font-size:13px}
+.vbox{position:relative;aspect-ratio:16/9;background:#000;border:1px solid var(--line);border-radius:12px;overflow:hidden;margin:16px 0 6px;display:flex;align-items:center;justify-content:center;flex-direction:column}
+.vbox iframe{position:absolute;inset:0;width:100%;height:100%;border:0}.play{background:var(--panel);color:var(--accent);border:1px solid var(--accent);border-radius:999px;padding:10px 18px;font:inherit;cursor:pointer}
+.vlink{text-decoration:none}.vlink .play{display:inline-block}
+.vcap{color:var(--sub);font-size:12px;margin-top:10px;padding:0 12px;text-align:center}.vsrc{font-size:13px;color:var(--sub)}.vsrc a{color:var(--accent)}
+/* 詳細頁：沿用 .ex／.an 的米色與淡藍灰底色；內容在無 JS 時仍完整顯示。 */
+.detail{max-width:1180px;background:#fffcf7;color:#082246;border-radius:16px;padding:22px clamp(16px,3vw,36px) 36px}
+.detail:target{display:block!important}
+.detail h2,.detail p,.detail li,.detail .dmeta{overflow-wrap:anywhere}
+.detail-layout{min-width:0}.detail h2{color:#082246;font-size:clamp(28px,4vw,46px);line-height:1.25;margin:8px 0}
+.detail .dmeta,.detail .lede,.detail .vsrc,.detail .vcap{color:#49627a}.detail .back,.detail .vsrc a,.detail .dfoot a{color:#db4b18}
+.detail h4{color:#082246;font-size:21px;line-height:1.3;margin:22px 0 10px}
+.dwhat h4,.dtake h4{border-left:4px solid #ed541f;padding-left:12px}.dwhat p{margin:0 0 8px}
+.dmedia:empty{display:none}.dmedia .vbox{margin:14px 0 6px}.dmedia .vsrc{margin:5px 0 10px}
+.tk{counter-reset:take;list-style:none;margin:0;padding:0}.tk li{counter-increment:take;display:flex;align-items:center;gap:12px;margin:0;min-height:52px;padding:8px 0;border-bottom:1px solid #f0d4c5;line-height:1.5}
+.tk li:last-child{border-bottom:0}.tk li::before{content:counter(take,decimal-leading-zero);display:grid;place-items:center;flex:none;width:38px;height:38px;border-radius:50%;background:#fae8d9;color:#df4d1a;font-weight:700}
+.dshare{display:block;width:100%;margin:14px 0 0;padding:10px 14px;border:0;border-radius:10px;background:#ef551e;color:#fff;font:inherit;font-weight:700;cursor:pointer}.dshare:hover,.dshare:focus-visible{background:#c94214;outline:2px solid #082246;outline-offset:2px}.dshare-status{display:block;color:#49627a;font-size:13px;line-height:1.5;overflow-wrap:anywhere}.dshare-status:not(:empty){margin-top:7px}
+.dtabs{min-width:0;margin-top:14px}.dtabs-nav{display:none;gap:0;border-top:1px solid #ead8c9;margin:0 0 12px}.tabs-ready .dtabs-nav{display:flex}
+.dtabs-nav button{flex:1;min-width:0;background:none;border:0;border-bottom:3px solid transparent;color:#5f7181;font:inherit;font-size:17px;font-weight:700;line-height:1.35;padding:14px 4px 10px;cursor:pointer}
+.dtabs-nav button[aria-selected="true"]{color:#082246;border-bottom-color:#ed541f}.dtabs-nav button:focus-visible{outline:2px solid #ed541f;outline-offset:-3px}
+.tabs-ready .dpanel:not(.is-active){display:none}.dpanel{padding:14px 18px;border:1px solid #e7dccb;border-radius:12px;background:#f3ebdd;min-width:0}
+.dpanel-view{background:#e9f1f3;border-color:#d4e2e7}.dpanel h4{margin:0 0 8px}.dpanel>p{margin:0}.dpanel .pt{border-left:2px solid #ddc9b5;margin:12px 0;padding-left:12px}
+.dpanel .pt:last-child{margin-bottom:0}.dpanel .pt .ex{color:#49586a;background:#f3ebdd}.dpanel .pt .an{color:#082246;background:#e9f1f3}
+.dentry{min-width:0}.dentry summary{list-style:none;cursor:pointer;font-weight:700;color:#082246}.dentry summary::-webkit-details-marker{display:none}
+.dentry summary span{float:right;font-size:24px;line-height:1}.dentry[open] summary span{transform:rotate(90deg)}.dentry summary:focus-visible{outline:2px solid #ed541f;outline-offset:3px}
+.drelated,.dsource-row{border:1px solid #ead8c9;border-radius:11px;margin-top:10px;padding:12px 16px;background:#fffdf9}
+.dsource-row{display:flex;align-items:flex-start;gap:10px}.dsource-row .dsources{flex:1}.drelated .rel{margin:12px 0 0}.detail .rel a,.detail .srcs a{color:#195b88;overflow-wrap:anywhere}
+.detail .rel a.back{margin:0 14px 0 0}.dsource-row .srcs{padding-left:22px;margin:12px 0 0}.dwatch{flex:none;align-self:center;background:#ef551e;border-radius:999px;color:#fff;text-decoration:none;font-weight:700;font-size:13px;padding:5px 11px;white-space:nowrap}
+.detail .dfoot{color:#526b7d;border-color:#ead8c9}.detail-layout>.back{margin-top:16px}
+@media(min-width:900px){.detail-layout{display:grid;grid-template-columns:minmax(0,1fr) 310px;column-gap:26px;align-items:start}.dintro{grid-column:1;grid-row:1}.dwhat{grid-column:1;grid-row:2}.dmedia{grid-column:1;grid-row:3}.dtabs{grid-column:1;grid-row:4 / span 2}.dtake{grid-column:2;grid-row:1 / span 3}.dsource-row{grid-column:2;grid-row:4}.drelated{grid-column:2;grid-row:5}.dfoot{grid-column:1 / -1;grid-row:6}.detail-layout>.back{grid-column:1 / -1;grid-row:7}.dtake,.dsource-row,.drelated{background:#fff;border:1px solid #eee2d4;border-radius:12px;padding:14px 18px;margin:0 0 14px}.dtake h4{margin-top:0}}
+.detail .vlink .play{color:var(--accent)}
+.months a{color:var(--sub);font-size:13px;text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:4px 11px;white-space:nowrap}.months a.active,.months a[aria-current="location"]{color:var(--bg);background:var(--accent);border-color:var(--accent);font-weight:700}
+.month{margin:30px 0 12px;font-size:22px;color:var(--gold);cursor:pointer;list-style:none;display:flex;align-items:baseline;gap:8px}
+.month::-webkit-details-marker{display:none}.month::before{content:'▾';font-size:16px;color:var(--sub);width:14px}
+.msec:not([open]) .month::before{content:'▸'}.month .hint{margin-left:auto;font-size:12px;color:var(--sub);opacity:.7}
+.msec{scroll-margin-top:7rem}.up{display:block;text-align:right;margin:14px 0 4px;color:var(--sub);font-size:13px;text-decoration:none}
+.totop{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:4;opacity:0;pointer-events:none;transition:opacity .2s;background:var(--panel);color:var(--accent);border:1px solid var(--line);border-radius:999px;padding:9px 14px;font-size:13px;text-decoration:none;box-shadow:0 4px 18px #0008}.totop.show{opacity:1;pointer-events:auto}
+.nb{white-space:nowrap}
+.month small{color:var(--sub);font-size:14px;margin-left:8px}
+.day{color:var(--sub);font-size:13px;margin:18px 0 6px;letter-spacing:.05em}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;margin-bottom:12px;scroll-margin-top:10rem}.card[open]{border-color:var(--kind)}.card>summary{list-style:none;cursor:pointer;padding:18px 20px}.card>summary::-webkit-details-marker{display:none}.card>summary:focus-visible{outline:2px solid var(--kind);outline-offset:2px;border-radius:14px}.card>summary::after{content:'展開 ↓';display:block;color:var(--kind);font-size:12px;margin-top:7px}.card[open]>summary::after{content:'收合 ↑'}.card-extra{padding:0 20px 18px}
+.card h3{margin:0 0 4px;font-size:20px}
+.org{color:var(--sub);font-size:13px;margin-left:6px;font-weight:400}
+.tag{font-size:12px;border-radius:6px;padding:1px 8px;margin-right:6px}
+.one{font-size:16px;margin:10px 0 6px}
+.plain{color:#c3d6d1;font-size:15px;margin:0}
+.meta{margin-top:12px;font-size:13px;color:var(--sub);overflow-wrap:anywhere}
+.meta a{color:var(--accent);text-decoration:none;margin-right:12px}
+.warn{color:var(--gold);font-size:12px}
+footer{color:var(--sub);font-size:12px;text-align:center;padding:30px 16px;border-top:1px solid var(--line)}
+.featured{margin:0 0 28px;color:var(--text)}
+.featured-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:14px}
+.featured-heading>div{min-width:0}.featured-heading h2{margin:0;font-size:clamp(22px,3vw,30px);line-height:1.3}.featured-heading p{margin:3px 0 0;color:var(--sub);font-size:14px;white-space:nowrap}
+.featured-heading a{flex:none;color:#ef551e;text-decoration:none;font-weight:700;padding:5px 0}.featured-heading a:hover,.featured-heading a:focus-visible{text-decoration:underline}
+.featured-track{display:flex;gap:12px;overflow-x:auto;overscroll-behavior-inline:contain;scroll-snap-type:x proximity;padding:3px 2px 16px;scrollbar-width:thin}
+.featured-card{flex:0 0 calc((100% - 48px)/5);min-width:0;min-height:190px;display:flex;flex-direction:column;align-items:flex-start;gap:4px;scroll-snap-align:start;padding:16px;background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:0 6px 20px #0001;color:var(--text);text-decoration:none}
+.featured-card:hover,.featured-card:focus-visible{outline:2px solid #ef551e;outline-offset:2px}.featured-number{color:#ef551e;font-size:42px;font-weight:800;line-height:1}.featured-card strong{font-size:17px;line-height:1.3;overflow-wrap:anywhere}.featured-org{color:var(--sub);font-size:13px}.featured-reason{margin-top:auto;font-size:13px;line-height:1.45;color:var(--text);word-break:normal;line-break:auto;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.level-filter{display:flex;gap:8px;width:100%}.level-filter button{flex:1;min-width:0;border:1px solid #e9c7b4;border-radius:999px;background:var(--panel);color:var(--text);font:inherit;font-weight:700;padding:6px 10px;cursor:pointer}
+.level-filter button[aria-pressed="true"]{background:#ef551e;border-color:#ef551e;color:#fff}.level-filter button[aria-pressed="true"]::before{content:'✓ ';font-weight:800}.level-filter button:focus-visible{outline:2px solid #ef551e;outline-offset:2px}
+.company-chip[aria-pressed="true"]{border-color:#ef551e!important;color:#ef551e!important;font-weight:700}
+.level-scope{flex:1 1 100%;margin:-5px 0 0;color:var(--sub);font-size:13px;line-height:1.4}
+.level-badge{display:inline-flex;align-items:center;gap:2px;vertical-align:middle;border:1px solid #a7b2b7;border-radius:999px;color:var(--sub);padding:1px 8px;font-size:12px;line-height:1.5;white-space:nowrap}
+.level-badge[data-badge-level="精選"]{border-color:#ef551e;color:#ef551e}.detail .level-badge{margin-left:6px;color:#536a79}.detail .level-badge[data-badge-level="精選"]{color:#db4b18}
+@media(max-width:900px){.featured-card{flex-basis:calc((100% - 36px)/4)}}
+@media(max-width:600px){header h1{font-size:34px}.card>summary{padding:16px}.card-extra{padding:0 16px 16px}.month .hint{display:none}.headline{padding:20px}.featured-card{flex-basis:calc((100% - 24px)/2.3);min-height:176px}.featured-heading p{font-size:11px}.featured-heading a{font-size:14px}.featured-card strong{font-size:16px}.featured-reason{font-size:12px}.level-filter button{padding:6px 4px}}
+body{--tab-orange:#ef551e}.wrap{padding-bottom:36px}footer{padding-bottom:calc(110px + env(safe-area-inset-bottom))}
+.site-tabs{position:fixed;z-index:20;bottom:0;left:0;right:0;display:flex;justify-content:center;background:#fffdf9;border-top:1px solid #ead8c9;box-shadow:0 -4px 24px #3a27111a;padding:5px 12px calc(5px + env(safe-area-inset-bottom))}
+.site-tabs button{width:min(25%,200px);display:flex;flex-direction:column;align-items:center;gap:0;background:none;border:0;border-bottom:3px solid transparent;color:#173354;font:inherit;font-size:25px;line-height:1.1;padding:5px 4px;cursor:pointer}
+.site-tabs button span{font-size:13px}.site-tabs button[aria-selected="true"]{color:var(--tab-orange);border-bottom-color:var(--tab-orange)}.site-tabs button:focus-visible{outline:2px solid var(--tab-orange);outline-offset:-2px}
+.totop{bottom:calc(78px + env(safe-area-inset-bottom))}.site-tabs[hidden]{display:none!important}
+.home-panel,.timeline-panel,.search-panel,.about-panel{min-width:0}.page-intro h2{font-family:Georgia,"Noto Serif TC",serif;font-size:clamp(30px,6vw,46px);color:#082246;line-height:1.2;margin:4px 0}.page-intro p{margin:3px 0 20px;color:#49627a;font-size:17px}
+.section-heading,.featured-heading{display:flex;align-items:baseline;justify-content:space-between;gap:12px}.section-heading h2{margin:0;color:#082246;font-family:Georgia,"Noto Serif TC",serif;font-size:clamp(25px,4vw,32px)}.section-heading a{color:var(--tab-orange);font-weight:700;text-decoration:none;white-space:nowrap}
+.week{margin:26px 0}.week-track{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x proximity;padding:8px 2px 18px}.week-card{flex:0 0 min(46%,220px);display:flex;flex-direction:column;align-items:flex-start;gap:5px;scroll-snap-align:start;padding:14px;background:#fffdf9;border:1px solid #ead8c9;border-radius:14px;box-shadow:0 5px 20px #3a27110d;color:#082246;text-decoration:none}.week-card:hover,.week-card:focus-visible{outline:2px solid var(--tab-orange)}.week-icon{display:grid;place-items:center;width:42px;height:42px;border-radius:11px;background:#fff0e7;color:var(--tab-orange)}.week-card strong{font-size:17px;line-height:1.3}.week-kind,.week-card>span:last-child{font-size:13px;color:#49627a}.week-empty{color:#49627a}
+.month-picker{position:sticky;top:0;z-index:3;padding:12px 0;background:#faf6ef}.month-picker .mlinks{margin:0 -16px}.month-chip{border:1px solid #ead8c9;border-radius:999px;padding:6px 12px;color:#173354;text-decoration:none;white-space:nowrap}.month-chip.active{background:var(--tab-orange);border-color:var(--tab-orange);color:white}
+.msec{scroll-margin-top:84px}.msec .month{color:#082246;border-bottom:1px solid #efc5ac;padding-bottom:7px}.timeline-panel .year{margin-top:18px}
+.search-panel .months{position:static;display:flex;flex-direction:column;align-items:stretch;background:transparent;border:0;margin:0;padding:0;gap:12px}.search-panel #q{background-color:#fffdf9;color:#082246;border-color:#ead8c9}.search-panel .level-filter,.kind-filter{display:flex;gap:7px;flex-wrap:wrap}.kind-filter>span{width:100%;font-weight:700;color:#082246}.kind-filter button{border:1px solid #ead8c9;border-radius:999px;padding:5px 12px;background:#fffdf9;color:#173354;font:inherit;cursor:pointer}.kind-filter button[aria-pressed="true"]{background:var(--tab-orange);border-color:var(--tab-orange);color:#fff}.search-panel .qn{margin:2px 0;color:#082246;font-weight:700;font-size:19px}.search-panel #list .msec{margin:0}.search-panel #list .month{font-size:19px}
+.about-panel{max-width:740px;margin:0 auto;color:#082246;font-size:17px}.about-panel h3{margin:24px 0 8px;color:#082246}.about-panel a{color:#db4b18}
+body[data-current-tab="detail"] .site-tabs{display:none}body[data-current-tab="detail"] .totop{display:none}body[data-current-tab="detail"] footer{padding-bottom:30px}.v5-head-ph{position:relative}.v5-ai-cap{position:absolute;right:8px;bottom:8px;background:#0009;color:#fff;font-size:11px;line-height:1.4;padding:2px 7px;border-radius:4px;pointer-events:none}body:not([data-current-tab="detail"]) footer{padding-bottom:calc(84px + env(safe-area-inset-bottom))}/* 10/21 V2：底部分頁列蓋住頁尾最後一行 */
+body[data-current-tab="timeline"] .v5-tl-hero,body[data-current-tab="search"] .v5-tl-hero,body[data-current-tab="about"] .v5-tl-hero{min-height:0!important;padding:12px 16px!important;background:#fffdf9!important}
+body[data-current-tab="timeline"] .v5-tl-hero>img,body[data-current-tab="search"] .v5-tl-hero>img,body[data-current-tab="about"] .v5-tl-hero>img{display:none!important}
+body[data-current-tab="timeline"] .v5-tl-hero-in,body[data-current-tab="search"] .v5-tl-hero-in,body[data-current-tab="about"] .v5-tl-hero-in{display:flex!important;align-items:center!important;gap:12px!important;min-height:0!important;padding:0!important}
+body[data-current-tab="timeline"] .v5-tl-icon,body[data-current-tab="search"] .v5-tl-icon,body[data-current-tab="about"] .v5-tl-icon{display:block!important;width:50px!important;height:50px!important}
+body[data-current-tab="timeline"] .v5-tl-hero h1,body[data-current-tab="search"] .v5-tl-hero h1,body[data-current-tab="about"] .v5-tl-hero h1{font-size:30px!important;margin:0!important}
+body[data-current-tab="timeline"] .v5-tl-hero p,body[data-current-tab="search"] .v5-tl-hero p,body[data-current-tab="about"] .v5-tl-hero p{display:none!important}
+@media(min-width:800px){.week-card{flex-basis:190px}}
+@media(max-width:600px){.week-card{flex-basis:46%}.search-panel .level-filter button{padding:7px 9px}.site-tabs button span{font-size:12px}}
+</style>
+<style id="tj-desk">.featured-card:hover,.featured-card:focus-visible,.week-card:hover,.week-card:focus-visible{outline-offset:-2px}@media (min-width:900px){.week-track,.featured-track{flex-wrap:wrap;overflow-x:visible;scroll-snap-type:none}.week-track>.week-card,.featured-track>.featured-card{flex:0 0 calc(20% - 9.6px);width:auto}}</style>
+<meta name="description" content="更多領域的每一個重要時刻，用白話說清楚，每條都附出處。">
+<meta property="og:title" content="通鑑｜更多領域">
+<meta property="og:description" content="更多領域的每一個重要時刻，用白話說清楚，每條都附出處。">
+<meta property="og:url" content="https://fervela.ai/timeline/more.html">
+<meta property="og:image" content="https://fervela.ai/timeline/icons/share-card.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"9791694bcfb64758948d79fecdce88b1","spa":false}'></script>
+<style>.funnel-list{padding-left:20px;margin:8px 0 12px}.funnel-list li{margin:6px 0}.funnel-row{display:flex;gap:10px;align-items:center;padding:12px 0;font-size:16px}.funnel-row input{width:22px;height:22px;accent-color:#db4b18}.dlike-row{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;margin:14px 0 4px;font-size:15px;color:#5b6470}.dlike,.dfb{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 14px;border-radius:999px;border:1px solid #e3d9cc;background:#fff;color:#1b2a3a;font:inherit;text-decoration:none;cursor:pointer}.dlike[aria-pressed="true"]{border-color:#db4b18;color:#db4b18;cursor:default}.dfb{color:#195b88}.dshare-menu{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 0}.dshare-menu[hidden]{display:none}.dshare-menu a,.dshare-menu button{flex:1 1 30%;min-height:40px;white-space:nowrap;display:inline-flex;align-items:center;justify-content:center;padding:0 10px;border:1px solid #e3d9cc;border-radius:10px;background:#fff;color:#1b2a3a;font:inherit;font-size:15px;text-decoration:none;cursor:pointer}.dshare-menu a:hover,.dshare-menu button:hover{border-color:#db4b18;color:#db4b18}</style>
+<!-- v5-timeline 外殼（assets/v5/timeline/apply_v5.py） -->
+<meta name="theme-color" content="#faf6ef">
+<link rel="stylesheet" href="/assets/v5/timeline/timeline-v5.css">
+<script src="/assets/v5/v5.js" defer></script>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="apple-mobile-web-app-title" content="通鑑">
+
+<link rel="canonical" href="https://fervela.ai/timeline/more.html">
+<meta name="twitter:image" content="https://fervela.ai/timeline/icons/share-card.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"更多領域","description":"更多領域的每一個重要時刻，用白話說清楚，每條都附出處。","url":"https://fervela.ai/timeline/more.html","publisher":{"@id":"https://fervela.ai/#org"}}</script>
+<style>#tj-tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;display:flex;gap:4px;overflow-x:auto;white-space:nowrap;background:#FAF6EF;border-bottom:1px solid #E6DDCC;padding:8px 12px;-webkit-overflow-scrolling:touch;scrollbar-width:thin}#tj-tabs a{flex:0 0 auto;font:700 16px "Noto Sans TC",sans-serif;color:#3D5563;text-decoration:none;border-bottom:3px solid transparent;padding:6px 10px}#tj-tabs a[aria-current="page"]{color:#B8430D;border-color:#EA5513}#tj-tabs a:focus-visible{outline:2px solid #EA5513;outline-offset:2px}</style>
+<style id="tj-v18">nav.months #q{height:50px;align-self:flex-start;flex:1 1 100%;width:100%;max-width:none}.hot-q{order:3;display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 4px;flex:1 1 100%}.hot-q>span{flex:1 1 100%;font-size:14px;color:#5b6773}.hot-q button{border:1px solid #e3d9cc;border-radius:999px;background:#fff;color:#1b2a3a;font:inherit;font-size:14px;padding:6px 14px;cursor:pointer;white-space:nowrap}.hot-q button:hover,.hot-q button[aria-pressed="true"]{border-color:#ef551e;color:#ef551e}</style>
+<style id="more-style">#more-topics{display:flex;gap:8px;overflow-x:auto;padding:10px 14px;background:#faf6ef;position:sticky;top:calc(env(safe-area-inset-top,0px) + var(--tj-tabs-h,0px));z-index:49}#more-topics button{flex:none;min-height:40px;border:1px solid #c9b8a2;border-radius:999px;background:#fff;color:#3d5563;padding:6px 14px;font:700 15px sans-serif;cursor:pointer}#more-topics button[aria-pressed="true"]{background:#b8430d;color:#fff}#more-topics button:focus-visible{outline:3px solid #ea5513;outline-offset:2px}.more-topic-label{display:inline-block;margin:4px 8px;color:#b8430d;font-weight:700}[data-more-topic][hidden],.headline[hidden],.week[hidden],.featured[hidden]{display:none!important}</style></head>
+<body>
+<nav id="tj-tabs" aria-label="通鑑類別"><a href="./">AI</a><a href="chip.html">晶片</a><a href="photo.html">光電</a><a href="quantum.html">量子</a><a href="energy.html">能源</a><a href="bio.html">生醫</a><a href="space.html">太空</a><a href="robot.html">機器人</a><a href="defense.html">國防</a><a href="more.html" aria-current="page">更多領域</a></nav><nav id="more-topics" aria-label="更多領域小題"><button type="button" data-topic="all" aria-pressed="true">全部</button><button type="button" data-topic="cyber" aria-pressed="false">資安</button><button type="button" data-topic="software" aria-pressed="false">軟體</button><button type="button" data-topic="comm" aria-pressed="false">通訊</button><button type="button" data-topic="mobility" aria-pressed="false">移動</button><button type="button" data-topic="material" aria-pressed="false">材料</button><button type="button" data-topic="medtech" aria-pressed="false">醫材</button><button type="button" data-topic="factory" aria-pressed="false">製造</button><button type="button" data-topic="fintech" aria-pressed="false">金融</button></nav>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-model" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="2.5"/><path d="M9 3v3m6-3v3M9 18v3m6-3v3M3 9h3m-3 6h3m12-6h3m-3 6h3"/><path d="m12 9 .8 2.2L15 12l-2.2.8L12 15l-.8-2.2L9 12l2.2-.8L12 9Z"/></symbol><symbol id="i-product" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4" width="19" height="16" rx="3"/><path d="M2.5 9h19M6.5 6.5h.01M9.5 6.5h.01m3.5 4.5 1.1 2.9L17 15l-2.9 1.1L13 19l-1.1-2.9L9 15l2.9-1.1L13 11Z"/></symbol><symbol id="i-tech" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2.5h6v2l2 1 1.7-1.2 2 2L19.5 8l1 2h2v4h-2l-1 2 1.2 1.7-2 2-1.7-1.2-2 1v2H9v-2l-2-1-1.7 1.2-2-2L4.5 16l-1-2h-2v-4h2l1-2-1.2-1.7 2-2L7 5.5l2-1v-2Z"/><path d="m10.5 10-2 2 2 2m3-4 2 2-2 2"/></symbol><symbol id="i-event" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M7.5 3v4m9-4v4M3 10h18"/><circle cx="12" cy="15.5" r="2"/></symbol><symbol id="i-paper" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 2.5H6a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9l-6.5-6.5Z"/><path d="M13.5 2.5V9H20M8 13h8m-8 4h6"/></symbol><symbol id="i-other" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.7"/><rect x="14" y="3" width="7" height="7" rx="1.7"/><rect x="3" y="14" width="7" height="7" rx="1.7"/><rect x="14" y="14" width="7" height="7" rx="1.7"/></symbol></svg>
+<a class="v5-skip" href="#list">跳至內容</a>
+<header class="v5-header" id="top"><div class="v5-header-in"><a class="v5-brand" href="/" aria-label="Fervela.ai 首頁"><img class="v5-logo" src="/assets/logo-a.svg" width="34" height="34" alt="" aria-hidden="true"><span>Fervela.ai</span></a><button class="menu" aria-label="開啟選單" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button><nav id="nav" aria-label="主選單"><ul><li><a href="/#work">作品</a></li><li><a href="/#journal">實踐筆記</a></li><li><a href="mailto:contact@fervela.ai">聊聊你的想法</a></li></ul></nav></div></header>
+<section class="v5-tl-hero"><img src="/assets/v5/footer.webp" alt="" aria-hidden="true" width="2000" height="533" fetchpriority="high"><div class="v5-tl-hero-in"><img class="v5-tl-icon" src="/assets/v5/icons/timeline.webp" alt="" aria-hidden="true" width="190" height="190"><h1>通鑑</h1><p>更多領域的每一個重要時刻，用白話說清楚，每條都附出處。</p></div></section>
+<div class="wrap">
+  <section class="home-panel" id="panel-today" role="tabpanel" aria-labelledby="tab-today">
+  <h2 class="v5-h2">近期最重要的一則</h2>
+  <a class="headline kind-event" href="#n20261122fintech06" aria-label="近期最重要的一則：Visa 發布支付詐欺威脅報告，前往卡片"><span class="head-kicker">近期最重要的一則</span><span class="tag"><svg class="icon" viewBox="0 0 24 24" role="img" aria-label="事件"><use href="#i-event"/></svg>事件</span><strong class="head-name">Visa 發布支付詐欺威脅報告</strong><span class="head-meta">Visa｜11 月 17 日</span><span class="head-one">Visa 發布涵蓋 <span class="nb">2026 年</span>上半年的威脅報告，指出涉及第三方服務商的事件較前六個月增加 <span class="nb">62%</span>。</span><span class="head-go">看這一則 ↓</span><span class="v5-head-ph"><img src="/assets/v5/step1.webp" alt="" width="1200" height="900" aria-hidden="true"></span></a>
+  <section class="week" aria-labelledby="week-title"><div class="section-heading"><h2 id="week-title">本週新增</h2><a href="#timeline">看全部 ›</a></div><div class="week-track"><a class="week-card" href="#d-n20261122cyber01"><span class="week-icon"><svg class="icon" viewBox="0 0 24 24" role="img" aria-label="事件"><use href="#i-event"/></svg></span><span class="week-kind">事件</span><strong>「Com」相關駭客以語音釣魚竊帳號勒索</strong><span>Palo Alto Networks Unit 42 · 11 月 20 日</span></a><a class="week-card" href="#d-n20261122mobility01"><span class="week-icon"><svg class="icon" viewBox="0 0 24 24" role="img" aria-label="事件"><use href="#i-event"/></svg></span><span class="week-kind">事件</span><strong>MB.DRIVE ASSIST PRO 取得德國點對點駕駛輔助核准</strong><span>Mercedes-Benz · 11 月 20 日</span></a><a class="week-card" href="#d-n20261122medtech01"><span class="week-icon"><svg class="icon" viewBox="0 0 24 24" role="img" aria-label="事件"><use href="#i-event"/></svg></span><span class="week-kind">事件</span><strong>FDA 對 Heraeus 血管導線發布潛在高風險醫材問題的早期警訊</strong><span>美國 FDA · 11 月 20 日</span></a><a class="week-card" href="#d-n20261122medtech02"><span class="week-icon"><svg class="icon" viewBox="0 0 24 24" role="img" aria-label="事件"><use href="#i-event"/></svg></span><span class="week-kind">事件</span><strong>Symani 手術機器人在歐洲啟用 NanoWrist 單極剪刀</strong><span>Medical Microinstruments · 11 月 20 日</span></a><a class="week-card" href="#d-n20261122cyber02"><span class="week-icon"><svg class="icon" viewBox="0 0 24 24" role="img" aria-label="事件"><use href="#i-event"/></svg></span><span class="week-kind">事件</span><strong>首項支援 Cyber Resilience Act 的歐洲標準發布</strong><span>European Commission · 11 月 19 日</span></a><a class="week-card" href="#d-n20261122material03"><span class="week-icon"><svg class="icon" viewBox="0 0 24 24" role="img" aria-label="事件"><use href="#i-event"/></svg></span><span class="week-kind">事件</span><strong>直立高分子纖維材料協助電子元件散熱</strong><span>Cornell University · 11 月 18 日</span></a><a class="week-card" href="#d-n20261122fintech03"><span class="week-icon"><svg class="icon" viewBox="0 0 24 24" role="img" aria-label="事件"><use href="#i-event"/></svg></span><span class="week-kind">事件</span><strong>DBS 與 Circle 擴大亞洲機構取得 USDC 的管道</strong><span>DBS、Circle · 11 月 18 日</span></a><a class="week-card" href="#d-n20261122fintech05"><span class="week-icon"><svg class="icon" viewBox="0 0 24 24" role="img" aria-label="事件"><use href="#i-event"/></svg></span><span class="week-kind">事件</span><strong>Visa 擴大 Agentic Ready 支付測試計畫</strong><span>Visa · 11 月 18 日</span></a><a class="week-card" href="#d-n20261122comm01"><span class="week-icon"><svg class="icon" viewBox="0 0 24 24" role="img" aria-label="事件"><use href="#i-event"/></svg></span><span class="week-kind">事件</span><strong>Vodafone 啟用 Málaga AI-RAN 測試中心</strong><span>Vodafone · 11 月 17 日</span></a><a class="week-card" href="#d-n20261122cyber04"><span class="week-icon"><svg class="icon" viewBox="0 0 24 24" role="img" aria-label="事件"><use href="#i-event"/></svg></span><span class="week-kind">事件</span><strong>Microsoft Agent Framework 的 PyPI 套件遭植入竊密程式</strong><span>Aikido Security · 11 月 17 日</span></a></div></section>
+  
+  <details class="a2hs" id="a2hs">
+  <summary>📱 加到手機主畫面，下次一點就開</summary>
+  <p>不用下載安裝檔，也不用帳號。</p>
+  <p><b>iPhone</b>：用 Safari 打開這頁，點下方「分享」→「加入主畫面」。</p>
+  <p><b>Android</b>：Chrome 右上「⋮」→「加到主畫面」或「安裝應用程式」。</p>
+</details>
+<style>
+.a2hs{margin:12px auto 18px;width:calc(100% - 32px);max-width:640px;box-sizing:border-box;padding:10px 14px;border:1px solid rgba(120,90,50,.25);border-radius:12px;background:rgba(255,250,240,.7);font-size:15px;line-height:1.6}
+.a2hs summary{cursor:pointer;font-weight:600}
+.a2hs p{margin:6px 0 0}
+@media (hover:hover) and (pointer:fine){.a2hs{display:none}}
+@media (display-mode:standalone){.a2hs{display:none}}
+</style>
+<script>
+(function(){var d=document.getElementById('a2hs'),ev=null;
+if(navigator.standalone){d.style.display='none';return}
+addEventListener('beforeinstallprompt',function(e){e.preventDefault();ev=e});
+d.querySelector('summary').addEventListener('click',function(e){if(!ev)return;e.preventDefault();ev.prompt();ev=null});
+})();
+</script>
+
+  </section>
+  <section class="timeline-panel" id="panel-timeline" role="tabpanel" aria-labelledby="tab-timeline" hidden>
+  <div class="page-intro"><h2>時間軸</h2><p>以時間，看見重要的科技與產業動向。</p></div>
+  <h2 class="v5-h2">探索更多重要時刻</h2>
+  <div class="year"><span class="year-label">2026 年</span></div>
+  <nav class="month-picker" aria-label="選擇月份"><span class="mlinks"><a class="month-chip" href="#m-2026-11">11 月</a></span></nav>
+  <div class="tl-filter" aria-label="時間軸篩選"></div>
+  <main id="list">
+  <details class="msec" id="m-2026-11" open><summary class="month">2026 年 11 月 <small>26 則</small><span class="hint">點一下收合</span></summary>
+<div class="day" data-day="11 月 20 日">11 月 20 日</div>
+<details class="card" data-kind="event" data-level="推薦" data-company="Palo Alto Networks Unit 42" id="n20261122cyber01" data-q="「Com」相關駭客以語音釣魚竊帳號勒索   Palo Alto Networks Unit 42 事件 Unit 42 追蹤到多波語音釣魚攻擊，受害機構主要位於美國、英國及澳洲，涉及金融、醫療與法律業。部分攻擊者冒充內部 IT 人員，透過中間人網站取得帳密與多因子驗證核准，隨後竊取資料並嘗試勒索。 2026-11-20 推薦 Unit 42：「Com」相關攻擊者冒充 IT 人員，以語音釣魚竊取資料並勒索" data-more-topic="cyber"><summary><span class="more-topic-label">資安</span><span class="tag"><svg class="icon" viewBox="0 0 24 24" role="img" aria-label="事件"><use href="#i-event"/></svg>事件</span><span class="level-badge" data-badge-level="推薦">推薦</span><h3><a class="more" href="#d-n20261122cyber01">「Com」相關駭客以語音釣魚竊帳號勒索</a><span class="org">Palo Alto Networks Unit 42</span></h3><p class="one"><span class="nb">Unit 42</span> 追蹤到多波語音釣魚攻擊，受害機構主要位於美國、英國及澳洲，涉及金融、醫療與法律業。</p></summary><div class="card-extra"><p class="plain">部分攻擊者冒充內部 IT 人員，透過中間人網站取得帳密與多因子驗證核准，隨後竊取資料並嘗試勒索。</p><a class="rm" href="#d-n20261122cyber01">看詳細分析 →</a><div class="meta">來源：<a href="https://unit42.paloaltonetworks.com/com-affiliate-vishing-attacks/" target="_blank" rel="noopener noreferrer">unit42.paloaltonetworks.com</a></div><div class="meta">最後查證：11/22</div></div></details>
+<details class="card" data-kind="event" data-level="推薦" data-company="Mercedes-Benz" id="n20261122mobility01" data-q="MB.DRIVE ASSIST PRO 取得德國點對點駕駛輔助核准   Mercedes-Benz 事件 Mercedes-Benz 表示，MB.DRIVE ASSIST PRO 已獲德國 Kraftfahrt-Bundesamt 核准，可在都市道路等路況提供點對點駕駛輔助。這是 SAE Level 2 系統；公司計畫自 2026 年底起，先在 Stuttgart 與 Munich 展開早期體驗計畫。 2026-11-20 推薦 Mercedes-Benz 點對點駕駛輔助系統獲德國核准" data-more-topic="mobility"><summary><span class="more-topic-label">移動</span><span class="tag"><svg class="icon" viewBox="0 0 24 24" role="img" aria-label="事件"><use href="#i-event"/></svg>事件</span><span class="level-badge" data-badge-level="推薦">推薦</span><h3><a class="more" href="#d-n20261122mobility01">MB.DRIVE ASSIST PRO 取得德國點對點駕駛輔助核准</a><span class="org">Mercedes-Benz</span></h3><p class="one">Mercedes-Benz 表示，MB.DRIVE ASSIST PRO 已獲德國 Kraftfahrt-Bundesamt 核准，可在都市道路等路況提供點對點駕駛輔助。</p></summary><div class="card-extra"><p class="plain">這是 SAE <span class="nb">Level 2</span> 系統；公司計畫自 <span class="nb">2026 年</span>底起，先在 Stuttgart 與 Munich 展開早期體驗計畫。</p><a class="rm" href="#d-n20261122mobility01">看詳細分析 →</a><div class="meta">來源：<a href="https://media.mercedes-benz.com/en/article/20b8a6c7-b424-4225-af81-2b7d2cf89e21" target="_blank" rel="noopener noreferrer">media.mercedes-benz.com</a></div><div class="meta">最後查證：11/22</div></div></details>
+<details class="card" data-kind="event" data-level="延伸" data-company="美國 FDA" id="n20261122medtech01" data-q="FDA 對 Heraeus 血管導線發布潛在高風險醫材問題的早期警訊   美國 FDA 事件 FDA 發布早期警訊，指出 Heraeus Medevio 已通知客戶移除特定批次的血管導線。導線的親水塗層遇生理食鹽水後可能結塊、剝落，FDA 要求立即停止使用與流通受影響產品，檢視庫存並隔離受影響批次。 2026-11-20 延伸 FDA 警示 Heraeus 部分血管導線塗層可能結塊、剝落" data-more-topic="medtech"><summary><span class="more-topic-label">醫材</span><span class="tag"><svg class="icon" viewBox="0 0 24 24" role="img" aria-label="事件"><use href="#i-event"/></svg>事件</span><span class="level-badge" data-badge-level="延伸">延伸</span><h3><a class="more" href="#d-n20261122medtech01">FDA 對 Heraeus 血管導線發布潛在高風險醫材問題的早期警訊</a><span class="org">美國 FDA</span></h3><p class="one">FDA 發布早期警訊，指出 Heraeus Medevio 已通知客戶移除特定批次的血管導線。</p></summary><div class="card-extra"><p class="plain">導線的親水塗層遇生理食鹽水後可能結塊、剝落，FDA 要求立即停止使用與流通受影響產品，檢視庫存並隔離受影響批次。</p><a class="rm" href="#d-n20261122medtech01">看詳細分析 →</a><div class="meta">來源：<a href="https://www.fda.gov/medical-devices/medical-device-recalls-and-early-alerts/early-alert-heraeus-medical-components-removes-vascular-guidewires" target="_blank" rel="noopener noreferrer">fda.gov</a></div><div class="meta">最後查證：11/22</div></div></details>
+<details class="card" data-kind="event" data-level="延伸" data-company="Medical Microinstruments" id="n20261122medtech02" data-q="Symani 手術機器人在歐洲啟用 NanoWrist 單極剪刀   Medical Microinstruments 事件 Medical Microinstruments 宣布 NanoWrist Monopolar Scissors 在歐洲上市，並已用於淋巴與頭頸部手術。這項 Symani 手術機器人的器械可用於組織剝離、切割與凝血；目前尚未取得美國 FDA 核准。 2026-11-20 延伸 Symani 手術機器人單極剪刀在歐洲上市，已用於淋巴與頭頸部手術" data-more-topic="medtech"><summary><span class="more-topic-label">醫材</span><span class="tag"><svg class="icon" viewBox="0 0 24 24" role="img" aria-label="事件"><use href="#i-event"/></svg>事件</span><span class="level-badge" data-badge-level="延伸">延伸</span><h3><a class="more" href="#d-n20261122medtech02">Symani 手術機器人在歐洲啟用 NanoWrist 單極剪刀</a><span class="org">Medical Microinstruments</span></h3><p class="one">Medical Microinstruments 宣布 NanoWrist Monopolar Scissors 在歐洲上市，並已用於淋巴與頭頸部手術。</p></summary><div class="card-extra"><p class="plain">這項 Symani 手術機器人的器械可用於組織剝離、切割與凝血；目前尚未取得美國 FDA 核准。</p><a class="rm" href="#d-n20261122medtech02">看詳細分析 →</a><div class="meta">來源：<a href="https://www.mmimicro.com/blog/2026/11/20/mmi-adds-energy-capabilities-to-the-symani-surgical-system-with-the-introduction-of-nanowrist-monopolar-scissors/" target="_blank" rel="noopener noreferrer">mmimicro.com</a></div><div class="meta">最後查證：11/22</div></div></details>
+<div class="day" data-day="11 月 19 日">11 月 19 日</div>
+<details class="card" data-kind="event" data-level="推薦" data-company="European Commission" id="n20261122cyber02" data-q="首項支援 Cyber Resilience Act 的歐洲標準發布   European Commission 事件 歐盟執委會表示，首項支援 Cyber Resilience Act 的歐洲標準已於 11 月 18 日發布。它為數位產品建立通用資安原則，涵蓋設計、開發、生產、維護、停止支援到除役等階段。 2026-11-19 推薦 首項支援《網路韌性法》的歐洲標準發布" data-more-topic="cyber"><summary><span class="more-topic-label">資安</span><span class="tag"><svg class="icon" viewBox="0 0 24 24" role="img" aria-label="事件"><use href="#i-event"/></svg>事件</span><span class="level-badge" data-badge-level="推薦">推薦</span><h3><a class="more" href="#d-n20261122cyber02">首項支援 Cyber Resilience Act 的歐洲標準發布</a><span class="org">European Commission</span></h3><p class="one">歐盟執委會表示，首項支援 Cyber Resilience Act 的歐洲標準已於 <span class="nb">11 月</span> <span class="nb">18 日</span>發布。</p></summary><div class="card-extra"><p class="plain">它為數位產品建立通用資安原則，涵蓋設計、開發、生產、維護、停止支援到除役等階段。</p><a class="rm" href="#d-n20261122cyber02">看詳細分析 →</a><div class="meta">來源：<a href="https://digital-strategy.ec.europa.eu/en/news/first-european-standard-published-support-cyber-resilience-act" target="_blank" rel="noopener noreferrer">digital-strategy.ec.europa.eu</a></div><div class="meta">最後查證：11/22</div></div></details>
+<div class="day" data-day="11 月 18 日">11 月 18 日</div>
+<details class="card" data-kind="event" data-level="延伸" data-company="Cornell University" id="n20261122material03" data-q="直立高分子纖維材料協助電子元件散熱   Cornell University 事件 Cornell 團隊將大量 Zylon 高分子纖維直立排列，並以 epoxy 或 PDMS 填充纖維間隙，製成兼具導熱與電絕緣特性的材料。在模擬晶片散熱的實驗中，epoxy 版本讓受熱表面比使用一款市售導熱墊時低 17°C。 2026-11-18 延伸 康乃爾大學研發直立高分子纖維材料，協助電子元件散熱" data-more-topic="material"><summary><span class="more-topic-label">材料</span><span class="tag"><svg class="icon" viewBox="0 0 24 24" role="img" aria-label="事件"><use href="#i-event"/></svg>事件</span><span class="level-badge" data-badge-level="延伸">延伸</span><h3><a class="more" href="#d-n20261122material03">直立高分子纖維材料協助電子元件散熱</a><span class="org">Cornell University</span></h3><p class="one">Cornell 團隊將大量 Zylon 高分子纖維直立排列，並以 epoxy 或 PDMS 填充纖維間隙，製成兼具導熱與電絕緣特性的材料。</p></summary><div class="card-extra"><p class="plain">在模擬晶片散熱的實驗中，epoxy 版本讓受熱表面比使用一款市售導熱墊時低 17°C。</p><a class="rm" href="#d-n20261122material03">看詳細分析 →</a><div class="meta">來源：<a href="https://news.cornell.edu/stories/2026/11/microscopic-polymer-fiber-forest-helps-keep-electronics-cool" target="_blank" rel="noopener noreferrer">news.cornell.edu</a></div><div class="meta">最後查證：11/22</div></div></details>
+<details class="card" data-kind="event" data-level="延伸" data-company="DBS、Circle" id="n20261122fintech03" data-q="DBS 與 Circle 擴大亞洲機構取得 USDC 的管道   DBS、Circle 事件 DBS 與 Circle 宣布合作，讓符合資格的機構客戶可直接透過 DBS 鑄造及贖回 USDC。透過 DBS 鑄造及贖回 USDC 時，合作安排也提供全天候的美元與 USDC 結算能力。 2026-11-18 延伸 DBS 與 Circle 合作，擴大亞洲機構取得 USDC 的管道；合資格機構客戶可透過 DBS 鑄造與贖回 USDC" data-more-topic="fintech"><summary><span class="more-topic-label">金融</span><span class="tag"><svg class="icon" viewBox="0 0 24 24" role="img" aria-label="事件"><use href="#i-event"/></svg>事件</span><span class="level-badge" data-badge-level="延伸">延伸</span><h3><a class="more" href="#d-n20261122fintech03">DBS 與 Circle 擴大亞洲機構取得 USDC 的管道</a><span class="org">DBS、Circle</span></h3><p class="one">DBS 與 Circle 宣布合作，讓符合資格的機構客戶可直接透過 DBS 鑄造及贖回 USDC。</p></summary><div class="card-extra"><p class="plain">透過 DBS 鑄造及贖回 USDC 時，合作安排也提供全天候的美元與 USDC 結算能力。</p><a class="rm" href="#d-n20261122fintech03">看詳細分析 →</a><div class="meta">來源：<a href="https://www.circle.com/pressroom/dbs-and-circle-expand-institutional-access-to-usdc-in-asia" target="_blank" rel="noopener noreferrer">circle.com</a></div><div class="meta">最後查證：11/22</div></div></details>
+<details class="card" data-kind="event" data-level="推薦" data-company="Visa" id="n20261122fintech05" data-q="Visa 擴大 Agentic Ready 支付測試計畫   Visa 事件 Visa 宣布將 Agentic Ready 計畫擴展至商家、支付服務供應商與收單機構，首批有超過 140 個參與者。參與者可測試如何辨識、驗證及處理 AI 代理發起的交易。 2026-11-18 推薦 Visa 擴大 Agentic Ready 計畫，讓商家測試 AI 代理發起的付款" data-more-topic="fintech"><summary><span class="more-topic-label">金融</span><span class="tag"><svg class="icon" viewBox="0 0 24 24" role="img" aria-label="事件"><use href="#i-event"/></svg>事件</span><span class="level-badge" data-badge-level="推薦">推薦</span><h3><a class="more" href="#d-n20261122fintech05">Visa 擴大 Agentic Ready 支付測試計畫</a><span class="org">Visa</span></h3><p class="one">Visa 宣布將 Agentic Ready 計畫擴展至商家、支付服務供應商與收單機構，首批有超過 <span class="nb">140 個</span>參與者。</p></summary><div class="card-extra"><p class="plain">參與者可測試如何辨識、驗證及處理 AI 代理發起的交易。</p><a class="rm" href="#d-n20261122fintech05">看詳細分析 →</a><div class="meta">來源：<a href="https://usa.visa.com/about-visa/newsroom/press-releases.releaseId.22986.html" target="_blank" rel="noopener noreferrer">usa.visa.com</a></div><div class="meta">最後查證：11/22</div></div></details>
+<div class="day" data-day="11 月 17 日">11 月 17 日</div>
+<details class="card" data-kind="event" data-level="延伸" data-company="Vodafone" id="n20261122comm01" data-q="Vodafone 啟用 Málaga AI-RAN 測試中心   Vodafone 事件 Vodafone 在西班牙 Málaga 啟用測試中心，研究 AI 如何改善行動無線接取網路的效能與能源使用。中心將與 Nokia、NVIDIA 等夥伴測試不同運算架構，結果用於評估未來的 AI-RAN 部署。 2026-11-17 延伸 Vodafone 在西班牙 Málaga 啟用 AI-RAN 測試中心" data-more-topic="comm"><summary><span class="more-topic-label">通訊</span><span class="tag"><svg class="icon" viewBox="0 0 24 24" role="img" aria-label="事件"><use href="#i-event"/></svg>事件</span><span class="level-badge" data-badge-level="延伸">延伸</span><h3><a class="more" href="#d-n20261122comm01">Vodafone 啟用 Málaga AI-RAN 測試中心</a><span class="org">Vodafone</span></h3><p class="one">Vodafone 在西班牙 Málaga 啟用測試中心，研究 AI 如何改善行動無線接取網路的效能與能源使用。</p></summary><div class="card-extra"><p class="plain">中心將與 Nokia、NVIDIA 等夥伴測試不同運算架構，結果用於評估未來的 AI-RAN 部署。</p><a class="rm" href="#d-n20261122comm01">看詳細分析 →</a><div class="meta">來源：<a href="https://www.vodafone.com/news/newsroom/technology/malaga-lab-ai-ran" target="_blank" rel="noopener noreferrer">vodafone.com</a></div><div class="meta">最後查證：11/22</div></div></details>
+<details class="card" data-kind="event" data-level="延伸" data-company="Aikido Security" id="n20261122cyber04" data-q="Microsoft Agent Framework 的 PyPI 套件遭植入竊密程式   Aikido Security 事件 Aikido Security 發現，PyPI 上的 agent-framework 1.26.1 與 1.26.2 含有竊取憑證的程式，兩版相隔 33 分鐘發布。惡意程式會在 Python 啟動時執行，即使使用者沒有匯入該套件；兩個版本後來都已從 PyPI 移除。 2026-11-17 延伸 Microsoft Agent Framework 的兩個 PyPI 版本遭植入竊密程式" data-more-topic="cyber"><summary><span class="more-topic-label">資安</span><span class="tag"><svg class="icon" viewBox="0 0 24 24" role="img" aria-label="事件"><use href="#i-event"/></svg>事件</span><span class="level-badge" data-badge-level="延伸">延伸</span><h3><a class="more" href="#d-n20261122cyber04">Microsoft Agent Framework 的 PyPI 套件遭植入竊密程式</a><span class="org">Aikido Security</span></h3><p class="one">Aikido Security 發現，PyPI 上的 <span class="nb">agent-framework 1.26.1</span> 與 1.26.2 含有竊取憑證的程式，兩版相隔 <span class="nb">33 分鐘</span>發布。</p></summary><div class="card-extra"><p class="plain">惡意程式會在 Python 啟動時執行，即使使用者沒有匯入該套件；兩個版本後來都已從 PyPI 移除。</p><a class="rm" href="#d-n20261122cyber04">看詳細分析 →</a><div class="meta">來源：<a href="https://www.aikido.dev/blog/two-malicious-agent-framework-releases-hit-pypi-in-33-minutes" target="_blank" rel="noopener noreferrer">aikido.dev</a></div><div class="meta">最後查證：11/22</div></div></details>
+<details class="card" data-kind="event" data-level="推薦" data-company="Medtronic" id="n20261122medtech05" data-q="Hugo 手術機器人獲准用於美國一般外科手術   Medtronic 事件 Medtronic 宣布，美國 FDA 已許可 Hugo robotic-assisted surgery system 用於一般外科手術。許可範圍包括上腹部一般外科手術，以及腹股溝疝氣修補與闌尾切除，使該系統在美國可做的手術超出原有的泌尿科範圍。 2026-11-17 推薦 Medtronic 的 Hugo 手術機器人獲准用於美國一般外科手術" data-more-topic="medtech"><summary><span class="more-topic-label">醫材</span><span class="tag"><svg class="icon" viewBox="0 0 24 24" role="img" aria-label="事件"><use href="#i-event"/></svg>事件</span><span class="level-badge" data-badge-level="推薦">推薦</span><h3><a class="more" href="#d-n20261122medtech05">Hugo 手術機器人獲准用於美國一般外科手術</a><span class="org">Medtronic</span></h3><p class="one">Medtronic 宣布，美國 FDA 已許可 Hugo robotic-assisted surgery system 用於一般外科手術。</p></summary><div class="card-extra"><p class="plain">許可範圍包括上腹部一般外科手術，以及腹股溝疝氣修補與闌尾切除，使該系統在美國可做的手術超出原有的泌尿科範圍。</p><a class="rm" href="#d-n20261122medtech05">看詳細分析 →</a><div class="meta">來源：<a href="https://news.medtronic.com/2026-11-17-Medtronic-announces-FDA-clearance-of-general-surgery-procedures-for-the-Hugo-TM-robotic-assisted-surgery-RAS-system" target="_blank" rel="noopener noreferrer">news.medtronic.com</a></div><div class="meta">最後查證：11/22</div></div></details>
+<details class="card" data-kind="event" data-level="延伸" data-company="Microsoft" id="n20261122software04" data-q="Microsoft SQL 模糊字串比對正式推出   Microsoft 事件 Microsoft 宣布四個原生 T-SQL 模糊字串比對函式正式推出，可計算字串的編輯距離或相似程度。功能涵蓋 Azure SQL Database、Azure SQL Managed Instance、Microsoft Fabric 中的 SQL database，以及安裝 CU11 或更新累積更新的 SQL Server 2025。 2026-11-17 延伸 Microsoft SQL 四項模糊字串比對函式正式推出" data-more-topic="software"><summary><span class="more-topic-label">軟體</span><span class="tag"><svg class="icon" viewBox="0 0 24 24" role="img" aria-label="事件"><use href="#i-event"/></svg>事件</span><span class="level-badge" data-badge-level="延伸">延伸</span><h3><a class="more" href="#d-n20261122software04">Microsoft SQL 模糊字串比對正式推出</a><span class="org">Microsoft</span></h3><p class="one">Microsoft 宣布四個原生 T-SQL 模糊字串比對函式正式推出，可計算字串的編輯距離或相似程度。</p></summary><div class="card-extra"><p class="plain">功能涵蓋 Azure SQL Database、Azure SQL Managed Instance、Microsoft Fabric 中的 SQL database，以及安裝 CU11 或更新累積更新的 SQL <span class="nb">Server 2025</span>。</p><a class="rm" href="#d-n20261122software04">看詳細分析 →</a><div class="meta">來源：<a href="https://devblogs.microsoft.com/azure-sql/fuzzy-string-matching-is-now-generally-available-across-microsoft-sql/" target="_blank" rel="noopener noreferrer">devblogs.microsoft.com</a></div><div class="meta">最後查證：11/22</div></div></details>
+<details class="card" data-kind="event" data-level="延伸" data-company="Siemens" id="n20261122factory02" data-q="Siemens 擴充 Simatic AX 動作控制工程工具   Siemens 事件 Siemens 發表 Simatic AX Motion Control Engineering，讓工程師在同一個文字式環境中處理包含動作控制的自動化專案。公司同時宣布 Simatic AX Logic Control Engineering 已在全球正式供應。 2026-11-17 延伸 Siemens 擴充 Simatic AX，加入動作控制工程工具" data-more-topic="factory"><summary><span class="more-topic-label">製造</span><span class="tag"><svg class="icon" viewBox="0 0 24 24" role="img" aria-label="事件"><use href="#i-event"/></svg>事件</span><span class="level-badge" data-badge-level="延伸">延伸</span><h3><a class="more" href="#d-n20261122factory02">Siemens 擴充 Simatic AX 動作控制工程工具</a><span class="org">Siemens</span></h3><p class="one">Siemens 發表 Simatic AX Motion Control Engineering，讓工程師在同一個文字式環境中處理包含動作控制的自動化專案。</p></summary><div class="card-extra"><p class="plain">公司同時宣布 Simatic AX Logic Control Engineering 已在全球正式供應。</p><a class="rm" href="#d-n20261122factory02">看詳細分析 →</a><div class="meta">來源：<a href="https://press.siemens.com/global/en/pressrelease/software-defined-automation-siemens-announces-major-milestone-simatic-ax-engineering" target="_blank" rel="noopener noreferrer">press.siemens.com</a></div><div class="meta">最後查證：11/22</div></div></details>
+<details class="card" data-kind="event" data-level="延伸" data-company="VulcanForms、EOS" id="n20261122factory05" data-q="VulcanForms 向 EOS 訂購 200 套金屬 3D 列印系統   VulcanForms、EOS 事件 VulcanForms 與 EOS 宣布訂購 200 套 EOS M4 ONYX 金屬積層製造系統及附屬設備，這是 EOS 歷來最大的單筆訂單。新設備將擴充 VulcanForms 在美國麻薩諸塞州 Devens 的產能；該廠目前已有 35 套 EOS M4 ONYX。 2026-11-17 延伸 VulcanForms 向 EOS 訂購 200 套金屬 3D 列印系統" data-more-topic="factory"><summary><span class="more-topic-label">製造</span><span class="tag"><svg class="icon" viewBox="0 0 24 24" role="img" aria-label="事件"><use href="#i-event"/></svg>事件</span><span class="level-badge" data-badge-level="延伸">延伸</span><h3><a class="more" href="#d-n20261122factory05">VulcanForms 向 EOS 訂購 200 套金屬 3D 列印系統</a><span class="org">VulcanForms、EOS</span></h3><p class="one">VulcanForms 與 EOS 宣布訂購 200 套 EOS M4 ONYX 金屬積層製造系統及附屬設備，這是 EOS 歷來最大的單筆訂單。</p></summary><div class="card-extra"><p class="plain">新設備將擴充 VulcanForms 在美國麻薩諸塞州 Devens 的產能；該廠目前已有 35 套 EOS M4 ONYX。</p><a class="rm" href="#d-n20261122factory05">看詳細分析 →</a><div class="meta">來源：<a href="https://www.eos.info/press-media/press-center/press-releases/2026/vulcanforms-orders-200-eos-m4-onyx-systems" target="_blank" rel="noopener noreferrer">eos.info</a></div><div class="meta">最後查證：11/22</div></div></details>
+<details class="card" data-kind="event" data-level="推薦" data-company="Visa" id="n20261122fintech06" data-q="Visa 發布支付詐欺威脅報告   Visa 事件 Visa 發布涵蓋 2026 年上半年的威脅報告，指出涉及第三方服務商的事件較前六個月增加 62%。Visa Scam Disruption 在該期間辨識出超過 14 億美元的潛在詐欺活動。 2026-11-17 推薦 Visa：第三方服務商相關事件增加 62%，AI 加快既有詐欺手法" data-more-topic="fintech"><summary><span class="more-topic-label">金融</span><span class="tag"><svg class="icon" viewBox="0 0 24 24" role="img" aria-label="事件"><use href="#i-event"/></svg>事件</span><span class="level-badge" data-badge-level="推薦">推薦</span><h3><a class="more" href="#d-n20261122fintech06">Visa 發布支付詐欺威脅報告</a><span class="org">Visa</span></h3><p class="one">Visa 發布涵蓋 <span class="nb">2026 年</span>上半年的威脅報告，指出涉及第三方服務商的事件較前六個月增加 <span class="nb">62%</span>。</p></summary><div class="card-extra"><p class="plain">Visa Scam Disruption 在該期間辨識出超過 <span class="nb">14 億美元</span>的潛在詐欺活動。</p><a class="rm" href="#d-n20261122fintech06">看詳細分析 →</a><div class="meta">來源：<a href="https://usa.visa.com/about-visa/newsroom/press-releases.releaseId.22981.html" target="_blank" rel="noopener noreferrer">usa.visa.com</a></div><div class="meta">最後查證：11/22</div></div></details>
+<div class="day" data-day="11 月 16 日">11 月 16 日</div>
+<details class="card" data-kind="event" data-level="推薦" data-company="衛生福利部食品藥物管理署" id="n20261122medtech06" data-q="台灣食藥署發布 Philips Azurion 心血管 X 光系統安全訊息   衛生福利部食品藥物管理署 事件 台灣食藥署公告，部分 Philips Azurion 系統可能因啟動或重新啟動時的突波電壓造成電源供應器故障，使造影功能無法使用。國內有 24 台受影響系統，台灣飛利浦已開始通知受影響客戶，後續將依原廠排程為受影響設備更換問題組件。 2026-11-16 推薦 食藥署發布飛利浦 Azurion 心血管 X 光系統安全訊息，國內 24 台受影響" data-more-topic="medtech"><summary><span class="more-topic-label">醫材</span><span class="tag"><svg class="icon" viewBox="0 0 24 24" role="img" aria-label="事件"><use href="#i-event"/></svg>事件</span><span class="level-badge" data-badge-level="推薦">推薦</span><h3><a class="more" href="#d-n20261122medtech06">台灣食藥署發布 Philips Azurion 心血管 X 光系統安全訊息</a><span class="org">衛生福利部食品藥物管理署</span></h3><p class="one">台灣食藥署公告，部分 Philips Azurion 系統可能因啟動或重新啟動時的突波電壓造成電源供應器故障，使造影功能無法使用。</p></summary><div class="card-extra"><p class="plain">國內有 24 台受影響系統，台灣飛利浦已開始通知受影響客戶，後續將依原廠排程為受影響設備更換問題組件。</p><a class="rm" href="#d-n20261122medtech06">看詳細分析 →</a><div class="meta">來源：<a href="https://www.fda.gov.tw/tc/siteListContent.aspx?id=52111&amp;sid=4275" target="_blank" rel="noopener noreferrer">fda.gov.tw</a></div><div class="meta">最後查證：11/22</div></div></details>
+<details class="card" data-kind="event" data-level="延伸" data-company="Siemens" id="n20261122factory06" data-q="Siemens 與合作夥伴建置自適應積層製造生產單元   Siemens 事件 Siemens 宣布以 AI 工作流程安排設計調整、虛擬驗證與製造準備，自適應生產單元則會把這套做法從工程延伸到生產。Siemens 正與 EOS、AM Solutions 在其 Erlangen 電子工廠整合積層製造、自動化及後處理流程。 2026-11-16 延伸 Siemens 串接 AI 設計流程，與夥伴打造自適應積層製造生產單元" data-more-topic="factory"><summary><span class="more-topic-label">製造</span><span class="tag"><svg class="icon" viewBox="0 0 24 24" role="img" aria-label="事件"><use href="#i-event"/></svg>事件</span><span class="level-badge" data-badge-level="延伸">延伸</span><h3><a class="more" href="#d-n20261122factory06">Siemens 與合作夥伴建置自適應積層製造生產單元</a><span class="org">Siemens</span></h3><p class="one">Siemens 宣布以 AI 工作流程安排設計調整、虛擬驗證與製造準備，自適應生產單元則會把這套做法從工程延伸到生產。</p></summary><div class="card-extra"><p class="plain">Siemens 正與 EOS、AM Solutions 在其 Erlangen 電子工廠整合積層製造、自動化及後處理流程。</p><a class="rm" href="#d-n20261122factory06">看詳細分析 →</a><div class="meta">來源：<a href="https://press.siemens.com/global/ie/node/7499" target="_blank" rel="noopener noreferrer">press.siemens.com</a></div><div class="meta">最後查證：11/22</div></div></details>
+<div class="day" data-day="11 月 13 日">11 月 13 日</div>
+<details class="card" data-kind="event" data-level="延伸" data-company="Siemens Mobility" id="n20261122mobility04" data-q="ÖBB 接收第 294 列 Desiro ML Cityjet   Siemens Mobility 事件 Siemens Mobility 在維也納中央車站交付第 294 列 Desiro ML，完成 ÖBB 的這項列車採購計畫。Siemens 表示，其中 273 列在奧地利合作製造，現有車隊正在升級 ETCS 列車防護系統。 2026-11-13 延伸 ÖBB 接收第 294 列 Desiro ML Cityjet，完成列車採購計畫" data-more-topic="mobility"><summary><span class="more-topic-label">移動</span><span class="tag"><svg class="icon" viewBox="0 0 24 24" role="img" aria-label="事件"><use href="#i-event"/></svg>事件</span><span class="level-badge" data-badge-level="延伸">延伸</span><h3><a class="more" href="#d-n20261122mobility04">ÖBB 接收第 294 列 Desiro ML Cityjet</a><span class="org">Siemens Mobility</span></h3><p class="one">Siemens Mobility 在維也納中央車站交付第 294 列 Desiro ML，完成 ÖBB 的這項列車採購計畫。</p></summary><div class="card-extra"><p class="plain">Siemens 表示，其中 273 列在奧地利合作製造，現有車隊正在升級 ETCS 列車防護系統。</p><a class="rm" href="#d-n20261122mobility04">看詳細分析 →</a><div class="meta">來源：<a href="https://press.siemens.com/global/en/pressrelease/obbs-largest-commuter-and-regional-train-fleet-complete-294-siemens-desiro-ml-cityjets" target="_blank" rel="noopener noreferrer">press.siemens.com</a></div><div class="meta">最後查證：11/22</div></div></details>
+<div class="day" data-day="11 月 12 日">11 月 12 日</div>
+<details class="card" data-kind="event" data-level="推薦" data-company="Check Point Research" id="n20261122cyber06" data-q="Check Point 揭露 PHP2Shell 漏洞遭用於入侵閘道器   Check Point Research 事件 Check Point Research 調查發現，攻擊者利用未修補閘道器的 PHP2Shell 漏洞取得初始存取權，再利用 CVE-2026-123039 提升權限。調查中的入侵事件還出現網頁後門、持續存取用的後門程式，以及對 VMware ESXi 主機部署的清除程式。 2026-11-12 推薦 Check Point 揭露未修補閘道器遭利用，攻擊者進一步入侵 ESXi 主機" data-more-topic="cyber"><summary><span class="more-topic-label">資安</span><span class="tag"><svg class="icon" viewBox="0 0 24 24" role="img" aria-label="事件"><use href="#i-event"/></svg>事件</span><span class="level-badge" data-badge-level="推薦">推薦</span><h3><a class="more" href="#d-n20261122cyber06">Check Point 揭露 PHP2Shell 漏洞遭用於入侵閘道器</a><span class="org">Check Point Research</span></h3><p class="one">Check Point Research 調查發現，攻擊者利用未修補閘道器的 PHP2Shell 漏洞取得初始存取權，再利用 CVE-2026-123039 提升權限。</p></summary><div class="card-extra"><p class="plain">調查中的入侵事件還出現網頁後門、持續存取用的後門程式，以及對 VMware ESXi 主機部署的清除程式。</p><a class="rm" href="#d-n20261122cyber06">看詳細分析 →</a><div class="meta">來源：<a href="https://research.checkpoint.com/2026/php2shell-exploitation-on-check-point-gateway/" target="_blank" rel="noopener noreferrer">research.checkpoint.com</a></div><div class="meta">最後查證：11/22</div></div></details>
+<div class="day" data-day="11 月 11 日">11 月 11 日</div>
+<details class="card" data-kind="event" data-level="推薦" data-company="數位發展部資通安全署" id="n20261122cyber07" data-q="資安署示警：臺灣企業與網路平台接連受害，近半數攻擊事件與 AI 攻擊有關   數位發展部資通安全署 事件 資安署表示，臺灣已有十餘家企業及網路平台接連受害，累計逾百萬份個資受影響。初步調查顯示，近半數攻擊事件與 AI 攻擊有關；攻擊者多利用PHP、Node.js、GitLab等相關軟體或平台的已知高風險漏洞，並透過具有較高權限、可大量存取資料的API，取得或擷取大量個資。 2026-11-11 推薦 資安署：臺灣十餘家企業與網路平台接連受駭，逾百萬份個資受影響" data-more-topic="cyber"><summary><span class="more-topic-label">資安</span><span class="tag"><svg class="icon" viewBox="0 0 24 24" role="img" aria-label="事件"><use href="#i-event"/></svg>事件</span><span class="level-badge" data-badge-level="推薦">推薦</span><h3><a class="more" href="#d-n20261122cyber07">資安署示警：臺灣企業與網路平台接連受害，近半數攻擊事件與 AI 攻擊有關</a><span class="org">數位發展部資通安全署</span></h3><p class="one">資安署表示，臺灣已有十餘家企業及網路平台接連受害，累計逾百萬份個資受影響。</p></summary><div class="card-extra"><p class="plain">初步調查顯示，近半數攻擊事件與 AI 攻擊有關；攻擊者多利用PHP、Node.js、GitLab等相關軟體或平台的已知高風險漏洞，並透過具有較高權限、可大量存取資料的API，取得或擷取大量個資。</p><a class="rm" href="#d-n20261122cyber07">看詳細分析 →</a><div class="meta">來源：<a href="https://moda.gov.tw/ACS/press/news/press/21422" target="_blank" rel="noopener noreferrer">moda.gov.tw</a></div><div class="meta">最後查證：11/22</div></div></details>
+<details class="card" data-kind="event" data-level="延伸" data-company="Red Hat" id="n20261122software06" data-q="Red Hat Enterprise Linux 10.3 與 9.9 推出   Red Hat 事件 Red Hat 宣布 RHEL 10.3 與 9.9 已推出。RHEL 10.3 的 image mode sealed images 正式可用，可透過密碼學驗證作業系統內容的完整性。 2026-11-11 延伸 Red Hat 推出 RHEL 10.3 與 9.9，10.3 加入可驗證作業系統完整性的封存映像" data-more-topic="software"><summary><span class="more-topic-label">軟體</span><span class="tag"><svg class="icon" viewBox="0 0 24 24" role="img" aria-label="事件"><use href="#i-event"/></svg>事件</span><span class="level-badge" data-badge-level="延伸">延伸</span><h3><a class="more" href="#d-n20261122software06">Red Hat Enterprise <span class="nb">Linux 10.3</span> 與 9.9 推出</a><span class="org">Red Hat</span></h3><p class="one">Red Hat 宣布 <span class="nb">RHEL 10.3</span> 與 9.9 已推出。</p></summary><div class="card-extra"><p class="plain"><span class="nb">RHEL 10.3</span> 的 image mode sealed images 正式可用，可透過密碼學驗證作業系統內容的完整性。</p><a class="rm" href="#d-n20261122software06">看詳細分析 →</a><div class="meta">來源：<a href="https://www.redhat.com/en/blog/introducing-red-hat-enterprise-linux-103-and-99" target="_blank" rel="noopener noreferrer">redhat.com</a></div><div class="meta">最後查證：11/22</div></div></details>
+<div class="day" data-day="11 月 10 日">11 月 10 日</div>
+<details class="card" data-kind="event" data-level="推薦" data-company="英國國防部" id="n20261122comm06" data-q="英國宣布以 Atlantic Net 加強海底通訊電纜防護   英國國防部 事件 英國國防部宣布，將投入無人載具、感測器與 AI 系統，提升皇家海軍對北大西洋海底基礎設施的監測能力。名為 Atlantic Net 的系統旨在協助保護海底通訊電纜及能源網路。 2026-11-10 推薦 英國宣布投入9,000萬英鎊，建立北大西洋海底監測網" data-more-topic="comm"><summary><span class="more-topic-label">通訊</span><span class="tag"><svg class="icon" viewBox="0 0 24 24" role="img" aria-label="事件"><use href="#i-event"/></svg>事件</span><span class="level-badge" data-badge-level="推薦">推薦</span><h3><a class="more" href="#d-n20261122comm06">英國宣布以 Atlantic Net 加強海底通訊電纜防護</a><span class="org">英國國防部</span></h3><p class="one">英國國防部宣布，將投入無人載具、感測器與 AI 系統，提升皇家海軍對北大西洋海底基礎設施的監測能力。</p></summary><div class="card-extra"><p class="plain">名為 Atlantic Net 的系統旨在協助保護海底通訊電纜及能源網路。</p><a class="rm" href="#d-n20261122comm06">看詳細分析 →</a><div class="meta">來源：<a href="https://www.gov.uk/government/news/90-million-investment-for-new-drones-and-sensors-to-protect-undersea-cables-and-hunt-russian-submarines" target="_blank" rel="noopener noreferrer">gov.uk</a></div><div class="meta">最後查證：11/22</div></div></details>
+<details class="card" data-kind="event" data-level="延伸" data-company="Abbott" id="n20261122medtech08" data-q="UltiSynq 植入式去顫導線取得美國與歐洲核准   Abbott 事件 Abbott 宣布，UltiSynq 去顫導線取得美國 FDA 核准及歐洲 CE 標誌。該導線設計用於心臟左束支區域，可配合相容的植入式心臟去顫器或心臟再同步治療去顫器，提供心臟傳導系統起搏與去顫治療。 2026-11-10 延伸 Abbott 的 UltiSynq 去顫導線取得美國 FDA 核准及歐洲 CE 標誌" data-more-topic="medtech"><summary><span class="more-topic-label">醫材</span><span class="tag"><svg class="icon" viewBox="0 0 24 24" role="img" aria-label="事件"><use href="#i-event"/></svg>事件</span><span class="level-badge" data-badge-level="延伸">延伸</span><h3><a class="more" href="#d-n20261122medtech08">UltiSynq 植入式去顫導線取得美國與歐洲核准</a><span class="org">Abbott</span></h3><p class="one">Abbott 宣布，UltiSynq 去顫導線取得美國 FDA 核准及歐洲 CE 標誌。</p></summary><div class="card-extra"><p class="plain">該導線設計用於心臟左束支區域，可配合相容的植入式心臟去顫器或心臟再同步治療去顫器，提供心臟傳導系統起搏與去顫治療。</p><a class="rm" href="#d-n20261122medtech08">看詳細分析 →</a><div class="meta">來源：<a href="https://abbott.mediaroom.com/press-releases?item=124791" target="_blank" rel="noopener noreferrer">abbott.mediaroom.com</a></div><div class="meta">最後查證：11/22</div></div></details>
+<details class="card" data-kind="event" data-level="延伸" data-company="European Central Bank" id="n20261122fintech08" data-q="ECB 說明 digital euro 試點準備進度   European Central Bank 事件 ECB 表示正準備於 2027 年下半年啟動 digital euro 試點，測試技術功能、作業流程及使用體驗。試點將使用不具法償地位的測試版本，並納入支付服務供應商及選定商家。 2026-11-10 延伸 ECB執委：數位歐元試點預計2027年下半年展開" data-more-topic="fintech"><summary><span class="more-topic-label">金融</span><span class="tag"><svg class="icon" viewBox="0 0 24 24" role="img" aria-label="事件"><use href="#i-event"/></svg>事件</span><span class="level-badge" data-badge-level="延伸">延伸</span><h3><a class="more" href="#d-n20261122fintech08">ECB 說明 digital euro 試點準備進度</a><span class="org">European Central Bank</span></h3><p class="one">ECB 表示正準備於 <span class="nb">2027 年</span>下半年啟動 digital euro 試點，測試技術功能、作業流程及使用體驗。</p></summary><div class="card-extra"><p class="plain">試點將使用不具法償地位的測試版本，並納入支付服務供應商及選定商家。</p><a class="rm" href="#d-n20261122fintech08">看詳細分析 →</a><div class="meta">來源：<a href="https://www.ecb.europa.eu/press/key/date/2026/html/ecb.sp261110~9422461bad.en.html" target="_blank" rel="noopener noreferrer">ecb.europa.eu</a></div><div class="meta">最後查證：11/22</div></div></details>
+<div class="day" data-day="11 月 9 日">11 月 9 日</div>
+<details class="card" data-kind="event" data-level="延伸" data-company="Mercedes-Benz" id="n20261122mobility07" data-q="Mercedes-Benz 擴充電動 VLE 車系   Mercedes-Benz 事件 Mercedes-Benz 宣布擴充電動 VLE 車系，新增可訂購的 VLE 400 4MATIC 四輪驅動版本及其他配置。公司公布，VLE 400 4MATIC 的可用電池容量為 115 kWh，WLTP 續航里程最高為 654 公里。 2026-11-09 延伸 Mercedes-Benz 電動 VLE 新增四輪驅動與入門配置" data-more-topic="mobility"><summary><span class="more-topic-label">移動</span><span class="tag"><svg class="icon" viewBox="0 0 24 24" role="img" aria-label="事件"><use href="#i-event"/></svg>事件</span><span class="level-badge" data-badge-level="延伸">延伸</span><h3><a class="more" href="#d-n20261122mobility07">Mercedes-Benz 擴充電動 VLE 車系</a><span class="org">Mercedes-Benz</span></h3><p class="one">Mercedes-Benz 宣布擴充電動 VLE 車系，新增可訂購的 <span class="nb">VLE 400</span> 4MATIC 四輪驅動版本及其他配置。</p></summary><div class="card-extra"><p class="plain">公司公布，<span class="nb">VLE 400</span> 4MATIC 的可用電池容量為 115 kWh，WLTP 續航里程最高為 654 公里。</p><a class="rm" href="#d-n20261122mobility07">看詳細分析 →</a><div class="meta">來源：<a href="https://media.mercedes-benz.com/en/article/d8b5948f-c137-48c9-ab8c-e00c4fe598ab" target="_blank" rel="noopener noreferrer">media.mercedes-benz.com</a></div><div class="meta">最後查證：11/22</div></div></details>
+<details class="card" data-kind="event" data-level="延伸" data-company="Red Hat" id="n20261122software08" data-q="Red Hat OpenShift 5 正式推出   Red Hat 事件 Red Hat 宣布 OpenShift 5 正式推出，支援在同一平台執行容器與虛擬機器等工作負載。官方表示，現有 OpenShift 4 環境可透過原地更新升級，並新增多租戶隔離與控制平面的後量子密碼學支援。 2026-11-09 延伸 Red Hat OpenShift 5 正式推出，可在同一平台執行容器與虛擬機器" data-more-topic="software"><summary><span class="more-topic-label">軟體</span><span class="tag"><svg class="icon" viewBox="0 0 24 24" role="img" aria-label="事件"><use href="#i-event"/></svg>事件</span><span class="level-badge" data-badge-level="延伸">延伸</span><h3><a class="more" href="#d-n20261122software08">Red Hat <span class="nb">OpenShift 5</span> 正式推出</a><span class="org">Red Hat</span></h3><p class="one">Red Hat 宣布 <span class="nb">OpenShift 5</span> 正式推出，支援在同一平台執行容器與虛擬機器等工作負載。</p></summary><div class="card-extra"><p class="plain">官方表示，現有 <span class="nb">OpenShift 4</span> 環境可透過原地更新升級，並新增多租戶隔離與控制平面的後量子密碼學支援。</p><a class="rm" href="#d-n20261122software08">看詳細分析 →</a><div class="meta">來源：<a href="https://www.redhat.com/en/about/press-releases/red-hat-openshift-5-transforms-hybrid-cloud-operations-real-time-intelligence-and-zero-trust-security" target="_blank" rel="noopener noreferrer">redhat.com</a></div><div class="meta">最後查證：11/22</div></div></details>
+<a class="up" href="#top">↑ 回到最上面</a></details>
+  </main>
+  </section>
+  <section class="search-panel" id="panel-search" role="tabpanel" aria-labelledby="tab-search" hidden>
+  <div class="page-intro"><h2>找找看</h2><p>搜尋 更多領域的重要時刻</p></div>
+  <nav class="months"><input id="q" type="search" placeholder="搜尋名詞、公司、說明…" aria-label="搜尋" autocomplete="off"><div class="hot-q" role="group" aria-label="熱門搜尋"><span>不知道搜什麼？點一下：</span><button type="button" data-q="Mercedes-Benz" aria-pressed="false">Mercedes-Benz</button><button type="button" data-q="Red Hat" aria-pressed="false">Red Hat</button><button type="button" data-q="Siemens" aria-pressed="false">Siemens</button><button type="button" data-q="Visa" aria-pressed="false">Visa</button><button type="button" data-q="Abbott" aria-pressed="false">Abbott</button><button type="button" data-q="DBS、Circle" aria-pressed="false">DBS、Circle</button><button type="button" data-q="Medtronic" aria-pressed="false">Medtronic</button><button type="button" data-q="Microsoft" aria-pressed="false">Microsoft</button><button type="button" data-q="Vodafone" aria-pressed="false">Vodafone</button><button type="button" data-q="數位發展部資通安全署" aria-pressed="false">數位發展部資通安全署</button></div><div class="level-filter" role="group" aria-label="程度篩選"><button type="button" data-filter-level="精選" aria-pressed="true">精選</button><button type="button" data-filter-level="推薦" aria-pressed="true">推薦</button><button type="button" data-filter-level="延伸" aria-pressed="true">延伸</button></div><p id="level-scope" class="level-scope" aria-live="polite"></p><div class="kind-filter" role="group" aria-label="類別篩選"><span>類別篩選</span><button type="button" data-filter-kind="model" aria-pressed="false">模型</button><button type="button" data-filter-kind="product" aria-pressed="false">產品</button><button type="button" data-filter-kind="tech" aria-pressed="false">技術</button><button type="button" data-filter-kind="event" aria-pressed="false">事件</button><button type="button" data-filter-kind="paper" aria-pressed="false">論文</button></div><span id="qn" class="qn" aria-live="polite"></span></nav>
+  <section id="none" class="none" hidden><img class="none-art" alt="" aria-hidden="true" width="240" height="160" src="data:image/webp;base64,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"><p id="none-title" class="none-title"></p><div class="none-actions"><button type="button" id="clear-search">清除搜尋，看全部</button></div><p class="none-hint">或試試熱門公司</p><div class="none-actions"><button type="button" class="company-chip" data-company="Mercedes-Benz">Mercedes-Benz</button><button type="button" class="company-chip" data-company="Red Hat">Red Hat</button><button type="button" class="company-chip" data-company="Siemens">Siemens</button><button type="button" class="company-chip" data-company="Visa">Visa</button><button type="button" class="company-chip" data-company="Abbott">Abbott</button></div></section>
+<div id="search-list"></div>
+</section>
+<section class="about-panel" id="panel-about" role="tabpanel" aria-labelledby="tab-about" hidden>
+  <div class="page-intro"><h2>關於通鑑</h2></div>
+  <p>新科技的每一個重要時刻，用白話說清楚。<br>每天更新，讓我們一起追緊新科技的腳步。</p>
+  <h3>怎麼用</h3><p>今天看重點<br>時間軸照月份看<br>找找看搜公司或名詞</p>
+  <h3>加到主畫面</h3><p>在 iPhone 的 Safari 點「分享」→「加入主畫面」；Android 的 Chrome 點右上「⋮」→「加到主畫面」。</p>
+<h3 id="funnel-about">匿名使用統計</h3>
+<p>為了知道大家用到哪一步就離開、哪裡需要改，通鑑會在你<b>第一次</b>走到幾個固定步驟時（第一次打開、第一次展開一張卡、第一次點開詳細頁、第一次點開來源連結或用搜尋），送出一則匿名紀錄給我們。每一步、每台裝置只送一次。另外，每篇詳細頁每天被點開幾次也會計數，見下面「每篇點開數」。</p>
+<ul class="funnel-list">
+<li><b>只送</b>：產品名稱、版本、平台（網頁）、步驟名稱、日期（只到哪一天），以及距離第一次打開大約多久（只分「1 分鐘內」「5 分鐘內」這類區間）。</li>
+<li><b>每篇點開數</b>：你點開一篇詳細頁時，會送出那篇的編號和日期（只到哪一天），同一篇每天最多送一次；我們只保存每篇每天被點開的總次數，用來知道哪些文章最多人看，不知道是誰點的。</li>
+<li><b>按讚</b>（1.8 版起新增）：你按下一篇的「讚」時，會送出那篇的編號和日期（只到哪一天）。我們只保存每篇每天被按讚的總次數，不知道是誰按的。瀏覽器會記住你按過哪幾篇，避免重複計算，不用 Cookie。按讚是你自己按了才送，不受下面的統計開關影響。</li>
+<li><b>公開的數字</b>：每篇顯示的點開數和按讚數，是上面這些總數加起來的結果，看不出是誰點的、誰按的。</li>
+<li><b>不送</b>：你搜尋的字、你展開的是哪一張卡、帳號、姓名、信箱、電話、位置、裝置或廣告編號。我們也不會嘗試辨識你是誰。</li>
+<li><b>傳送時</b>：資料送到 t.fervela.ai（主機由 Cloudflare 提供，Cloudflare 是美國公司）。傳送時網路會帶出你的連線位址（IP），我們不儲存它。</li>
+<li><b>保存</b>：我們不存單則紀錄，送來的資料會直接加進當天各步驟的次數、各篇的點開次數和按讚次數，只保存這些總數。這些總數用來看長期趨勢，會持續保存；裡面沒有任何一筆對得到某一個人。</li>
+<li><b>在你的瀏覽器裡</b>：為了「每步只送一次」「每篇每天只算一次」和算「距離第一次打開多久」，會在你的瀏覽器存「第一次打開的時間」「哪些步驟送過了」和「今天點開過哪幾篇」（隔天換新），不用 Cookie。</li>
+</ul>
+<p>這是 1.5 版起新增的；每篇點開數是 1.7 版起新增的，按讚是 1.8 版起新增的。之前的版本不會送出。</p>
+<label class="funnel-row"><input id="funnel-switch" type="checkbox" checked> 匿名使用統計（關掉後不再送出，還沒送出的也一起清掉）</label>
+</section>
+<div id="detail-host" aria-live="polite"></div>
+</div>
+<div class="v5-tl-foot" aria-hidden="true"><img src="/assets/v5/note1.webp" alt="" aria-hidden="true" width="1200" height="900" loading="lazy"></div>
+<footer><div class="v5-foot-in"><a class="v5-brand" href="/" aria-label="Fervela.ai 首頁"><img class="v5-logo" src="/assets/logo-a.svg" width="34" height="34" alt="" aria-hidden="true" loading="lazy"><span>Fervela.ai</span></a><div class="v5-flinks"><a href="/#work">作品</a><a href="/#journal">實踐筆記</a><a href="mailto:contact@fervela.ai">聊聊你的想法</a><a href="/privacy.html">隱私權政策</a></div></div><!-- 10/12 法遵長定 P3：V1.0 不放隱私說明頁，頁尾照實寫；有影片嵌入或統計時再補正式頁送法遵 -->通鑑 by Fervela.ai｜卡片說明由 AI 依官方來源整理，以原文為準｜文中產品名稱與商標屬各公司所有｜發現錯誤或權利疑慮，請來信 contact@fervela.ai，我們會在 72 小時內處理｜<span class="nb">2026 年 26 則</span><br>通鑑由 AI 整理公開資料，可能有遺漏或錯誤，內容以原文為準，不構成投資或其他專業建議。<br>本站的照片、插圖與圖示由 AI 生成，僅為示意。<br>本站沒有帳號或 Cookie；用 Cloudflare 網站分析（Cloudflare 是美國公司）計算各頁瀏覽次數：不使用 Cookie、不收集你輸入的內容，也不記錄網址後面帶的參數。另有匿名使用統計（只記你第一次走到哪幾步，以及每篇詳細頁每天被點開的總次數；不含你搜尋的字，也不知道是誰點的，可在「關於」關閉）。網站放在 GitHub Pages，主機業者會看到你的 IP。寫信給我們時，我們會看到你的信箱，只用來回覆。</footer>
+<nav class="site-tabs" role="tablist" aria-label="通鑑分頁">
+  <button type="button" role="tab" id="tab-today" aria-controls="panel-today" aria-selected="true" data-tab="today">⌂<span>今天</span></button>
+  <button type="button" role="tab" id="tab-timeline" aria-controls="panel-timeline" aria-selected="false" tabindex="-1" data-tab="timeline">◇<span>時間軸</span></button>
+  <button type="button" role="tab" id="tab-search" aria-controls="panel-search" aria-selected="false" tabindex="-1" data-tab="search">⌕<span>找找看</span></button>
+  <button type="button" role="tab" id="tab-about" aria-controls="panel-about" aria-selected="false" tabindex="-1" data-tab="about">▤<span>關於</span></button>
+</nav>
+<a class="totop" href="#top" aria-label="回到最上面">↑ 最上面</a>
+<script>/* 10/12 V1.0 驗收 V2：浮動鈕只在往下捲超過一屏半、而且往回捲時出現，平常不蓋正文 */(function(){var b=document.querySelector('.totop'),y=0;addEventListener('scroll',function(){var n=scrollY;if(n===y)return;b.classList.toggle('show',n>innerHeight*1.5&&n<y);y=n},{passive:true})})()</script>
+<script>(function(){
+var q=document.getElementById('q');if(!q)return;
+var cards=[].slice.call(document.querySelectorAll('.card'));
+var secs=[].slice.call(document.querySelectorAll('.msec'));
+var qn=document.getElementById('qn'),none=document.getElementById('none'),noneTitle=document.getElementById('none-title');
+var levelButtons=[].slice.call(document.querySelectorAll('[data-filter-level]'));
+var kindButtons=[].slice.call(document.querySelectorAll('[data-filter-kind]'));
+var levelScope=document.getElementById('level-scope'),levelTouched=false,company='',kind='',searchMode=false;
+var ALL=['精選','推薦','延伸'],sel=ALL.slice();  // 10/19 Miles：三顆是勾選，結果取聯集；預設全勾＝全部；全不勾視同全勾
+function setSel(a){sel=a;levelTouched=sel.length>0&&sel.length<3}  // 全不勾＝顯示全部，但按鈕維持不亮（不會自己跳回全勾）
+var opened=secs.map(function(){return true});
+function norm(t){return (t||'').toLowerCase().replace(/[\s\-‑–_.·・]/g,'')}
+cards.forEach(function(c){c._q=norm(c.getAttribute('data-q'))});
+function run(){
+  if(!searchMode)return;
+  var words=q.value.trim().toLowerCase().split(/\s+/).map(norm).filter(Boolean);
+  var shown=0,scope=0;
+  cards.forEach(function(c){
+    var inLevel=!sel.length||sel.indexOf(c.getAttribute('data-level')||'推薦')>=0;
+    if(inLevel)scope++;
+    var ok=inLevel&&(!company||c.getAttribute('data-company')===company)&&words.every(function(w){return c._q.indexOf(w)>=0})&&(!kind||c.getAttribute('data-kind')===kind);
+    c.hidden=!ok;if(words.length)c.open=false;if(ok)shown++;
+  });
+  secs.forEach(function(s,i){
+    var any=s.querySelector('.card:not([hidden])');
+    s.hidden=!any;
+    var sm=s.querySelector('.month small');if(sm){if(!sm.hasAttribute('data-all'))sm.setAttribute('data-all',sm.textContent);sm.textContent=(words.length||company||kind||levelTouched)?s.querySelectorAll('.card:not([hidden])').length+' 則':sm.getAttribute('data-all')}
+    if(words.length||company||levelTouched){if(any)s.open=true}else{s.open=false}   // 10/21 行銷長：沒條件時月份全收（R102），不要 242 則全展開
+    if(kind&&any)s.open=true;
+    [].slice.call(s.querySelectorAll('.day')).forEach(function(d){
+      var n=d.nextElementSibling,vis=false;
+      while(n&&n.classList.contains('card')){if(!n.hidden){vis=true;break}n=n.nextElementSibling}
+      d.hidden=!vis;
+    });
+  });
+  levelButtons.forEach(function(b){b.setAttribute('aria-pressed',sel.indexOf(b.getAttribute('data-filter-level'))>=0?'true':'false')});
+  kindButtons.forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-filter-kind')===kind&&!!kind?'true':'false')});
+  [].slice.call(document.querySelectorAll('.company-chip')).forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-company')===company&&!!company?'true':'false')});
+  levelScope.textContent=(sel.length===3||!sel.length?'全部':ALL.filter(function(x){return sel.indexOf(x)>=0}).join('＋'))+'，共 '+scope+' 則';
+  qn.textContent='搜尋結果 '+shown+' 則';
+  none.hidden=shown!==0;
+  noneTitle.textContent=words.length?'找不到「'+q.value.trim()+'」':company?'找不到「'+company+'」':'這個範圍目前沒有卡片';
+}
+q.addEventListener('input',run);
+document.getElementById('clear-search').addEventListener('click',function(){q.value='';company='';kind='';setSel(ALL.slice());run();q.focus()});
+[].slice.call(document.querySelectorAll('.company-chip')).forEach(function(b){b.addEventListener('click',function(){var selected=b.getAttribute('data-company');company=company===selected?'':selected;run()})});
+levelButtons.forEach(function(b){b.addEventListener('click',function(){var v=b.getAttribute('data-filter-level'),i=sel.indexOf(v),a=sel.slice();if(i>=0)a.splice(i,1);else a.push(v);setSel(a);run()})});
+kindButtons.forEach(function(b){b.addEventListener('click',function(){var v=b.getAttribute('data-filter-kind');kind=kind===v?'':v;run()})});
+window.tongjianSearch={enter:function(){if(!searchMode)opened=secs.map(function(s){return s.open});searchMode=true;run()},leave:function(){if(searchMode)secs.forEach(function(s,i){s.open=opened[i]});searchMode=false;cards.forEach(function(c){c.hidden=false});none.hidden=true;secs.forEach(function(s){s.querySelectorAll('.day').forEach(function(d){d.hidden=false})})},run:run};
+})();(function(){
+var links=[].slice.call(document.querySelectorAll('.month-chip'));
+var sections=[].slice.call(document.querySelectorAll('.msec'));
+function active(id){links.forEach(function(a){var yes=a.getAttribute('href')==='#'+id;a.classList.toggle('active',yes);if(yes){a.setAttribute('aria-current','location');var m=a.parentNode,l=a.offsetLeft-m.offsetLeft;if(l<m.scrollLeft||l+a.offsetWidth>m.scrollLeft+m.clientWidth)m.scrollLeft=l-16}else a.removeAttribute('aria-current')})}
+var selected=links.length?links[0].hash.slice(1):'';
+function select(id){if(!document.getElementById(id))return;selected=id;sections.forEach(function(s){s.hidden=s.id!==id;if(s.id===id)s.open=true});active(id)}
+if(selected)select(selected);
+if('IntersectionObserver' in window){
+  var io=new IntersectionObserver(function(entries){
+    var visible=entries.filter(function(entry){return entry.isIntersecting&&!entry.target.hidden});
+    if(visible.length&&document.body.getAttribute('data-current-tab')==='timeline')active(visible[0].target.id);
+  },{rootMargin:'-150px 0px -65% 0px',threshold:0});
+  sections.forEach(function(s){io.observe(s)});
+}
+window.tongjianMonth={select:select,current:function(){return selected}};
+})();window.tongjianDetailFiles={"n20261122cyber01": "n20261122cyber01", "n20261122mobility01": "n20261122mobility01", "n20261122medtech01": "n20261122medtech01", "n20261122comm01": "n20261122comm01", "n20261122cyber02": "n20261122cyber02", "n20261122medtech02": "n20261122medtech02", "n20261122comm06": "n20261122comm06", "n20261122cyber04": "n20261122cyber04", "n20261122cyber06": "n20261122cyber06", "n20261122cyber07": "n20261122cyber07", "n20261122mobility04": "n20261122mobility04", "n20261122mobility07": "n20261122mobility07", "n20261122material03": "n20261122material03", "n20261122medtech05": "n20261122medtech05", "n20261122medtech06": "n20261122medtech06", "n20261122medtech08": "n20261122medtech08", "n20261122software04": "n20261122software04", "n20261122software06": "n20261122software06", "n20261122software08": "n20261122software08", "n20261122factory02": "n20261122factory02", "n20261122factory05": "n20261122factory05", "n20261122factory06": "n20261122factory06", "n20261122fintech03": "n20261122fintech03", "n20261122fintech05": "n20261122fintech05", "n20261122fintech06": "n20261122fintech06", "n20261122fintech08": "n20261122fintech08"};
+(function(){
+// 每種網址只由這裡切畫面；瀏覽器返回／前進只還原，不再寫入一筆歷史。
+var list=document.getElementById('list'),siteTabs=document.querySelector('.site-tabs');
+var panels={today:document.getElementById('panel-today'),timeline:document.getElementById('panel-timeline'),search:document.getElementById('panel-search'),about:document.getElementById('panel-about')};
+var tab='today',origin=null;
+var detailHost=document.getElementById('detail-host'),detailFiles=window.tongjianDetailFiles||{};
+var detailCache=new Map(),detailRequest=0;
+function selectTab(d,index,focus){
+  var tabs=d.querySelectorAll('.dtabs-nav [role="tab"]'),panels=d.querySelectorAll('.dpanel[role="tabpanel"]');
+  if(!tabs.length||!panels.length)return;
+  d.classList.add('tabs-ready');
+  [].forEach.call(tabs,function(tab,i){tab.setAttribute('aria-selected',i===index?'true':'false');tab.tabIndex=i===index?0:-1});
+  [].forEach.call(panels,function(panel,i){panel.classList.toggle('is-active',i===index)});
+  if(focus)tabs[index].focus();
+}
+function remember(){try{history.replaceState(Object.assign({},history.state||{},{tab:tab,scroll:scrollY,month:window.tongjianMonth.current()}),'',location.href)}catch(e){}}
+function writeHash(hash,state,push){if(!push)return;remember();try{history.pushState(state||{},'','#'+hash)}catch(e){}}
+function showTab(name,push,scroll){
+  if(!panels[name])return false;
+  detailRequest++;
+  writeHash(name,{tab:name},push);
+  tab=name;
+  [].slice.call(document.querySelectorAll('.detail')).forEach(function(d){d.hidden=true});
+  Object.keys(panels).forEach(function(key){panels[key].hidden=key!==name});
+  siteTabs.hidden=false;document.body.setAttribute('data-current-tab',name);
+  siteTabs.querySelectorAll('[data-tab]').forEach(function(b){var on=b.getAttribute('data-tab')===name;b.setAttribute('aria-selected',on?'true':'false');b.tabIndex=on?0:-1});
+  if(name==='search'){document.getElementById('search-list').appendChild(list);window.tongjianSearch.enter()}
+  else{panels.timeline.appendChild(list);window.tongjianSearch.leave();window.tongjianMonth.select(window.tongjianMonth.current())}
+  if(scroll!==undefined&&scroll!==null)requestAnimationFrame(function(){window.scrollTo(0,scroll)});
+  else window.scrollTo(0,0);
+  return true;
+}
+function showMonth(id,push,scroll){
+  if(!document.getElementById(id))return false;
+  writeHash(id,{tab:'timeline',month:id},push);
+  showTab('timeline',false,scroll);window.tongjianMonth.select(id);
+  return true;
+}
+function showCard(id,push,scroll){
+  var c=document.getElementById(id);if(!c||!c.classList.contains('card'))return false;
+  var s=c.closest('.msec');writeHash(id,{tab:'timeline',month:s.id},push);
+  showMonth(s.id,false);c.open=true;
+  if(scroll!==undefined&&scroll!==null)requestAnimationFrame(function(){window.scrollTo(0,scroll)});
+  else requestAnimationFrame(function(){c.scrollIntoView({block:'start'})});
+  return true;
+}
+function openDetail(id,push,prior){
+  var inline=document.getElementById('d-'+id);
+  if(!inline&&!Object.prototype.hasOwnProperty.call(detailFiles,id))return false;
+  var card=document.getElementById(id);
+  var fallback={tab:'timeline',scroll:0,month:card&&card.closest('.msec')&&card.closest('.msec').id,hash:'#'+id};
+  var from=prior||origin||fallback;
+  if(push){from=document.body.getAttribute('data-current-tab')==='detail'&&origin?origin:
+    {tab:tab,scroll:scrollY,month:window.tongjianMonth.current(),hash:location.hash||'#today'};
+    writeHash('d-'+id,{origin:from},true)}
+  origin=from;
+  var request=++detailRequest;
+  Object.keys(panels).forEach(function(key){panels[key].hidden=true});siteTabs.hidden=true;
+  document.body.setAttribute('data-current-tab','detail');window.scrollTo(0,0);
+  if(inline){
+    [].slice.call(detailHost.querySelectorAll('article.detail')).forEach(function(x){x.hidden=true});
+    selectTab(inline,0,false);inline.hidden=false;return true;
+  }
+  function status(message,failed){
+    var box=document.createElement('div');box.className='detail-status';
+    var p=document.createElement('p');p.textContent=message;box.appendChild(p);
+    if(failed){
+      var retry=document.createElement('button');retry.type='button';retry.textContent='再試一次';
+      retry.addEventListener('click',function(){openDetail(id,false,from)});box.appendChild(retry);
+      var back=document.createElement('a');back.href='#timeline';back.textContent='回通鑑';box.appendChild(back);
+    }
+    detailHost.replaceChildren(box);
+  }
+  function display(html){
+    if(request!==detailRequest)return false;
+    var doc=new DOMParser().parseFromString(html,'text/html');
+    var d=doc.querySelector('article.detail');
+    if(!d||d.id!=='d-'+id){status('這篇沒載入成功，可能是網路不穩',true);return false}
+    d.hidden=false;detailHost.replaceChildren(d);selectTab(d,0,false);
+    return true;
+  }
+  if(detailCache.has(id)){display(detailCache.get(id));return true}
+  status('載入中…',false);
+  var controller=new AbortController(),timer=setTimeout(function(){controller.abort()},10000);
+  fetch('d/'+detailFiles[id]+'.html',{signal:controller.signal}).then(function(response){
+    if(!response.ok)throw new Error('HTTP '+response.status);
+    return response.text();
+  }).then(function(html){
+    if(!html.trim())throw new Error('empty detail');
+    if(display(html))detailCache.set(id,html);
+  }).catch(function(){if(request===detailRequest)status('這篇沒載入成功，可能是網路不穩',true)})
+    .finally(function(){clearTimeout(timer)});
+  return true;
+}
+function backTo(id){
+  var from=(history.state||{}).origin||origin;
+  if(from&&from.hash){var hash=from.hash.slice(1);if(/^m-\d{4}-\d{2}$/.test(hash))showMonth(hash,true,from.scroll);
+    else if(panels[hash])showTab(hash,true,from.scroll);
+    else if(!showCard(hash,true,from.scroll))showTab(from.tab||'timeline',true,from.scroll);
+    return}
+  if(id&&showCard(id,true))return;
+  showTab('timeline',true);
+}
+document.addEventListener('click',function(ev){
+  var tab=ev.target.closest('.dtabs-nav [role="tab"]');
+  if(tab){selectTab(tab.closest('.detail'),[].indexOf.call(tab.parentNode.querySelectorAll('[role="tab"]'),tab),false);return}
+  var siteTab=ev.target.closest('.site-tabs [data-tab]');if(siteTab){showTab(siteTab.getAttribute('data-tab'),true);return}
+  var a=ev.target.closest('a[href^="#"]');
+  if(a){
+    var h=a.getAttribute('href'),m=/^#d-(.+)$/.exec(h),value=h.slice(1);
+    if(m){if(openDetail(m[1],true))ev.preventDefault();return}
+    if(a.classList.contains('back')){ev.preventDefault();backTo(h.slice(1));return}
+    if(value==='list'||value==='timeline'){ev.preventDefault();showTab('timeline',true);return}
+    if(panels[value]){ev.preventDefault();showTab(value,true);return}
+    if(/^m-\d{4}-\d{2}$/.test(value)){ev.preventDefault();showMonth(value,true);return}
+    if(value==='top'){ev.preventDefault();window.scrollTo({top:0,behavior:'smooth'});return}
+    if(showCard(value,true)){ev.preventDefault();return}
+  }
+  var b=ev.target.closest('.vbox:not(.vlink) .play');if(!b)return;   // 朋友版的影片是連結，不嵌入
+  var box=b.parentNode,id=box.getAttribute('data-yt');
+  if(!/^[A-Za-z0-9_-]{11}$/.test(id||''))return;   // 資安長 10/14：影片編號只准 11 碼英數，不符就不嵌入（防 data-yt 藏引號注入）
+  // 10/2：直接開本機檔案（審稿預覽、手機收到的檔案）沒有網址來源，YouTube 會回錯誤 153 → 改開新分頁；正式網站照常嵌入
+  if(!/^https?:$/.test(location.protocol)){window.open('https://www.youtube.com/watch?v='+id,'_blank','noopener');return}
+  var f=document.createElement('iframe');   // 資安長 10/14：不用 innerHTML 拼字串
+  f.src='https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1';f.title='官方影片';f.referrerPolicy='strict-origin-when-cross-origin';
+  f.allow='autoplay; encrypted-media; picture-in-picture';f.allowFullscreen=true;box.replaceChildren(f);
+});
+document.addEventListener('keydown',function(ev){
+  var siteTab=ev.target.closest('.site-tabs [data-tab]');
+  if(siteTab&&['ArrowLeft','ArrowRight'].includes(ev.key)){
+    var all=siteTabs.querySelectorAll('[data-tab]'),at=[].indexOf.call(all,siteTab);
+    ev.preventDefault();var next=all[(at+(ev.key==='ArrowRight'?1:all.length-1))%all.length];
+    showTab(next.getAttribute('data-tab'),true);next.focus();return;
+  }
+  var tab=ev.target.closest('.dtabs-nav [role="tab"]');
+  if(!tab||!['ArrowLeft','ArrowRight'].includes(ev.key))return;
+  var tabs=tab.parentNode.querySelectorAll('[role="tab"]'),index=[].indexOf.call(tabs,tab);
+  ev.preventDefault();selectTab(tab.closest('.detail'),(index+(ev.key==='ArrowRight'?1:tabs.length-1))%tabs.length,true);
+});
+function fromHash(){
+  var value;try{value=decodeURIComponent(location.hash.slice(1))}catch(e){value=''}
+  var state=history.state||{};
+  if(value.indexOf('d-')===0&&openDetail(value.slice(2),false,state.origin))return;
+  origin=null;
+  if(/^m-\d{4}-\d{2}$/.test(value)&&showMonth(value,false,state.scroll))return;
+  if(panels[value]){showTab(value,false,state.scroll);return}
+  if(value==='list'){showTab('timeline',false,state.scroll);return}
+  if(value==='top'){showTab(tab==='detail'?'timeline':tab,false,0);return}
+  if(value&&showCard(value,false,state.scroll))return;
+  if(/^(all|comm|cyber|mobility|material|medtech|software|factory|fintech)$/.test(value)){showTab('timeline',false,state.scroll);return}
+  showTab('today',false,state.scroll);
+}
+window.addEventListener('popstate',function(){fromHash()});
+window.addEventListener('hashchange',function(){fromHash()});
+fromHash();
+})();
+// 10/19 Miles：手機主畫面的 App（殼與加到主畫面）退到背景再打開不會重新載入，畫面停在舊的一天。
+// 回到前景時，離上次載入超過 30 分鐘就重新整理（網址的 # 保留，詳細頁停在原篇）；不存任何東西。
+(function(){var t=Date.now();function chk(){if(document.visibilityState==='visible'&&Date.now()-t>18e5)location.reload()}
+document.addEventListener('visibilitychange',chk);addEventListener('pageshow',function(e){if(e.persisted)chk()});})();
+(function(){
+function shareUrl(button){
+  var slug=button.getAttribute('data-share');
+  return /^[a-z0-9]+(?:-[0-9]+)?$/.test(slug||'')?'https://fervela.ai/timeline/s/'+slug+'.html?r=share':null;
+}
+function menuFor(button){
+  var next=button.nextElementSibling;
+  if(next&&next.classList.contains('dshare-menu'))return next;
+  var url=shareUrl(button);if(!url)return null;
+  var title=button.getAttribute('data-title')||'',u=encodeURIComponent(url);
+  var menu=document.createElement('div');menu.className='dshare-menu';menu.hidden=true;menu.setAttribute('role','group');menu.setAttribute('aria-label','分享到');
+  [['Facebook','https://www.facebook.com/sharer/sharer.php?u='+u],
+   ['Threads','https://www.threads.net/intent/post?text='+encodeURIComponent(title+' '+url)],
+   ['LINE','https://social-plugins.line.me/lineit/share?url='+u]].forEach(function(x){
+    var a=document.createElement('a');a.href=x[1];a.target='_blank';a.rel='noopener noreferrer';a.textContent=x[0];menu.appendChild(a)});
+  [['Instagram','ig'],['複製連結','copy']].concat(navigator.share?[['更多…','more']]:[]).forEach(function(x){
+    var b=document.createElement('button');b.type='button';b.textContent=x[0];b.setAttribute('data-act',x[1]);menu.appendChild(b)});
+  button.after(menu);return menu;
+}
+document.addEventListener('click',function(ev){
+  var button=ev.target.closest('.dshare'),act=ev.target.closest('.dshare-menu [data-act]');
+  if(button){var m=menuFor(button);if(m){m.hidden=!m.hidden;button.setAttribute('aria-expanded',m.hidden?'false':'true')}return}
+  if(!act)return;
+  var menu=act.parentNode,btn=menu.previousElementSibling,url=shareUrl(btn),status=menu.nextElementSibling,kind=act.getAttribute('data-act');
+  function show(message,keep){clearTimeout(status._shareTimer);status.textContent=message;if(!keep)status._shareTimer=setTimeout(function(){status.textContent=''},4000)}
+  function copy(done){
+    if(!navigator.clipboard||!navigator.clipboard.writeText){show(url,true);return}
+    try{navigator.clipboard.writeText(url).then(function(){show(done)},function(){show(url,true)})}catch(error){show(url,true)}
+  }
+  if(kind==='ig')copy('已複製連結，打開 Instagram 貼到限時動態或私訊');
+  else if(kind==='copy')copy('已複製連結，貼給朋友就能看');
+  else if(kind==='more'){try{Promise.resolve(navigator.share({title:btn.getAttribute('data-title'),text:btn.getAttribute('data-text'),url:url}))
+    .catch(function(error){if(!error||error.name!=='AbortError')copy('已複製連結，貼給朋友就能看')})}catch(error){copy('已複製連結，貼給朋友就能看')}}
+});
+})();</script>
+<style>.tl-filter{display:flex;flex-direction:column;gap:10px;margin:0 0 16px}.tl-filter .kind-filter{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.tl-filter .kind-filter>span{color:var(--text,#082246)}.tl-off{display:none!important}</style>
+<script>(function(){var box=document.querySelector('.tl-filter'),sp=document.getElementById('panel-search');if(!box||!sp)return;
+var L=sp.querySelector('.level-filter'),K=sp.querySelector('.kind-filter');if(!L||!K)return;L=L.cloneNode(true);K=K.cloneNode(true);
+[].slice.call(L.querySelectorAll('[data-filter-level]')).forEach(function(b){b.setAttribute('data-tl-level',b.getAttribute('data-filter-level'));b.removeAttribute('data-filter-level')});
+[].slice.call(K.querySelectorAll('[data-filter-kind]')).forEach(function(b){b.setAttribute('data-tl-kind',b.getAttribute('data-filter-kind'));b.removeAttribute('data-filter-kind');b.setAttribute('aria-pressed','false')});
+box.appendChild(L);box.appendChild(K);
+var ALL=['精選','推薦','延伸'],sel=ALL.slice(),kind='';
+window.tjTlApply=apply;function apply(){var on=document.body.getAttribute('data-current-tab')!=='search',all=!sel.length||sel.length===3,f=!!document.querySelector("#list .card[hidden]")||!all||!!kind;
+[].slice.call(document.querySelectorAll('#list .card')).forEach(function(c){var ok=!c.hidden&&(all||sel.indexOf(c.getAttribute('data-level')||'推薦')>=0)&&(!kind||c.getAttribute('data-kind')===kind);c.classList.toggle('tl-off',on&&!ok)});
+[].slice.call(document.querySelectorAll('#list .day')).forEach(function(d){var n=d.nextElementSibling,v=false;while(n&&n.classList.contains('card')){if(!n.classList.contains('tl-off')){v=true;break}n=n.nextElementSibling}d.classList.toggle('tl-off',on&&!v)});
+[].slice.call(document.querySelectorAll('#list .msec')).forEach(function(m){var sm=m.querySelector('.month small');if(!sm||!on)return;if(!sm.hasAttribute('data-tl-all'))sm.setAttribute('data-tl-all',sm.textContent);sm.textContent=f?m.querySelectorAll('.card:not(.tl-off)').length+' 則':sm.getAttribute('data-tl-all')});
+if(on&&f){var cur=document.querySelector('#list .msec:not([hidden])');if(cur&&!cur.querySelector('.card:not(.tl-off)')){var hit=[].slice.call(document.querySelectorAll('#list .msec')).filter(function(m){return m.querySelector('.card:not(.tl-off)')})[0];var chip=hit&&document.querySelector('.month-chip[href="#'+hit.id+'"]');if(chip)chip.click()}}
+[].slice.call(L.querySelectorAll('[data-tl-level]')).forEach(function(b){b.setAttribute('aria-pressed',sel.indexOf(b.getAttribute('data-tl-level'))>=0?'true':'false')});
+[].slice.call(K.querySelectorAll('[data-tl-kind]')).forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-tl-kind')===kind?'true':'false')})}
+L.addEventListener('click',function(e){var b=e.target.closest('[data-tl-level]');if(!b)return;var v=b.getAttribute('data-tl-level'),i=sel.indexOf(v);if(i>=0)sel.splice(i,1);else sel.push(v);apply()});
+K.addEventListener('click',function(e){var b=e.target.closest('[data-tl-kind]');if(!b)return;var v=b.getAttribute('data-tl-kind');kind=kind===v?'':v;apply()});
+new MutationObserver(apply).observe(document.body,{attributes:true,attributeFilter:['data-current-tab']});apply()})();</script>
+<script type="module" id="funnel-code">// 匿名使用漏斗：瀏覽器以 <script type="module"> 載入。
+const DAY_MS = 24 * 60 * 60 * 1000;
+const RETURN_STEPS = [[1, '回訪_d1'], [7, '回訪_d7'], [30, '回訪_d30']];
+let current = null;
+let work = Promise.resolve();
+let enabledOverride = null;
+let pendingInit = null;
+
+function schedule(action) {
+  work = work.then(action, action).catch(() => {});
+  return work;
+}
+
+function taiwanDay(time) {
+  return new Date(time + 8 * 60 * 60 * 1000).toISOString().slice(0, 10);
+}
+
+function dayNumber(day) {
+  return Date.parse(`${day}T00:00:00Z`) / DAY_MS;
+}
+
+function minuteBand(elapsed) {
+  const minutes = Math.max(0, elapsed) / 60000;
+  if (minutes < 1) return '<1';
+  if (minutes < 5) return '1-5';
+  if (minutes < 30) return '5-30';
+  if (minutes < 1440) return '30-1440';
+  return '>1440';
+}
+
+function readJSON(storage, key, fallback) {
+  try {
+    const value = JSON.parse(storage.getItem(key));
+    return Array.isArray(value) ? value : fallback;
+  } catch {
+    return fallback;
+  }
+}
+
+function saveQueue(state) {
+  state.storage.setItem(state.prefix + 'queue', JSON.stringify(state.queue));
+}
+
+function cleanEvent(state, event, oldest, today) {
+  if (!event || typeof event !== 'object' || !state.allow.has(event.step)) return null;
+  if (typeof event.date !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(event.date) ||
+      Number.isNaN(Date.parse(`${event.date}T00:00:00Z`)) ||
+      new Date(`${event.date}T00:00:00Z`).toISOString().slice(0, 10) !== event.date ||
+      event.date < oldest || event.date > today) return null;
+  if (!['<1', '1-5', '5-30', '30-1440', '>1440'].includes(event.mins)) return null;
+  return { product: state.product, version: state.version, platform: state.platform,
+    step: event.step, mins: event.mins, date: event.date };
+}
+
+async function flush(state) {
+  if (state.off || !state.queue.length) return;
+  // 收集端只收 31 天內的；更舊的丟掉
+  const oldest = taiwanDay(Date.now() - 31 * DAY_MS);
+  const today = taiwanDay(Date.now());
+  state.queue = state.queue.map(event => cleanEvent(state, event, oldest, today)).filter(Boolean).slice(-50);
+  if (!state.queue.length) { saveQueue(state); return; }
+  // 收集端每批最多 30 則、每分鐘 30 則：一次 flush 只送一批，剩下的等下次 init／step 再送
+  const batch = state.queue.slice(0, 30);
+  let response;
+  try {
+    // 不設標頭：字串 body 預設 text/plain，不觸發 CORS 預檢
+    response = await fetch(state.endpoint, { method: 'POST', keepalive: true, body: JSON.stringify(batch), signal: state.controller.signal });
+  } catch {
+    return;
+  }
+  if (state.off) return;
+  const status = response?.status;
+  if (status === 410) {
+    state.off = true;
+    state.queue = [];
+    state.storage.setItem(state.prefix + 'off', '1');
+    state.storage.removeItem(state.prefix + 'queue');
+    return;
+  }
+  // 204／2xx 收下；400 格式不對，整批丟掉不重送；429 與其他錯誤留著下次再送
+  if (response?.ok || status === 400) {
+    state.queue = state.queue.slice(batch.length);
+    saveQueue(state);
+  }
+}
+
+async function record(state, name) {
+  // 只送 allow 白名單裡的步驟（收集端照白名單回 400 會丟整批；法遵 10/21 回訪只准部分產品收）
+  if (state.off || !state.allow.has(name) || state.sent.has(name)) return;
+  const now = Date.now();
+  const event = {
+    product: state.product,
+    version: state.version,
+    platform: state.platform,
+    step: name,
+    mins: minuteBand(now - state.firstAt),
+    date: taiwanDay(now),
+  };
+  state.sent.add(name);
+  state.storage.setItem(state.prefix + 'sent', JSON.stringify([...state.sent]));
+  if (name === '第一個成果') {
+    state.storage.setItem(state.prefix + 'resultAt', String(now));
+    state.resultAt = now;
+  }
+  state.queue.push(event);
+  if (state.queue.length > 50) state.queue.splice(0, state.queue.length - 50);
+  saveQueue(state);
+  await flush(state);
+}
+
+const FervelaFunnel = {
+  init(options) {
+    if (options && typeof options.product === 'string') pendingInit = { storage: globalThis.localStorage, prefix: `ffunnel:${options.product}:` };
+    return schedule(async () => {
+      if (!options || typeof options.product !== 'string' ||
+          typeof options.version !== 'string' || typeof options.platform !== 'string' ||
+          typeof options.endpoint !== 'string' || !Array.isArray(options.allow)) return;
+      const storage = globalThis.localStorage;
+      const prefix = `ffunnel:${options.product}:`;
+      const pendingOff = enabledOverride?.storage === storage && enabledOverride.on === false;
+      const off = storage.getItem(prefix + 'off') === '1' || storage.getItem(prefix + 'optout') === '1' || pendingOff;
+      if (pendingOff) storage.setItem(prefix + 'optout', '1');
+      const storedFirst = storage.getItem(prefix + 'firstAt');
+      const firstAt = storedFirst === null ? Date.now() : Number(storedFirst);
+      if (!Number.isFinite(firstAt)) return;
+      if (storedFirst === null && !off) storage.setItem(prefix + 'firstAt', String(firstAt));
+      const state = {
+        product: options.product,
+        version: options.version,
+        platform: options.platform,
+        endpoint: options.endpoint,
+        allow: new Set(options.allow),
+        storage,
+        prefix,
+        firstAt,
+        resultAt: Number(storage.getItem(prefix + 'resultAt')) || null,
+        sent: new Set(readJSON(storage, prefix + 'sent', [])),
+        queue: readJSON(storage, prefix + 'queue', []).slice(-50),
+        off,
+        controller: new AbortController(),
+      };
+      current = state;
+      enabledOverride = null;
+      pendingInit = null;
+      if (state.off) { state.queue = []; storage.removeItem(prefix + 'queue'); return; }
+      await flush(state);
+      if (state.off) return;
+      if (storedFirst === null) await record(state, '首次打開');
+      if (state.off || state.resultAt === null) return;
+      const days = dayNumber(taiwanDay(Date.now())) - dayNumber(taiwanDay(state.resultAt));
+      for (const [threshold, name] of RETURN_STEPS) {
+        if (days >= threshold) await record(state, name);
+      }
+    });
+  },
+  // 設定頁的開關（法遵 10/16 建議：預設開）；關掉＝不再送、清暫存
+  setEnabled(on) {
+    const state = current;
+    if (!state) {
+      enabledOverride = { storage: globalThis.localStorage, on: Boolean(on) };
+      if (!on && pendingInit && pendingInit.storage === globalThis.localStorage) {
+        pendingInit.storage.setItem(pendingInit.prefix + 'optout', '1');
+        pendingInit.storage.removeItem(pendingInit.prefix + 'queue');
+      }
+      return Promise.resolve();
+    }
+    if (on) {
+      state.storage.removeItem(state.prefix + 'optout');
+      state.off = state.storage.getItem(state.prefix + 'off') === '1';
+      if (!state.off) state.controller = new AbortController();
+    } else {
+      state.off = true;
+      state.queue = [];
+      state.controller.abort();
+      state.storage.setItem(state.prefix + 'optout', '1');
+      state.storage.removeItem(state.prefix + 'queue');
+    }
+    return Promise.resolve();
+  },
+  step(name) {
+    return schedule(async () => {
+      const state = current;
+      if (!state || state.off) return;
+      await flush(state);
+      if (state.off) return;
+      await record(state, name);
+    });
+  },
+};
+
+if (typeof window !== 'undefined') window.FervelaFunnel = FervelaFunnel;
+
+export { FervelaFunnel };
+export default FervelaFunnel;
+
+const F = FervelaFunnel, OPT = 'ffunnel:tongjian:optout';
+let ready = false;
+try { localStorage.getItem(OPT); ready = true; } catch (e) { /* 禁止儲存：不送統計 */ }
+if (ready) {
+  F.init({ product: 'tongjian', version: '1.5', platform: 'web', endpoint: 'https://t.fervela.ai/e', allow: ["首次打開", "展開一張卡", "點開一張詳細頁", "第一個成果"] });
+  const step = n => F.step(n);
+  document.addEventListener('click', ev => {
+    const t = ev.target;
+    if (!t || !t.closest) return;
+    if (t.closest('details.card > summary')) step('展開一張卡');
+    const da = t.closest('a[href^="#d-"]');
+    if (da) { step('點開一張詳細頁'); /*V*/view(da.getAttribute('href'));/*V*/ }   // 點詳細頁連結不一定觸發 hashchange
+    if (t.closest('.card-extra .meta a[href^="http"], .dsources a[href^="http"]')) step('第一個成果');
+  }, true);
+  const q = document.getElementById('q');
+  if (q) q.addEventListener('input', () => { if (q.value.trim()) step('第一個成果'); });
+  // <views>
+  // 每篇點開數（11/12 營運長派工，老闆要知道哪篇最多人看）：只送文章編號＋台灣日期；每台每篇每天最多一次；關掉統計就不送
+  const seen = () => {
+    const day = new Date(Date.now() + 8 * 3600e3).toISOString().slice(0, 10), key = 'ffunnel:tongjian:seen';
+    let s; try { s = JSON.parse(localStorage.getItem(key)); } catch (e) { s = null; }
+    if (!s || s.day !== day) s = { day: day, ids: [] };
+    return { day: day, s: s, save: () => { try { localStorage.setItem(key, JSON.stringify(s)); } catch (e) {} } };
+  };
+  const view = (hash) => {
+    if (typeof hash !== 'string') hash = location.hash;
+    if (!hash.startsWith('#d-')) return;
+    try { if (localStorage.getItem(OPT) === '1' || localStorage.getItem('ffunnel:tongjian:off') === '1') return; } catch (e) { return; }
+    let id; try { id = decodeURIComponent(hash.slice(3)); } catch (e) { return; }
+    // 詳細頁是點了才載入；只認首頁上有連結的編號（不是本站的文章不送）
+    if (!document.getElementById('d-' + id) && !document.querySelector('a[href="#d-' + CSS.escape(id) + '"]')) return;
+    const v = seen();
+    if (v.s.ids.includes(id)) return;
+    v.s.ids.push(id); v.s.ids = v.s.ids.slice(-300); v.save();
+    fetch('https://t.fervela.ai/e'.replace(/\/e$/, '/a'), { method: 'POST', keepalive: true,
+      body: JSON.stringify([{ product: 'tongjian', article: id, date: v.day }]) }).catch(() => {});
+  };
+  window.addEventListener('hashchange', view);
+  view();
+  // </views>
+  const sw = document.getElementById('funnel-switch');
+  if (sw) {
+    try { sw.checked = localStorage.getItem(OPT) !== '1' && localStorage.getItem('ffunnel:tongjian:off') !== '1'; } catch (e) { sw.checked = false; }
+    sw.addEventListener('change', () => F.setEnabled(sw.checked));
+  }
+}
+
+{
+  const LK = 'ffunnel:tongjian:liked', FB = {}, done = new WeakSet(), counts = new Map();
+  let store = false;
+  try { localStorage.getItem(LK); store = true; } catch (e) { /* 禁止儲存：不顯示讚鈕，避免重複計算 */ }
+  const liked = () => { try { const a = JSON.parse(localStorage.getItem(LK)); return Array.isArray(a) ? a : []; } catch (e) { return []; } };
+  const day = () => new Date(Date.now() + 8 * 3600e3).toISOString().slice(0, 10);
+  const decorate = (d) => {
+    if (done.has(d) || d.hidden || !d.id.startsWith('d-')) return;
+    done.add(d);
+    const id = d.id.slice(2), row = document.createElement('div');
+    row.className = 'dlike-row';
+    const seen = document.createElement('span'); seen.className = 'dviews'; row.appendChild(seen);
+    let btn = null, n = 0;
+    const paint = () => {
+      seen.textContent = counts.has(id) ? counts.get(id).views + ' 次點開' : '';
+      if (!btn) return;
+      const on = liked().includes(id);
+      btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      btn.textContent = (on ? '👍 已按讚' : '👍 讚') + (n > 0 ? ' ' + n : '');
+    };
+    if (store) {
+      btn = document.createElement('button'); btn.type = 'button'; btn.className = 'dlike';
+      btn.addEventListener('click', () => {
+        if (liked().includes(id)) return;                 // 每台每篇只算一次，取消讚也不再送
+        try { localStorage.setItem(LK, JSON.stringify(liked().concat([id]))); } catch (e) { return; }
+        if (!liked().includes(id)) return;                // 沒記住就不送
+        n += 1; paint();
+        fetch('https://t.fervela.ai/e'.replace(/\/e$/, '/l'), { method: 'POST', keepalive: true,
+          body: JSON.stringify([{ product: 'tongjian', article: id, date: day() }]) }).catch(() => {});
+      });
+      row.appendChild(btn);
+    }
+    if (Object.prototype.hasOwnProperty.call(FB, id)) {
+      const a = document.createElement('a'); a.className = 'dfb'; a.href = FB[id];
+      a.target = '_blank'; a.rel = 'noopener noreferrer'; a.textContent = '到粉專討論 ↗';
+      row.appendChild(a);
+    }
+    const take = d.querySelector('.dtake');
+    if (take) take.after(row); else d.prepend(row);
+    paint();
+    fetch('https://t.fervela.ai/e'.replace(/\/e$/, '/c') + '?product=' + 'tongjian' + '&article=' + encodeURIComponent(id))
+      .then(r => r.ok ? r.json() : null).then(c => {
+        if (!c || typeof c.views !== 'number' || typeof c.likes !== 'number') return;
+        counts.set(id, c); n = Math.max(n, c.likes); paint();
+      }).catch(() => {});
+  };
+  const scan = () => document.querySelectorAll('article.detail:not([hidden])').forEach(decorate);
+  new MutationObserver(scan).observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['hidden'] });
+  scan();
+}
+</script>
+<script>(function(){var q=document.getElementById("q");if(!q)return;[].slice.call(document.querySelectorAll(".hot-q button")).forEach(function(b){b.addEventListener("click",function(){var v=b.getAttribute("data-q");q.value=q.value===v?"":v;[].slice.call(document.querySelectorAll(".hot-q button")).forEach(function(x){x.setAttribute("aria-pressed",x===b&&q.value?"true":"false")});q.dispatchEvent(new Event("input",{bubbles:true}))})});q.addEventListener("input",function(){[].slice.call(document.querySelectorAll(".hot-q button")).forEach(function(x){x.setAttribute("aria-pressed",x.getAttribute("data-q")===q.value?"true":"false")})})})();</script>
+<script>(function(){var n=document.getElementById("tj-tabs");if(!n)return;function s(){document.documentElement.style.setProperty("--tj-tabs-h",n.offsetHeight+"px")}s();addEventListener("resize",s);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(s)})();</script><script id="more-filter">(function(){var nav=document.getElementById("more-topics");if(!nav)return;var buttons=nav.querySelectorAll("button"),cards=document.querySelectorAll(".card[data-more-topic]");function show(){var key=location.hash.slice(1),found=false;buttons.forEach(function(b){if(b.dataset.topic===key)found=true});if(!found)key="all";buttons.forEach(function(b){b.setAttribute("aria-pressed",b.dataset.topic===key?"true":"false")});cards.forEach(function(c){c.hidden=key!=="all"&&c.dataset.moreTopic!==key});document.querySelectorAll(".headline,.week,.featured").forEach(function(x){x.hidden=key!=="all"});if(window.tjTlApply)window.tjTlApply();var on=nav.querySelector("[aria-pressed=true]");if(on)nav.scrollLeft=Math.max(0,on.offsetLeft-nav.offsetLeft-60)}nav.addEventListener("click",function(ev){var b=ev.target.closest("button[data-topic]");if(!b)return;location.hash=b.dataset.topic==="all"?"all":b.dataset.topic;show()});addEventListener("hashchange",show);addEventListener("popstate",show);show()})();</script></body>
+</html>
