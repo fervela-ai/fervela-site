@@ -7,7 +7,7 @@
 - [萬卷 — Fervela.ai](https://fervela.ai/books/): 從一張封面或一排書開始，找回每本書；也記住你讀到哪裡、花了多久，和想留給下次自己的話。
 - [四國軍棋 — Fervela.ai](https://fervela.ai/army/): 和對家並肩，試探、推理，拿下敵方軍旗。四方暗棋的較量，每一步都藏著盤算。
 - [采風 — Fervela.ai](https://fervela.ai/scout/): 收集公開討論裡的抱怨與需求，整理出值得繼續追問的題目。
-- [飛鴻 — Fervela.ai](https://fervela.ai/journey/): 不知道去哪的時候，拉一下；想好要去了，幾秒排好一整趟。到了現場蓋一枚章，回家把走過的鄉鎮點亮。
+- [飛鴻 — Fervela.ai](https://fervela.ai/journey/): 不知道去哪的時候，拉一下；想好要去了，按一下排好一整趟。到了現場蓋一枚章，回家把走過的鄉鎮點亮。
 - [通鑑｜Fervela.ai](https://fervela.ai/timeline/): AI、晶片、光電、量子、能源、生醫、太空、機器人、國防等科技的重要時刻，用白話說清楚，每條都附出處。
 
 ## 課程
