@@ -115,3 +115,7 @@
 .fan-link{display:block;margin-top:16px;color:#fff;text-decoration:underline;font-size:15px}
 @media(max-width:900px){.fan-pill{order:2;margin-left:auto;margin-right:8px}}
 @media(max-width:640px){.fan-in{flex-wrap:wrap}.fan-t{flex-basis:calc(100% - 70px)}.fan-btn{width:100%;justify-content:center}}
+
+.line-band{background:#0b2433;border-top:1px solid rgba(255,255,255,.08)}
+.line-f{background:#06c755;font-size:13px;letter-spacing:.5px}
+.line-btn{background:#06c755}
